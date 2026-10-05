@@ -109,6 +109,28 @@ and is not student evidence.
 
 A student who completes the CORE without ADVANCED work must remain eligible for full common checkpoint assessment.
 
+## Advanced track portal
+
+The canonical navigation and selection guide for advanced material is:
+
+```text
+docs/advanced/README.md
+```
+
+Use the portal for:
+
+```text
+domain paths
+durations
+prerequisites
+delivery modes
+infrastructure gates
+diagnostic-driven selection
+self-study guidance
+```
+
+This file remains the source of truth for which advanced supports are currently activated from each TD.
+
 ## Current ADVANCED availability
 
 Only supports with status:
