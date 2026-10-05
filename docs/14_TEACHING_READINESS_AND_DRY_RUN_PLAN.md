@@ -1103,25 +1103,535 @@ R6.4 does not block the Wave 3 dry run.
 
 ## 9. R6.5 - Wave 3 dry run
 
-Validate:
+Status:
+
+```text
+REVIEW
+```
+
+Validated:
 
 ```text
 TD07 Data Normalization + Comparison
-TD08 Yahoo Finance
+TD08 Yahoo Finance provider contract
+TD07 -> TD08 analytics reuse
 ```
 
-Focus:
+Yahoo LIVE installation and retrieval still require an external network-enabled environment.
+
+### 9.1 TD07 - canonical numeric rows
+
+The exact starter sample was used:
 
 ```text
-analytics.py creation
-alignment
-period return
-base 100
-relative performance
-Yahoo provider boundary
-canonical rows
-Checkpoint B readiness
+AAPL  = 21 observations
+SP500 = 21 observations
 ```
+
+Local CSV rows were normalized before analytics.
+
+Validated types:
+
+```text
+date   -> str
+ticker -> str
+open   -> float
+high   -> float
+low    -> float
+close  -> float
+volume -> int
+```
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 9.2 TD07 - common-date alignment
+
+Implemented and executed:
+
+```python
+index_by_date(...)
+align_series(...)
+```
+
+Observed result:
+
+```text
+instrument raw rows = 21
+benchmark raw rows  = 21
+common dates        = 21
+first common date   = 2026-09-01
+last common date    = 2026-09-30
+```
+
+Every aligned instrument row uses the same date as the corresponding benchmark row.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 9.3 TD07 - period return
+
+Executed against aligned rows.
+
+Observed values:
+
+```text
+AAPL
+first close = 250.00
+last close  = 266.20
+period return = 6.48000000%
+
+SP500
+first close = 6600.00
+last close  = 6742.00
+period return = 2.15151515%
+```
+
+No return value was hard-coded.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 9.4 TD07 - relative performance
+
+Executed:
+
+```text
+instrument return
+-
+benchmark return
+=
+relative performance
+```
+
+Observed result:
+
+```text
+6.48000000
+-
+2.15151515
+=
+4.32848485 percentage points
+```
+
+The subtraction direction matches the functional contract.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 9.5 TD07 - base 100
+
+Executed:
+
+```python
+calculate_base_100(...)
+```
+
+Observed values:
+
+```text
+AAPL
+100.00000000 -> 106.48000000
+
+SP500
+100.00000000 -> 102.15151515
+```
+
+Both series start at exactly 100.
+
+The final base-100 values are mathematically consistent with the period returns.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 9.6 TD07 - analytics isolation
+
+The dry-run `src/analytics.py` contains only provider-neutral functions:
+
+```text
+index_by_date
+align_series
+calculate_period_return
+calculate_base_100
+calculate_relative_performance
+```
+
+A scan confirmed zero occurrences of:
+
+```text
+AAPL
+SP500
+^GSPC
+Yahoo
+Bloomberg
+```
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 9.7 TD07 terminal result
+
+Executed:
+
+```bash
+python src/main.py
+```
+
+Observed output:
+
+```text
+=== MarketPulse ===
+
+Market configuration
+Period   : 1 month
+Interval : Daily
+
+Instrument
+AAPL - Apple Inc.
+Period return : 6.48%
+
+Benchmark
+SP500 - S&P 500
+Period return : 2.15%
+
+Relative performance
+AAPL vs SP500 : +4.33 percentage points
+
+Base 100
+AAPL  : 100.00 -> 106.48
+SP500 : 100.00 -> 102.15
+```
+
+Executed:
+
+```bash
+python -m py_compile src/analytics.py src/main.py
+```
+
+Result:
+
+```text
+PASS
+```
+
+### 9.8 TD08 - dependency boundary
+
+The TD08 dry-run dependency file contains one new direct dependency:
+
+```text
+yfinance
+```
+
+No transitive package such as `pandas` was added manually.
+
+The current public yfinance reference still documents support for:
+
+```text
+Ticker.history(...)
+period = 1mo
+interval = 1d
+auto_adjust = False
+```
+
+The validation runner cannot resolve external package hosts through its shell network path.
+
+Therefore:
+
+```text
+requirements contract = INSPECTED
+current call signature = INSPECTED
+actual pip installation = EXTERNAL VERIFY
+```
+
+### 9.9 TD08 - Yahoo provider contract
+
+Implemented the documented provider boundary:
+
+```python
+fetch_yahoo_prices(
+    symbol,
+    canonical_ticker,
+    period="1mo",
+    interval="1d",
+)
+```
+
+A controlled yfinance-compatible test double was injected only at the external acquisition boundary.
+
+The provider implementation itself remained unchanged from the teaching shape.
+
+Validated calls:
+
+```text
+AAPL
+period=1mo
+interval=1d
+auto_adjust=False
+
+^GSPC
+period=1mo
+interval=1d
+auto_adjust=False
+```
+
+Classification:
+
+```text
+EXECUTED WITH CONTROLLED PROVIDER DOUBLE
+```
+
+This is not classified as Yahoo LIVE evidence.
+
+### 9.10 TD08 - canonical ticker preservation
+
+The simulated provider returned Yahoo-shaped rows for:
+
+```text
+AAPL
+^GSPC
+```
+
+The normalized MarketPulse rows preserved:
+
+```text
+AAPL  -> AAPL
+^GSPC -> SP500
+```
+
+Validated canonical row types:
+
+```text
+date   -> str
+ticker -> str
+open   -> float
+high   -> float
+low    -> float
+close  -> float
+volume -> int
+```
+
+The provider-specific benchmark symbol did not propagate into analytics.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 9.11 TD08 - unequal provider calendars
+
+The controlled provider double deliberately returned:
+
+```text
+AAPL raw rows  = 21
+SP500 raw rows = 20
+```
+
+One benchmark date was omitted intentionally.
+
+The unchanged TD07 alignment produced:
+
+```text
+aligned AAPL  = 20
+aligned SP500 = 20
+```
+
+Every aligned pair shared the same date.
+
+This proves TD08 does not rely on equal raw row counts or list position.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 9.12 TD08 - analytics reuse proof
+
+A hash of `src/analytics.py` was captured before the TD08 provider work.
+
+After provider creation and Yahoo-path orchestration:
+
+```text
+src/analytics.py hash unchanged
+```
+
+The same functions were reused:
+
+```text
+align_series(...)
+calculate_period_return(...)
+calculate_base_100(...)
+calculate_relative_performance(...)
+```
+
+No Yahoo-specific branch was added to analytics.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 9.13 TD08 - empty-provider behaviour
+
+The provider was also exercised with an unsupported symbol whose controlled history was empty.
+
+Observed result:
+
+```text
+ValueError:
+No Yahoo Finance data returned for INVALID
+```
+
+MarketPulse therefore does not silently run analytics on an empty provider result.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 9.14 TD08 terminal result with provider double
+
+Executed through the Yahoo orchestration path:
+
+```text
+Provider
+Yahoo Finance via yfinance
+
+Market configuration
+Instrument : AAPL - Apple Inc.
+Benchmark  : S&P 500
+Period     : 1 month
+Interval   : Daily
+
+Aligned observations : 20
+Instrument return : 6.48%
+Benchmark return  : 2.15%
+
+Relative performance
+AAPL vs SP500 : +4.33 percentage points
+
+Base 100 starts : 100.00 / 100.00
+```
+
+This validates the provider-to-analytics wiring.
+
+It is not Yahoo LIVE market evidence.
+
+### 9.15 Remaining external Yahoo verification
+
+The following commands require a network-enabled student or instructor environment:
+
+```bash
+python -m pip install yfinance
+python -m pip show yfinance
+python src/main.py
+```
+
+The LIVE provider check must confirm non-empty current data for:
+
+```text
+AAPL
+^GSPC
+```
+
+Required evidence:
+
+```text
+successful remote retrieval
+canonical AAPL rows
+canonical SP500 rows
+common aligned dates
+provider label = Yahoo Finance via yfinance
+```
+
+Classification:
+
+```text
+EXTERNAL VERIFY
+```
+
+No static CSV run or controlled provider double may be presented as successful Yahoo LIVE evidence.
+
+### 9.16 Git workflow inheritance
+
+TD07 and TD08 correctly instruct students to reuse the established:
+
+```text
+branch
+push
+Pull Request
+review
+merge
+```
+
+workflow.
+
+The local and remote Git mechanics were already executed in R6.4.
+
+The GitHub Pull Request and review UI remain part of the external team-fork verification already recorded by R6.4.
+
+### 9.17 R6.5 acceptance criteria
+
+```text
+[x] TD07 creates src/analytics.py
+[x] CSV rows are normalized before analytics
+[x] AAPL and SP500 align on 21 common starter dates
+[x] period return is calculated from aligned rows
+[x] AAPL starter return = 6.48%
+[x] SP500 starter return = 2.15151515%
+[x] relative performance = instrument minus benchmark
+[x] relative performance = 4.32848485 percentage points
+[x] both base-100 series start at 100
+[x] final base-100 values match period-return mathematics
+[x] analytics.py contains no provider-specific identifier
+[x] python src/main.py reproduces the TD07 target output
+[x] TD08 dependency contract contains yfinance as the direct dependency
+[x] current yfinance history call shape remains compatible with the teaching snippet
+[x] Yahoo provider normalizes provider-shaped rows to the canonical schema
+[x] AAPL remains canonical AAPL
+[x] ^GSPC becomes canonical SP500
+[x] period=1mo is passed to both provider calls
+[x] interval=1d is passed to both provider calls
+[x] auto_adjust=False is passed explicitly
+[x] unequal raw provider calendars are aligned by common date
+[x] TD07 analytics.py remains byte-for-byte unchanged during TD08 wiring
+[x] empty provider output raises an explicit error
+[ ] yfinance installed from PyPI in a network-enabled teaching environment
+[ ] Yahoo LIVE AAPL retrieval returns non-empty data
+[ ] Yahoo LIVE ^GSPC retrieval returns non-empty data
+[ ] Checkpoint B Yahoo evidence captured from an actual successful remote retrieval
+```
+
+R6.5 conclusion:
+
+```text
+TD07 ANALYTICS PASS
+TD08 PROVIDER CONTRACT PASS
+YAHOO LIVE VERIFY REMAINS
+```
+
+R6.5 does not block the Wave 4 dry run.
 
 ## 10. R6.6 - Wave 4 dry run
 
@@ -1222,8 +1732,8 @@ TEACHING BASELINE READY
 | R6.2 | Clean-clone and student bootstrap portability | REVIEW |
 | R6.3 | Wave 1 dry run | DONE |
 | R6.4 | Wave 2 dry run | REVIEW |
-| R6.5 | Wave 3 dry run | NEXT |
-| R6.6 | Wave 4 dry run | NOT STARTED |
+| R6.5 | Wave 3 dry run | REVIEW |
+| R6.6 | Wave 4 dry run | NEXT |
 | R6.7 | Checkpoint and evidence dry run | NOT STARTED |
 | R6.8 | Instructor contingency and provider fallback validation | NOT STARTED |
 | R6.9 | Teaching baseline freeze | NOT STARTED |
