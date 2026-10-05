@@ -885,26 +885,36 @@ Acceptance criteria:
 Status:
 
 ```text
-NEW P0 CONTROL
+DONE
 ```
 
-Before TD11, define one application-level result contract.
+Canonical contract:
 
-Conceptual function:
+```text
+docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md
+```
+
+Frozen CORE boundary:
 
 ```python
 build_market_snapshot(...)
 ```
 
-Conceptual output:
+Frozen result shape:
 
 ```python
 {
     "provider": ...,
     "lookback": ...,
     "interval": ...,
-    "instrument": ...,
-    "benchmark": ...,
+    "instrument": {
+        "ticker": ...,
+        "name": ...,
+    },
+    "benchmark": {
+        "ticker": ...,
+        "name": ...,
+    },
     "instrument_return": ...,
     "benchmark_return": ...,
     "relative_performance": ...,
@@ -913,21 +923,44 @@ Conceptual output:
 }
 ```
 
+Implemented controls:
+
+- kept the frozen flat CORE architecture with no new application package;
+- placed the CORE snapshot builder contract in `src/main.py`;
+- required import-safe `main.py` using the existing `if __name__ == "__main__"` guard;
+- defined canonical instrument and benchmark metadata;
+- defined numeric return and relative-performance values;
+- defined base-100 list contracts;
+- required an honest provider label, including LIVE vs APPROVED_SAMPLE distinction;
+- required terminal presentation to consume the snapshot;
+- required Dash presentation to consume the same snapshot;
+- prohibited provider-specific calls from `src/dashboard.py`;
+- prohibited duplicate return and base-100 formulas in `src/dashboard.py`;
+- updated TD10, TD11, target architecture, learning path and transverse review to reference the shared contract.
+
 Purpose:
 
 ```text
-terminal
+providers
    |
-   +------+
-          |
-dashboard +--> same application result
+   v
+analytics
+   |
+   v
+snapshot
+   |
+   +----------+
+   |          |
+   v          v
+terminal     Dash
 ```
 
 Acceptance criteria:
 
 ```text
-[ ] terminal and Dash do not recompute separate business logic
-[ ] dashboard does not call Bloomberg/Yahoo directly
+[x] terminal and Dash use one frozen application result contract
+[x] dashboard does not call Bloomberg/Yahoo directly
+[x] dashboard does not own analytical formulas
 ```
 
 ### R4.5 TD11 - Dash Dashboard

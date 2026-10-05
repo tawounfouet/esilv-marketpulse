@@ -148,6 +148,8 @@ Before starting:
 [ ] period return works
 [ ] base-100 series works
 [ ] relative performance works
+[ ] build_market_snapshot(...) follows docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md
+[ ] terminal presentation can consume the shared snapshot
 [ ] no credentials are exposed
 ```
 
@@ -357,43 +359,67 @@ Instrument vs Benchmark market comparison
 
 > What is the difference between the Dash Python process and the page displayed in your browser?
 
-# Part 6 - Prepare dashboard data
+# Part 6 - Consume the MarketPulse snapshot
 
 Do not hard-code market returns inside the layout.
 
-The dashboard needs a data structure produced from existing MarketPulse logic.
+The application-level contract is frozen in:
 
-A simple structure may look like:
-
-```python
-dashboard_data = {
-    "provider": "bloomberg",
-    "lookback": "1 month",
-    "interval": "Daily",
-    "instrument": {
-        "ticker": "AAPL",
-        "name": "Apple Inc.",
-        "period_return": instrument_return,
-    },
-    "benchmark": {
-        "ticker": "SP500",
-        "name": "S&P 500",
-        "period_return": benchmark_return,
-    },
-    "relative_performance": relative_performance,
-    "instrument_base_100": instrument_base_100,
-    "benchmark_base_100": benchmark_base_100,
-}
+```text
+docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md
 ```
 
-The exact function organization is your responsibility.
+The shared function is:
+
+```python
+build_market_snapshot(...)
+```
+
+For the flat CORE structure, it lives in:
+
+```text
+src/main.py
+```
+
+The dashboard should consume it:
+
+```python
+from main import build_market_snapshot
+
+
+snapshot = build_market_snapshot()
+```
+
+Required snapshot keys:
+
+```text
+provider
+lookback
+interval
+instrument
+benchmark
+instrument_return
+benchmark_return
+relative_performance
+instrument_base_100
+benchmark_base_100
+```
 
 The important principle is:
 
 ```text
-analytics produce values
-dashboard displays values
+providers acquire
++
+analytics calculate
++
+snapshot assembles
++
+dashboard displays
 ```
+
+Do not call Yahoo or Bloomberg directly from `dashboard.py`.
+
+Do not recalculate returns or base 100 inside `dashboard.py`.
 
 # Part 7 - Display configuration information
 

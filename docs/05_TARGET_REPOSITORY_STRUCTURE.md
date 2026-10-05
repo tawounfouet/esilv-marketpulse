@@ -216,6 +216,8 @@ src/main.py
 =
 application orchestration
 +
+build_market_snapshot(...)
++
 terminal presentation
 
 src/analytics.py
@@ -237,7 +239,17 @@ Bloomberg-to-canonical normalization
 src/dashboard.py
 =
 Dash presentation
++
+snapshot consumption
 ```
+
+The shared application result is defined in:
+
+```text
+docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md
+```
+
+For the flat CORE structure, `build_market_snapshot(...)` lives in `src/main.py`.
 
 The architectural rule is:
 
@@ -249,6 +261,9 @@ canonical rows
         |
         v
 shared analytics
+        |
+        v
+application snapshot
         |
         +----------------+
         |                |

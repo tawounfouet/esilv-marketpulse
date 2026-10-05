@@ -435,6 +435,24 @@ common market-data model
 
 Contributes to Checkpoint C.
 
+## Application snapshot handoff before TD11
+
+Before dashboard presentation is wired, MarketPulse uses the shared application result defined in:
+
+```text
+docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md
+```
+
+The required boundary is:
+
+```python
+build_market_snapshot(...)
+```
+
+Both terminal and Dash consume that same result.
+
+The dashboard does not call Yahoo or Bloomberg directly and does not recompute returns.
+
 ## 14. TD11 - Dash Dashboard
 
 ### Business requirement

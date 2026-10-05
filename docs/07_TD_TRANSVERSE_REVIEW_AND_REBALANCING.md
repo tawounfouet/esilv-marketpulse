@@ -1253,12 +1253,28 @@ OPTIONAL:
 
 Important dependency:
 
-TD10 or the application layer must already expose reusable computed data.
+This dependency is now resolved by LOT-R4.4.
+
+The shared application result is frozen in:
+
+```text
+docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md
+```
+
+with:
+
+```python
+build_market_snapshot(...)
+```
+
+The terminal and Dash paths must consume the same snapshot.
+
+`src/dashboard.py` must not call Yahoo or Bloomberg directly and must not recompute returns.
 
 Verdict:
 
 ```text
-90 minutes can work only with one simple dashboard file and no required callbacks.
+90 minutes can work only with one simple dashboard file, the shared snapshot and no required callbacks.
 ```
 
 ### TD12 - Integration + Release

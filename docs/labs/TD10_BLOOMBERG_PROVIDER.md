@@ -838,6 +838,33 @@ canonical rows
 shared analytics
 ```
 
-Before TD11, MarketPulse needs one reusable application-level result so that terminal and dashboard presentation do not recompute business logic independently.
+Before TD11, MarketPulse uses the frozen application snapshot contract:
 
-That contract is introduced in the next remediation lot.
+```text
+docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md
+```
+
+The shared boundary is:
+
+```python
+build_market_snapshot(...)
+```
+
+The contract keeps one calculation path for both presentations:
+
+```text
+providers
+   |
+   v
+analytics
+   |
+   v
+snapshot
+   |
+   +----------+
+   |          |
+   v          v
+terminal     Dash
+```
+
+TD11 will consume this contract rather than creating a second provider or analytics path.
