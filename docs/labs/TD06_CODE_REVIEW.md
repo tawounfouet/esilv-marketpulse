@@ -14,22 +14,11 @@
 
 ## Context
 
-In TD05, each student created a feature branch, pushed it to the team repository and opened a Pull Request.
+TD05 ended with real Pull Requests left open in the shared team repository.
 
-A Pull Request is not only a technical mechanism for merging code.
+TD06 adds the review step before merge.
 
-It is also a place where another developer can:
-
-- read the proposed change;
-- ask questions;
-- identify a problem;
-- request a correction;
-- approve the change;
-- verify that the feature is ready to merge.
-
-TD06 introduces this collaborative review step.
-
-The target workflow is now:
+The collaborative workflow is now:
 
 ```text
 feature branch
@@ -44,67 +33,59 @@ push
 Pull Request
       |
       v
-code review
+review by another student
       |
-      v
-correction if needed
-      |
-      v
-approval
+      +--> real issue found?
+      |       |
+      |       +--> yes -> correction -> push -> review again
+      |       |
+      |       +--> no  -> approval
       |
       v
 merge
+      |
+      v
+team main
 ```
+
+A correction is required only when the review identifies a real issue.
+
+Do not manufacture a defect or an unnecessary fix just to create another commit.
 
 ## Learning objectives
 
 At the end of TD06, you should be able to:
 
-- explain the purpose of code review;
-- read the files changed in a Pull Request;
-- distinguish a comment from an approval;
-- identify a useful review comment;
-- request a correction when necessary;
-- update a Pull Request after feedback;
-- approve a Pull Request when it is ready;
-- merge an approved Pull Request;
-- verify the result on `main`;
-- explain why review quality matters more than simply clicking a button.
+- explain why code review exists;
+- inspect another student's Pull Request;
+- read the `Files changed` view;
+- compare the PR description with the actual diff;
+- write meaningful technical feedback;
+- distinguish Comment, Request changes and Approve;
+- request a correction only when justified;
+- update the same PR when a real correction is required;
+- approve a PR after actual inspection;
+- merge after review;
+- synchronize local `main` after merge.
 
-## Expected result
+## CORE definition of done
 
-Each student should complete the following cycle:
-
-```text
-review another student's PR
-        |
-        v
-leave meaningful feedback
-        |
-        v
-author updates branch if needed
-        |
-        v
-review again
-        |
-        v
-approve
-        |
-        v
-merge
-```
-
-By the end of TD06:
+TD06 is complete when each student can confirm:
 
 ```text
 [ ] I reviewed another student's Pull Request
-[ ] I left at least one meaningful review comment
-[ ] I understand request changes vs approve
-[ ] I responded to review feedback on my own PR
+[ ] I inspected Files changed
+[ ] my review contains meaningful technical feedback
+[ ] I can explain Comment vs Request changes vs Approve
+[ ] I requested a correction only if a real issue existed
+[ ] if my PR required a correction, I updated the same branch and PR
+[ ] my own PR was reviewed by another student
 [ ] my PR was merged only after review
-[ ] I updated local main after merge
+[ ] I synchronized local main after merge
 [ ] MarketPulse still runs
 ```
+
+A review does not need to produce a correction to be valid.
 
 ## Prerequisites
 
@@ -114,52 +95,70 @@ Before starting:
 [ ] TD05 completed
 [ ] I have an open Pull Request
 [ ] another team member has an open Pull Request
-[ ] my branch was pushed to origin
+[ ] my feature branch was pushed to origin
 [ ] my PR targets team main
-[ ] MarketPulse runs
+[ ] Files changed was checked in TD05
+[ ] python src/main.py works
 ```
 
-If your team has too few open Pull Requests, create a small coherent feature branch before starting the review exercise.
+If a team is missing an open PR, fix that TD05 prerequisite before starting the main TD06 workflow.
 
-## Important rule
+Do not create meaningless code only to generate something to review.
 
-A review is not:
+## Important review rule
+
+A meaningful review demonstrates inspection.
+
+Weak examples:
 
 ```text
-"looks good"
-"ok"
-"nice"
-👍
+looks good
+ok
+nice
+works
 ```
 
-A meaningful review should demonstrate that you inspected the change.
-
-Examples:
+Better examples:
 
 ```text
-"The benchmark label is clear, but the same metadata is printed twice.
-Could this reuse the existing display function?"
-
-"The new output works for AAPL, but does it also work for SP500?"
-
-"Please run python src/main.py and confirm both series still show 21 observations."
+The instrument metadata is displayed correctly.
+I also checked the benchmark path and the same helper is reused.
 ```
+
+```text
+The output works for AAPL, but SP500 now prints the wrong label.
+Please correct the benchmark label before merge.
+```
+
+```text
+The implementation is coherent and python src/main.py still works.
+I found no blocking issue, so I approve the PR.
+```
+
+Positive feedback can be meaningful when it states what was actually verified.
 
 ## Session plan
 
+The CORE is designed for approximately 80 minutes.
+
+The final 10 minutes are reserved for GitHub variation, merge recovery and optional review practice.
+
 | Time | Activity |
 |---|---|
-| 00-10 min | Why code review matters |
-| 10-25 min | Inspect another Pull Request |
-| 25-40 min | Write meaningful review feedback |
-| 40-55 min | Apply requested changes |
-| 55-68 min | Review again and approve |
-| 68-78 min | Merge and update local main |
-| 78-90 min | Review evidence and recap |
+| 00-10 min | Review purpose and outcomes |
+| 10-25 min | Inspect another student's PR |
+| 25-40 min | Write meaningful review |
+| 40-55 min | Correction cycle only if justified |
+| 55-65 min | Approve when ready |
+| 65-75 min | Merge and synchronize main |
+| 75-80 min | CORE validation |
+| 80-90 min | Buffer / optional practice |
 
-# Part 1 - Understand code review
+# CORE
 
-Code review serves several purposes:
+# Part 1 - Understand the purpose of review
+
+Code review contributes to:
 
 ```text
 quality
@@ -173,34 +172,28 @@ consistency
 knowledge transfer
 ```
 
-The reviewer does not need to rewrite the feature.
+The reviewer is not expected to redesign the feature.
 
-The reviewer should verify that the proposed change is:
+The reviewer should determine whether the proposed change is:
 
 - understandable;
-- relevant to the business requirement;
-- limited in scope;
+- relevant;
+- limited to its intended scope;
 - technically coherent;
-- safe to integrate.
+- safe to integrate at the current course level.
 
-## Questions
+# Part 2 - Assign reviewers
 
-1. Why is code review useful even if the program already runs?
-2. Why should the reviewer be someone other than the author?
-3. What could a reviewer detect that the author may not notice?
+Each student reviews another student's Pull Request.
 
-# Part 2 - Choose a Pull Request to review
+Do not review your own PR.
 
-Each student reviews another team member's Pull Request.
-
-Do not review your own Pull Request.
-
-A good pairing for a team of three may be:
+For three students:
 
 ```text
-Student A reviews Student B
-Student B reviews Student C
-Student C reviews Student A
+A reviews B
+B reviews C
+C reviews A
 ```
 
 For four students:
@@ -212,11 +205,11 @@ C reviews D
 D reviews A
 ```
 
-This keeps review responsibility distributed.
+The objective is distributed responsibility and individual traceability.
 
 # Part 3 - Read the Pull Request before commenting
 
-Open the Pull Request.
+Open the assigned Pull Request.
 
 Inspect:
 
@@ -230,159 +223,144 @@ commits
 Files changed
 ```
 
-Before writing a comment, answer:
+Before submitting a review, answer:
 
-1. What business need does the PR address?
+1. What change does the PR propose?
 2. Which files changed?
-3. Are the changes limited to the intended feature?
-4. Does the PR description match the actual diff?
-5. Is the implementation understandable?
+3. Does the description match the diff?
+4. Is the change limited to the expected scope?
+5. Does the implementation remain understandable?
 
-## 3.1 Inspect Files changed
+# Part 4 - Inspect Files changed
 
-Use the GitHub:
+Open:
 
 ```text
 Files changed
 ```
 
-view.
+Check at least:
 
-Look for:
+```text
+[ ] expected files only
+[ ] no temporary debug output
+[ ] no accidental unrelated edits
+[ ] no secret
+[ ] output logic remains understandable
+[ ] MarketPulse behaviour still matches the stated change
+```
 
-- unexpected file modifications;
-- duplicated logic;
-- debug prints;
-- unclear variable names;
-- accidental formatting changes;
-- hard-coded values;
-- missing validation.
+Possible MarketPulse review questions include:
 
-Do not search for sophisticated problems that are outside the current course level.
+```text
+Does the feature work for both instrument and benchmark?
 
-The review should remain proportional to the feature.
+Does it reuse existing logic instead of duplicating large blocks?
 
-# Part 4 - Write a meaningful review
+Does it preserve the current lookback and interval?
 
-## 4.1 Good review comments
+Does it introduce a hard-coded market value?
 
-A useful comment is:
+Does python src/main.py still run?
+```
+
+Do not invent advanced architecture requirements that have not been taught yet.
+
+# Part 5 - Write meaningful technical feedback
+
+A useful review is:
 
 ```text
 specific
 +
 technical
 +
-actionable
+grounded in the diff
 +
-respectful
+actionable when correction is needed
 ```
 
-Example:
+## Example without blocking issue
 
 ```text
-The instrument market is displayed correctly.
-Could you also verify the same function handles the benchmark so we avoid duplicated output logic?
+I checked the market metadata output for both AAPL and SP500.
+The existing display helper is reused and the PR only changes src/main.py.
+No blocking issue found.
 ```
 
-Another example:
+## Example with a real issue
 
 ```text
-This line reads the metadata correctly, but the label says "Exchange".
-The JSON field is "market". Could we keep the vocabulary consistent with the data model?
+The instrument output is correct, but the benchmark still uses the instrument market label.
+Please use the benchmark metadata in this branch before merge.
 ```
 
-## 4.2 Weak review comments
-
-Avoid:
+## Example validation request
 
 ```text
-ok
-good
-fine
-works
-nice code
+Please confirm python src/main.py still shows both AAPL and SP500 after this change.
 ```
 
-These do not show what was inspected.
+A meaningful review may end in approval without requiring a code change.
 
-## 4.3 Ask for validation
+# Part 6 - Choose the correct review outcome
 
-A reviewer may request evidence such as:
-
-```bash
-python src/main.py
-```
-
-The author can answer in the Pull Request discussion:
-
-```text
-Validated locally with python src/main.py.
-AAPL and SP500 both display correctly.
-```
-
-# Part 5 - Use review outcomes
-
-Depending on what you find, the review may conclude with:
-
-```text
-Comment
-Request changes
-Approve
-```
+Use the outcome that matches what you actually found.
 
 ## Comment
 
-Use a comment when:
+Use Comment when:
 
 - asking a question;
-- suggesting an improvement;
-- discussing a detail.
+- clarifying a detail;
+- leaving non-blocking feedback.
 
 ## Request changes
 
-Use request changes when the Pull Request should not be merged yet.
+Use Request changes only when the PR should not merge yet.
 
 Examples:
 
 - feature does not work;
-- benchmark case is broken;
-- unintended file is included;
-- required correction is missing.
+- benchmark behaviour is broken;
+- unintended files are included;
+- required part of the change is missing;
+- a clear technical defect is visible.
 
 ## Approve
 
-Approve when the Pull Request is ready to integrate.
+Use Approve when:
 
-Approval should follow actual inspection.
+- you inspected the diff;
+- the PR matches its stated purpose;
+- no blocking issue remains;
+- the change is ready to integrate.
 
-Do not approve before reading the diff.
+Do not request changes merely because the exercise mentions review.
 
-# Part 6 - Respond to review feedback
+Do not approve without inspecting the change.
 
-Now return to your own Pull Request.
+# Part 7 - Correction cycle only when justified
 
-Read the feedback from your reviewer.
-
-If a correction is requested, stay on the same feature branch.
+If your reviewer identified a real issue on your own PR, stay on the same feature branch.
 
 Verify:
 
 ```bash
 git branch
+git status
 ```
 
-Make the correction.
+Apply only the justified correction.
 
-Then:
+Then inspect and validate:
 
 ```bash
-git status
 git diff
 python src/main.py
 ```
 
-If the result is correct:
+Stage and commit:
 
 ```bash
 git add <changed-file>
@@ -390,51 +368,43 @@ git commit -m "fix: address review feedback"
 git push
 ```
 
-Refresh the Pull Request.
-
-The new commit should appear automatically.
-
-## Important concept
-
-You do not create a new Pull Request for every correction.
-
-The Pull Request follows the same source branch.
+The existing Pull Request updates automatically because it follows the same branch.
 
 ```text
 same feature branch
       |
       +-- initial commit
       |
-      +-- review fix commit
+      +-- justified fix commit
       |
       v
 same Pull Request
 ```
 
-# Part 7 - Review again
+If no real issue was found, skip this part.
 
-The reviewer should inspect the updated Pull Request.
+Do not add a fake fix commit.
+
+# Part 8 - Review again when a correction occurred
+
+If the author pushed a correction, the reviewer reopens the PR and verifies the new diff.
 
 Check:
 
-- was the requested correction implemented?
-- does the feature still match the original scope?
-- does MarketPulse still work?
-- are there unexpected new changes?
-
-If the PR is now ready:
-
 ```text
-Approve
+[ ] original issue addressed
+[ ] no unrelated change introduced
+[ ] feature still matches its scope
+[ ] MarketPulse still behaves correctly
 ```
 
-Do not approve only because the author says the fix is complete.
+If the PR is ready, approve it.
 
-Inspect the new diff.
+If no correction was required in the first place, the original review may proceed directly to approval.
 
-# Part 8 - Merge the Pull Request
+# Part 9 - Merge after review
 
-After approval, merge the Pull Request into:
+Merge the approved Pull Request into:
 
 ```text
 team main
@@ -442,275 +412,117 @@ team main
 
 Do not merge into the instructor repository.
 
-The exact merge button available may depend on repository settings.
-
-The important outcome is:
+After merge, verify on GitHub:
 
 ```text
-reviewed feature
-      |
-      v
-team main
+PR status = Merged
 ```
 
-## 8.1 Verify on GitHub
+The reviewed feature is now part of the shared team baseline.
 
-After merge, confirm that the PR status shows:
+# Part 10 - Synchronize local main
 
-```text
-Merged
-```
+GitHub `main` changed during merge.
 
-The feature should now be visible in the team repository `main` branch.
+Each student should update their local copy.
 
-# Part 9 - Update local main
-
-Your local repository does not automatically update when GitHub `main` changes.
-
-Switch to main:
+Run:
 
 ```bash
 git switch main
-```
-
-Inspect:
-
-```bash
 git status
-```
-
-Then update from the team repository:
-
-```bash
 git pull
 ```
 
-Run:
+Then verify:
 
 ```bash
 git log --oneline -5
 python src/main.py
 ```
 
-Question:
+You should be able to identify the integrated work in the local history.
 
-> Can you find the merged feature in your local history?
+Before later labs begin, the team should avoid leaving different outdated local `main` states.
 
-# Part 10 - Delete merged feature branches
+# Part 11 - CORE validation
 
-After a branch is merged, it may be cleaned up.
+Each student should show or explain:
 
-On GitHub, the team may delete the remote feature branch.
+```text
+reviewed PR
+Files changed
+meaningful feedback
+review outcome
+merge status
+updated local main
+```
 
-Locally:
+Run:
 
 ```bash
-git branch -d feature/<description>
+git status
+git log --oneline -5
+python src/main.py
 ```
 
-Only delete a branch after confirming its work is integrated.
+If a correction occurred, be able to explain why it was necessary.
 
-Do not use force deletion without understanding why.
+If no correction occurred, be able to explain why approval was justified.
 
-# Part 11 - Complete workflow recap
+That distinction is part of the learning objective.
 
-The collaborative workflow is now:
-
-```text
-main
-  |
-  v
-feature branch
-  |
-  v
-implementation
-  |
-  v
-git diff
-  |
-  v
-commit
-  |
-  v
-push
-  |
-  v
-Pull Request
-  |
-  v
-review by another student
-  |
-  +-- request changes
-  |        |
-  |        v
-  |     correction
-  |        |
-  |        v
-  |      push
-  |        |
-  +--------+
-  |
-  v
-approval
-  |
-  v
-merge
-  |
-  v
-updated main
-```
-
-This workflow will now be reused for later MarketPulse features.
-
-# Part 12 - Review a real MarketPulse concern
-
-During TD06, the reviewer should check at least one functional point.
-
-Possible questions:
-
-```text
-Does the feature work for both instrument and benchmark?
-
-Does the implementation duplicate logic?
-
-Does the output preserve the common lookback and interval?
-
-Does the feature change unrelated files?
-
-Does python src/main.py still work?
-```
-
-The objective is to connect Git review to application behaviour.
-
-# Part 13 - Review comments should be attributable
-
-Each student review should be performed with their own GitHub account.
-
-The review history should make visible:
-
-```text
-reviewer identity
-+
-review comment
-+
-review status
-```
-
-Do not ask one student to perform all reviews for the team.
-
-# Part 14 - Relationship with Checkpoint B
+# Checkpoint relation
 
 Checkpoint B is performed after TD08.
 
-One required screenshot is:
+One required evidence file is:
 
 ```text
 02_code_review.png
 ```
 
-The screenshot should demonstrate a meaningful review performed by the student.
+The canonical evidence contract is:
 
-It should make visible, when possible:
+```text
+docs/04_CHECKPOINTS_AND_EVIDENCE.md
+```
 
-- reviewer identity;
-- Pull Request context;
-- technical comment or review action.
+The evidence must show meaningful review activity performed by the student.
 
-A reaction alone is not sufficient evidence.
+A reaction alone is not sufficient.
 
 Do not submit Checkpoint B yet.
 
-# Part 15 - Mini review exercise
+# OPTIONAL
 
-Choose one already merged or open Pull Request.
+Complete optional work only after the CORE definition of done is satisfied.
 
-Without commenting immediately, write a short private checklist:
+## Optional 1 - Inspect review history
 
-```text
-[ ] business requirement understood
-[ ] source branch identified
-[ ] target branch identified
-[ ] changed files inspected
-[ ] feature works
-[ ] no unrelated change
-[ ] one technical point verified
-```
+Inspect the PR conversation and review timeline.
 
-Only then write your GitHub review.
-
-Question:
-
-> Did the checklist change what you noticed in the Pull Request?
-
-# Part 16 - Review vocabulary
-
-You should now understand:
+Identify:
 
 ```text
-Pull Request
-review
-reviewer
 author
-comment
-request changes
-approve
-merge
-Files changed
-conversation
-source branch
-target branch
+reviewer
+review outcome
+merge status
 ```
 
-# Part 17 - Common mistakes
+## Optional 2 - Compare commits inside a corrected PR
 
-## Mistake 1 - Reviewing without opening Files changed
-
-A useful review requires inspecting the actual diff.
-
-## Mistake 2 - Approving your own Pull Request
-
-The review should come from another team member.
-
-## Mistake 3 - Treating code review as personal criticism
-
-Review the code and the change, not the person.
-
-Prefer:
+Only if the PR actually required a correction, identify:
 
 ```text
-"This condition does not appear to handle the benchmark."
+initial implementation commit
+review correction commit
 ```
 
-Avoid:
+Do not create a second commit solely for this exercise.
 
-```text
-"You wrote this badly."
-```
-
-## Mistake 4 - Requesting unrelated work
-
-Do not expand a small PR into a large redesign unless the current change truly requires it.
-
-## Mistake 5 - Creating a new PR for a review correction
-
-Update the same feature branch and push again.
-
-## Mistake 6 - Merging before approval
-
-The purpose of TD06 is to establish review before integration.
-
-# Part 18 - If you finish early
-
-## Challenge 1 - Compare commits inside a PR
-
-Inspect the Pull Request commit list.
-
-Explain which commit was:
-
-- initial implementation;
-- review correction.
-
-## Challenge 2 - Review commit history
+## Optional 3 - Inspect integrated Git history
 
 Run:
 
@@ -718,58 +530,66 @@ Run:
 git log --oneline --graph --decorate --all
 ```
 
-Identify the feature integration.
+Identify the reviewed integration.
 
-## Challenge 3 - Inspect a merged change
+## Optional 4 - Inspect one integrated commit
 
-Use:
+Run:
 
 ```bash
 git show <commit-id>
 ```
 
-Explain what changed and why.
+Explain what changed.
 
-## Challenge 4 - Write a better review
+## Optional 5 - Improve a weak review statement
 
-Take a weak comment such as:
+Rewrite:
 
 ```text
 Looks good.
 ```
 
-Rewrite it into a comment that demonstrates actual inspection.
+into a statement that names what was actually inspected and why the PR is ready or not ready.
 
-# Part 19 - Troubleshooting
+# TROUBLESHOOTING
 
 ## No open Pull Request to review
 
-Coordinate within the team.
+Return to the TD05 end state.
 
-A student who finished TD05 should leave a coherent Pull Request open for TD06.
+The normal solution is to recover or open a real coherent TD05 PR.
 
-If necessary, create a small feature branch and PR before continuing.
+Do not invent random code merely to create review material.
 
 ## Cannot review or approve
 
-Check that:
+Verify:
 
 - you are signed into your own GitHub account;
 - you have collaborator access;
 - you are not reviewing your own PR.
 
-## New commit does not appear in the PR
+## New correction commit does not appear in the PR
 
 Check:
 
 ```bash
 git branch
 git status
-git remote -v
+git remote get-url origin
 git push
 ```
 
-Make sure you pushed to the branch used by the Pull Request.
+Make sure you pushed to the source branch used by the PR.
+
+## PR has no defect
+
+This is valid.
+
+Write meaningful feedback describing what you checked, then approve if the PR is ready.
+
+Do not create a synthetic problem.
 
 ## Local main does not contain the merged feature
 
@@ -781,7 +601,7 @@ git pull
 git log --oneline -5
 ```
 
-## Merge creates unexpected result
+## Merge creates an unexpected result
 
 Run:
 
@@ -791,36 +611,28 @@ git status
 git log --oneline --graph --decorate --all
 ```
 
-Do not start another feature until the team understands the repository state.
+Do not start TD07 work until the team understands the repository state.
 
-# Part 20 - Readiness check
+# Final readiness check
 
-Before finishing TD06, each student should be able to explain:
-
-```text
-[ ] why code review exists
-[ ] how to inspect Files changed
-[ ] what a useful review comment looks like
-[ ] comment vs request changes
-[ ] request changes vs approve
-[ ] how to update an open Pull Request
-[ ] why the same PR follows new commits
-[ ] when a Pull Request is ready to merge
-[ ] how to update local main after merge
-```
-
-Each student should also confirm:
+Each student should confirm:
 
 ```text
 [ ] I reviewed another student's Pull Request
-[ ] my review contained meaningful technical feedback
-[ ] I responded to review feedback on my own PR
-[ ] my feature was reviewed before merge
-[ ] I can find the merged feature in Git history
+[ ] I inspected Files changed
+[ ] I left meaningful technical feedback
+[ ] I understand Comment
+[ ] I understand Request changes
+[ ] I understand Approve
+[ ] I know that correction is conditional on a real issue
+[ ] I know how the same PR receives a correction commit if needed
+[ ] my own PR was reviewed by another student
+[ ] my PR was merged only after review
+[ ] local main is synchronized
 [ ] MarketPulse still runs
 ```
 
-# Part 21 - What comes next?
+# What comes next?
 
 Pedagogical Wave 2 is now complete:
 
@@ -833,30 +645,26 @@ TD05 - Remote Branch + Pull Request
 TD06 - Code Review
 ```
 
-Checkpoint B is not performed yet. It closes Checkpoint Phase B after TD08.
+Checkpoint B is not performed yet.
 
-The collaboration workflow is now established.
+It closes Checkpoint Phase B after TD08.
 
-The next business requirement is:
+The collaboration workflow is now established and should be reused rather than retaught in every later lab.
 
-```text
-"All market-data sources must feed a common comparison model."
-```
-
-In TD07, the focus returns to Python and market data.
-
-You will start preparing:
+TD07 introduces the reusable comparison layer:
 
 ```text
-instrument
-+
-benchmark
-+
-aligned observations
-+
-returns
-+
-base-100 comparison
+canonical local data
+        |
+        v
+alignment
+        |
+        v
+period return
+        |
+        v
+base 100
+        |
+        v
+relative performance
 ```
-
-The Git workflow introduced in TD05 and TD06 should now be reused for all new MarketPulse features.

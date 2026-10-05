@@ -629,33 +629,30 @@ Acceptance criteria:
 Status:
 
 ```text
-KEEP WITH RULE CHANGE
+DONE
 ```
 
-CORE:
+Implemented remediation:
 
-- inspect another student's PR;
-- inspect Files changed;
-- leave meaningful feedback;
-- use Comment / Request changes / Approve appropriately;
-- merge when ready;
-- pull updated `main`.
-
-Rule change:
-
-```text
-A correction is required only if a real issue exists.
-```
-
-Do not force artificial review fixes.
+- added an explicit CORE definition of done;
+- planned approximately 80 minutes of required work plus 10 minutes of buffer;
+- kept real review of another student's TD05 Pull Request in CORE;
+- kept Files changed inspection and meaningful technical feedback in CORE;
+- clarified Comment, Request changes and Approve as different outcomes;
+- made correction conditional on a real issue;
+- removed any requirement to manufacture a review defect or fix commit;
+- kept same-branch PR update only when justified;
+- kept approval, merge and local `main` synchronization in CORE;
+- moved extended review-history and Git-history exploration to OPTIONAL;
+- preserved Checkpoint B code-review evidence through the canonical evidence contract.
 
 Acceptance criteria:
 
 ```text
-[ ] each student reviews another student's PR
-[ ] review contains meaningful technical content
-[ ] corrections are evidence-based, not manufactured
-[ ] team main is synchronized after merge
+[x] each student reviews another student's PR
+[x] review contains meaningful technical content
+[x] corrections are evidence-based, not manufactured
+[x] team main is synchronized after merge
 ```
 
 ## 7. R3 - Rebalance TD07 to TD08
@@ -1370,7 +1367,7 @@ Initial status:
 | Lot | Scope | Priority | Status |
 |---|---|---|---|
 | R1 | Cross-cutting contracts | P0 | DONE |
-| R2 | TD01-TD06 | P0/P1 | IN PROGRESS |
+| R2 | TD01-TD06 | P0/P1 | DONE |
 | R3 | TD07-TD08 | P0 | NOT STARTED |
 | R4 | TD09-TD12 | P0 | NOT STARTED |
 | R5 | Final validation | P0 closure | NOT STARTED |

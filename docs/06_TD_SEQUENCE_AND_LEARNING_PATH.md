@@ -287,10 +287,12 @@ Contributes to Checkpoint B.
 Students should be able to:
 
 - read another student's changes;
-- comment on a Pull Request;
-- request a correction;
-- approve a change;
-- merge after review.
+- inspect Files changed;
+- comment meaningfully on a Pull Request;
+- request a correction only when a real issue exists;
+- approve a correct change after inspection;
+- merge after review;
+- synchronize local main after integration.
 
 ### Checkpoint relation
 
