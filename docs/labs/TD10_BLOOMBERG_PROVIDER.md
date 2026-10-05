@@ -825,6 +825,26 @@ Bloomberg stage
 
 and explain why the analytics layer can reuse them.
 
+# ADVANCED
+
+No `READY_TO_TEACH` advanced activity is active in TD10 at this time.
+
+The planned advanced path:
+
+```text
+ADV-BBG-01 - Bloomberg Reference Data
+```
+
+currently has status:
+
+```text
+PENDING_EXTERNAL
+```
+
+It requires a validated Bloomberg LIVE environment.
+
+Do not treat APPROVED_SAMPLE as LIVE evidence and do not attempt this activity until the delivery gate has passed.
+
 # TROUBLESHOOTING
 
 ## LIVE access fails
