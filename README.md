@@ -1,6 +1,6 @@
 # MarketPulse
 
-MarketPulse is the progressive use case for the **ESILV A4 — Python, Git, Linux** labs.
+MarketPulse is the progressive use case for the **ESILV A4 - Python, Git, Linux** labs.
 
 ## Business context
 
@@ -114,5 +114,5 @@ Evidence is requested only at the defined checkpoints. See `evidence/README.md`.
 
 ---
 
-**Course:** MESIFI472326 — Python, Git, Linux  
-**Use case:** MarketPulse — Multi-Source Financial Market Data Dashboard
+**Course:** MESIFI472326 - Python, Git, Linux  
+**Use case:** MarketPulse - Multi-Source Financial Market Data Dashboard
