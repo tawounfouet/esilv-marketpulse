@@ -40,6 +40,7 @@ Chaque item utilise un statut parmi :
 ```text
 CANDIDATE
 READY_TO_DESIGN
+PENDING_EXTERNAL
 READY_TO_TEACH
 DEFERRED
 REJECTED
@@ -53,9 +54,22 @@ Le sujet est pertinent mais n'a pas encore de support MarketPulse dédié.
 
 Le périmètre et les prérequis sont suffisamment clairs pour créer un support.
 
+### PENDING_EXTERNAL
+
+Le support a été écrit et sa structure a été qualifiée, mais une validation réelle dépend encore d'un environnement externe contrôlé, par exemple:
+
+```text
+SSH host
+systemd host
+Bloomberg LIVE
+real Dash package/runtime
+```
+
+Ce statut ne doit pas être présenté comme READY_TO_TEACH.
+
 ### READY_TO_TEACH
 
-Le support a été écrit, relu et testé.
+Le support a été écrit, relu et testé dans l'environnement requis.
 
 ### DEFERRED
 
@@ -133,27 +147,27 @@ python src/dashboard.py
 
 | ID | Domain | Topic | Priority | Mode | Suggested duration | Status |
 |---|---|---|---|---|---:|---|
-| ADV-LNX-01 | Linux | File operations | P1 | MINI_LAB | 30 min | READY_TO_DESIGN |
-| ADV-LNX-02 | Linux | Permissions and chmod | P1 | MINI_LAB | 30-45 min | READY_TO_DESIGN |
-| ADV-LNX-03 | Linux | Pipes and text processing | P1 | ADVANCED_LAB | 60-90 min | READY_TO_DESIGN |
-| ADV-LNX-04 | Linux | Environment variables | P1 | MINI_LAB | 30 min | READY_TO_DESIGN |
+| ADV-LNX-01 | Linux | File operations | P1 | MINI_LAB | 30 min | READY_TO_TEACH |
+| ADV-LNX-02 | Linux | Permissions and chmod | P1 | MINI_LAB | 30-45 min | READY_TO_TEACH |
+| ADV-LNX-03 | Linux | Pipes and text processing | P1 | ADVANCED_LAB | 60-90 min | READY_TO_TEACH |
+| ADV-LNX-04 | Linux | Environment variables | P1 | MINI_LAB | 30 min | READY_TO_TEACH |
 | ADV-LNX-05 | Linux | Bash scripting | P2 | ADVANCED_LAB | 60-90 min | CANDIDATE |
 | ADV-LNX-06 | Linux | Cron scheduling | P2 | MINI_LAB | 30-45 min | CANDIDATE |
-| ADV-GIT-01 | Git | Conflict resolution | P1 | MINI_LAB | 30-45 min | READY_TO_DESIGN |
-| ADV-GIT-02 | Git | Restore, revert and reset | P1 | ADVANCED_LAB | 60 min | READY_TO_DESIGN |
+| ADV-GIT-01 | Git | Conflict resolution | P1 | MINI_LAB | 30-45 min | READY_TO_TEACH |
+| ADV-GIT-02 | Git | Restore, revert and reset | P1 | ADVANCED_LAB | 60 min | READY_TO_TEACH |
 | ADV-GIT-03 | Git | Interactive rebase | P2 | ADVANCED_LAB | 60-90 min | CANDIDATE |
-| ADV-GIT-04 | Git | Tags and releases | P1 | MINI_LAB | 30-45 min | READY_TO_DESIGN |
+| ADV-GIT-04 | Git | Tags and releases | P1 | MINI_LAB | 30-45 min | READY_TO_TEACH |
 | ADV-GIT-05 | Git | Aliases and productivity | P3 | SELF_STUDY | 20-30 min | CANDIDATE |
-| ADV-RMT-01 | Remote Linux | SSH fundamentals | P1 | ADVANCED_LAB | 60 min | READY_TO_DESIGN |
+| ADV-RMT-01 | Remote Linux | SSH fundamentals | P1 | ADVANCED_LAB | 60 min | PENDING_EXTERNAL |
 | ADV-RMT-02 | Remote Linux | SCP file transfer | P2 | MINI_LAB | 30 min | CANDIDATE |
-| ADV-RMT-03 | Remote Linux | systemd service | P1 | ADVANCED_LAB | 60-90 min | READY_TO_DESIGN |
+| ADV-RMT-03 | Remote Linux | systemd service | P1 | ADVANCED_LAB | 60-90 min | PENDING_EXTERNAL |
 | ADV-RMT-04 | Remote Linux | VPS deployment | P2 | ADVANCED_LAB | 90 min | CANDIDATE |
-| ADV-BBG-01 | Bloomberg | Reference data | P1 | MINI_LAB | 30-45 min | READY_TO_DESIGN |
+| ADV-BBG-01 | Bloomberg | Reference data | P1 | MINI_LAB | 30-45 min | PENDING_EXTERNAL |
 | ADV-BBG-02 | Bloomberg | xbbg exploration | P2 | INSTRUCTOR_DEMO | 30 min | CANDIDATE |
 | ADV-BBG-03 | Bloomberg | blpapi low-level request | P2 | ADVANCED_LAB | 60-90 min | CANDIDATE |
 | ADV-BBG-04 | Bloomberg | Intraday bars | P2 | ADVANCED_LAB | 60 min | CANDIDATE |
-| ADV-DASH-01 | Dash | Callback | P1 | MINI_LAB | 30-45 min | READY_TO_DESIGN |
-| ADV-DASH-02 | Dash | Instrument selector | P1 | MINI_LAB | 30-45 min | READY_TO_DESIGN |
+| ADV-DASH-01 | Dash | Callback | P1 | MINI_LAB | 30-45 min | PENDING_EXTERNAL |
+| ADV-DASH-02 | Dash | Instrument selector | P1 | MINI_LAB | 30-45 min | PENDING_EXTERNAL |
 | ADV-DEP-01 | Deployment | Docker | P2 | ADVANCED_LAB | 90 min | CANDIDATE |
 | ADV-DEP-02 | Deployment | GitHub Actions | P2 | ADVANCED_LAB | 60-90 min | CANDIDATE |
 | ADV-DEP-03 | Deployment | Service + reverse proxy | P3 | SELF_STUDY | 90+ min | DEFERRED |
@@ -1878,3 +1892,48 @@ docs/legacy/04_LEGACY_CONTENT_OPERATIONALIZATION_ROADMAP.md
 Do not create advanced supports outside the R7 roadmap.
 
 A backlog item remains optional until a separate curriculum decision explicitly changes that status.
+
+
+## 48. R7.4.2 production status
+
+All 12 P1 supports now exist under:
+
+```text
+docs/advanced/
+```
+
+Qualification result:
+
+```text
+READY_TO_TEACH
+=
+7
+
+PENDING_EXTERNAL
+=
+5
+```
+
+READY_TO_TEACH:
+
+```text
+ADV-LNX-01
+ADV-LNX-02
+ADV-LNX-03
+ADV-LNX-04
+ADV-GIT-01
+ADV-GIT-02
+ADV-GIT-04
+```
+
+PENDING_EXTERNAL:
+
+```text
+ADV-RMT-01
+ADV-RMT-03
+ADV-BBG-01
+ADV-DASH-01
+ADV-DASH-02
+```
+
+PENDING_EXTERNAL items must complete their real environment gate before a student TD advertises them as READY_TO_TEACH.
