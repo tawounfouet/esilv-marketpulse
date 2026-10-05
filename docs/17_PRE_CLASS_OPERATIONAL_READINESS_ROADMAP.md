@@ -197,7 +197,29 @@ before the first TD session
 Status:
 
 ```text
-NOT_STARTED
+PENDING_EXTERNAL
+```
+
+Evidence:
+
+```text
+docs/readiness/01_R8_1_STUDENT_BOOTSTRAP_AND_CLONE_VALIDATION.md
+```
+
+Current result:
+
+```text
+repository-side bootstrap
+=
+PASS
+
+actual clone from validation runner
+=
+BLOCKED BY RUNNER DNS
+
+actual clone from intended ESILV/student network
+=
+PENDING_EXTERNAL
 ```
 
 ### Required environment
@@ -836,8 +858,8 @@ It simply leaves that Advanced activity inactive.
 
 | Lot | Scope | Status |
 |---|---|---|
-| R8.1 | Student bootstrap and clone validation | NEXT |
-| R8.2 | GitHub collaboration validation | NOT_STARTED |
+| R8.1 | Student bootstrap and clone validation | PENDING_EXTERNAL |
+| R8.2 | GitHub collaboration validation | NEXT |
 | R8.3 | Yahoo Finance network validation | NOT_STARTED |
 | R8.4 | Bloomberg teaching-mode validation | NOT_STARTED |
 | R8.5 | Dash runtime validation | NOT_STARTED |
@@ -899,8 +921,10 @@ revalidate the affected R6 baseline contract
 ## 19. Current next action
 
 ```text
-R8.1
-Student bootstrap and clone validation
+R8.2
+GitHub collaboration validation
 ```
 
-The first real operational proof should be executed from the intended teaching/student environment rather than inferred from repository inspection.
+R8.1 repository-side bootstrap checks are complete.
+
+The real clone from the intended ESILV/student network remains PENDING_EXTERNAL and is still required before final teaching GO.
