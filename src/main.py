@@ -5,9 +5,14 @@ import json
 
 DATA_DIR = Path("data/sample")
 
+# These starter values mirror config/settings.yml.
+# YAML configuration will be wired into the application later in the labs.
+LOOKBACK_LABEL = "1 month"
+INTERVAL_LABEL = "Daily"
 
-def load_instrument():
-    with open(DATA_DIR / "instrument.json", encoding="utf-8") as file:
+
+def load_instruments():
+    with open(DATA_DIR / "instruments.json", encoding="utf-8") as file:
         return json.load(file)
 
 
@@ -16,17 +21,39 @@ def load_prices():
         return list(csv.DictReader(file))
 
 
+def filter_prices(prices, ticker):
+    return [row for row in prices if row["ticker"] == ticker]
+
+
 def main():
-    instrument = load_instrument()
+    instruments = load_instruments()
     prices = load_prices()
 
-    latest = prices[-1]
+    instrument = instruments["instrument"]
+    benchmark = instruments["benchmark"]
+
+    instrument_prices = filter_prices(prices, instrument["ticker"])
+    benchmark_prices = filter_prices(prices, benchmark["ticker"])
+
+    instrument_latest = instrument_prices[-1]
+    benchmark_latest = benchmark_prices[-1]
 
     print("=== MarketPulse ===")
-    print(f"Instrument: {instrument['ticker']}")
-    print(f"Name: {instrument['name']}")
-    print(f"Last price: {latest['close']} {instrument['currency']}")
-    print(f"Observations: {len(prices)}")
+    print()
+    print("Instrument")
+    print(f"{instrument['ticker']} - {instrument['name']}")
+    print(f"Last price: {instrument_latest['close']} {instrument['currency']}")
+    print()
+    print("Benchmark")
+    print(f"{benchmark['ticker']} - {benchmark['name']}")
+    print(f"Last level: {benchmark_latest['close']}")
+    print()
+    print(f"Period: {LOOKBACK_LABEL}")
+    print(f"Interval: {INTERVAL_LABEL}")
+    print()
+    print("Observations")
+    print(f"{instrument['ticker']}: {len(instrument_prices)}")
+    print(f"{benchmark['ticker']}: {len(benchmark_prices)}")
 
 
 if __name__ == "__main__":
