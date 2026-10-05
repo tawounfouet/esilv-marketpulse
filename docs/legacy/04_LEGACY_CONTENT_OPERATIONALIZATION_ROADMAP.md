@@ -1052,6 +1052,70 @@ advanced track
 second mandatory curriculum
 ```
 
+### Execution result
+
+Created:
+
+```text
+docs/advanced/README.md
+```
+
+The portal packages:
+
+```text
+12 P1 supports
+7 READY_TO_TEACH
+5 PENDING_EXTERNAL
+```
+
+Navigation dimensions:
+
+```text
+domain
+status
+duration
+prerequisites
+delivery mode
+infrastructure requirement
+diagnostic profile
+available time
+```
+
+Delivery modes:
+
+```text
+SELF_STUDY_CAPABLE
+INSTRUCTOR_GUIDED
+INSTRUCTOR_DEPENDENT
+```
+
+The portal also separates:
+
+```text
+P1 implemented supports
+from
+P2/P3 backlog candidates
+```
+
+and defines the promotion procedure:
+
+```text
+PENDING_EXTERNAL
+->
+READY_TO_TEACH
+```
+
+without reopening the frozen CORE.
+
+R7.6 conclusion:
+
+```text
+PASS
+
+ADVANCED TRACK
+PACKAGED AND NAVIGABLE
+```
+
 ## 13. R7.7 - Legacy closure audit
 
 ### Goal
@@ -1150,8 +1214,8 @@ Do not mix the two status systems.
 | R7.3 | Instructor deep-dive operationalization | DONE |
 | R7.4 | Advanced P1 content operationalization | DONE |
 | R7.5 | TD enrichment capsules | DONE |
-| R7.6 | Advanced-track packaging | NEXT |
-| R7.7 | Legacy closure audit | NOT STARTED |
+| R7.6 | Advanced-track packaging | DONE |
+| R7.7 | Legacy closure audit | NEXT |
 
 ## 16. Current baseline facts
 
@@ -1207,7 +1271,7 @@ R7 is complete only when:
 [x] R7.3 DONE
 [x] R7.4 DONE with every P1 item explicitly resolved
 [x] R7.5 DONE
-[ ] R7.6 DONE when advanced supports exist
+[x] R7.6 DONE
 [ ] R7.7 DONE
 ```
 
@@ -1235,12 +1299,13 @@ WITHOUT CORE DIVERGENCE
 The current action is:
 
 ```text
-R7.6 - Advanced-track packaging
+R7.7 - Legacy closure audit
 ```
 
-R7.5 is closed.
+R7.6 is closed.
 
-The instructor layer now contains both:
-10 operational deep dives
-+
-11 TD enrichment capsules.
+The advanced layer now has a canonical navigable portal:
+
+```text
+docs/advanced/README.md
+```
