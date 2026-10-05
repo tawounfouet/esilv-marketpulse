@@ -516,34 +516,28 @@ Acceptance criteria:
 Status:
 
 ```text
-MAJOR REBALANCING
+DONE
 ```
 
-CORE:
+Implemented remediation:
 
-- create branch;
-- implement one small feature;
-- commit;
-- compare branch;
-- merge;
-- inspect graph;
-- prepare Checkpoint A.
-
-Move to INSTRUCTOR DEMO or OPTIONAL:
-
-- manufactured merge conflict;
-- manual conflict resolution;
-- conflict-demo file lifecycle.
-
-Checkpoint A remains after TD04.
+- added an explicit CORE definition of done;
+- planned approximately 80 minutes of required work plus 10 minutes of buffer and Checkpoint A capture;
+- kept one small feature branch, one meaningful branch commit, branch comparison, merge and Git graph inspection in CORE;
+- preserved fast-forward merge as a valid outcome;
+- kept merge-conflict understanding in CORE;
+- moved the complete manufactured conflict execution and conflict-demo file lifecycle to instructor demo / OPTIONAL;
+- removed mandatory manual conflict resolution from CORE;
+- kept Checkpoint A fully supported through the canonical evidence contract;
+- prepared the TD04 ending for the separate TD04 -> TD05 team-baseline handoff lot.
 
 Acceptance criteria:
 
 ```text
-[ ] branch + merge is completed by every student
-[ ] conflict understanding is introduced
-[ ] conflict execution is not mandatory
-[ ] Checkpoint A still fully supported
+[x] branch + merge is completed by every student
+[x] conflict understanding is introduced
+[x] conflict execution is not mandatory
+[x] Checkpoint A remains fully supported
 ```
 
 ### R2.5 Add TD04 -> TD05 team baseline handoff

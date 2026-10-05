@@ -14,31 +14,31 @@
 
 ## Context
 
-In TD03, you learned how Git records changes through local commits.
+TD03 introduced local Git history.
 
-You can now answer:
+TD04 adds feature isolation.
 
-```text
-What changed?
-Who changed it?
-When was it committed?
-```
+The new question is:
 
-A new problem now appears.
+> How can we develop a change without modifying the current main line until the change is ready?
 
-If every feature is developed directly on `main`, unfinished work can affect the stable version of MarketPulse.
+Git branches provide that isolation.
 
-Git branches provide a way to isolate work before integration.
-
-In TD04, you will learn to:
+The CORE workflow is:
 
 ```text
 main
   |
-  +-- feature branch
+  +--> feature branch
           |
           v
-       commits
+        change
+          |
+          v
+        commit
+          |
+          v
+        compare
           |
           v
         merge
@@ -55,47 +55,35 @@ They arrive in TD05.
 
 At the end of TD04, you should be able to:
 
-- explain why branches are useful;
+- explain why branches isolate feature work;
 - identify the current branch;
 - create a feature branch;
 - switch between branches;
-- make commits on a feature branch;
-- compare branch history;
-- merge a completed branch into `main`;
-- recognize a merge conflict;
-- resolve a simple text conflict;
-- inspect the resulting history;
-- explain why direct feature development on `main` should stop after this TD.
+- make a meaningful commit on the feature branch;
+- compare the branch with `main`;
+- merge the completed branch into `main`;
+- inspect the resulting Git graph;
+- recognize what a merge conflict means;
+- explain why direct feature work on `main` stops after this TD.
 
-## Expected result
+## CORE definition of done
 
-Each student should be able to demonstrate:
-
-```text
-main
-  |
-  +-- feature/<description>
-          |
-          +-- commit
-          |
-          v
-        merge
-          |
-          v
-         main
-```
-
-By the end of TD04:
+TD04 is complete when each student can confirm:
 
 ```text
-[ ] one feature branch created
-[ ] at least one commit created on the branch
-[ ] branch merged into local main
-[ ] Git graph inspected
-[ ] simple conflict demonstrated or understood
-[ ] MarketPulse still runs
-[ ] Checkpoint A evidence prepared
+[ ] I started from a clean main branch
+[ ] I created one feature branch
+[ ] I implemented one small MarketPulse feature
+[ ] I committed the feature on the branch
+[ ] I compared the feature branch with main
+[ ] I merged the feature into local main
+[ ] I inspected the Git graph
+[ ] I understand what a merge conflict means
+[ ] MarketPulse still runs after the merge
+[ ] Checkpoint A evidence is ready or can be captured
 ```
+
+Executing a manufactured conflict is not required for CORE completion.
 
 ## Prerequisites
 
@@ -110,7 +98,7 @@ Before starting:
 [ ] git add understood
 [ ] git commit understood
 [ ] git log understood
-[ ] MarketPulse runs
+[ ] python src/main.py works
 ```
 
 Verify:
@@ -123,26 +111,22 @@ python src/main.py
 
 Start from a clean working tree.
 
-If your working tree contains unfinished changes, resolve them with the instructor before continuing.
+If unfinished work remains, resolve it with the instructor before creating the feature branch.
 
-## Important rule from TD04 onward
+## Rule from TD04 onward
 
-After branch-based development has been introduced:
+Feature work should no longer be developed directly on `main`.
 
-```text
-No direct feature development on main.
-```
-
-The normal local workflow becomes:
+The normal local pattern becomes:
 
 ```text
 main
   |
   v
-create feature branch
+feature branch
   |
   v
-implement
+change
   |
   v
 commit
@@ -151,60 +135,68 @@ commit
 merge
 ```
 
-In TD05, this will evolve into:
-
-```text
-feature branch
-      |
-      v
-push
-      |
-      v
-Pull Request
-      |
-      v
-review
-      |
-      v
-merge
-```
+TD05 will extend this pattern with GitHub collaboration.
 
 ## Session plan
+
+The CORE is designed for approximately 80 minutes.
+
+The final 10 minutes are reserved for Checkpoint A capture, questions or optional conflict practice.
 
 | Time | Activity |
 |---|---|
 | 00-10 min | Branch mental model |
-| 10-25 min | Create and inspect a feature branch |
-| 25-45 min | Implement a small MarketPulse change |
-| 45-60 min | Commit and compare branches |
-| 60-72 min | Merge into main |
-| 72-82 min | Simple conflict exercise |
-| 82-90 min | Checkpoint A preparation |
+| 10-20 min | Create and inspect feature branch |
+| 20-42 min | Implement small MarketPulse feature |
+| 42-55 min | Commit and compare branches |
+| 55-68 min | Merge into main and inspect graph |
+| 68-75 min | Conflict concept and instructor demo |
+| 75-80 min | CORE validation |
+| 80-90 min | Checkpoint A capture / buffer / optional practice |
 
-# Part 1 - Understand branches
+# CORE
 
-A branch is a movable reference to a line of commits.
+# Part 1 - Understand branch isolation
 
-For this TD, use the following simplified mental model:
+A feature branch allows work to move independently from `main`.
+
+Simplified model:
 
 ```text
 main
   |
-  o---o---o
-          |
-          +-- feature/display-dates
+  o---o
+      |
+      +--> feature/display-observation-dates
                     |
                     o
 ```
 
-The feature branch lets you work without immediately changing `main`.
+Before the merge:
 
-## 1.1 Inspect your current branch
+```text
+main
+!=
+feature branch
+```
+
+After successful integration:
+
+```text
+feature result
++
+main
+=
+updated main
+```
+
+# Part 2 - Inspect the current branch
 
 Run:
 
 ```bash
 git branch
+git status
 ```
 
 The current branch is marked with:
@@ -213,68 +205,30 @@ The current branch is marked with:
 *
 ```
 
-You may also run:
-
-```bash
-git status
-```
-
-Question:
-
-> Which branch are you currently on?
-
-## 1.2 Inspect branch names
-
-Run:
-
-```bash
-git branch --list
-```
-
-At this stage, you may only see:
+Before continuing, verify that you are on:
 
 ```text
 main
 ```
 
-# Part 2 - Create a feature branch
+and that the working tree is clean.
 
-## 2.1 Choose a small feature
+# Part 3 - Create a feature branch
 
-For TD04, use a small MarketPulse improvement.
-
-Recommended task:
+Use the small MarketPulse feature:
 
 ```text
 Display the first and last observation dates
-for both instrument and benchmark.
+for instrument and benchmark.
 ```
 
-This builds directly on TD02.
+This builds directly on the TD02 data helpers.
 
-The output may evolve toward:
-
-```text
-Instrument
-AAPL - Apple Inc.
-Observations : 21
-First date   : 2026-09-01
-Last date    : 2026-09-30
-First close  : 250.00 USD
-Last close   : 266.20 USD
-```
-
-Do not calculate returns yet.
-
-## 2.2 Create the branch
-
-Use a descriptive branch name:
+Create:
 
 ```bash
 git switch -c feature/display-observation-dates
 ```
-
-If your Git version does not support `git switch`, the instructor may show the equivalent `git checkout` command.
 
 Verify:
 
@@ -289,11 +243,27 @@ Expected shape:
   main
 ```
 
-Question:
+Branch names should describe the work.
 
-> Why is `feature/display-observation-dates` better than a branch called `test` or `student1`?
+Good examples:
 
-# Part 3 - Implement the feature
+```text
+feature/display-observation-dates
+feature/yahoo-provider
+fix/invalid-ticker
+docs/update-readme
+```
+
+Avoid person-based or vague names such as:
+
+```text
+student1
+mybranch
+test
+final
+```
+
+# Part 4 - Implement the small feature
 
 Open:
 
@@ -301,7 +271,7 @@ Open:
 src/main.py
 ```
 
-Create or reuse simple functions such as:
+Create or reuse:
 
 ```python
 def get_first_date(prices):
@@ -312,7 +282,21 @@ def get_last_date(prices):
     return prices[-1]["date"]
 ```
 
-Integrate the information into your market summary.
+Integrate the dates into the existing reusable market summary.
+
+Target idea:
+
+```text
+Instrument
+AAPL - Apple Inc.
+Observations : 21
+First date   : 2026-09-01
+Last date    : 2026-09-30
+First close  : 250.00 USD
+Last close   : 266.20 USD
+```
+
+Do not calculate returns yet.
 
 Run:
 
@@ -322,36 +306,28 @@ python src/main.py
 
 Verify that both instrument and benchmark display dates.
 
-## 3.1 Inspect the change before staging
+# Part 5 - Inspect and commit the branch change
 
-Run:
+Inspect:
 
 ```bash
 git status
 git diff
 ```
 
-Explain the diff to another team member.
-
-## 3.2 Stage the intended file
-
-Example:
+Stage the intended file:
 
 ```bash
 git add src/main.py
 ```
 
-Inspect:
+Inspect what will be committed:
 
 ```bash
 git diff --staged
 ```
 
-# Part 4 - Commit on the feature branch
-
-Create a meaningful commit.
-
-Example:
+Commit:
 
 ```bash
 git commit -m "feat: display first and last observation dates"
@@ -364,182 +340,38 @@ git status
 git log --oneline -5
 ```
 
-Question:
+The feature commit belongs to the feature branch.
 
-> Is the commit now part of `main`?
+It is not yet integrated into `main`.
 
-Not yet.
+# Part 6 - Compare feature branch and main
 
-It currently belongs to the feature branch history.
-
-# Part 5 - Compare branches
-
-## 5.1 Inspect the graph
-
-Run:
+Inspect the graph:
 
 ```bash
 git log --oneline --graph --decorate --all
 ```
 
-You should be able to identify:
+Identify:
 
 ```text
 main
 feature/display-observation-dates
 ```
 
-## 5.2 Switch back to main
-
-Run:
-
-```bash
-git switch main
-```
-
-Then:
-
-```bash
-git branch
-git log --oneline -5
-```
-
-Question:
-
-> Is the feature commit visible as the current commit of main?
-
-## 5.3 Compare the branches
-
-Try:
+Compare the branch with `main`:
 
 ```bash
 git diff main..feature/display-observation-dates
 ```
 
-Question:
+Be able to answer:
 
-> What difference does Git show between the two branches?
+1. Which change exists on the feature branch?
+2. Why is that change not yet part of `main`?
+3. What would happen if the branch were abandoned before merge?
 
-# Part 6 - Merge the feature
-
-Make sure you are on `main`:
-
-```bash
-git branch
-```
-
-Then merge:
-
-```bash
-git merge feature/display-observation-dates
-```
-
-Run:
-
-```bash
-git log --oneline --graph --decorate --all
-```
-
-Then verify MarketPulse:
-
-```bash
-python src/main.py
-```
-
-## Questions
-
-1. Is the feature now available on `main`?
-2. Is the feature commit still visible in history?
-3. Did Git create a separate merge commit or perform a fast-forward?
-4. What does your Git graph show?
-
-## Important
-
-A fast-forward merge is valid.
-
-Do not force a merge commit only to make the graph look more complex.
-
-The objective is to understand integration, not to manufacture history.
-
-# Part 7 - Branch lifecycle
-
-After successful integration, the local feature branch is no longer needed.
-
-List branches:
-
-```bash
-git branch
-```
-
-If the instructor asks you to clean the merged branch, use:
-
-```bash
-git branch -d feature/display-observation-dates
-```
-
-The `-d` option refuses to delete some unmerged branches.
-
-Do not use force deletion unless you understand why it is necessary.
-
-# Part 8 - Understand merge conflicts
-
-A conflict occurs when Git cannot automatically decide how to combine competing changes.
-
-Conceptually:
-
-```text
-main changes one line
-          +
-feature changes the same line
-          |
-          v
-Git cannot choose automatically
-          |
-          v
-merge conflict
-```
-
-Conflicts are not errors in Git.
-
-They are situations that require a human decision.
-
-# Part 9 - Simple conflict exercise
-
-This exercise should use a harmless text file so that the MarketPulse code remains safe.
-
-## 9.1 Create a practice file on main
-
-Make sure you are on `main`:
-
-```bash
-git switch main
-```
-
-Create:
-
-```bash
-printf "MarketPulse mode: standard\n" > conflict_demo.txt
-git add conflict_demo.txt
-git commit -m "chore: add conflict demonstration file"
-```
-
-## 9.2 Create a conflict branch
-
-Create:
-
-```bash
-git switch -c practice/conflict-demo
-```
-
-Change the file:
-
-```bash
-printf "MarketPulse mode: feature\n" > conflict_demo.txt
-git add conflict_demo.txt
-git commit -m "chore: change conflict demo on feature branch"
-```
-
-## 9.3 Change the same line on main
+# Part 7 - Merge the feature into main
 
 Switch back:
 
@@ -547,165 +379,153 @@ Switch back:
 git switch main
 ```
 
-Change the same line:
+Verify:
 
 ```bash
-printf "MarketPulse mode: main\n" > conflict_demo.txt
-git add conflict_demo.txt
-git commit -m "chore: change conflict demo on main"
+git branch
 ```
 
-This direct change on `main` exists only to create a controlled conflict exercise.
-
-It is not the normal feature-development workflow.
-
-## 9.4 Attempt the merge
-
-Run:
+Merge:
 
 ```bash
-git merge practice/conflict-demo
+git merge feature/display-observation-dates
 ```
 
-Git should report a conflict.
-
-Inspect:
+Then inspect:
 
 ```bash
-git status
-cat conflict_demo.txt
+git log --oneline --graph --decorate --all
 ```
 
-You may see markers similar to:
+Run MarketPulse:
 
-```text
-<<<<<<< HEAD
-MarketPulse mode: main
-=======
-MarketPulse mode: feature
->>>>>>> practice/conflict-demo
+```bash
+python src/main.py
 ```
 
-## 9.5 Resolve the conflict
+Be able to explain:
 
-Choose a final value that your team understands.
+1. Is the feature now visible from `main`?
+2. Is the feature commit still visible?
+3. Did Git perform a fast-forward or create a merge commit?
+4. What does the graph show?
 
-For example:
+A fast-forward merge is valid.
 
-```text
-MarketPulse mode: resolved
+Do not force a merge commit only to make the history look more complex.
+
+# Part 8 - Clean the merged branch
+
+After the instructor confirms the merge:
+
+```bash
+git branch -d feature/display-observation-dates
 ```
-
-Edit the file so that no conflict markers remain.
 
 Then:
 
 ```bash
-git add conflict_demo.txt
-git status
-git commit
-```
-
-Use the merge message proposed by Git or a clear equivalent.
-
-Inspect:
-
-```bash
-git log --oneline --graph --decorate --all
-```
-
-## 9.6 Clean up the demonstration file
-
-The file exists only for the exercise.
-
-After the instructor confirms the conflict exercise, remove it through a normal tracked change:
-
-```bash
-rm conflict_demo.txt
-git add conflict_demo.txt
-git commit -m "chore: remove conflict demonstration file"
-```
-
-The exercise remains visible in Git history even though the temporary file is removed.
-
-# Part 10 - What a conflict teaches
-
-You should now understand:
-
-```text
-Git detects competing changes
-          |
-          v
-Git stops the merge
-          |
-          v
-human reads the conflict
-          |
-          v
-human chooses final content
-          |
-          v
-git add
-          |
-          v
-commit merge resolution
-```
-
-Never resolve a conflict by deleting markers randomly without understanding which content should remain.
-
-# Part 11 - Branch naming convention
-
-Use:
-
-```text
-feature/<short-description>
-fix/<short-description>
-docs/<short-description>
-```
-
-Examples:
-
-```text
-feature/display-observation-dates
-feature/yahoo-provider
-fix/invalid-ticker
-docs/update-readme
-```
-
-Avoid:
-
-```text
-test
-student1
-thomas
-mybranch
-final
-final2
-```
-
-A branch describes the work, not the person.
-
-# Part 12 - Git commands recap
-
-By the end of TD04, you should understand:
-
-```bash
 git branch
-git branch --list
-git switch -c <branch>
-git switch <branch>
-git status
-git diff
-git add
-git commit
-git log --oneline
 git log --oneline --graph --decorate --all
-git diff main..<branch>
-git merge <branch>
-git branch -d <branch>
 ```
 
-# Part 13 - Checkpoint A
+The important history remains even after the local branch name is removed.
+
+Do not use force deletion in the CORE.
+
+# Part 9 - Understand merge conflicts
+
+A merge conflict occurs when Git cannot automatically decide how to combine competing changes.
+
+Conceptually:
+
+```text
+main changes one area
+        +
+feature changes the same area
+        |
+        v
+Git cannot choose safely
+        |
+        v
+human decision required
+```
+
+A conflict is not a Git failure.
+
+It means integration requires interpretation.
+
+Typical conflict markers may look like:
+
+```text
+<<<<<<< HEAD
+content from current branch
+=======
+content from other branch
+>>>>>>> feature/example
+```
+
+The resolution principle is:
+
+```text
+inspect
+  |
+  v
+understand both versions
+  |
+  v
+choose final content
+  |
+  v
+remove markers
+  |
+  v
+git add
+  |
+  v
+complete merge
+```
+
+## Instructor demo
+
+The instructor may demonstrate one controlled conflict using a harmless text file.
+
+Students should focus on understanding:
+
+- why the conflict occurred;
+- what `git status` reports;
+- what the markers mean;
+- why a human must choose the final content.
+
+Executing the complete manufactured conflict is OPTIONAL.
+
+# Part 10 - CORE validation
+
+Run:
+
+```bash
+git status
+git log --oneline --graph --decorate --all
+python src/main.py
+```
+
+You should be able to explain:
+
+```text
+main
+feature branch
+branch creation
+branch switch
+branch commit
+branch comparison
+merge
+fast-forward
+merge conflict
+```
+
+If the feature is integrated and the concepts are understood, TD04 CORE is complete.
+
+# Part 11 - Checkpoint A
 
 Checkpoint A is performed after TD04 and closes Checkpoint Phase A.
 
@@ -715,9 +535,7 @@ The canonical evidence contract is:
 docs/04_CHECKPOINTS_AND_EVIDENCE.md
 ```
 
-That document defines the required screenshot content, individual README fields, live validation rules and assessment guidance.
-
-For convenience, the required Checkpoint A files are:
+For convenience, the required files are:
 
 ```text
 README.md
@@ -734,57 +552,69 @@ evidence/checkpoint-a/<github-username>/
 
 Do not rename the files.
 
-# Part 14 - Checkpoint A capture checklist
+## Capture checklist
 
-Before leaving TD04, capture or prepare evidence only after verifying:
+Before leaving TD04, verify:
 
 ```text
 [ ] MarketPulse runs
 [ ] git status is understandable
-[ ] git log shows your work
+[ ] git log shows my work
 [ ] branch and merge history are visible
-[ ] evidence belongs to your own GitHub identity
+[ ] evidence is attributable to my GitHub identity
 [ ] no secret appears in a screenshot
 ```
 
-Do not invent evidence.
-
-# Part 15 - Checkpoint A live validation reminder
-
 Screenshots do not replace understanding.
 
-Be ready to:
+For the official evidence rules, use `docs/04_CHECKPOINTS_AND_EVIDENCE.md`.
+
+# OPTIONAL
+
+Complete optional work only after the CORE definition of done and Checkpoint A preparation are under control.
+
+## Optional 1 - Execute a controlled conflict
+
+Only perform this exercise if the instructor has enough time to supervise it.
+
+Use a harmless text file, not MarketPulse business code.
+
+Example outline:
 
 ```text
-run MarketPulse
-show git diff
-show your commits
-show a branch
-explain a merge
-explain your own contribution
+main
+creates practice file
+        |
+        v
+practice branch
+changes one line
+        |
+        v
+main
+changes same line differently
+        |
+        v
+merge
+        |
+        v
+conflict
 ```
 
-For the official validation rules, use `docs/04_CHECKPOINTS_AND_EVIDENCE.md`.
+Inspect:
 
-# Part 16 - Security before screenshots
+```bash
+git status
+```
 
-Before committing evidence, inspect every screenshot.
+Read the conflict markers.
 
-Never expose:
+Resolve the file only after understanding both versions.
 
-- passwords;
-- API keys;
-- GitHub tokens;
-- private SSH keys;
-- Bloomberg credentials;
-- cloud credentials;
-- payment information.
+Then stage the resolved file and complete the merge.
 
-If a terminal displays sensitive information, do not include it in the screenshot.
+Do not leave the practice file in the final project unless the instructor wants to preserve it.
 
-# Part 17 - If you finish early
-
-## Challenge 1 - Compare two branches
+## Optional 2 - Compare another branch
 
 Create a harmless practice branch and use:
 
@@ -792,9 +622,9 @@ Create a harmless practice branch and use:
 git diff main..<branch>
 ```
 
-Explain what changes exist only on the branch.
+Explain what exists only on the branch.
 
-## Challenge 2 - Inspect graph decorations
+## Optional 3 - Inspect graph decorations
 
 Run:
 
@@ -805,10 +635,10 @@ git log --oneline --graph --decorate --all
 Identify:
 
 - current branch;
-- main;
+- `main`;
 - recent commits.
 
-## Challenge 3 - File history
+## Optional 4 - File history
 
 Run:
 
@@ -816,19 +646,13 @@ Run:
 git log --oneline -- src/main.py
 ```
 
-Then inspect one commit:
+Then:
 
 ```bash
 git show <commit-id> -- src/main.py
 ```
 
-## Challenge 4 - Explain fast-forward
-
-Using your own Git graph, explain in your own words what happened when your feature branch was merged.
-
-You do not need to memorize a formal definition.
-
-# Part 18 - Troubleshooting
+# TROUBLESHOOTING
 
 ## Cannot switch branches
 
@@ -852,7 +676,7 @@ Inspect:
 git log --oneline --graph --decorate --all
 ```
 
-You may already have merged the branch or created no additional commit on it.
+You may already have merged the branch or created no new branch commit.
 
 ## Merge conflict appears unexpectedly
 
@@ -862,11 +686,9 @@ Run:
 git status
 ```
 
-Identify conflicted files.
-
 Do not continue editing unrelated files.
 
-Resolve one conflict carefully before proceeding.
+Ask the instructor to help identify the competing changes before resolving them.
 
 ## Conflict markers remain
 
@@ -876,14 +698,14 @@ Search:
 grep -R "<<<<<<<" .
 ```
 
-Also check for:
+Also inspect for:
 
 ```text
 =======
 >>>>>>>
 ```
 
-Do not commit unresolved conflict markers.
+Do not commit unresolved markers.
 
 ## MarketPulse fails after merge
 
@@ -895,44 +717,52 @@ git status
 git diff
 ```
 
-Inspect the merged code before creating more changes.
+Inspect the integrated code before creating more changes.
 
-# Part 19 - What comes next?
+# Final readiness check
+
+Each student should confirm:
+
+```text
+[ ] I can identify my current branch
+[ ] I can create a feature branch
+[ ] I can switch branches
+[ ] I can commit on a feature branch
+[ ] I can compare a feature branch with main
+[ ] I can merge into main
+[ ] I can inspect the Git graph
+[ ] I understand fast-forward merge
+[ ] I understand what causes a merge conflict
+[ ] I understand that conflict execution was optional
+[ ] MarketPulse still runs
+[ ] Checkpoint A can be completed
+```
+
+# What comes next?
 
 Checkpoint Phase A is now complete:
 
 ```text
 Checkpoint Phase A - TD01-TD04
-
-TD01 - Bootstrap + Linux
-TD02 - Python + CSV / JSON
-TD03 - Git Local Workflow
-TD04 - Branches + Merge
         |
         v
 Checkpoint A
 ```
 
-This is a checkpoint boundary, not a pedagogical wave boundary.
+Pedagogical Wave 2 continues through TD06.
 
-Pedagogical Wave 1 ended after TD02. Wave 2 continues through TD06.
-
-In TD05, the workflow becomes collaborative at GitHub level.
-
-The next business requirement is:
+TD05 introduces remote collaboration:
 
 ```text
-"Several developers now contribute to the same MarketPulse repository."
-```
-
-You will introduce:
-
-```text
-feature branch
-+
+local feature branch
+        |
+        v
 push
-+
-Pull Request
+        |
+        v
+GitHub Pull Request
 ```
 
-From that point, a completed feature should no longer be integrated simply by working directly on `main`.
+Before TD05 feature work begins, the team will first establish one validated shared baseline.
+
+That synchronization step is defined in the next remediation lot.
