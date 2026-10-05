@@ -163,6 +163,21 @@ Turn analysis and backlog decisions into operational teaching assets.
 
 This is now the canonical execution roadmap for the remaining Legacy stream.
 
+### 05 - Final migration registry
+
+```text
+05_LEGACY_FINAL_MIGRATION_REGISTRY.md
+```
+
+Purpose:
+
+```text
+Assign one final operational destination
+to every significant Legacy topic.
+```
+
+The registry is the traceability bridge between classification and execution.
+
 ### Instructor deep-dive reference
 
 ```text
@@ -443,10 +458,18 @@ The current roadmap state is maintained in:
 docs/legacy/04_LEGACY_CONTENT_OPERATIONALIZATION_ROADMAP.md
 ```
 
-After R7.1 reconciliation, execution proceeds to:
+R7.1 and R7.2 are now complete.
+
+The current execution target is:
 
 ```text
-R7.2 - Final migration registry
+R7.3 - Instructor deep-dive operationalization
+```
+
+The routing source for R7.3 and R7.4 is:
+
+```text
+docs/legacy/05_LEGACY_FINAL_MIGRATION_REGISTRY.md
 ```
 
 Do not create new Legacy-derived teaching material outside that roadmap.
