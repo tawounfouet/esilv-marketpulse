@@ -2450,3 +2450,44 @@ keep advanced depth available
 ```
 
 That is the intended bridge between the historical teaching material and the current MarketPulse curriculum.
+
+
+## 29. Operationalization handoff
+
+The mapping decisions in this document remain authoritative for classification:
+
+```text
+CORE
+OPTIONAL
+TEACHER_REFERENCE
+DROP
+```
+
+The common MarketPulse CORE is now frozen through R6.
+
+No classification in this document should be interpreted as permission to expand the 18-hour CORE automatically.
+
+Operational execution of the remaining Legacy value is governed by:
+
+```text
+docs/legacy/04_LEGACY_CONTENT_OPERATIONALIZATION_ROADMAP.md
+```
+
+The next execution step is not another mapping exercise.
+
+It is:
+
+```text
+R7.2
+Final migration registry
+```
+
+which will assign each significant Legacy topic one final operational destination:
+
+```text
+CORE_MIGRATED
+INSTRUCTOR_READY
+ADVANCED_READY
+REFERENCE_ONLY
+DROP_CLOSED
+```
