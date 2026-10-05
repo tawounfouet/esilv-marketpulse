@@ -1849,6 +1849,12 @@ PASS
 
 ### R5.7 Security scan
 
+Status:
+
+```text
+DONE
+```
+
 Verify that no lab asks students to expose:
 
 - passwords;
@@ -1858,11 +1864,62 @@ Verify that no lab asks students to expose:
 - cloud credentials;
 - billing information.
 
+Repository-wide review confirmed:
+
+```text
+repository-level security reminders
+=
+README.md
+CONTRIBUTING.md
+TEAM_TEMPLATE.md
+docs/03_GITHUB_TEAM_WORKFLOW.md
+
+evidence security
+=
+docs/04_CHECKPOINTS_AND_EVIDENCE.md
+evidence/README.md
+
+provider security
+=
+TD08 requires no committed credential
+TD09 forbids sensitive session information in Git or screenshots
+TD10 forbids credentials in code and output
+APPROVED_SAMPLE requires no Bloomberg credential
+```
+
+Versioned configuration review:
+
+```text
+config/settings.yml
+=
+human-readable application configuration only
+no credential or billing value is required
+```
+
+The repository ignore rules already exclude local environment files.
+
+Optional advanced remote-work documentation also states that:
+
+```text
+personal cloud payment is not required
+private keys must remain secret
+secrets must not be transferred for demonstrations
+secrets must not be committed in service configuration
+```
+
+A repository code-search review for common credential and private-key signatures found no committed credential candidate.
+
 Acceptance criteria:
 
 ```text
-[ ] security reminders remain at relevant provider/evidence steps
-[ ] no credentials are needed in versioned config
+[x] security reminders remain at relevant provider/evidence steps
+[x] no credentials are needed in versioned config
+```
+
+R5.7 conclusion:
+
+```text
+PASS
 ```
 
 ### R5.8 Character convention scan
