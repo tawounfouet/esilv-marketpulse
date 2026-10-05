@@ -126,7 +126,7 @@ esilv-marketpulse/
 │   ├── 04_CHECKPOINTS_AND_EVIDENCE.md
 │   ├── 05_TARGET_REPOSITORY_STRUCTURE.md
 │   ├── 06_TD_SEQUENCE_AND_LEARNING_PATH.md
-│   └── td/
+│   └── labs/
 │       ├── README.md
 │       └── TD01_BOOTSTRAP_LINUX.md
 ├── src/
