@@ -178,6 +178,21 @@ to every significant Legacy topic.
 
 The registry is the traceability bridge between classification and execution.
 
+### 06 - CORE / OPTIONAL / ADVANCED taxonomy impact study
+
+```text
+06_CORE_OPTIONAL_ADVANCED_TAXONOMY_IMPACT_STUDY.md
+```
+
+Purpose:
+
+```text
+Map every lab and repository change required
+before introducing student-facing ADVANCED sections.
+```
+
+It freezes the impact scope before R7.4 implementation.
+
 ### Instructor deep-dive reference
 
 ```text
@@ -471,8 +486,10 @@ R7.3 is now complete.
 The current execution target is:
 
 ```text
-R7.4 - Advanced P1 content operationalization
+R7.4.2 - P1 advanced support production
 ```
+
+R7.4.1 taxonomy and impact analysis is complete.
 
 The routing source for R7.3 and R7.4 is:
 
