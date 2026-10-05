@@ -467,6 +467,7 @@ This README intentionally does not display CI, security, release or license badg
 - [Bloomberg provider scaffold](docs/11_BLOOMBERG_PROVIDER_SCAFFOLD.md)
 - [Application snapshot contract](docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md)
 - [Libraries and dependencies](docs/13_MARKETPULSE_LIBRARIES_AND_DEPENDENCIES.md)
+- [Pre-lab diagnostic and interpretation](docs/diagnostic/README.md)
 
 ---
 
