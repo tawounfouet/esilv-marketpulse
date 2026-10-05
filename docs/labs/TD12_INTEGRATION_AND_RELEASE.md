@@ -798,6 +798,12 @@ evidence/checkpoint-c/<github-username>/
 
 Do not rename the files.
 
+For `03_final_pull_request.png`, you do not need to be the author of the single team integration PR.
+
+Use a meaningful late-stage PR from TD09-TD12 that is attributable to your own contribution.
+
+The team release PR may be authored by one integration lead. Do not create duplicate PRs only to manufacture individual evidence.
+
 # Part 21 - Checkpoint C capture checklist
 
 Before leaving TD12, verify:
@@ -811,7 +817,7 @@ Before leaving TD12, verify:
 [ ] dashboard shows benchmark return
 [ ] dashboard shows relative performance
 [ ] dashboard shows the base-100 comparison
-[ ] late-stage Pull Request evidence is attributable
+[ ] my late-stage Pull Request evidence is attributable to my own contribution
 [ ] fresh or clean reproducible run is demonstrated
 [ ] no secret appears in a screenshot
 ```

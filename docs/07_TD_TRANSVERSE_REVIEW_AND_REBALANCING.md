@@ -1298,9 +1298,9 @@ Checkpoint C evidence:
 
 Keep only a short checklist in TD12 and make `docs/04_CHECKPOINTS_AND_EVIDENCE.md` the canonical contract.
 
-Important individual-evidence correction:
+Individual-evidence correction:
 
-Every student does not need to be the author of the same team-level final integration PR.
+This issue has now been remediated by LOT-R1.6.
 
 For:
 
@@ -1308,11 +1308,19 @@ For:
 03_final_pull_request.png
 ```
 
-a student should be allowed to show a final or late-stage PR from TD09-TD12 that is attributable to that student.
+the canonical rule is now explicit:
 
-The team-level release PR may be authored by one integration lead.
+```text
+meaningful late-stage PR from TD09-TD12
++
+attributable to the student
+```
 
-This matches the existing checkpoint document better than forcing artificial final PRs for every student.
+The evidence does not have to be the single team-level final integration PR.
+
+One integration lead may author the team release PR while other students use their own attributable late-stage Pull Requests.
+
+Artificial duplicate release PRs are not required.
 
 Release dependency recommendation:
 

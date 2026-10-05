@@ -330,7 +330,7 @@ The objective is to show a real comparative market view, not only that Dash star
 
 #### 03_final_pull_request.png
 
-The screenshot should show a final or late-stage Pull Request that demonstrates the collaborative workflow:
+The screenshot should show a final or late-stage Pull Request from the TD09-TD12 stage that demonstrates the collaborative workflow:
 
 ```text
 feature branch
@@ -345,7 +345,13 @@ review
 merge
 ```
 
-The contribution must be attributable to the student.
+The Pull Request must be attributable to the student whose evidence directory contains the screenshot.
+
+It does not have to be the single team-level final integration or release Pull Request.
+
+A team may legitimately have one final integration Pull Request authored by one integration lead. Other students may use another meaningful late-stage Pull Request from TD09, TD10, TD11 or TD12, provided that it demonstrates their own identifiable contribution.
+
+Do not create artificial duplicate final Pull Requests only to satisfy the screenshot requirement.
 
 #### 04_reproducible_run.png
 
@@ -488,6 +494,10 @@ Each student provides their own evidence.
 A team should not copy the same personal-contribution screenshot into every student's directory when the screenshot is intended to prove individual work.
 
 Shared application behaviour may naturally look similar across team members, but Git contribution evidence must remain attributable to the individual student.
+
+For Checkpoint C, individual traceability does not mean that every student must author the same type of final release Pull Request.
+
+The requirement is an attributable late-stage contribution, not an artificial duplication of team integration work.
 
 ## 10. Team vs individual validation
 

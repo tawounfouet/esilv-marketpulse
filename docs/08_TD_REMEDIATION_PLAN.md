@@ -380,27 +380,37 @@ Acceptance criteria:
 
 ### R1.6 Clarify Checkpoint C Pull Request evidence
 
+Status:
+
+```text
+DONE
+```
+
 Decision:
 
 ```text
 03_final_pull_request.png
 =
-a final or late-stage PR attributable to the student
+a meaningful late-stage PR from TD09-TD12
++
+attributable to the student
 ```
 
 It does not have to be the single team-level final release PR.
 
-Required actions:
+Completed actions:
 
-- clarify `docs/04_CHECKPOINTS_AND_EVIDENCE.md`;
-- update TD12;
-- preserve individual traceability.
+- `docs/04_CHECKPOINTS_AND_EVIDENCE.md` now states the rule explicitly;
+- TD12 tells students not to manufacture duplicate release PRs;
+- the team integration PR may be authored by one integration lead;
+- other students may use their own meaningful late-stage PR from TD09-TD12;
+- individual Git traceability remains mandatory.
 
 Acceptance criteria:
 
 ```text
-[ ] no requirement that every student authors one team final PR
-[ ] every student can show attributable late-stage PR evidence
+[x] no requirement that every student authors one team final PR
+[x] every student can show attributable late-stage PR evidence
 ```
 
 ## 6. R2 - Rebalance TD01 to TD06
@@ -1412,7 +1422,7 @@ Initial status:
 
 | Lot | Scope | Priority | Status |
 |---|---|---|---|
-| R1 | Cross-cutting contracts | P0 | IN PROGRESS |
+| R1 | Cross-cutting contracts | P0 | DONE |
 | R2 | TD01-TD06 | P0/P1 | NOT STARTED |
 | R3 | TD07-TD08 | P0 | NOT STARTED |
 | R4 | TD09-TD12 | P0 | NOT STARTED |
