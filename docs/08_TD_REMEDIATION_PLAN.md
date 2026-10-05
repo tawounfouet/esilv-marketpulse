@@ -818,32 +818,32 @@ Acceptance criteria:
 Status:
 
 ```text
-SIMPLIFY
+DONE
 ```
 
-CORE:
+Implemented remediation:
 
-- Bloomberg role;
-- canonical vs provider identifier;
-- `AAPL US Equity`;
-- `SPX Index`;
-- inspect live or approved sample;
-- identify returned fields;
-- create `docs/BLOOMBERG_FIELD_MAPPING.md`;
-- preserve canonical tickers.
-
-Move to OPTIONAL:
-
-- extended live exploration;
-- extra identifiers;
-- additional provider investigations.
+- added an explicit CORE definition of done;
+- planned approximately 80 minutes of required work plus 10 minutes of review and environment buffer;
+- made `docs/BLOOMBERG_FIELD_MAPPING.md` the single TD09 deliverable;
+- required one explicit session mode: `LIVE` or `APPROVED_SAMPLE`;
+- removed live Bloomberg connectivity as a TD09 completion condition;
+- kept `AAPL -> AAPL US Equity` and `SP500 -> SPX Index` in CORE;
+- required one instrument input and one benchmark input to be inspected;
+- required LIVE mappings to use only actually observed fields;
+- required APPROVED_SAMPLE mappings to label fallback keys as teaching wrapper keys;
+- preserved canonical AAPL and SP500 tickers;
+- added an explicit TD09 -> TD10 handoff section to the student mapping document;
+- deferred Bloomberg provider implementation to TD10;
+- moved extended live exploration and additional identifiers to OPTIONAL;
+- preserved the no-credentials rule and canonical evidence separation.
 
 Acceptance criteria:
 
 ```text
-[ ] mapping document reflects observed or approved fields
-[ ] access mode is documented honestly
-[ ] no credentials are committed
+[x] mapping document reflects observed or approved fields
+[x] access mode is documented honestly
+[x] no credentials are committed
 ```
 
 ### R4.3 TD10 - Bloomberg Provider

@@ -1078,46 +1078,48 @@ Remote availability remains an external teaching risk, covered by the instructor
 
 ### TD09 - Bloomberg Introduction
 
-Current status:
+Remediation status:
 
 ```text
-GOOD CONCEPT, EXTERNAL-RISK HEAVY
+REMEDIATED BY LOT-R4.2
 ```
 
-The strongest aspect of TD09 is that it does not invent unverified Bloomberg fields.
-
-That must remain.
-
-However, live Bloomberg access should not be the condition for successful completion of the lab.
-
-Recommended CORE result:
+The revised TD09 CORE result is:
 
 ```text
 docs/BLOOMBERG_FIELD_MAPPING.md
 ```
 
-produced from either:
+produced from exactly one explicit access mode:
 
 ```text
-live instructor-approved access
+LIVE
 or
-instructor-approved reference sample
+APPROVED_SAMPLE
 ```
 
-CORE:
+CORE now focuses on:
 
-- Bloomberg role;
-- identifier mapping;
-- inspect one approved response;
-- map actual fields;
-- preserve canonical tickers;
-- document access mode accurately.
+- Bloomberg role in the provider progression;
+- canonical vs Bloomberg identifier mapping;
+- `AAPL US Equity`;
+- `SPX Index`;
+- inspect one approved instrument input;
+- inspect one approved benchmark input;
+- document observed LIVE fields or approved teaching wrapper keys;
+- preserve canonical `AAPL` and `SP500`;
+- create the TD10 handoff mapping;
+- standard Git review.
 
-OPTIONAL:
+Live connectivity is no longer a completion condition.
 
-- extra live exploration;
+Provider implementation is deferred to TD10.
+
+OPTIONAL now contains:
+
+- extended LIVE exploration;
 - additional identifiers;
-- extra response-analysis exercises.
+- extra provider comparison diagrams.
 
 Required instructor assets are now prepared by LOT-R4.1:
 
@@ -1133,11 +1135,12 @@ It uses documented teaching wrapper keys so the course does not invent unverifie
 
 The reference also defines the required `LIVE` vs `APPROVED_SAMPLE` distinction.
 
-Verdict:
+Current verdict after LOT-R4.2:
 
 ```text
-The external-access risk now has an instructor-controlled fallback path.
-TD09 can be rebalanced without making live Bloomberg connectivity a completion condition.
+TD09 is designed for about 80 minutes plus a 10-minute buffer.
+The deliverable is a reviewed mapping contract, not a provider implementation.
+LIVE and APPROVED_SAMPLE are both valid CORE paths when documented honestly.
 ```
 
 ### TD10 - Bloomberg Provider

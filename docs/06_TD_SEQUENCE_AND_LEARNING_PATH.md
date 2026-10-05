@@ -382,10 +382,16 @@ Checkpoint B is performed after TD08.
 
 Students should be able to:
 
-- understand the Bloomberg role in the project;
-- identify professional instrument identifiers;
-- retrieve an initial market-data sample when the environment permits;
-- compare Bloomberg concepts with the previous provider.
+- understand Bloomberg's role in the provider progression;
+- distinguish canonical tickers from Bloomberg identifiers;
+- distinguish LIVE from APPROVED_SAMPLE mode;
+- inspect an instructor-approved LIVE response or fallback sample;
+- document only observed or approved input fields;
+- create `docs/BLOOMBERG_FIELD_MAPPING.md`;
+- preserve AAPL and SP500 as canonical tickers;
+- prepare a mapping contract for TD10 without inventing Bloomberg fields.
+
+Live connectivity is not required for TD09 completion.
 
 ### Checkpoint relation
 
