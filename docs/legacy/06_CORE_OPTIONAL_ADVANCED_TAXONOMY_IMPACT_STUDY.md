@@ -1594,3 +1594,49 @@ IMPACT MAPPED
 R7.4 MAY PROCEED
 WITHOUT REOPENING THE CORE
 ```
+
+
+## 26. R7.4 implementation reconciliation
+
+The planned impact has now been implemented through R7.4.3.
+
+Observed result:
+
+```text
+12 / 12 labs contain # ADVANCED
+53 activities remain OPTIONAL
+3 former Optional activities were reclassified
+7 READY_TO_TEACH links are active
+5 PENDING_EXTERNAL supports are inactive
+```
+
+The original impact model expected 12 P1 entry points after full qualification.
+
+The implemented state correctly activates only qualified supports.
+
+Therefore:
+
+```text
+planned P1 destinations
+=
+12
+
+currently active READY_TO_TEACH entry points
+=
+7
+
+explicit PENDING_EXTERNAL destinations
+=
+5
+```
+
+This is not a divergence.
+
+It is the application of the study's rule:
+
+```text
+do not link an unqualified support
+as READY_TO_TEACH
+```
+
+No CORE runtime, checkpoint filename, assessment weight or root dependency was changed.
