@@ -778,6 +778,14 @@ git log --oneline main..HEAD
 
 Identify which commits belong to your feature branch but not to `main`.
 
+# ADVANCED
+
+No `READY_TO_TEACH` advanced activity is attached directly to TD05 at this time.
+
+Complete the CORE and OPTIONAL work only.
+
+Instructor deep dives may enrich explanations, but they are not student deliverables and are not checkpoint evidence.
+
 # TROUBLESHOOTING
 
 ## Push rejected
