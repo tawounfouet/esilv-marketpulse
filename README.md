@@ -468,6 +468,7 @@ This README intentionally does not display CI, security, release or license badg
 - [Application snapshot contract](docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md)
 - [Libraries and dependencies](docs/13_MARKETPULSE_LIBRARIES_AND_DEPENDENCIES.md)
 - [Pre-lab diagnostic and interpretation](docs/diagnostic/README.md)
+- [Legacy course analysis and migration](docs/legacy/README.md)
 
 ---
 

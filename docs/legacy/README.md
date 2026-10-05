@@ -1,0 +1,393 @@
+# Legacy Course Documentation
+
+## Purpose
+
+This directory documents the relationship between the previous ESILV teaching repository:
+
+```text
+tawounfouet/intro_git_linux_bloomberg
+```
+
+and the current MarketPulse teaching repository:
+
+```text
+tawounfouet/esilv-marketpulse
+```
+
+The objective is not to reproduce the historical course.
+
+The objective is to:
+
+```text
+understand what existed
++
+identify what still has value
++
+map useful content to the current curriculum
++
+protect the 18-hour CORE from overload
+```
+
+## Historical source
+
+The historical repository contains extensive material on:
+
+```text
+Linux
+Unix
+Git local
+Git remote
+Git internals
+SSH / SCP
+cloud
+Bloomberg
+financial data
+deployment
+quantitative finance
+```
+
+It is treated as:
+
+```text
+legacy teaching reference
+```
+
+not as the current course contract.
+
+## Current course contract
+
+The current guided path remains the 12-TD MarketPulse sequence:
+
+```text
+TD01  Bootstrap + Linux
+TD02  Python + CSV / JSON
+TD03  Git Local Workflow
+TD04  Branches + Merge
+TD05  Remote Branch + Pull Request
+TD06  Code Review
+TD07  Data Normalization + Comparison
+TD08  Yahoo Finance
+TD09  Bloomberg Introduction
+TD10  Bloomberg Provider
+TD11  Dash Dashboard
+TD12  Integration + Release
+```
+
+Reference:
+
+```text
+docs/06_TD_SEQUENCE_AND_LEARNING_PATH.md
+```
+
+## Documentation set
+
+### 01 - Previous course repository analysis
+
+```text
+01_PREVIOUS_COURSE_REPOSITORY_ANALYSIS.md
+```
+
+Purpose:
+
+```text
+What was in the historical course?
+How deep was it?
+What were its strengths?
+Where did overload or environmental risk appear?
+How does it compare with MarketPulse?
+```
+
+This document provides the complete historical analysis.
+
+### 02 - Legacy to MarketPulse content mapping
+
+```text
+02_LEGACY_TO_MARKETPULSE_CONTENT_MAPPING.md
+```
+
+Purpose:
+
+```text
+For each historical topic,
+what should happen to it now?
+```
+
+The decision taxonomy is:
+
+```text
+CORE
+OPTIONAL
+TEACHER_REFERENCE
+DROP
+```
+
+### 03 - Optional advanced content backlog
+
+```text
+03_OPTIONAL_ADVANCED_CONTENT_BACKLOG.md
+```
+
+Purpose:
+
+```text
+Transform OPTIONAL legacy content
+into a structured advanced-learning backlog.
+```
+
+Domains include:
+
+```text
+Linux Advanced
+Git Advanced
+Remote Linux
+Bloomberg Advanced
+Dash Advanced
+Deployment Advanced
+```
+
+This backlog does not change checkpoint requirements.
+
+### Instructor deep-dive reference
+
+```text
+../instructor/01_LEGACY_DEEP_DIVE_REFERENCE.md
+```
+
+Purpose:
+
+```text
+Preserve conceptual depth for instructors
+without turning every deep concept into a student requirement.
+```
+
+It covers areas such as:
+
+```text
+Unix philosophy
+Linux context
+Git object model
+HEAD and refs
+merge vs rebase
+Gitflow
+Bloomberg Terminal
+BDP / BDS / BDH
+Request / Response
+Subscription
+B-PIPE
+xbbg vs blpapi
+```
+
+## Relationship between the documents
+
+```text
+Historical repository
+        |
+        v
+01 - ANALYSIS
+What existed?
+        |
+        v
+02 - MAPPING
+What do we do with it?
+        |
+        +--------------------------+
+        |                          |
+        v                          v
+CORE / DROP                   OPTIONAL / TEACHER_REFERENCE
+                                   |
+                     +-------------+-------------+
+                     |                           |
+                     v                           v
+03 - OPTIONAL BACKLOG       INSTRUCTOR DEEP DIVE
+advanced student work       deeper teacher knowledge
+```
+
+## Decision taxonomy
+
+### CORE
+
+```text
+mandatory
++
+observable
++
+timeboxed
++
+part of the common 18-hour path
+```
+
+### OPTIONAL
+
+```text
+valuable advanced practice
++
+not required for common completion
+```
+
+### TEACHER_REFERENCE
+
+```text
+knowledge useful to instructors
++
+not a student deliverable
+```
+
+### DROP
+
+```text
+do not migrate into the common path
+```
+
+Important:
+
+```text
+DROP
+!=
+technically useless
+```
+
+It means only:
+
+```text
+not appropriate for the current common curriculum
+```
+
+## Main migration principle
+
+The current design should preserve:
+
+```text
+historical depth
+without
+historical overload
+```
+
+The guiding relationship is:
+
+```text
+legacy course
+=
+bank of depth
+
+MarketPulse
+=
+common guided path
+
+diagnostic
+=
+cohort calibration
+
+advanced backlog
+=
+optional practice
+
+instructor reference
+=
+teacher depth
+```
+
+## What must not happen
+
+Do not:
+
+```text
+copy the entire old course into MarketPulse
+expand a 90-minute TD to fit legacy material
+make optional content necessary for checkpoints
+require a personal cloud payment method
+make LIVE Bloomberg access mandatory for completion
+reintroduce advanced quant finance into the guided CORE
+copy historical third-party assets without checking reuse rights
+use historical assessment weighting as the current contract
+```
+
+## What may be reused
+
+Useful concepts may be:
+
+```text
+rewritten
+simplified
+recontextualized
+adapted to MarketPulse
+moved to optional material
+moved to instructor references
+```
+
+Examples:
+
+```text
+Git staging mental model
+Git branch graphs
+conflict-resolution concepts
+Unix composition
+permissions context
+SSH concepts
+Bloomberg BDP / BDS / BDH context
+request / response vs subscription
+xbbg vs blpapi comparison
+```
+
+## Public repository note
+
+The historical repository is private.
+
+MarketPulse is public.
+
+Therefore, historical assets must not be bulk-copied into MarketPulse.
+
+Before reusing:
+
+```text
+images
+PDFs
+logos
+diagrams
+external screenshots
+```
+
+verify:
+
+```text
+source
+license
+reuse rights
+```
+
+Prefer:
+
+```text
+rewritten explanations
+new diagrams
+official sources
+independently licensed assets
+```
+
+## Current status
+
+```text
+01 Previous course analysis          DONE
+02 Legacy to MarketPulse mapping     DONE
+03 Optional advanced backlog         DONE
+Instructor deep-dive reference       DONE
+```
+
+The legacy analysis stream is therefore structurally complete.
+
+Future additions should be driven by an actual teaching need rather than by a desire to preserve every historical artifact.
+
+## Next repository phase
+
+The next main repository phase is:
+
+```text
+R5 - Final consistency and teaching readiness
+```
+
+starting with:
+
+```text
+R5.1 - Repository-wide Path Scan
+```
+
+The purpose is to validate that the current teaching repository remains internally consistent after all design, remediation, diagnostic and legacy-analysis work.
