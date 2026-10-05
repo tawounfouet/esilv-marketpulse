@@ -1160,22 +1160,69 @@ Did any copied asset bypass license review?
 ### Final acceptance criteria
 
 ```text
-[ ] final migration registry complete
-[ ] 10 instructor priority deep dives resolved
-[ ] every P1 advanced item resolved
-[ ] TD enrichment capsules reviewed
-[ ] advanced index exists if advanced supports exist
-[ ] no Legacy item changes checkpoint requirements
-[ ] no Legacy item changes frozen CORE runtime
-[ ] no unverified third-party asset migration
-[ ] no mandatory personal payment requirement
-[ ] no fake LIVE provider requirement
-[ ] all DROP clusters remain closed or have explicit reversal
+[x] final migration registry complete
+[x] 10 instructor priority deep dives resolved
+[x] every P1 advanced item resolved
+[x] TD enrichment capsules reviewed
+[x] advanced index exists if advanced supports exist
+[x] no Legacy item changes checkpoint requirements
+[x] no Legacy item changes frozen CORE runtime
+[x] no unverified third-party asset migration
+[x] no mandatory personal payment requirement
+[x] no fake LIVE provider requirement
+[x] all DROP clusters remain closed or have explicit reversal
 ```
 
 ### Final conclusion target
 
 ```text
+LEGACY CONTENT OPERATIONALIZATION
+COMPLETE
+```
+
+### Execution result
+
+Final closure evidence:
+
+```text
+docs/legacy/08_R7_LEGACY_CLOSURE_AUDIT.md
+```
+
+Verified:
+
+```text
+98 / 98 registry rows routed
+25 CORE_MIGRATED
+10 INSTRUCTOR_READY
+12 P1 advanced targets resolved
+12 other optional backlog rows explicit
+13 REFERENCE_ONLY
+26 / 26 DROP_CLOSED still closed
+
+10 / 10 deep dives exist
+11 enrichment capsules exist
+12 / 12 P1 supports exist
+7 READY_TO_TEACH
+5 PENDING_EXTERNAL
+0 ambiguous
+
+12 / 12 labs expose ADVANCED boundaries
+53 Optional activities remain
+7 active READY_TO_TEACH links
+0 active PENDING_EXTERNAL links
+
+checkpoint evidence filenames unchanged
+requirements.txt unchanged
+src/ unchanged
+R6 release file unchanged
+no historical binary asset copied
+```
+
+R7.7 conclusion:
+
+```text
+PASS
+
 LEGACY CONTENT OPERATIONALIZATION
 COMPLETE
 ```
@@ -1215,7 +1262,7 @@ Do not mix the two status systems.
 | R7.4 | Advanced P1 content operationalization | DONE |
 | R7.5 | TD enrichment capsules | DONE |
 | R7.6 | Advanced-track packaging | DONE |
-| R7.7 | Legacy closure audit | NEXT |
+| R7.7 | Legacy closure audit | DONE |
 
 ## 16. Current baseline facts
 
@@ -1272,7 +1319,7 @@ R7 is complete only when:
 [x] R7.4 DONE with every P1 item explicitly resolved
 [x] R7.5 DONE
 [x] R7.6 DONE
-[ ] R7.7 DONE
+[x] R7.7 DONE
 ```
 
 Expected final state:
@@ -1296,16 +1343,19 @@ WITHOUT CORE DIVERGENCE
 
 ## 18. Immediate next action
 
-The current action is:
+R7 is now complete.
+
+Final closure evidence:
 
 ```text
-R7.7 - Legacy closure audit
+docs/legacy/08_R7_LEGACY_CLOSURE_AUDIT.md
 ```
 
-R7.6 is closed.
-
-The advanced layer now has a canonical navigable portal:
+Final status:
 
 ```text
-docs/advanced/README.md
+LEGACY CONTENT OPERATIONALIZATION
+COMPLETE
 ```
+
+The five PENDING_EXTERNAL advanced supports remain governed by their explicit delivery gates and do not represent unresolved Legacy classification.
