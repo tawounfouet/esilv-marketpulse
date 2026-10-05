@@ -14,67 +14,68 @@
 
 ## Context
 
-In TD01, your team created a common working environment.
+TD02 produced meaningful Python changes in MarketPulse.
 
-In TD02, you started modifying the Python code used by MarketPulse.
+TD03 gives those changes a history.
 
-You now need to answer a new question:
+The central question is:
 
 > How can we know what changed, who changed it and when?
 
 Git provides that history.
 
-In this TD, the focus is local Git usage.
+This TD focuses only on local Git:
 
-You will learn how to inspect modifications, prepare a commit and read repository history.
+```text
+working tree
+    |
+    v
+staging area
+    |
+    v
+local commit history
+```
 
-Remote collaboration, Pull Requests and code review come later.
+Branches are introduced in TD04.
+
+Remote push, Pull Requests and code review are introduced later.
 
 ## Learning objectives
 
 At the end of TD03, you should be able to:
 
-- explain the difference between a working directory and a commit;
+- explain working tree, staging area and commit;
 - inspect repository state with `git status`;
-- inspect code changes with `git diff`;
-- stage selected changes with `git add`;
-- create a commit with `git commit`;
+- inspect unstaged changes with `git diff`;
+- select changes with `git add`;
+- inspect staged changes with `git diff --staged`;
+- create a meaningful commit;
 - read history with `git log`;
-- recognize a commit identifier;
-- understand why commit messages matter;
-- distinguish tracked, modified and staged files;
-- explain why Git history is useful for MarketPulse.
+- inspect one commit with `git show`;
+- identify your Git author identity;
+- explain the change represented by your own commit.
 
-## Expected result
+## CORE definition of done
 
-At the end of the session, you should be able to demonstrate:
+TD03 is complete when each student can confirm:
 
 ```text
-working directory
-      |
-      v
-git status
-      |
-      v
-git diff
-      |
-      v
-git add
-      |
-      v
-staging area
-      |
-      v
-git commit
-      |
-      v
-local history
-      |
-      v
-git log
+[ ] my Git identity is correct
+[ ] I inspected the real TD02 working changes
+[ ] I used git status
+[ ] I used git diff
+[ ] I staged an intended change
+[ ] I inspected git diff --staged
+[ ] I created at least one meaningful local commit
+[ ] I can find that commit in git log
+[ ] I can inspect it with git show
+[ ] I can explain the diff
+[ ] MarketPulse still runs
 ```
 
-Each student should create at least one identifiable local commit.
+No remote push is required.
+
+No Pull Request is required.
 
 ## Prerequisites
 
@@ -84,38 +85,36 @@ Before starting:
 [ ] TD01 completed
 [ ] TD02 completed
 [ ] team repository accessible
-[ ] MarketPulse runs
+[ ] meaningful TD02 Python changes are available
+[ ] python src/main.py works
 [ ] Git is available
-[ ] Git identity is correct
 ```
 
-Verify:
+## Important TD03 rule
 
-```bash
-git --version
-git config user.name
-git config user.email
-```
+During TD03, direct local commits on `main` may be used as a temporary pedagogical exception.
 
-If your Git identity is incorrect, ask the instructor before continuing.
+The objective is to learn the local Git lifecycle before branches are introduced.
 
-## Important rule for TD03
-
-Branches are introduced in TD04.
-
-Pull Requests are introduced in TD05.
-
-During TD03, the instructor may temporarily allow direct local commits on `main` only for learning purposes.
-
-This is a temporary pedagogical exception.
-
-Later in the module:
+From TD04 onward:
 
 ```text
 feature work
     |
     v
 branch
+    |
+    v
+merge
+```
+
+From TD05 onward:
+
+```text
+branch
+    |
+    v
+push
     |
     v
 Pull Request
@@ -127,185 +126,96 @@ review
 merge
 ```
 
+Do not generalize the TD03 exception into a permanent workflow.
+
 ## Session plan
+
+The CORE is designed for approximately 80 minutes.
+
+The final 10 minutes are reserved for questions, recovery and optional exploration.
 
 | Time | Activity |
 |---|---|
-| 00-10 min | Git mental model |
-| 10-25 min | Inspect repository state |
-| 25-40 min | Create a small MarketPulse change |
-| 40-55 min | Stage changes |
-| 55-70 min | Commit changes |
-| 70-82 min | Read and interpret history |
-| 82-90 min | Readiness check |
+| 00-10 min | Git mental model and identity |
+| 10-22 min | Inspect TD02 working changes |
+| 22-35 min | Understand status and diff |
+| 35-48 min | Stage intended changes |
+| 48-62 min | Create the first meaningful commit |
+| 62-72 min | Read history and inspect commit |
+| 72-80 min | Run MarketPulse and CORE validation |
+| 80-90 min | Buffer and optional exercises |
 
-# Part 1 - Understand the Git model
+# CORE
 
-Git tracks versions of files.
+# Part 1 - Understand the local Git model
 
-A useful simplified model is:
+A simplified model is:
 
 ```text
-Working directory
-       |
-       | git add
-       v
+Working tree
+     |
+     | git add
+     v
 Staging area
-       |
-       | git commit
-       v
-Local repository history
+     |
+     | git commit
+     v
+Local history
 ```
 
-## 1.1 Working directory
+## Working tree
 
-The working directory contains the files you are currently editing.
+The working tree contains the files you are currently editing.
 
-Examples:
+A tracked file can be modified without being part of a commit yet.
 
-```text
-src/main.py
-README.md
-data/sample/prices.csv
-```
+## Staging area
 
-If you modify a tracked file, Git can detect that the file changed.
+The staging area contains the exact changes selected for the next commit.
 
-## 1.2 Staging area
-
-The staging area contains the changes selected for the next commit.
-
-A file may be:
+This means:
 
 ```text
 modified
-but not staged
+!=
+staged
 ```
 
-or:
+## Commit
+
+A commit records a selected project state with metadata such as:
 
 ```text
-modified
-and staged
+author
+date
+message
+identifier
+changed content
 ```
 
-These are different states.
+Saving a file in the editor does not create a commit.
 
-## 1.3 Commit
-
-A commit records a selected version of the project.
-
-A commit contains information such as:
-
-- changed files;
-- author;
-- date;
-- commit message;
-- commit identifier.
-
-A commit is not the same thing as saving a file in the editor.
-
-# Part 2 - Inspect the repository
-
-From the repository root, run:
-
-```bash
-pwd
-git status
-```
-
-Read the output carefully.
-
-Questions:
-
-1. Which branch are you currently on?
-2. Are there modified files?
-3. Are there untracked files?
-4. Are any changes already staged?
-
-## 2.1 Short status
-
-Try:
-
-```bash
-git status --short
-```
-
-Possible markers include:
-
-```text
-M
-??
-```
-
-Discuss with your team what these markers mean.
-
-## 2.2 Inspect recent history
+# Part 2 - Verify Git identity
 
 Run:
 
 ```bash
-git log --oneline
+git --version
+git config user.name
+git config user.email
 ```
 
-Each line represents one commit.
+Your commits must be attributable to your own identity.
 
-Example shape:
+If the values are missing or clearly incorrect, ask the instructor before continuing.
 
-```text
-abc1234 docs: add TD03 Git local workflow lab
-def5678 docs: add TD02 Python CSV JSON lab
-```
+Do not copy another student's Git identity.
 
-The short value at the beginning is part of the commit identifier.
+# Part 3 - Inspect the real TD02 changes
 
-# Part 3 - Create a small MarketPulse change
+TD03 should start from the useful Python work completed in TD02.
 
-You need a real change to version.
-
-Use a small modification that does not introduce a new business feature.
-
-Choose one of the following tasks.
-
-## Option A - Improve one output label
-
-For example, in `src/main.py`, improve a label so the terminal output is clearer.
-
-Do not calculate returns yet.
-
-## Option B - Improve one explanatory comment
-
-Add or improve one short comment in `src/main.py`.
-
-The comment should explain why a piece of code exists.
-
-Avoid comments that only repeat the code.
-
-## Option C - Improve README wording
-
-Improve one small part of the team README related to how MarketPulse is executed.
-
-Do not rewrite the whole document.
-
-## Individual contribution rule
-
-Each student should be able to point to a change they personally understand.
-
-A good TD03 change is:
-
-```text
-small
-+
-clear
-+
-easy to explain
-```
-
-Do not create a large feature just to have more Git activity.
-
-# Part 4 - Inspect the modification
-
-After editing a file, run:
+Run:
 
 ```bash
 git status
@@ -317,17 +227,30 @@ Then:
 git diff
 ```
 
-## Questions
-
-1. Which file is modified?
-2. Which lines were removed?
-3. Which lines were added?
-4. Does the diff match the change you intended?
-
-The important habit is:
+Your output may show changes in:
 
 ```text
-edit
+src/main.py
+```
+
+or another file legitimately modified during TD02.
+
+Do not create an artificial change if meaningful TD02 work is already available.
+
+## Questions
+
+Be able to answer:
+
+1. Which files are modified?
+2. Which lines were added?
+3. Which lines were removed?
+4. Does the diff match the work you intended?
+5. Is there temporary debugging output that should be removed before committing?
+
+The required habit is:
+
+```text
+change
   |
   v
 inspect
@@ -336,44 +259,73 @@ inspect
 stage
   |
   v
+inspect again
+  |
+  v
 commit
 ```
 
-Do not commit blindly.
+# Part 4 - Understand git status and git diff
 
-# Part 5 - Stage the change
+Run:
 
-Suppose you modified:
+```bash
+git status
+git status --short
+git diff
+```
+
+Use `git status` to understand repository state.
+
+Use `git diff` to inspect unstaged changes.
+
+Possible short-status markers may include:
+
+```text
+M
+??
+```
+
+You do not need to memorize every Git status code today.
+
+You should understand the difference between:
+
+```text
+tracked file modified
+untracked file
+staged change
+```
+
+# Part 5 - Stage the intended change
+
+If the useful TD02 work is in:
 
 ```text
 src/main.py
 ```
 
-Stage only that file:
+stage that file:
 
 ```bash
 git add src/main.py
 ```
 
-Then run:
+If another intended file is part of the same coherent change, stage it deliberately.
+
+Do not use:
+
+```bash
+git add .
+```
+
+without first understanding what it would include.
+
+After staging, run:
 
 ```bash
 git status
-```
-
-Question:
-
-> What changed in the status output after `git add`?
-
-## 5.1 Inspect the staged diff
-
-Run:
-
-```bash
 git diff --staged
 ```
-
-This displays the changes that will be part of the next commit.
 
 Compare:
 
@@ -387,24 +339,38 @@ with:
 git diff --staged
 ```
 
-Questions:
+You should be able to explain:
 
-1. Which command shows unstaged changes?
-2. Which command shows staged changes?
-3. Why is this distinction useful?
+```text
+git diff
+=
+unstaged changes
 
-# Part 6 - Commit the change
+git diff --staged
+=
+changes selected for the next commit
+```
 
-## 6.1 Write a meaningful message
+# Part 6 - Create the first meaningful commit
 
-A good commit message describes the change.
+Before committing, verify MarketPulse:
+
+```bash
+python src/main.py
+```
+
+The project should still run.
+
+## Commit-message rule
+
+Use a message that describes the actual change.
 
 Examples:
 
 ```text
 feat: improve MarketPulse market summary
-docs: clarify starter execution instructions
-refactor: simplify market summary display
+refactor: reuse market summary display
+docs: clarify starter execution
 ```
 
 Avoid:
@@ -418,35 +384,24 @@ final
 final2
 ```
 
-## 6.2 Create the commit
-
-Example:
+Create the commit:
 
 ```bash
-git commit -m "docs: clarify MarketPulse execution"
+git commit -m "<meaningful message>"
 ```
 
-Use a message that matches your actual change.
+The first meaningful TD03 commit may represent the Python work produced during TD02.
 
-## 6.3 Verify repository state
+This is intentional.
+
+Git is being introduced to version real work, not a fabricated exercise.
+
+# Part 7 - Read the local history
 
 Run:
 
 ```bash
 git status
-```
-
-If every intended change was committed, Git may report a clean working tree.
-
-Question:
-
-> What does a clean working tree mean?
-
-# Part 7 - Read repository history
-
-Run:
-
-```bash
 git log --oneline
 ```
 
@@ -455,180 +410,44 @@ Your new commit should appear near the top.
 Identify:
 
 ```text
-commit identifier
+short commit identifier
 commit message
 ```
 
-## 7.1 Detailed commit information
-
-Run:
+Inspect the latest commit:
 
 ```bash
-git log -1
+git show HEAD
 ```
 
-Identify:
-
-- commit identifier;
-- author;
-- date;
-- message.
-
-## 7.2 Inspect one commit
-
-Copy the short identifier from your latest commit.
-
-Then run:
+or use its identifier:
 
 ```bash
 git show <commit-id>
 ```
 
-Example:
+Be able to explain:
 
-```bash
-git show abc1234
-```
+1. which files changed;
+2. what the diff represents;
+3. why the commit message is appropriate;
+4. who is recorded as the author.
 
-Do not copy the example identifier literally.
-
-Use one from your repository.
-
-Question:
-
-> How is `git show` different from `git log --oneline`?
-
-# Part 8 - Understand tracked and untracked files
-
-Create a temporary text file:
-
-```bash
-touch td03_notes.txt
-```
-
-Run:
-
-```bash
-git status
-```
-
-The file should appear as untracked.
-
-Question:
-
-> Why can Git see the file even though it has never been committed?
-
-Now remove the temporary file:
-
-```bash
-rm td03_notes.txt
-```
-
-Run:
-
-```bash
-git status
-```
-
-The temporary file should disappear from the status output.
-
-Do not commit this file.
-
-# Part 9 - Practice with two modifications
-
-Modify two files with very small harmless changes.
-
-For example:
-
-```text
-README.md
-src/main.py
-```
-
-Run:
-
-```bash
-git status
-git diff
-```
-
-Stage only one file:
-
-```bash
-git add README.md
-```
-
-Then inspect:
-
-```bash
-git status
-git diff
-git diff --staged
-```
-
-Question:
-
-> Can one file be staged while another modified file remains unstaged?
-
-Yes.
-
-This is one of the reasons the staging area exists.
-
-## Clean up the exercise
-
-Decide which change you want to keep.
-
-If both changes are meaningful, you may create separate commits.
-
-If one change was only experimental, ask the instructor how to discard it safely.
-
-Do not use destructive Git commands you do not understand.
-
-# Part 10 - Commit quality
+# Part 8 - Commit quality and traceability
 
 A useful commit should be:
 
 ```text
 small
++
 coherent
++
 understandable
++
 explainable
 ```
 
-A commit should not mix unrelated work such as:
-
-```text
-Python refactor
-+
-large documentation rewrite
-+
-random data changes
-+
-temporary debug code
-```
-
-when these changes could have been separated.
-
-## Example
-
-Better:
-
-```text
-feat: display first and last market observations
-docs: clarify MarketPulse execution
-```
-
-Less useful:
-
-```text
-update everything
-```
-
-# Part 11 - Individual traceability
-
-MarketPulse is a team project.
-
-Git history helps preserve individual contribution.
+Avoid mixing unrelated work when it can be separated clearly.
 
 Each student should eventually be able to answer:
 
@@ -640,82 +459,145 @@ Can I explain the diff?
 Can I reproduce the change?
 ```
 
-Being listed in `TEAM.md` is not evidence of technical contribution.
+Being listed in `TEAM.md` does not by itself prove technical contribution.
 
-# Part 12 - Local vs remote Git
+# Part 9 - Local vs remote Git
 
-TD03 focuses on local Git.
-
-For now:
+TD03 stops at local history:
 
 ```text
-Working directory
+Working tree
       |
       v
 Staging area
       |
       v
-Local commits
+Local commit
 ```
 
-Later:
+Do not make remote collaboration part of today's required workflow.
+
+The next stages are introduced later:
 
 ```text
-Local commits
-      |
-      v
-push
-      |
-      v
-GitHub
-      |
-      v
-Pull Request
+TD04
+branches + merge
+
+TD05
+push + Pull Request
+
+TD06
+code review
 ```
 
-Do not worry if `git push` is not yet part of today's required workflow.
+# Part 10 - CORE validation
 
-Push and Pull Requests are introduced later.
+Run:
 
-# Part 13 - Checkpoint A connection
+```bash
+git status
+git log --oneline
+python src/main.py
+```
+
+Then inspect your own commit:
+
+```bash
+git show HEAD
+```
+
+If several commits were created, inspect the commit that represents your own work.
+
+You should be able to explain:
+
+```text
+working tree
+staging area
+commit
+commit identifier
+git status
+git diff
+git diff --staged
+git add
+git commit
+git log
+git show
+```
+
+If those concepts and commands are understood, TD03 CORE is complete.
+
+# Checkpoint relation
 
 Checkpoint A is performed after TD04.
 
-One of the required screenshots is:
+One required screenshot is:
 
 ```text
 02_git_status_log.png
 ```
 
-It must later show evidence including:
+The canonical evidence contract is:
+
+```text
+docs/04_CHECKPOINTS_AND_EVIDENCE.md
+```
+
+Do not capture or submit Checkpoint A yet unless the instructor asks you to.
+
+# OPTIONAL
+
+Complete optional work only after the CORE definition of done is satisfied.
+
+## Optional 1 - Tracked vs untracked
+
+Create a temporary file:
+
+```bash
+touch td03_notes.txt
+git status
+```
+
+Observe that the file is untracked.
+
+Remove it:
+
+```bash
+rm td03_notes.txt
+git status
+```
+
+Do not commit the temporary file.
+
+## Optional 2 - Stage one file while another remains modified
+
+Create two small harmless modifications in different files.
+
+Inspect:
 
 ```bash
 git status
-git log --oneline
+git diff
 ```
 
-Do not submit the checkpoint yet.
-
-Today, make sure you understand what those commands show.
-
-# Part 14 - Mini exercises
-
-## Exercise 1 - Identify the latest commit
-
-Run:
+Stage only one file:
 
 ```bash
-git log --oneline -5
+git add <one-file>
 ```
 
-Write down:
+Then compare:
 
-```text
-latest commit id
-latest commit message
+```bash
+git status
+git diff
+git diff --staged
 ```
 
-## Exercise 2 - Inspect one file history
+Do not keep experimental modifications unless they are meaningful.
+
+Ask the instructor before using a destructive recovery command.
+
+## Optional 3 - Filter file history
 
 Try:
 
@@ -727,35 +609,7 @@ Question:
 
 > What does this command filter?
 
-## Exercise 3 - Inspect one commit
-
-Use:
-
-```bash
-git show <commit-id>
-```
-
-Explain the change to another team member.
-
-## Exercise 4 - Compare working state with history
-
-Make one small temporary edit but do not stage it.
-
-Then run:
-
-```bash
-git status
-git diff
-git log --oneline -3
-```
-
-Explain why the temporary modification appears in `git diff` but not in the commit history.
-
-Undo the temporary edit using your editor.
-
-# Part 15 - If you finish early
-
-## Challenge 1 - Graph view
+## Optional 4 - Graph view
 
 Try:
 
@@ -763,23 +617,9 @@ Try:
 git log --oneline --graph --decorate
 ```
 
-You may not see branches yet.
+The graph becomes more useful after branches are introduced in TD04.
 
-That becomes more interesting in TD04.
-
-## Challenge 2 - File statistics
-
-Try:
-
-```bash
-git show --stat
-```
-
-Question:
-
-> What does the statistics view summarize?
-
-## Challenge 3 - Author filtering
+## Optional 5 - Author filtering
 
 Try:
 
@@ -789,11 +629,7 @@ git log --author="<your name>" --oneline
 
 Use the author name configured in your Git environment.
 
-Question:
-
-> How can this help demonstrate individual contribution?
-
-## Challenge 4 - Inspect tracked files
+## Optional 6 - Tracked files
 
 Try:
 
@@ -801,49 +637,11 @@ Try:
 git ls-files
 ```
 
-Question:
+This command is useful reference material, not a CORE requirement.
 
-> Which project files are already tracked by Git?
-
-# Part 16 - Troubleshooting
+# TROUBLESHOOTING
 
 ## Nothing to commit
-
-If Git reports:
-
-```text
-nothing to commit
-```
-
-check:
-
-```bash
-git status
-git diff
-```
-
-You may not have modified a tracked file.
-
-## Commit identity error
-
-If Git asks you to configure your identity, stop and verify:
-
-```bash
-git config user.name
-git config user.email
-```
-
-Ask the instructor if you are unsure which values should be used.
-
-## Wrong file staged
-
-Do not use random destructive commands.
-
-Ask the instructor how to unstage the file while preserving your work.
-
-The objective is to understand the staging area, not to memorize recovery commands without context.
-
-## Unexpected large diff
 
 Run:
 
@@ -852,64 +650,88 @@ git status
 git diff
 ```
 
-Check that you did not accidentally reformat or replace a large file.
+Possible explanations:
 
-## MarketPulse no longer runs
+- TD02 changes were already committed;
+- no tracked file was modified;
+- the wrong working directory is open.
 
-Before committing a Python change, run:
+If TD02 changes were already committed, use one small meaningful MarketPulse or documentation improvement approved by the instructor.
+
+Do not create random noise only to produce a commit.
+
+## Git identity error
+
+Check:
+
+```bash
+git config user.name
+git config user.email
+```
+
+Ask the instructor before changing values if you are unsure.
+
+## Wrong file staged
+
+Do not use destructive commands at random.
+
+Ask the instructor how to unstage the file while preserving the working change.
+
+## Unexpected large diff
+
+Run:
+
+```bash
+git status
+git diff
+git diff --staged
+```
+
+Check for accidental formatting or unrelated modifications.
+
+## MarketPulse fails
+
+Run:
 
 ```bash
 python src/main.py
 ```
 
-A commit should preferably preserve a working project state.
+Inspect the working or staged diff before creating additional commits.
 
-# Part 17 - Readiness check
+# Final readiness check
 
-Before finishing TD03, each student should be able to explain:
-
-```text
-[ ] working directory
-[ ] staging area
-[ ] commit
-[ ] commit identifier
-[ ] git status
-[ ] git diff
-[ ] git diff --staged
-[ ] git add
-[ ] git commit
-[ ] git log
-[ ] git show
-```
-
-Each student should also confirm:
+Each student should confirm:
 
 ```text
-[ ] my Git identity is correct
-[ ] I created at least one understandable commit
-[ ] I can find my commit in git log
-[ ] I can explain the diff in my commit
+[ ] I know my Git author identity
+[ ] I understand working tree vs staging area vs commit
+[ ] I used git status
+[ ] I used git diff
+[ ] I used git diff --staged
+[ ] I staged intended work deliberately
+[ ] I created an understandable local commit
+[ ] I can find the commit in git log
+[ ] I can inspect it with git show
+[ ] I can explain my own diff
 [ ] MarketPulse still runs
+[ ] I did not need a remote push or Pull Request
 ```
 
-# Part 18 - What comes next?
+# What comes next?
 
-In TD04, the business requirement changes:
+TD04 introduces feature isolation:
 
 ```text
-"Features should no longer be developed directly on main."
+main
+  |
+  +--> feature branch
+            |
+            v
+          commit
+            |
+            v
+          merge
 ```
 
-You will introduce:
-
-```text
-branches
-+
-feature isolation
-+
-merge
-+
-simple conflict resolution
-```
-
-The Git history you created today becomes the foundation for that workflow.
+The local history created in TD03 becomes the foundation for branch work.

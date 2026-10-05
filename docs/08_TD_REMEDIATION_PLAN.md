@@ -488,38 +488,27 @@ Acceptance criteria:
 Status:
 
 ```text
-KEEP, REDUCE DRILLS
+DONE
 ```
 
-CORE:
+Implemented remediation:
 
-```text
-git status
-git diff
-git add
-git diff --staged
-git commit
-git log
-git show
-```
-
-Primary exercise:
-
-Version the useful TD02 change.
-
-Move to OPTIONAL:
-
-- temporary tracked/untracked file exercise;
-- multi-file staging drill;
-- author filtering;
-- `git ls-files`.
+- added an explicit CORE definition of done;
+- planned approximately 80 minutes of required work plus 10 minutes of buffer;
+- made the real TD02 working changes the primary Git exercise;
+- kept `git status`, `git diff`, `git add`, `git diff --staged`, `git commit`, `git log` and `git show` in CORE;
+- moved temporary tracked/untracked work, multi-file staging, graph exploration, author filtering and `git ls-files` to OPTIONAL;
+- moved Git identity verification into TD03 where commits actually begin;
+- kept direct local commits on `main` only as a temporary pedagogical exception;
+- kept remote push and Pull Requests outside TD03;
+- added a fallback for the case where TD02 work was already committed without encouraging meaningless commits.
 
 Acceptance criteria:
 
 ```text
-[ ] first meaningful commit can represent TD02 work
-[ ] each student can explain working tree vs staging vs commit
-[ ] no remote Git required yet
+[x] first meaningful commit can represent TD02 work
+[x] each student can explain working tree vs staging vs commit
+[x] no remote Git is required
 ```
 
 ### R2.4 TD04 - Branches + Merge
