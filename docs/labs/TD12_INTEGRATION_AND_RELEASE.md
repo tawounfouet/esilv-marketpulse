@@ -565,6 +565,54 @@ advanced optional evidence
 
 Do not duplicate those rules in TD12.
 
+# ADVANCED
+
+Advanced work starts only after TD12 CORE and Checkpoint C preparation are complete.
+
+Advanced work is not required for Checkpoint C.
+
+## ADV-GIT-04 - Tags and Releases
+
+Status:
+
+```text
+READY_TO_TEACH
+```
+
+Prerequisites:
+
+```text
+TD12 CORE complete
+clean completed repository
+```
+
+Estimated duration:
+
+```text
+30-45 minutes
+```
+
+Support:
+
+[ADV-GIT-04 - Tags and Releases](../advanced/ADV_GIT_04_TAGS_RELEASES.md)
+
+## External-gated advanced paths
+
+The following P1 supports exist but are not active student exercises yet:
+
+```text
+ADV-RMT-01 - SSH Fundamentals
+ADV-RMT-03 - systemd Service
+```
+
+Current status:
+
+```text
+PENDING_EXTERNAL
+```
+
+They require an approved remote Linux teaching environment before activation.
+
 # Final readiness check
 
 The team should confirm:
