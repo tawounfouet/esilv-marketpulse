@@ -414,9 +414,35 @@ A fast-forward merge is valid.
 
 Do not force a merge commit only to make the history look more complex.
 
-# Part 8 - Clean the merged branch
+# Part 8 - Capture Checkpoint A branch evidence, then clean the branch
 
-After the instructor confirms the merge:
+Before deleting the merged feature branch, capture the branch-and-merge state required by:
+
+```text
+03_branch_merge.png
+```
+
+Run:
+
+```bash
+git branch
+git branch --merged
+git log --oneline --graph --decorate --all
+```
+
+A fast-forward merge is valid.
+
+The graph may remain linear. In that case, the evidence should still show that:
+
+```text
+main contains the feature commit
++
+feature/display-observation-dates is listed as merged
+```
+
+Do not force a merge commit only to create a more complex graph.
+
+After the evidence is captured and the instructor confirms the merge:
 
 ```bash
 git branch -d feature/display-observation-dates
@@ -560,7 +586,8 @@ Before leaving TD04, verify:
 [ ] MarketPulse runs
 [ ] git status is understandable
 [ ] git log shows my work
-[ ] branch and merge history are visible
+[ ] 03_branch_merge.png was captured before the merged feature branch was deleted
+[ ] branch and merge history are understandable, including a valid fast-forward if one occurred
 [ ] evidence is attributable to my GitHub identity
 [ ] no secret appears in a screenshot
 ```
