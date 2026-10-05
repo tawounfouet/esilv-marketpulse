@@ -569,6 +569,87 @@ Do not create branches or commits.
 
 Formal Git work starts in TD03.
 
+# ADVANCED
+
+Complete advanced work only after TD01 CORE is complete.
+
+Advanced work is not required for Checkpoint A.
+
+## ADV-LNX-01 - File Operations
+
+Status:
+
+```text
+READY_TO_TEACH
+```
+
+Prerequisites:
+
+```text
+TD01 CORE complete
+comfortable with pwd / ls / cd
+```
+
+Estimated duration:
+
+```text
+30 minutes
+```
+
+Support:
+
+[ADV-LNX-01 - File Operations](../advanced/ADV_LNX_01_FILE_OPERATIONS.md)
+
+## ADV-LNX-02 - Permissions and chmod
+
+Status:
+
+```text
+READY_TO_TEACH
+```
+
+Prerequisites:
+
+```text
+TD01 CORE complete
+basic file operations
+```
+
+Estimated duration:
+
+```text
+30-45 minutes
+```
+
+Support:
+
+[ADV-LNX-02 - Permissions and chmod](../advanced/ADV_LNX_02_PERMISSIONS_CHMOD.md)
+
+## ADV-LNX-03 - Pipes and Text Processing
+
+Status:
+
+```text
+READY_TO_TEACH
+```
+
+Prerequisites:
+
+```text
+TD01 CORE complete
+local MarketPulse files available
+```
+
+Estimated duration:
+
+```text
+60-90 minutes
+```
+
+Support:
+
+[ADV-LNX-03 - Pipes and Text Processing](../advanced/ADV_LNX_03_PIPES_TEXT_PROCESSING.md)
+
 # TROUBLESHOOTING
 
 ## Python command not found
