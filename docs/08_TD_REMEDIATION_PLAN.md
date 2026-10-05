@@ -1047,6 +1047,12 @@ P0 closure
 
 ### R5.1 Path scan
 
+Status:
+
+```text
+DONE
+```
+
 Verify that all file paths are coherent.
 
 Search for stale CORE paths such as:
@@ -1057,11 +1063,86 @@ src/marketpulse/
 src/dashboard/app.py
 ```
 
+Repository-wide scan result:
+
+```text
+docs/td/
+=
+no active path usage
+the only occurrence is this stale-path scan specification
+
+src/marketpulse/
+=
+no CORE requirement
+remaining occurrences are intentional:
+- remediation history / exclusion language
+- optional professional evolution in docs/05
+
+src/dashboard/app.py
+=
+no CORE requirement
+remaining occurrences are intentional:
+- remediation scan / historical exclusion language
+- explicit "Do not create" example in TD11
+
+tawounfouet/marketpulse
+=
+no occurrence
+
+canonical instructor repository
+=
+tawounfouet/esilv-marketpulse
+
+canonical student repository pattern
+=
+<owner>/esilv-marketpulse-gXX-tYY
+
+canonical lab directory
+=
+docs/labs/
+```
+
+The current repository tree contains:
+
+```text
+docs/labs/README.md
+docs/labs/TD01_BOOTSTRAP_LINUX.md
+...
+docs/labs/TD12_INTEGRATION_AND_RELEASE.md
+```
+
+The progressive CORE Python structure remains:
+
+```text
+TD01-TD06
+src/main.py
+
+TD07
++ src/analytics.py
+
+TD08
++ src/providers/yahoo_provider.py
+
+TD10
++ src/providers/bloomberg_provider.py
+
+TD11
++ src/dashboard.py
+```
+
+The instructor starter repository currently contains only the Python files that must exist at the current starter stage. Later CORE files are introduced by the corresponding labs.
+
 Acceptance criteria:
 
 ```text
-[ ] docs/labs/ is used
-[ ] no stale CORE Python structure remains
+[x] docs/labs/ is used
+[x] no stale CORE Python structure remains
+```
+
+R5.1 conclusion:
+
+```text
+PASS
 ```
 
 ### R5.2 Runtime-command scan
@@ -1364,7 +1445,7 @@ Initial status:
 | R2 | TD01-TD06 | P0/P1 | DONE |
 | R3 | TD07-TD08 | P0 | DONE |
 | R4 | TD09-TD12 | P0 | DONE |
-| R5 | Final validation | P0 closure | NOT STARTED |
+| R5 | Final validation | P0 closure | IN PROGRESS |
 
 Each lot should move through:
 
