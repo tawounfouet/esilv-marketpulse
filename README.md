@@ -433,6 +433,30 @@ Use:
 - [Instructor contingency and recovery playbook](docs/15_INSTRUCTOR_CONTINGENCY_AND_RECOVERY_PLAYBOOK.md)
 - [Teaching baseline release and pre-class gates](docs/16_TEACHING_BASELINE_RELEASE.md)
 
+## Pre-class operational readiness
+
+The frozen teaching baseline remains:
+
+```text
+TEACHING BASELINE READY
+WITH EXTERNAL PRE-CLASS CHECKS
+```
+
+The execution roadmap for those remaining real-environment checks is:
+
+[Pre-class operational readiness roadmap](docs/17_PRE_CLASS_OPERATIONAL_READINESS_ROADMAP.md)
+
+Current R8 starting point:
+
+```text
+R8.1
+Student bootstrap and clone validation
+```
+
+R8 may validate external services and activate qualified Advanced material.
+
+It does not silently change the frozen CORE.
+
 ## Security
 
 Never commit:
@@ -545,6 +569,7 @@ This README intentionally does not display CI, security, release or license badg
 - [Teaching readiness and dry-run plan](docs/14_TEACHING_READINESS_AND_DRY_RUN_PLAN.md)
 - [Instructor contingency and recovery playbook](docs/15_INSTRUCTOR_CONTINGENCY_AND_RECOVERY_PLAYBOOK.md)
 - [Teaching baseline release](docs/16_TEACHING_BASELINE_RELEASE.md)
+- [Pre-class operational readiness roadmap](docs/17_PRE_CLASS_OPERATIONAL_READINESS_ROADMAP.md)
 - [Pre-lab diagnostic and interpretation](docs/diagnostic/README.md)
 - [Advanced track](docs/advanced/README.md)
 - [Instructor deep dives](docs/instructor/deep-dives/README.md)
