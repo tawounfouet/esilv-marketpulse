@@ -3,7 +3,7 @@
 Status:
 
 ```text
-REVIEW - BLOOMBERG LIVE GATE
+PENDING_EXTERNAL
 ```
 
 Mode:
