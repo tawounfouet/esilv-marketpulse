@@ -786,6 +786,14 @@ date        AAPL      SP500
 
 Do not turn the terminal output into a full dashboard.
 
+# ADVANCED
+
+No `READY_TO_TEACH` advanced activity is attached directly to TD07 at this time.
+
+Daily returns and the other extensions above remain OPTIONAL because they are lightweight continuations of the same analytics model.
+
+Complete the CORE and OPTIONAL work only.
+
 # TROUBLESHOOTING
 
 ## TypeError during calculations
