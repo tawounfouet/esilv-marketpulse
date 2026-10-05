@@ -490,6 +490,16 @@ meaningful TD09-TD12 PR
 attributable to the student
 ```
 
+For `04_reproducible_run.png`, capture a successful clean or freshly prepared run.
+
+If an external package index or platform outage prevents the clean installation during the scheduled capture, use the `PENDING_EXTERNAL` recovery rule defined in:
+
+```text
+docs/04_CHECKPOINTS_AND_EVIDENCE.md
+```
+
+Do not present a failed install as successful reproducibility evidence.
+
 It does not have to be the single team final integration PR.
 
 Do not create duplicate release PRs just to manufacture evidence.
