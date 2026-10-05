@@ -1635,27 +1635,702 @@ R6.5 does not block the Wave 4 dry run.
 
 ## 10. R6.6 - Wave 4 dry run
 
-Validate:
+Status:
+
+```text
+REVIEW
+```
+
+Validated:
 
 ```text
 TD09 Bloomberg Introduction
 TD10 Bloomberg Provider
-TD11 Dash Dashboard
-TD12 Integration + Release
+TD11 Dash Dashboard contract
+TD12 Integration + Release contract
 ```
 
-Focus:
+Selected Bloomberg teaching mode for this dry run:
 
 ```text
-Bloomberg mapping
-LIVE vs APPROVED_SAMPLE honesty
-provider normalization
-shared build_market_snapshot(...)
-import-safe main.py
-Dash consumption
-dependency installation
-release reproducibility
+APPROVED_SAMPLE
 ```
+
+No claim of LIVE Bloomberg connectivity is made.
+
+### 10.1 Dry-run finding - fallback window mismatch
+
+The first end-to-end run uncovered a real contract mismatch.
+
+Before remediation:
+
+```text
+snapshot lookback = 1 month
+snapshot interval = Daily
+
+Bloomberg APPROVED_SAMPLE fixture
+=
+4 AAPL observations
++
+4 SP500 observations
+```
+
+The provider boundary and calculations worked technically, but the final presentation claimed a one-month comparison while the fallback fixture covered only:
+
+```text
+2026-09-01
+to
+2026-09-04
+```
+
+This was not acceptable for the frozen CORE contract.
+
+### 10.2 Remediation - full one-month fallback
+
+The approved Bloomberg fallback was expanded from the canonical starter CSV.
+
+After remediation:
+
+```text
+AAPL fallback observations  = 21
+SP500 fallback observations = 21
+expected canonical rows     = 42
+
+first date = 2026-09-01
+last date  = 2026-09-30
+```
+
+Updated repository assets:
+
+```text
+data/sample/bloomberg_reference_sample.json
+data/sample/bloomberg_reference_expected.json
+docs/10_BLOOMBERG_INSTRUCTOR_REFERENCE.md
+```
+
+The values remain explicitly:
+
+```text
+illustrative teaching values
+not certified Bloomberg historical observations
+```
+
+The wrapper keys remain explicitly:
+
+```text
+teaching wrapper keys
+not Bloomberg LIVE field mnemonics
+```
+
+Classification:
+
+```text
+REMEDIATED
+```
+
+### 10.3 TD09 - mapping contract
+
+A representative TD09 mapping document was produced in the disposable dry-run repository.
+
+Validated content:
+
+```text
+Access mode = APPROVED_SAMPLE
+Live connectivity = not demonstrated
+
+AAPL
+-> AAPL US Equity
+
+SP500
+-> SPX Index
+
+observation_date -> date
+open_value       -> open
+high_value       -> high
+low_value        -> low
+close_value      -> close
+volume_value     -> volume
+```
+
+The mapping also preserved:
+
+```text
+ticker
+=
+application mapping to AAPL or SP500
+```
+
+and contained a usable TD10 handoff.
+
+A security scan found no credential field or sensitive session value.
+
+Classification:
+
+```text
+EXECUTED / INSPECTED
+```
+
+### 10.4 TD10 - APPROVED_SAMPLE provider normalization
+
+The documented Bloomberg provider scaffold was implemented in the disposable dry-run repository.
+
+Executed boundaries:
+
+```text
+load_bloomberg_reference_sample(...)
+find_reference_series(...)
+normalize_reference_series(...)
+fetch_approved_sample_prices(...)
+```
+
+Identifier mapping:
+
+```text
+AAPL
+-> AAPL US Equity
+-> canonical AAPL rows
+
+SP500
+-> SPX Index
+-> canonical SP500 rows
+```
+
+The provider returned:
+
+```text
+AAPL rows  = 21
+SP500 rows = 21
+```
+
+The combined normalized result was compared with:
+
+```text
+data/sample/bloomberg_reference_expected.json
+```
+
+Result:
+
+```text
+42 / 42 rows exact match
+```
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 10.5 TD10 - shared analytics reuse
+
+The Bloomberg rows were passed to the same TD07 functions:
+
+```text
+align_series(...)
+calculate_period_return(...)
+calculate_base_100(...)
+calculate_relative_performance(...)
+```
+
+No Bloomberg-specific analytical function was introduced.
+
+Observed results on the full teaching window:
+
+```text
+AAPL period return
+=
++6.48%
+
+SP500 period return
+=
++2.15151515%
+
+relative performance
+=
++4.32848485 percentage points
+
+AAPL base 100
+=
+100.00 -> 106.48
+
+SP500 base 100
+=
+100.00 -> 102.15151515
+```
+
+These values are consistent with the TD07 local-data dry run because the approved fallback intentionally reuses the starter teaching values.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 10.6 TD10 - build_market_snapshot contract
+
+Implemented:
+
+```python
+build_market_snapshot(...)
+```
+
+The returned dictionary contained exactly the required CORE keys:
+
+```text
+provider
+lookback
+interval
+instrument
+benchmark
+instrument_return
+benchmark_return
+relative_performance
+instrument_base_100
+benchmark_base_100
+```
+
+Validated invariants:
+
+```text
+provider
+=
+Bloomberg stage - APPROVED_SAMPLE
+
+lookback
+=
+1 month
+
+interval
+=
+Daily
+
+instrument ticker
+=
+AAPL
+
+benchmark ticker
+=
+SP500
+
+returns
+=
+numeric
+
+relative performance
+=
+instrument return - benchmark return
+
+base-100 row counts
+=
+21 + 21
+
+both base-100 series start at 100
+
+both base-100 series use identical aligned dates
+```
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 10.7 TD10 - import-safe main.py
+
+Executed an import-only check for:
+
+```text
+src/main.py
+```
+
+Observed terminal output during import:
+
+```text
+none
+```
+
+The dry-run implementation preserved:
+
+```python
+if __name__ == "__main__":
+    main()
+```
+
+Running:
+
+```bash
+python src/main.py
+```
+
+produced:
+
+```text
+Provider
+Bloomberg stage - APPROVED_SAMPLE
+
+Instrument : AAPL - Apple Inc.
+Benchmark  : SP500 - S&P 500
+Period     : 1 month
+Interval   : Daily
+
+Instrument return : +6.48%
+Benchmark return  : +2.15%
+
+Relative performance
+AAPL vs SP500 : +4.33 percentage points
+```
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 10.8 TD11 - dependency state
+
+Validation environment state:
+
+```text
+plotly = installed
+dash = not installed
+yfinance = not installed
+```
+
+Actual Plotly figure construction was therefore executable.
+
+The external package installation path remained unavailable because the shell environment could not reach the package index.
+
+The final direct dependency contract remains:
+
+```text
+yfinance
+dash
+plotly
+```
+
+No transitive dependency was promoted manually.
+
+Classification:
+
+```text
+Plotly = EXECUTED
+Dash installation = EXTERNAL VERIFY
+```
+
+### 10.9 TD11 - dashboard isolation
+
+A representative `src/dashboard.py` was executed with:
+
+```text
+real plotly.graph_objects
++
+controlled minimal Dash dependency double
+```
+
+The double replaced only the unavailable external Dash package.
+
+The MarketPulse application code, provider code, analytics code and snapshot builder were unchanged.
+
+The dashboard:
+
+```text
+imports build_market_snapshot
+builds the snapshot once
+reads provider context
+reads instrument context
+reads benchmark context
+reads three performance values
+reads both base-100 series
+builds one Plotly figure
+```
+
+A source scan confirmed zero dashboard calls to:
+
+```text
+fetch_yahoo_prices(...)
+fetch_bloomberg_prices(...)
+fetch_raw_bloomberg_history(...)
+```
+
+and zero dashboard calls to:
+
+```text
+calculate_period_return(...)
+calculate_base_100(...)
+calculate_relative_performance(...)
+```
+
+Classification:
+
+```text
+EXECUTED WITH CONTROLLED DASH DEPENDENCY DOUBLE
+```
+
+This is not classified as a real Dash server run.
+
+### 10.10 TD11 - real Plotly comparison figure
+
+The actual installed Plotly library created:
+
+```text
+1 Figure
+2 Scatter traces
+```
+
+Observed traces:
+
+```text
+AAPL  = 21 points
+SP500 = 21 points
+```
+
+Both traces start at:
+
+```text
+100
+```
+
+The dashboard values were compared directly with the snapshot values.
+
+Result:
+
+```text
+instrument return = identical
+benchmark return = identical
+relative performance = identical
+```
+
+No analytical value was recomputed in the dashboard.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 10.11 TD11 - current API compatibility inspection
+
+The current official Dash API reference still documents:
+
+```python
+app.run(debug=False)
+```
+
+and the current Plotly graph-object API still supports:
+
+```text
+go.Figure()
+go.Scatter(...)
+Figure.add_trace(...)
+Figure.update_layout(...)
+```
+
+The TD11 teaching shape is therefore not relying on a removed API.
+
+Classification:
+
+```text
+INSPECTED
+```
+
+### 10.12 TD12 - source and dependency reconciliation
+
+The simulated final source tree contained direct imports for:
+
+```text
+yfinance
+dash
+plotly
+```
+
+The simulated final `requirements.txt` contained exactly:
+
+```text
+yfinance
+dash
+plotly
+```
+
+Result:
+
+```text
+direct external imports
+=
+declared direct dependencies
+```
+
+No guessed Bloomberg Python connector was added for APPROVED_SAMPLE mode.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 10.13 TD12 - README runtime contract
+
+The simulated final README documented all three required commands:
+
+```bash
+python -m pip install -r requirements.txt
+python src/main.py
+python src/dashboard.py
+```
+
+The final provider statement remained:
+
+```text
+Bloomberg stage - APPROVED_SAMPLE
+```
+
+with an explicit statement that LIVE Bloomberg connectivity was not demonstrated.
+
+Classification:
+
+```text
+INSPECTED
+```
+
+### 10.14 TD12 - fresh local clone
+
+A new bare Git remote was created from the simulated integrated release.
+
+A second directory then performed a genuinely fresh Git clone from that remote.
+
+From the fresh clone:
+
+```bash
+python src/main.py
+python -m py_compile     src/analytics.py     src/main.py     src/dashboard.py     src/providers/bloomberg_provider.py     src/providers/yahoo_provider.py
+```
+
+all succeeded.
+
+The dashboard module also executed successfully against the external controlled Dash dependency double.
+
+After execution:
+
+```text
+git status = clean
+tracked __pycache__ / *.pyc files = 0
+```
+
+This validates repository completeness and relative-path portability independently of the original working directory.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 10.15 TD12 - clean dependency installation boundary
+
+Executed from the fresh clone:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+The command could not complete because the validation environment cannot access the external package index.
+
+The failure occurred while resolving:
+
+```text
+yfinance
+```
+
+This is consistent with the network limitation already recorded during R6.5.
+
+It is not classified as a missing or invalid repository dependency.
+
+Required remaining verification:
+
+```text
+network-enabled environment
++
+python -m pip install -r requirements.txt
++
+python src/main.py
++
+python src/dashboard.py
+```
+
+Classification:
+
+```text
+EXTERNAL VERIFY
+```
+
+### 10.16 Git workflow inheritance
+
+TD09 through TD12 reuse the standard:
+
+```text
+branch
+push
+Pull Request
+review
+merge
+```
+
+workflow already validated mechanically in R6.4.
+
+No synthetic GitHub Pull Request or review was created in the instructor repository during R6.6.
+
+Actual GitHub PR/review UI verification remains the same external item recorded in R6.4.
+
+### 10.17 R6.6 acceptance criteria
+
+```text
+[x] TD09 supports explicit APPROVED_SAMPLE mode
+[x] TD09 maps AAPL to AAPL US Equity
+[x] TD09 maps SP500 to SPX Index
+[x] wrapper keys are labelled as teaching keys
+[x] LIVE connectivity is explicitly not claimed
+[x] no Bloomberg credential is required by the fallback
+[x] fallback fixture covers the full 1-month teaching window after remediation
+[x] fallback fixture contains 21 AAPL observations
+[x] fallback fixture contains 21 SP500 observations
+[x] expected canonical reference contains 42 rows
+[x] TD10 normalized output matches all 42 expected rows
+[x] canonical tickers remain AAPL and SP500
+[x] TD07 analytics are reused unchanged
+[x] build_market_snapshot(...) exists in the dry-run implementation
+[x] snapshot contains all 10 required keys
+[x] snapshot lookback = 1 month
+[x] snapshot interval = Daily
+[x] snapshot provider label is honest
+[x] snapshot base-100 series contain 21 aligned rows each
+[x] src/main.py is import-safe
+[x] terminal path consumes the shared snapshot
+[x] terminal path executes in APPROVED_SAMPLE mode
+[x] dashboard imports build_market_snapshot(...)
+[x] dashboard contains no provider request
+[x] dashboard contains no analytical formula
+[x] real Plotly figure contains AAPL and SP500
+[x] both Plotly traces contain 21 points
+[x] terminal and dashboard consume identical business values
+[x] final direct-import dependency set matches requirements.txt
+[x] final README contains the three required commands
+[x] fresh local clone reproduces the terminal path
+[x] fresh clone compiles the full final Python source tree
+[x] fresh clone remains Git-clean after runtime validation
+[ ] dash installed from package index in a network-enabled clean environment
+[ ] python src/dashboard.py served with the real Dash package in a clean environment
+[ ] full python -m pip install -r requirements.txt succeeds from a network-enabled clean environment
+[ ] actual TD09-TD12 Pull Request/review cycle verified through GitHub team-fork UI
+```
+
+R6.6 conclusion:
+
+```text
+TD09 APPROVED_SAMPLE MAPPING PASS
+TD10 PROVIDER + SNAPSHOT PASS
+TD11 PRESENTATION CONTRACT PASS
+TD12 CLEAN-CLONE STRUCTURE PASS
+REAL DASH INSTALL / FULL PIP / GITHUB UI VERIFY REMAIN
+```
+
+R6.6 does not block the checkpoint/evidence dry run.
 
 ## 11. R6.7 - Checkpoint and evidence dry run
 
@@ -1733,7 +2408,7 @@ TEACHING BASELINE READY
 | R6.3 | Wave 1 dry run | DONE |
 | R6.4 | Wave 2 dry run | REVIEW |
 | R6.5 | Wave 3 dry run | REVIEW |
-| R6.6 | Wave 4 dry run | NEXT |
-| R6.7 | Checkpoint and evidence dry run | NOT STARTED |
+| R6.6 | Wave 4 dry run | REVIEW |
+| R6.7 | Checkpoint and evidence dry run | NEXT |
 | R6.8 | Instructor contingency and provider fallback validation | NOT STARTED |
 | R6.9 | Teaching baseline freeze | NOT STARTED |
