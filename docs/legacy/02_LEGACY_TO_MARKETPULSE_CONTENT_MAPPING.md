@@ -2397,13 +2397,13 @@ Dash Advanced
 Deployment
 ```
 
-A second possible future document is:
+The instructor deep-dive reference is now documented in:
 
 ```text
-docs/instructor/LEGACY_DEEP_DIVE_REFERENCE.md
+docs/instructor/01_LEGACY_DEEP_DIVE_REFERENCE.md
 ```
 
-for the items classified:
+It covers the items classified:
 
 ```text
 TEACHER_REFERENCE
