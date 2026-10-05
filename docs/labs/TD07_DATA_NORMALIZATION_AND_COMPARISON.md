@@ -179,6 +179,22 @@ Start from a clean working tree.
 | 68-78 min | Calculate relative performance |
 | 78-90 min | Validate, push and open PR |
 
+## CORE repository evolution
+
+TD07 introduces the shared analytics module:
+
+```text
+src/
+├── main.py
+└── analytics.py
+```
+
+Reusable comparison logic belongs in `src/analytics.py`.
+
+`src/main.py` remains the terminal entry point and orchestrates the application.
+
+This structure is the frozen CORE reference defined in `docs/05_TARGET_REPOSITORY_STRUCTURE.md`.
+
 # Part 1 - Understand the comparison problem
 
 The current sample contains two series:

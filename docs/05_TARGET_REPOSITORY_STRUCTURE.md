@@ -4,9 +4,17 @@
 
 Students do not receive the final architecture on day one.
 
-MarketPulse starts small and evolves as new requirements appear.
+MarketPulse starts with one Python file and evolves only when a new requirement creates a clear reason to separate responsibilities.
 
-The objective is to understand why project structure changes.
+The 18-hour CORE deliberately avoids advanced Python packaging.
+
+The goal is to understand:
+
+- where data comes from;
+- where provider-specific logic belongs;
+- where shared analytics belong;
+- how terminal and dashboard presentation reuse the same application logic;
+- how the repository evolves through Git history.
 
 ## 2. Starter repository
 
@@ -19,156 +27,264 @@ esilv-marketpulse/
 ├── CONTRIBUTING.md
 ├── .gitignore
 ├── requirements.txt
-│
 ├── config/
 │   └── settings.yml
-│
 ├── data/
 │   └── sample/
 │       ├── instruments.json
 │       └── prices.csv
-│
 ├── docs/
 │   ├── 00_MARKETPULSE_FUNCTIONAL_CONTRACT.md
 │   ├── 01_STUDENT_ONBOARDING.md
 │   ├── 02_MARKETPULSE_USE_CASE.md
 │   ├── 03_GITHUB_TEAM_WORKFLOW.md
 │   ├── 04_CHECKPOINTS_AND_EVIDENCE.md
-│   └── 05_TARGET_REPOSITORY_STRUCTURE.md
-│
+│   ├── 05_TARGET_REPOSITORY_STRUCTURE.md
+│   ├── 06_TD_SEQUENCE_AND_LEARNING_PATH.md
+│   ├── 07_TD_TRANSVERSE_REVIEW_AND_REBALANCING.md
+│   ├── 08_TD_REMEDIATION_PLAN.md
+│   └── labs/
 ├── evidence/
 │   └── README.md
-│
 └── src/
     └── main.py
 ```
 
 This structure is intentionally small.
 
-## 3. Why not start with the final structure?
+## 3. Frozen CORE architecture
 
-Students should first understand:
+The CORE architecture for the 18 hours is now fixed as:
 
-- where the data lives;
-- how the Python program reads it;
-- how the program is executed;
-- how Git records changes.
+```text
+src/
+├── main.py
+├── analytics.py
+├── dashboard.py
+└── providers/
+    ├── __init__.py
+    ├── yahoo_provider.py
+    └── bloomberg_provider.py
+```
 
-Later, new requirements create a reason to refactor.
+Not every file exists on day one.
 
-The target architecture should emerge from the project.
+The structure appears progressively as the business requirements evolve.
 
 ## 4. Progressive evolution
 
-### Initial stage
+### TD01 to TD06 - Starter and Git foundations
 
 ```text
 src/
 └── main.py
 ```
 
-### Multiple data sources appear
+At this stage, students focus on:
+
+- local CSV / JSON data;
+- Python fundamentals;
+- Git history;
+- branches;
+- Pull Requests;
+- code review.
+
+No additional Python architecture is required.
+
+### TD07 - Shared analytics appear
 
 ```text
 src/
-└── marketpulse/
-    ├── main.py
-    └── providers/
-        ├── csv_provider.py
-        └── yahoo_provider.py
+├── main.py
+└── analytics.py
 ```
 
-### Common processing appears
+`analytics.py` becomes the home of reusable comparison logic such as:
+
+- date alignment;
+- period return;
+- base-100 normalization;
+- relative performance.
+
+Provider-specific identifiers do not belong in this file.
+
+### TD08 - Yahoo Finance provider appears
 
 ```text
 src/
-└── marketpulse/
-    ├── main.py
-    ├── providers/
-    └── processing/
-        ├── normalization.py
-        └── indicators.py
+├── main.py
+├── analytics.py
+└── providers/
+    ├── __init__.py
+    └── yahoo_provider.py
 ```
 
-### Bloomberg appears
+`yahoo_provider.py` owns Yahoo-specific acquisition and normalization.
+
+The rest of MarketPulse continues to use canonical rows.
+
+### TD09 - Bloomberg mapping is documented
+
+TD09 does not require a new Python module yet.
+
+The main deliverable is:
 
 ```text
-providers/
-├── csv_provider.py
-├── yahoo_provider.py
-└── bloomberg_provider.py
+docs/BLOOMBERG_FIELD_MAPPING.md
 ```
 
-### Dash appears
+### TD10 - Bloomberg provider appears
 
 ```text
-dashboard/
-├── layout.py
-└── callbacks.py
+src/
+├── main.py
+├── analytics.py
+└── providers/
+    ├── __init__.py
+    ├── yahoo_provider.py
+    └── bloomberg_provider.py
 ```
 
-## 5. Target common repository
+`bloomberg_provider.py` owns Bloomberg-specific acquisition and normalization.
 
-A possible final common structure is:
+The shared analytics remain unchanged.
+
+### TD11 - Dashboard entry point appears
+
+```text
+src/
+├── main.py
+├── analytics.py
+├── dashboard.py
+└── providers/
+    ├── __init__.py
+    ├── yahoo_provider.py
+    └── bloomberg_provider.py
+```
+
+The dashboard is deliberately a single CORE entry point.
+
+This avoids introducing package and import complexity that is not required by the module.
+
+### TD12 - Release structure is validated
+
+TD12 does not introduce a new application layer.
+
+It validates the integrated structure already built through TD11.
+
+## 5. Target CORE repository
+
+A possible final CORE repository is:
 
 ```text
 esilv-marketpulse/
-│
 ├── README.md
 ├── TEAM.md
+├── TEAM_TEMPLATE.md
 ├── CONTRIBUTING.md
 ├── requirements.txt
 ├── .gitignore
-│
 ├── config/
 │   └── settings.yml
-│
 ├── data/
-│   ├── sample/
-│   │   ├── instruments.json
-│   │   └── prices.csv
-│   ├── raw/
-│   └── processed/
-│
+│   └── sample/
+│       ├── instruments.json
+│       └── prices.csv
 ├── src/
-│   └── marketpulse/
+│   ├── main.py
+│   ├── analytics.py
+│   ├── dashboard.py
+│   └── providers/
 │       ├── __init__.py
-│       ├── app.py
-│       ├── cli.py
-│       ├── config.py
-│       │
-│       ├── providers/
-│       │   ├── __init__.py
-│       │   ├── csv_provider.py
-│       │   ├── yahoo_provider.py
-│       │   └── bloomberg_provider.py
-│       │
-│       ├── processing/
-│       │   ├── __init__.py
-│       │   ├── normalization.py
-│       │   └── indicators.py
-│       │
-│       └── dashboard/
-│           ├── __init__.py
-│           ├── layout.py
-│           └── callbacks.py
-│
+│       ├── yahoo_provider.py
+│       └── bloomberg_provider.py
 ├── docs/
+│   ├── labs/
 │   └── ...
-│
 └── evidence/
     ├── checkpoint-a/
     ├── checkpoint-b/
     └── checkpoint-c/
 ```
 
-The exact final structure may be simplified depending on the actual pace of the class.
+The exact content of student repositories may vary slightly, but the CORE Python paths above are the common reference.
 
-## 6. Important exclusions
+## 6. Responsibility map
+
+```text
+src/main.py
+=
+application orchestration
++
+terminal presentation
+
+src/analytics.py
+=
+shared comparison logic
+
+src/providers/yahoo_provider.py
+=
+Yahoo-specific acquisition
++
+Yahoo-to-canonical normalization
+
+src/providers/bloomberg_provider.py
+=
+Bloomberg-specific acquisition
++
+Bloomberg-to-canonical normalization
+
+src/dashboard.py
+=
+Dash presentation
+```
+
+The architectural rule is:
+
+```text
+provider-specific code
+        |
+        v
+canonical rows
+        |
+        v
+shared analytics
+        |
+        +----------------+
+        |                |
+        v                v
+terminal output      Dash output
+```
+
+## 7. CORE execution paths
+
+The intended CORE entry points are:
+
+```bash
+python src/main.py
+python src/dashboard.py
+```
+
+The dashboard entry point is introduced only in TD11.
+
+Before TD11, only the terminal entry point is required.
+
+## 8. Configuration status
+
+`config/settings.yml` is part of the repository as a human-readable configuration contract.
+
+Parsing YAML is not required by the 18-hour CORE.
+
+Students should not add PyYAML solely to satisfy the existence of this file.
+
+If the teaching team later decides to wire YAML into the application, that is a separate explicit extension.
+
+## 9. Important CORE exclusions
 
 The common target does not require:
 
 ```text
+src/marketpulse/
 tests/
 Dockerfile
 .github/workflows/
@@ -179,31 +295,25 @@ advanced CI/CD
 
 These are outside the common 18-hour scope unless explicitly introduced as optional material.
 
-## 7. Core architectural flow
+## 10. Optional professional evolution
 
-The important structure is conceptual:
+After the CORE sequence, a team may explore a more formal package structure such as:
 
 ```text
-CSV
-Yahoo
-Bloomberg
-   |
-   v
-normalized market data
-   |
-   v
-processing
-   |
-   v
-Dash
-   |
-   v
-Trader
+src/
+└── marketpulse/
+    ├── __init__.py
+    ├── app.py
+    ├── analytics.py
+    ├── providers/
+    └── dashboard/
 ```
 
-The application should progressively make provider changes less disruptive to the rest of the code.
+This is an architectural extension, not a mandatory TD requirement.
 
-## 8. Market comparison flow
+Students must not be penalized for keeping the frozen CORE structure.
+
+## 11. Market comparison flow
 
 MarketPulse ultimately handles:
 
@@ -228,16 +338,17 @@ lookback = 1mo
 interval = 1d
 ```
 
-unless the instructor asks for a different configuration.
+unless the instructor explicitly revises the common configuration.
 
-## 9. Final criterion
+## 12. Final criterion
 
-The goal is not to reproduce this tree mechanically.
+The goal is not to reproduce a directory tree mechanically.
 
 A successful team should be able to explain:
 
-- why the project was refactored;
+- why `analytics.py` was introduced;
 - why providers are separated;
-- why instrument and benchmark use a common comparison model;
-- how Git history reflects the evolution;
+- why provider-specific identifiers do not leak into analytics;
+- why terminal and Dash presentation share the same calculations;
+- how Git history reflects the repository evolution;
 - how another student can clone and run the project.

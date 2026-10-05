@@ -169,9 +169,17 @@ P0
 
 ### R1.1 Freeze the CORE repository architecture
 
+Status:
+
+```text
+DONE
+```
+
+Implemented in commit associated with LOT-R1.1.
+
 Current problem:
 
-Different documents describe different final Python structures.
+Different documents described different final Python structures.
 
 Decision:
 
@@ -220,10 +228,10 @@ Required actions:
 Acceptance criteria:
 
 ```text
-[ ] one CORE structure is documented
-[ ] every TD uses the same structure
-[ ] no TD requires src/marketpulse/ for CORE
-[ ] no TD uses src/dashboard/app.py for CORE
+[x] one CORE structure is documented
+[x] every affected TD uses the same structure
+[x] no TD requires src/marketpulse/ for CORE
+[x] no TD uses src/dashboard/app.py for CORE
 ```
 
 ### R1.2 Freeze runtime commands
@@ -1365,7 +1373,7 @@ Initial status:
 
 | Lot | Scope | Priority | Status |
 |---|---|---|---|
-| R1 | Cross-cutting contracts | P0 | NOT STARTED |
+| R1 | Cross-cutting contracts | P0 | IN PROGRESS |
 | R2 | TD01-TD06 | P0/P1 | NOT STARTED |
 | R3 | TD07-TD08 | P0 | NOT STARTED |
 | R4 | TD09-TD12 | P0 | NOT STARTED |

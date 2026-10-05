@@ -193,6 +193,18 @@ All TD10 work should stay on this branch until review and merge.
 
 # Part 3 - Create the Bloomberg provider module
 
+TD10 extends the same frozen CORE structure:
+
+```text
+src/
+├── main.py
+├── analytics.py
+└── providers/
+    ├── __init__.py
+    ├── yahoo_provider.py
+    └── bloomberg_provider.py
+```
+
 Create:
 
 ```text

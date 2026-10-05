@@ -287,40 +287,30 @@ import plotly.graph_objects as go
 
 then both are direct project dependencies.
 
-# Part 4 - Create the dashboard package
+# Part 4 - Create the dashboard entry point
 
-Create:
-
-```text
-src/dashboard/
-```
-
-Then:
-
-```text
-src/dashboard/__init__.py
-src/dashboard/app.py
-```
-
-A minimal structure is enough for TD11.
-
-Do not create unnecessary files before they are needed.
-
-Target:
+TD11 adds one simple dashboard entry point:
 
 ```text
 src/
 ├── main.py
-├── providers/
-│   ├── __init__.py
-│   ├── yahoo_provider.py
-│   └── bloomberg_provider.py
-└── dashboard/
+├── analytics.py
+├── dashboard.py
+└── providers/
     ├── __init__.py
-    └── app.py
+    ├── yahoo_provider.py
+    └── bloomberg_provider.py
 ```
 
-Your team structure may differ slightly depending on previous refactoring.
+Create:
+
+```text
+src/dashboard.py
+```
+
+Do not create a nested dashboard package for the CORE.
+
+The single-file entry point keeps imports and execution understandable within the 18-hour scope.
 
 # Part 5 - Create a minimal Dash application
 
@@ -351,7 +341,7 @@ if __name__ == "__main__":
 Run:
 
 ```bash
-python src/dashboard/app.py
+python src/dashboard.py
 ```
 
 Open the local URL displayed by Dash.
@@ -616,7 +606,7 @@ same interval
 Run:
 
 ```bash
-python src/dashboard/app.py
+python src/dashboard.py
 ```
 
 Verify:
@@ -746,8 +736,8 @@ Expected changes may include:
 
 ```text
 requirements.txt
-src/dashboard/__init__.py
-src/dashboard/app.py
+src/dashboard.py
+src/dashboard.py
 src/main.py
 ```
 
@@ -757,7 +747,7 @@ Run:
 
 ```bash
 python src/main.py
-python src/dashboard/app.py
+python src/dashboard.py
 ```
 
 Verify both paths if your architecture supports them.
@@ -770,8 +760,8 @@ Example:
 
 ```bash
 git add requirements.txt
-git add src/dashboard/__init__.py
-git add src/dashboard/app.py
+git add src/dashboard.py
+git add src/dashboard.py
 ```
 
 Add other files only if they changed intentionally.
@@ -960,7 +950,7 @@ Keep callbacks small.
 If `app.py` becomes difficult to read, move layout construction into:
 
 ```text
-src/dashboard/layout.py
+src/dashboard.py
 ```
 
 Do this only if the refactoring improves clarity.

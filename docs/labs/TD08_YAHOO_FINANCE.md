@@ -336,18 +336,25 @@ This is normalization at the provider boundary.
 
 # Part 6 - Create the Yahoo provider module
 
-Create:
+TD08 extends the frozen CORE structure:
 
 ```text
-src/providers/
+src/
+├── main.py
+├── analytics.py
+└── providers/
+    ├── __init__.py
+    └── yahoo_provider.py
 ```
 
-Then create:
+Create:
 
 ```text
 src/providers/__init__.py
 src/providers/yahoo_provider.py
 ```
+
+Keep shared comparison logic in `src/analytics.py`.
 
 A possible starter implementation is:
 

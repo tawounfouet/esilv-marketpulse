@@ -317,7 +317,7 @@ Remove temporary inspection output that no longer belongs in the final flow.
 
 # Part 5 - Review the target repository structure
 
-A possible final structure is:
+The frozen CORE application structure is:
 
 ```text
 esilv-marketpulse/
@@ -329,18 +329,15 @@ esilv-marketpulse/
 ├── config/
 │   └── settings.yml
 ├── data/
-│   ├── sample/
-│   ├── raw/
-│   └── processed/
+│   └── sample/
 ├── src/
 │   ├── main.py
-│   ├── providers/
-│   │   ├── __init__.py
-│   │   ├── yahoo_provider.py
-│   │   └── bloomberg_provider.py
-│   └── dashboard/
+│   ├── analytics.py
+│   ├── dashboard.py
+│   └── providers/
 │       ├── __init__.py
-│       └── app.py
+│       ├── yahoo_provider.py
+│       └── bloomberg_provider.py
 ├── evidence/
 │   ├── checkpoint-a/
 │   ├── checkpoint-b/
@@ -348,11 +345,11 @@ esilv-marketpulse/
 └── docs/
 ```
 
-Your team repository may differ slightly.
+This is the common CORE reference defined in `docs/05_TARGET_REPOSITORY_STRUCTURE.md`.
 
-The important requirement is coherence.
+Do not reorganize the project into a more complex package during TD12.
 
-Do not reorganize the entire project in the final 90 minutes only to match this tree exactly.
+A more formal `src/marketpulse/` package is an optional professional evolution, not a release requirement.
 
 # Part 6 - Review requirements.txt
 
@@ -468,7 +465,7 @@ python src/main.py
 Dashboard:
 
 ```bash
-python src/dashboard/app.py
+python src/dashboard.py
 ```
 
 ## Expected result
@@ -532,7 +529,7 @@ Verify:
 Run:
 
 ```bash
-python src/dashboard/app.py
+python src/dashboard.py
 ```
 
 Verify:
@@ -571,7 +568,7 @@ python src/main.py
 Then, if supported in the environment:
 
 ```bash
-python src/dashboard/app.py
+python src/dashboard.py
 ```
 
 ## Important
@@ -760,7 +757,7 @@ python src/main.py
 and:
 
 ```bash
-python src/dashboard/app.py
+python src/dashboard.py
 ```
 
 The final validation must be performed from the merged version.
