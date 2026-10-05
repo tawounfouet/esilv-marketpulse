@@ -97,6 +97,7 @@ Use:
 DONE
 TO_BUILD_R7.3
 READY_TO_DESIGN_R7.4
+PENDING_EXTERNAL
 CANDIDATE
 DEFERRED
 CLOSED
@@ -197,18 +198,18 @@ These are the 12 P1 backlog items that R7.4 must resolve.
 
 | ID | Legacy source | Topic | Original decision | Final destination | Target support | Current backlog status | R7.4 status | Validation |
 |---|---|---|---|---|---|---|---|---|
-| ADV-LNX-01 | TD1.1 | File operations | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_LNX_01_FILE_OPERATIONS.md | READY_TO_DESIGN | READY_TO_DESIGN_R7.4 | TO_VALIDATE |
-| ADV-LNX-02 | TD1.1 | Permissions and chmod | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_LNX_02_PERMISSIONS_CHMOD.md | READY_TO_DESIGN | READY_TO_DESIGN_R7.4 | TO_VALIDATE |
-| ADV-LNX-03 | TD1.3 | Pipes and text processing | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_LNX_03_PIPES_TEXT_PROCESSING.md | READY_TO_DESIGN | READY_TO_DESIGN_R7.4 | TO_VALIDATE |
-| ADV-LNX-04 | CM1 / TD1.2 | Environment variables | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_LNX_04_ENVIRONMENT_VARIABLES.md | READY_TO_DESIGN | READY_TO_DESIGN_R7.4 | TO_VALIDATE |
-| ADV-GIT-01 | TD3 | Conflict resolution | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_GIT_01_CONFLICT_RESOLUTION.md | READY_TO_DESIGN | READY_TO_DESIGN_R7.4 | TO_VALIDATE |
-| ADV-GIT-02 | TD2 | Restore / revert / reset | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_GIT_02_RESTORE_REVERT_RESET.md | READY_TO_DESIGN | READY_TO_DESIGN_R7.4 | TO_VALIDATE |
-| ADV-GIT-04 | CM3 | Tags and releases | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_GIT_04_TAGS_RELEASES.md | READY_TO_DESIGN | READY_TO_DESIGN_R7.4 | TO_VALIDATE |
-| ADV-RMT-01 | TD1.4 | SSH fundamentals | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_RMT_01_SSH_FUNDAMENTALS.md | READY_TO_DESIGN | READY_TO_DESIGN_R7.4 | TO_VALIDATE |
-| ADV-RMT-03 | Historical deployment | systemd service | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_RMT_03_SYSTEMD_SERVICE.md | READY_TO_DESIGN | READY_TO_DESIGN_R7.4 | TO_VALIDATE |
-| ADV-BBG-01 | CM4 / TD4 | Bloomberg reference data | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_BBG_01_REFERENCE_DATA.md | READY_TO_DESIGN | READY_TO_DESIGN_R7.4 | TO_VALIDATE |
-| ADV-DASH-01 | Historical project | Dash callback | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_DASH_01_CALLBACK.md | READY_TO_DESIGN | READY_TO_DESIGN_R7.4 | TO_VALIDATE |
-| ADV-DASH-02 | Historical project | Instrument selector | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_DASH_02_INSTRUMENT_SELECTOR.md | READY_TO_DESIGN | READY_TO_DESIGN_R7.4 | TO_VALIDATE |
+| ADV-LNX-01 | TD1.1 | File operations | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_LNX_01_FILE_OPERATIONS.md | READY_TO_DESIGN | DONE | REFERENCE_VALIDATED |
+| ADV-LNX-02 | TD1.1 | Permissions and chmod | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_LNX_02_PERMISSIONS_CHMOD.md | READY_TO_DESIGN | DONE | REFERENCE_VALIDATED |
+| ADV-LNX-03 | TD1.3 | Pipes and text processing | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_LNX_03_PIPES_TEXT_PROCESSING.md | READY_TO_DESIGN | DONE | REFERENCE_VALIDATED |
+| ADV-LNX-04 | CM1 / TD1.2 | Environment variables | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_LNX_04_ENVIRONMENT_VARIABLES.md | READY_TO_DESIGN | DONE | REFERENCE_VALIDATED |
+| ADV-GIT-01 | TD3 | Conflict resolution | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_GIT_01_CONFLICT_RESOLUTION.md | READY_TO_DESIGN | DONE | REFERENCE_VALIDATED |
+| ADV-GIT-02 | TD2 | Restore / revert / reset | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_GIT_02_RESTORE_REVERT_RESET.md | READY_TO_DESIGN | DONE | REFERENCE_VALIDATED |
+| ADV-GIT-04 | CM3 | Tags and releases | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_GIT_04_TAGS_RELEASES.md | READY_TO_DESIGN | DONE | REFERENCE_VALIDATED |
+| ADV-RMT-01 | TD1.4 | SSH fundamentals | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_RMT_01_SSH_FUNDAMENTALS.md | READY_TO_DESIGN | PENDING_EXTERNAL | TO_VALIDATE |
+| ADV-RMT-03 | Historical deployment | systemd service | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_RMT_03_SYSTEMD_SERVICE.md | READY_TO_DESIGN | PENDING_EXTERNAL | TO_VALIDATE |
+| ADV-BBG-01 | CM4 / TD4 | Bloomberg reference data | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_BBG_01_REFERENCE_DATA.md | READY_TO_DESIGN | PENDING_EXTERNAL | TO_VALIDATE |
+| ADV-DASH-01 | Historical project | Dash callback | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_DASH_01_CALLBACK.md | READY_TO_DESIGN | PENDING_EXTERNAL | TO_VALIDATE |
+| ADV-DASH-02 | Historical project | Instrument selector | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_DASH_02_INSTRUMENT_SELECTOR.md | READY_TO_DESIGN | PENDING_EXTERNAL | TO_VALIDATE |
 
 R7.4 rule:
 
@@ -511,3 +512,30 @@ INS-BBG-04
 ```
 
 Do not create unrelated instructor notes outside those targets without first updating this registry and the R7 roadmap.
+
+
+## 18. R7.4.2 support production status
+
+All 12 P1 support files have been produced.
+
+Current qualification:
+
+```text
+7
+READY_TO_TEACH / DONE / REFERENCE_VALIDATED
+
+5
+PENDING_EXTERNAL / TO_VALIDATE
+```
+
+The 5 external-gated supports are:
+
+```text
+ADV-RMT-01
+ADV-RMT-03
+ADV-BBG-01
+ADV-DASH-01
+ADV-DASH-02
+```
+
+They must not be exposed as READY_TO_TEACH in student labs until their delivery gates pass.
