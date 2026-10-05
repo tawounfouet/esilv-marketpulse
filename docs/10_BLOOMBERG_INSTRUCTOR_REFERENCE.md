@@ -134,7 +134,7 @@ SPX Index
 teaching-wrapper observations
 ```
 
-The fixture contains four aligned daily observations for each series.
+The fixture contains 21 aligned daily observations for each series, covering the full September 2026 teaching window used by the starter.
 
 ## Reference mapping for APPROVED_SAMPLE mode
 
@@ -250,7 +250,7 @@ Before class, the instructor should verify the fallback files:
 [ ] SPX Index is present
 [ ] canonical AAPL is present
 [ ] canonical SP500 is present
-[ ] both series contain four rows
+[ ] both series contain 21 rows
 [ ] dates are aligned
 [ ] expected rows use canonical keys
 [ ] no credential exists in either file
