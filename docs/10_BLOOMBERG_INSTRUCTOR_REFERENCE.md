@@ -365,3 +365,12 @@ approved sample
 !=
 live Bloomberg evidence
 ```
+
+
+## Cross-scenario recovery reference
+
+For the canonical instructor response when Bloomberg availability overlaps with environment, Git, Dash or evidence issues, use:
+
+```text
+docs/15_INSTRUCTOR_CONTINGENCY_AND_RECOVERY_PLAYBOOK.md
+```
