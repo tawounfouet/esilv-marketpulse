@@ -208,6 +208,20 @@ PENDING_EXTERNAL gates,
 and CORE/checkpoint isolation proof.
 ```
 
+### Advanced-track portal
+
+```text
+../advanced/README.md
+```
+
+Purpose:
+
+```text
+Navigate qualified advanced material
+by domain, duration, prerequisites,
+delivery mode and environment requirements.
+```
+
 ### Instructor deep-dive reference
 
 ```text
@@ -511,6 +525,16 @@ R7.4 is now complete.
 
 R7.5 is now complete.
 
+R7.6 is now complete.
+
+Advanced packaging state:
+
+```text
+docs/advanced/README.md
+=
+canonical portal
+```
+
 Instructor enrichment state:
 
 ```text
@@ -529,7 +553,7 @@ Current P1 state:
 The current execution target is:
 
 ```text
-R7.6 - Advanced-track packaging
+R7.7 - Legacy closure audit
 ```
 
 The routing source for R7.3 and R7.4 is:
