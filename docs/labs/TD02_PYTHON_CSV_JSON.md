@@ -646,6 +646,37 @@ f"{value:.2f}"
 
 Formatting polish must not replace the CORE requirements.
 
+# ADVANCED
+
+Complete advanced work only after TD02 CORE is complete.
+
+Advanced work is not required for Checkpoint A.
+
+## ADV-LNX-04 - Environment Variables
+
+Status:
+
+```text
+READY_TO_TEACH
+```
+
+Prerequisites:
+
+```text
+TD02 CORE complete
+basic Python imports
+```
+
+Estimated duration:
+
+```text
+30 minutes
+```
+
+Support:
+
+[ADV-LNX-04 - Environment Variables](../advanced/ADV_LNX_04_ENVIRONMENT_VARIABLES.md)
+
 # TROUBLESHOOTING
 
 ## IndexError
