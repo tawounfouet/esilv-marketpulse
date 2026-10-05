@@ -567,32 +567,25 @@ A more formal Python package remains an optional professional evolution outside 
 
 The CORE therefore prioritizes reliable execution and conceptual clarity over packaging sophistication.
 
-## 8. Configuration inconsistency
+## 8. Configuration contract
 
-The starter contains:
+This finding has now been remediated by LOT-R1.3.
+
+The repository keeps:
 
 ```text
 config/settings.yml
 ```
 
-and `src/main.py` currently says that YAML configuration will be wired later.
+as a human-readable configuration contract.
 
-However, no mandatory lab actually introduces YAML parsing.
+The 18-hour CORE does not require YAML parsing.
 
-TD10 only presents configuration as a possible extension.
+The starter code, README and TD10 now state this explicitly.
 
-This creates an unfulfilled promise in the learning path.
+Students should not add PyYAML only because `settings.yml` exists.
 
-Recommended decision:
-
-```text
-Keep settings.yml as a readable configuration contract.
-Do not require YAML parsing in the 18-hour CORE.
-```
-
-The starter comments and README should eventually be adjusted to say this explicitly.
-
-Do not add PyYAML merely to satisfy an earlier comment.
+If YAML parsing is introduced later, it must be presented as an explicit optional extension rather than an implicit CORE requirement.
 
 ## 9. Official waves vs checkpoint phases
 

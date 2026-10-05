@@ -271,6 +271,12 @@ Acceptance criteria:
 
 ### R1.3 Freeze configuration status
 
+Status:
+
+```text
+DONE
+```
+
 Decision:
 
 ```text
@@ -279,21 +285,23 @@ config/settings.yml
 human-readable configuration contract
 ```
 
-It is not mandatory to parse YAML in the CORE.
+YAML parsing is not mandatory in the CORE.
 
-Required actions:
+Completed actions:
 
-- update starter comments in `src/main.py`;
-- update root README;
-- update any TD language suggesting mandatory future YAML wiring;
-- keep PyYAML outside the CORE unless explicitly introduced later.
+- starter comments in `src/main.py` now describe `settings.yml` as a reference contract;
+- the root README no longer promises future YAML wiring;
+- `config/settings.yml` documents its CORE role directly;
+- TD10 states that provider configuration may be documented without being parsed;
+- PyYAML remains outside the CORE unless introduced as an explicit optional extension;
+- the transverse review reflects the resolved configuration contract.
 
 Acceptance criteria:
 
 ```text
-[ ] no unfulfilled promise that YAML will definitely be parsed
-[ ] no mandatory PyYAML dependency
-[ ] settings.yml remains useful documentation
+[x] no unfulfilled promise that YAML will definitely be parsed
+[x] no mandatory PyYAML dependency
+[x] settings.yml remains useful documentation
 ```
 
 ### R1.4 Freeze pedagogical wave terminology

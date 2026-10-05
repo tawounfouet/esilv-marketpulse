@@ -169,11 +169,14 @@ The starter dataset is intentionally small enough to inspect directly from the t
 At this initial stage:
 
 - `src/main.py` reads the sample CSV and JSON files directly;
-- `config/settings.yml` already describes the future configuration contract;
-- YAML configuration is not yet wired into the Python program;
+- `config/settings.yml` is a human-readable configuration contract;
+- parsing YAML is not required by the 18-hour CORE;
+- students should not add PyYAML only because `settings.yml` exists;
 - returns, base-100 normalization and relative performance are not implemented yet.
 
-Those capabilities will appear progressively during the labs.
+The analytical and provider capabilities appear progressively during the labs.
+
+YAML parsing may be explored later as an explicit optional extension.
 
 ## Initial learning objectives
 

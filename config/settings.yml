@@ -1,3 +1,7 @@
+# MarketPulse CORE configuration contract.
+# This file is intentionally human-readable.
+# Parsing YAML is not required by the 18-hour CORE.
+
 app:
   name: MarketPulse
 

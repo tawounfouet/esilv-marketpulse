@@ -587,13 +587,19 @@ The objective is to make acquisition selectable while keeping analytics shared.
 
 # Part 14 - Configuration
 
-If your team already uses:
+The CORE repository already contains:
 
 ```text
 config/settings.yml
 ```
 
-the provider value may evolve to:
+In the 18-hour CORE, this file is a human-readable configuration contract.
+
+You are not required to parse YAML from Python.
+
+Do not add PyYAML only because this file exists.
+
+The provider value may still be updated for documentation purposes:
 
 ```yaml
 market:
@@ -602,9 +608,7 @@ market:
   interval: 1d
 ```
 
-Provider-specific identifiers may also be represented in a dedicated configuration section.
-
-Example concept:
+Provider-specific identifiers may also be documented conceptually:
 
 ```yaml
 providers:
@@ -617,7 +621,9 @@ providers:
     SP500: SPX Index
 ```
 
-Do not introduce this structure if the team cannot explain it.
+If your team chooses to wire YAML into Python, treat it as an explicit optional extension.
+
+The required TD10 implementation must not depend on YAML parsing.
 
 Configuration should make the application clearer, not more complicated.
 
