@@ -2079,7 +2079,7 @@ LOT-R5.8  Character convention
 
 ## 12. Remediation status board
 
-Initial status:
+Final status:
 
 | Lot | Scope | Priority | Status |
 |---|---|---|---|
@@ -2087,7 +2087,7 @@ Initial status:
 | R2 | TD01-TD06 | P0/P1 | DONE |
 | R3 | TD07-TD08 | P0 | DONE |
 | R4 | TD09-TD12 | P0 | DONE |
-| R5 | Final validation | P0 closure | IN PROGRESS |
+| R5 | Final validation | P0 closure | DONE |
 
 Each lot should move through:
 
@@ -2106,65 +2106,94 @@ DONE
 
 ## 13. Global Definition of Done
 
+Status:
+
+```text
+DONE
+```
+
 The remediation is complete only when all of the following are true.
 
 ### Pedagogy
 
 ```text
-[ ] all 12 TDs remain
-[ ] each TD has explicit CORE scope
-[ ] optional work is clearly separated
-[ ] every CORE is realistic in 90 minutes
-[ ] difficulty rises progressively
+[x] all 12 TDs remain
+[x] each TD has explicit CORE scope
+[x] optional work is clearly separated
+[x] every CORE is realistic in 90 minutes
+[x] difficulty rises progressively
 ```
 
 ### Technical continuity
 
 ```text
-[ ] one CORE Python structure exists
-[ ] one terminal command exists
-[ ] one dashboard command exists
-[ ] TD04 -> TD05 team handoff is explicit
-[ ] TD07 analytics are reusable
-[ ] TD08 Yahoo feeds canonical rows
-[ ] TD10 Bloomberg feeds canonical rows
-[ ] TD11 reuses shared results
-[ ] TD12 validates rather than redesigns
+[x] one CORE Python structure exists
+[x] one terminal command exists
+[x] one dashboard command exists
+[x] TD04 -> TD05 team handoff is explicit
+[x] TD07 analytics are reusable
+[x] TD08 Yahoo feeds canonical rows
+[x] TD10 Bloomberg feeds canonical rows
+[x] TD11 reuses shared results
+[x] TD12 validates rather than redesigns
 ```
 
 ### Checkpoints
 
 ```text
-[ ] Checkpoint A derives from TD01-TD04
-[ ] Checkpoint B derives from TD05-TD08
-[ ] Checkpoint C derives from TD09-TD12
-[ ] docs/04 is the single evidence source of truth
-[ ] every screenshot filename is consistent
-[ ] individual contribution rules are realistic
+[x] Checkpoint A derives from TD01-TD04
+[x] Checkpoint B derives from TD05-TD08
+[x] Checkpoint C derives from TD09-TD12
+[x] docs/04 is the single evidence source of truth
+[x] every screenshot filename is consistent
+[x] individual contribution rules are realistic
 ```
 
 ### Maintainability
 
 ```text
-[ ] repeated Git theory is reduced after TD06
-[ ] checkpoint duplication is reduced
-[ ] no stale file paths remain
-[ ] no contradictory architecture remains
-[ ] no unfulfilled YAML promise remains
+[x] repeated Git theory is reduced after TD06
+[x] checkpoint duplication is reduced
+[x] no stale file paths remain
+[x] no contradictory architecture remains
+[x] no unfulfilled YAML promise remains
 ```
 
 ### Safety
 
 ```text
-[ ] no credentials are required in the repository
-[ ] Bloomberg fallback is safe
-[ ] screenshots do not require secret exposure
+[x] no credentials are required in the repository
+[x] Bloomberg fallback is safe
+[x] screenshots do not require secret exposure
 ```
 
 ### Repository convention
 
 ```text
-[ ] zero em dash occurrences
+[x] zero em dash occurrences
+```
+
+### Closure evidence
+
+```text
+R1 = cross-cutting contracts DONE
+R2 = TD01-TD06 DONE
+R3 = TD07-TD08 DONE
+R4 = TD09-TD12 DONE
+R5.1 = paths PASS
+R5.2 = commands PASS
+R5.3 = checkpoints PASS
+R5.4 = terminology PASS
+R5.5 = timing PASS
+R5.6 = dependency continuity PASS
+R5.7 = security PASS
+R5.8 = character convention PASS
+```
+
+Global remediation conclusion:
+
+```text
+PASS
 ```
 
 ## 14. Expected final state
