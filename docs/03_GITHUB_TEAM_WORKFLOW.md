@@ -326,3 +326,12 @@ individual evidence
 =
 verifiable collaborative work
 ```
+
+
+## 16. Instructor recovery reference
+
+For GitHub outages, late synchronization, controlled alignment and merge-conflict recovery, use:
+
+```text
+docs/15_INSTRUCTOR_CONTINGENCY_AND_RECOVERY_PLAYBOOK.md
+```
