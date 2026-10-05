@@ -617,6 +617,45 @@ docs/labs/
 
 unless a future explicit curriculum revision promotes them into the official 12-TD sequence.
 
+### R7.4 taxonomy decision
+
+R7.4 now uses the explicit teaching taxonomy:
+
+```text
+CORE
+OPTIONAL
+ADVANCED
+INSTRUCTOR
+```
+
+Canonical impact study:
+
+```text
+docs/legacy/06_CORE_OPTIONAL_ADVANCED_TAXONOMY_IMPACT_STUDY.md
+```
+
+### R7.4 sub-phases
+
+| Sub-lot | Scope | Status |
+|---|---|---|
+| R7.4.1 | Taxonomy and impact baseline | DONE |
+| R7.4.2 | P1 advanced support production | NEXT |
+| R7.4.3 | Lab taxonomy integration | NOT STARTED |
+| R7.4.4 | Qualification and registry closure | NOT STARTED |
+
+R7.4.1 established:
+
+```text
+56 current Optional activities
+53 retained Optional activities
+3 reclassified ADVANCED activities
+12 P1 ADVANCED entry points
+9 net-new ADVANCED choices
+12 labs requiring explicit ADVANCED sections
+```
+
+No CORE or checkpoint contract was changed during R7.4.1.
+
 ## 11. R7.5 - TD enrichment capsules
 
 ### Goal
@@ -880,12 +919,12 @@ WITHOUT CORE DIVERGENCE
 
 ## 18. Immediate next action
 
-The next action is:
+The current action is:
 
 ```text
-R7.4 - Advanced P1 content operationalization
+R7.4.2 - P1 advanced support production
 ```
 
-R7.3 has operationalized all 10 priority instructor deep dives.
+R7.4.1 taxonomy and impact analysis is complete.
 
-R7.4 may now start from the 12 P1 ADVANCED_READY targets defined in the final migration registry.
+The 12 P1 supports must be qualified before their corresponding TD ADVANCED links are activated.
