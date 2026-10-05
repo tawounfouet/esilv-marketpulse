@@ -640,8 +640,8 @@ docs/legacy/06_CORE_OPTIONAL_ADVANCED_TAXONOMY_IMPACT_STUDY.md
 |---|---|---|
 | R7.4.1 | Taxonomy and impact baseline | DONE |
 | R7.4.2 | P1 advanced support production | DONE |
-| R7.4.3 | Lab taxonomy integration | NEXT |
-| R7.4.4 | Qualification and registry closure | NOT STARTED |
+| R7.4.3 | Lab taxonomy integration | DONE |
+| R7.4.4 | Qualification and registry closure | NEXT |
 
 R7.4.1 established:
 
@@ -764,6 +764,61 @@ PASS FOR SUPPORT PRODUCTION
 R7.4.2 does not claim final R7.4 qualification.
 
 R7.4.3 may integrate only READY_TO_TEACH supports as active student links.
+
+### R7.4.3 execution result
+
+Integrated the taxonomy into:
+
+```text
+TD01-TD12
+docs/labs/README.md
+```
+
+Result:
+
+```text
+12 / 12 labs contain an explicit ADVANCED section
+
+53 current activities remain OPTIONAL
+
+3 former Optional activities are reclassified:
+TD04 controlled conflict
+TD11 callback
+TD11 simple selector
+
+7 READY_TO_TEACH supports are active student links
+
+5 PENDING_EXTERNAL supports remain inactive
+```
+
+Active links:
+
+```text
+TD01 -> ADV-LNX-01, ADV-LNX-02, ADV-LNX-03
+TD02 -> ADV-LNX-04
+TD03 -> ADV-GIT-02
+TD04 -> ADV-GIT-01
+TD12 -> ADV-GIT-04
+```
+
+Pending, not activated:
+
+```text
+TD10 -> ADV-BBG-01
+TD11 -> ADV-DASH-01, ADV-DASH-02
+TD12 -> ADV-RMT-01, ADV-RMT-03
+```
+
+No CORE section, checkpoint requirement or canonical runtime was intentionally changed.
+
+R7.4.3 conclusion:
+
+```text
+PASS
+
+LAB TAXONOMY INTEGRATED
+WITH READY-ONLY ACTIVATION
+```
 
 ## 11. R7.5 - TD enrichment capsules
 
@@ -1032,11 +1087,9 @@ WITHOUT CORE DIVERGENCE
 The current action is:
 
 ```text
-R7.4.3 - Lab taxonomy integration
+R7.4.4 - Qualification and registry closure
 ```
 
-R7.4.2 produced all 12 P1 support documents.
+R7.4.3 integrated the explicit ADVANCED taxonomy into all 12 labs.
 
-Only the 7 READY_TO_TEACH supports may be activated as student-facing ADVANCED links at this stage.
-
-The 5 PENDING_EXTERNAL supports remain inactive until their delivery gates pass.
+R7.4.4 must now verify global counts, links, checkpoint isolation, dependency isolation and transverse documentation alignment.
