@@ -1781,3 +1781,70 @@ centralize repeated contracts
 ```
 
 After these corrections, the MarketPulse sequence can realistically function as a coherent 18-hour practical path rather than only as twelve individually complete documents.
+
+
+## 23. Post-freeze taxonomy addendum
+
+This document remains the historical transverse review that drove the R1-R6 CORE rebalancing.
+
+Its earlier terminology:
+
+```text
+CORE / OPTIONAL / INSTRUCTOR DEMO
+```
+
+has now been refined after the R6 freeze into:
+
+```text
+CORE / OPTIONAL / ADVANCED / INSTRUCTOR
+```
+
+The refinement does not reopen the 18-hour CORE.
+
+Interpretation:
+
+```text
+CORE
+=
+mandatory common work
+
+OPTIONAL
+=
+lightweight continuation inside the TD
+
+ADVANCED
+=
+deeper student practice in docs/advanced/
+
+INSTRUCTOR
+=
+teacher-facing depth in docs/instructor/
+```
+
+Three historical Optional activities were specifically reclassified:
+
+```text
+TD04 controlled conflict
+->
+ADV-GIT-01
+
+TD11 callback
+->
+ADV-DASH-01
+
+TD11 simple selector
+->
+ADV-DASH-02
+```
+
+The first is currently READY_TO_TEACH.
+
+The two Dash activities remain PENDING_EXTERNAL until a real Dash runtime gate passes.
+
+The historical analysis above should not be rewritten to hide the evolution of the course design.
+
+Canonical post-freeze impact source:
+
+```text
+docs/legacy/06_CORE_OPTIONAL_ADVANCED_TAXONOMY_IMPACT_STUDY.md
+```
