@@ -570,6 +570,7 @@ This README intentionally does not display CI, security, release or license badg
 - [Instructor contingency and recovery playbook](docs/15_INSTRUCTOR_CONTINGENCY_AND_RECOVERY_PLAYBOOK.md)
 - [Teaching baseline release](docs/16_TEACHING_BASELINE_RELEASE.md)
 - [Pre-class operational readiness roadmap](docs/17_PRE_CLASS_OPERATIONAL_READINESS_ROADMAP.md)
+- [Instructor guide visual asset registry](docs/18_INSTRUCTOR_GUIDE_VISUAL_ASSET_REGISTRY.md)
 - [Pre-lab diagnostic and interpretation](docs/diagnostic/README.md)
 - [Advanced track](docs/advanced/README.md)
 - [Instructor deep dives](docs/instructor/deep-dives/README.md)
