@@ -430,47 +430,28 @@ P0 + P1
 Status:
 
 ```text
-KEEP WITH TIMEBOX
+DONE
 ```
 
-CORE:
+Implemented remediation:
 
-- MarketPulse context;
-- team fork;
-- TEAM.md;
-- collaborators;
-- common environment;
-- `pwd`;
-- `ls`;
-- `cd`;
-- `cat`;
-- `head`;
-- `grep`;
-- Python version;
-- Git version;
-- run starter.
-
-Move to OPTIONAL:
-
-- recursive grep;
-- extended `find`;
-- extra Git exploration;
-- extended shell challenges.
-
-Add operational rule:
-
-```text
-Individual environment blocker > approximately 10 minutes
--> pair temporarily with a teammate
--> continue the TD
-```
+- added an explicit CORE definition of done;
+- planned approximately 80 minutes of required work plus 10 minutes of buffer;
+- retained MarketPulse context, team fork, TEAM.md, collaborators and common environment in CORE;
+- retained `pwd`, `ls`, `cd`, `cat`, `head` and `grep` in CORE;
+- retained Python and Git version checks and starter execution in CORE;
+- moved observation counting, recursive search, extended `find` and Git exploration to OPTIONAL;
+- removed Git identity setup from the required TD01 path;
+- added the explicit approximately 10-minute environment blocker rule;
+- added guidance against starting heavyweight local environment installation during the common TD;
+- preserved the rule that formal Git workflow starts later.
 
 Acceptance criteria:
 
 ```text
-[ ] CORE fits 90 minutes
-[ ] environment fallback rule is visible
-[ ] optional shell work is clearly labelled
+[x] CORE is planned within 80 minutes plus a 10-minute buffer
+[x] environment fallback rule is visible
+[x] optional shell work is clearly labelled
 ```
 
 ### R2.2 TD02 - Python + CSV / JSON
@@ -1423,7 +1404,7 @@ Initial status:
 | Lot | Scope | Priority | Status |
 |---|---|---|---|
 | R1 | Cross-cutting contracts | P0 | DONE |
-| R2 | TD01-TD06 | P0/P1 | NOT STARTED |
+| R2 | TD01-TD06 | P0/P1 | IN PROGRESS |
 | R3 | TD07-TD08 | P0 | NOT STARTED |
 | R4 | TD09-TD12 | P0 | NOT STARTED |
 | R5 | Final validation | P0 closure | NOT STARTED |

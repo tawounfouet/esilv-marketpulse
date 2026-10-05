@@ -37,7 +37,7 @@ The goal is to make sure that every team can access, inspect and run the project
 At the end of TD01, you should be able to:
 
 - identify the MarketPulse project;
-- work inside an identified team repository;
+- access an identified team repository;
 - use a Linux terminal;
 - understand your current directory;
 - list and inspect project files;
@@ -45,32 +45,34 @@ At the end of TD01, you should be able to:
 - execute the MarketPulse starter;
 - identify the CSV and JSON input files.
 
-## Expected result
+## CORE definition of done
 
-At the end of the session, your team should have:
+TD01 is complete when your team can confirm:
 
 ```text
-[ ] one team repository
-[ ] repository name esilv-marketpulse-gXX-tYY
-[ ] TEAM.md completed
-[ ] all team members added as collaborators
-[ ] working development environment
-[ ] working Linux terminal
-[ ] Python available
-[ ] Git available
-[ ] MarketPulse running
-[ ] CSV and JSON files inspected
+[ ] one team repository exists
+[ ] repository name follows esilv-marketpulse-gXX-tYY
+[ ] TEAM.md is completed
+[ ] all team members can access the repository
+[ ] one working development environment is available
+[ ] one working Linux terminal is available
+[ ] Python is available
+[ ] Git is available
+[ ] MarketPulse runs with python src/main.py
+[ ] CSV and JSON starter files were inspected
 ```
+
+Optional exploration is not required to complete TD01.
 
 ## Before starting
 
-The instructor repository is:
+Instructor repository:
 
 ```text
 tawounfouet/esilv-marketpulse
 ```
 
-Your team repository naming convention is:
+Team repository naming convention:
 
 ```text
 esilv-marketpulse-gXX-tYY
@@ -90,17 +92,42 @@ Recommended team size:
 
 ## Session plan
 
+The CORE is designed for approximately 80 minutes.
+
+The final 10 minutes are kept as buffer for environment variation, questions and validation.
+
 | Time | Activity |
 |---|---|
-| 00-10 min | MarketPulse introduction |
-| 10-25 min | Team creation and fork |
-| 25-40 min | TEAM.md and collaborators |
-| 40-55 min | Development environment and terminal |
-| 55-70 min | Linux navigation and file inspection |
-| 70-82 min | Run MarketPulse |
-| 82-90 min | Readiness check |
+| 00-08 min | MarketPulse context |
+| 08-22 min | Team repository and collaborators |
+| 22-32 min | TEAM.md |
+| 32-42 min | Development environment and terminal |
+| 42-58 min | Linux navigation |
+| 58-68 min | Inspect CSV and JSON |
+| 68-78 min | Verify Python/Git and run MarketPulse |
+| 78-80 min | CORE definition of done |
+| 80-90 min | Buffer, support and optional exploration |
 
-The instructor may adjust the timing depending on onboarding issues.
+## Environment timebox rule
+
+Do not let one environment problem consume the session.
+
+```text
+Individual blocker for approximately 10 minutes
+        |
+        v
+pair temporarily with a teammate
+        |
+        v
+continue the TD
+        |
+        v
+resolve the individual issue with instructor support
+```
+
+Do not install VirtualBox, WSL, Docker or another large local environment during the common TD unless the instructor explicitly asks you to.
+
+# CORE
 
 # Part 1 - Understand MarketPulse
 
@@ -128,7 +155,7 @@ Performance comparison
 Dash
 ```
 
-Do not try to implement these later stages today.
+Do not implement these later stages today.
 
 ## 1.2 Identify the starter
 
@@ -146,7 +173,7 @@ esilv-marketpulse/
 └── src/
 ```
 
-The important files for TD01 are:
+For TD01, focus on:
 
 ```text
 README.md
@@ -156,27 +183,27 @@ data/sample/prices.csv
 src/main.py
 ```
 
-# Part 2 - Create the team repository
+# Part 2 - Prepare the team repository
 
 ## 2.1 Form the team
 
 Confirm:
 
 ```text
-TD Group        : GXX
-MarketPulse Team: TXX
+TD Group         : GXX
+MarketPulse Team : TXX
 ```
 
 Example:
 
 ```text
-TD Group        : G03
-MarketPulse Team: T02
+TD Group         : G03
+MarketPulse Team : T02
 ```
 
-## 2.2 Fork the instructor repository
+## 2.2 Create one team fork
 
-One team member creates the initial fork from:
+One team member creates the fork from:
 
 ```text
 tawounfouet/esilv-marketpulse
@@ -188,7 +215,7 @@ Do not create one fork per student.
 
 ## 2.3 Rename the fork
 
-Rename the team repository using:
+Use:
 
 ```text
 esilv-marketpulse-gXX-tYY
@@ -200,17 +227,15 @@ Example:
 esilv-marketpulse-g03-t02
 ```
 
-Do not add student initials to the repository name.
+Do not add student names or initials to the repository name.
 
 ## 2.4 Add collaborators
 
-The owner of the fork adds the other team members as collaborators.
+The fork owner adds the other team members as collaborators.
 
-Every student should confirm that they can access the repository using their own GitHub account.
+Every student must confirm access using their own GitHub account.
 
 # Part 3 - Create TEAM.md
-
-## 3.1 Copy the template
 
 Create:
 
@@ -224,9 +249,7 @@ from:
 TEAM_TEMPLATE.md
 ```
 
-## 3.2 Complete team information
-
-At minimum, complete:
+Complete at least:
 
 - TD group;
 - MarketPulse team number;
@@ -242,8 +265,6 @@ Do not add:
 - passwords;
 - tokens.
 
-## 3.3 Verify the team file
-
 Every team member should be able to answer:
 
 ```text
@@ -253,29 +274,31 @@ What is our repository name?
 Who are the repository collaborators?
 ```
 
-# Part 4 - Open the development environment
-
-## 4.1 Start the common environment
+# Part 4 - Open the common development environment
 
 Use the development environment indicated by the instructor.
 
-For the common course path, GitHub Codespaces may be used to provide a Linux terminal and Python environment.
+For the common course path, GitHub Codespaces may be used to provide:
 
-The objective is not to learn Codespaces as a separate technology.
+```text
+Linux terminal
++
+Python
++
+Git
++
+repository workspace
+```
 
-Codespaces is only a means to obtain a common working environment.
+Codespaces is a means to obtain a common environment.
 
-## 4.2 Open a terminal
+It is not a separate competency being assessed in TD01.
 
-You should see a command prompt.
+Open a terminal before continuing.
 
-Do not worry if your prompt looks different from another student's prompt.
+# Part 5 - Linux navigation
 
-The important point is that you can type and execute commands.
-
-# Part 5 - First Linux commands
-
-## 5.1 Where am I?
+## 5.1 Identify the current directory
 
 Run:
 
@@ -283,25 +306,18 @@ Run:
 pwd
 ```
 
-Question:
+The displayed path tells you where the shell is currently working.
 
-> What does the displayed path represent?
-
-## 5.2 What files are here?
+## 5.2 List repository files
 
 Run:
 
 ```bash
 ls
-```
-
-Then:
-
-```bash
 ls -la
 ```
 
-Identify:
+Identify at least:
 
 ```text
 README.md
@@ -312,11 +328,7 @@ evidence
 src
 ```
 
-Question:
-
-> What additional information does `ls -la` show compared with `ls`?
-
-## 5.3 Navigate into a directory
+## 5.3 Navigate to the sample data
 
 Run:
 
@@ -324,11 +336,7 @@ Run:
 cd data
 pwd
 ls
-```
 
-Then:
-
-```bash
 cd sample
 pwd
 ls
@@ -341,20 +349,16 @@ instruments.json
 prices.csv
 ```
 
-## 5.4 Move back to the repository root
-
-Run:
+Return to the repository root:
 
 ```bash
 cd ../..
 pwd
 ```
 
-Check that you are back at the project root.
+# Part 6 - Inspect the starter data
 
-# Part 6 - Inspect the MarketPulse data
-
-## 6.1 Inspect the JSON file
+## 6.1 JSON metadata
 
 Run:
 
@@ -373,13 +377,13 @@ currency
 market
 ```
 
-Questions:
+You should be able to answer:
 
-1. What is the primary instrument?
+1. What is the instrument?
 2. What is the benchmark?
-3. Which fields describe each one?
+3. Where are their names and tickers stored?
 
-## 6.2 Inspect the CSV file
+## 6.2 CSV observations
 
 Run:
 
@@ -387,7 +391,7 @@ Run:
 head data/sample/prices.csv
 ```
 
-Identify the columns:
+Identify:
 
 ```text
 date
@@ -399,49 +403,18 @@ close
 volume
 ```
 
-Question:
-
-> Why does the CSV contain both AAPL and SP500 rows?
-
-## 6.3 Search for a ticker
-
-Run:
+Search for both series:
 
 ```bash
 grep AAPL data/sample/prices.csv
-```
-
-Then:
-
-```bash
 grep SP500 data/sample/prices.csv
 ```
 
-Question:
+You should understand that the CSV contains observations for both the instrument and the benchmark.
 
-> What does `grep` help you find?
+# Part 7 - Verify the runtime
 
-## 6.4 Count observations
-
-Try:
-
-```bash
-grep -c AAPL data/sample/prices.csv
-grep -c SP500 data/sample/prices.csv
-```
-
-Expected result:
-
-```text
-21
-21
-```
-
-This confirms that the two series currently contain the same number of daily observations.
-
-# Part 7 - Verify Python and Git
-
-## 7.1 Python
+## 7.1 Check Python
 
 Run:
 
@@ -449,13 +422,9 @@ Run:
 python --version
 ```
 
-If your environment requires it, the instructor may ask you to use:
+If the instructor-provided environment uses a different command, follow the instructor instruction.
 
-```bash
-python3 --version
-```
-
-## 7.2 Git
+## 7.2 Check Git
 
 Run:
 
@@ -463,22 +432,13 @@ Run:
 git --version
 ```
 
-## 7.3 Git identity
+Formal Git workflow begins later.
 
-Run:
+Do not create branches or commits in TD01 unless the instructor asks you to.
 
-```bash
-git config user.name
-git config user.email
-```
+## 7.3 Run MarketPulse
 
-Your commits later in the module must be attributable to your own GitHub identity.
-
-If the values look incorrect, ask the instructor before changing them.
-
-# Part 8 - Run MarketPulse
-
-From the repository root, run:
+From the repository root:
 
 ```bash
 python src/main.py
@@ -505,56 +465,32 @@ AAPL: 21
 SP500: 21
 ```
 
-## Questions
-
-1. Which file contains the Python program?
-2. Which file contains market metadata?
-3. Which file contains daily prices?
-4. How many observations are loaded for AAPL?
-5. How many observations are loaded for SP500?
-6. Why do instrument and benchmark need a common period?
-
-# Part 9 - Read the Python file without modifying it
-
-Run:
-
-```bash
-cat src/main.py
-```
-
-Do not try to understand every line yet.
-
-Identify only:
+Be able to identify:
 
 ```text
-imports
-DATA_DIR
-load_instruments
-load_prices
-filter_prices
-main
+program          : src/main.py
+market metadata  : data/sample/instruments.json
+daily prices     : data/sample/prices.csv
+instrument       : AAPL
+benchmark        : SP500 / S&P 500
 ```
 
-Question:
+# Part 8 - CORE validation
 
-> Which function appears responsible for selecting rows for one ticker?
-
-The detailed Python work starts in TD02.
-
-# Part 10 - Readiness check
-
-Before finishing TD01, each student should confirm:
+Before finishing the required work, each student should confirm:
 
 ```text
 [ ] I can access the team repository
-[ ] I know my team repository name
-[ ] I can open the development environment
+[ ] I know the team repository name
+[ ] I can open the common development environment
 [ ] I can use pwd
 [ ] I can use ls
 [ ] I can use cd
 [ ] I can use cat
 [ ] I can use head
 [ ] I can use grep
+[ ] I can identify the JSON metadata file
+[ ] I can identify the CSV price file
 [ ] I can check the Python version
 [ ] I can check the Git version
 [ ] I can run python src/main.py
@@ -569,13 +505,33 @@ The team should confirm:
 [ ] repository naming is correct
 ```
 
-# Part 11 - If you finish early
+If all checks pass, TD01 CORE is complete.
 
-Do not wait passively.
+# OPTIONAL
 
-Complete these optional exploration tasks.
+Complete these tasks only after the CORE definition of done is satisfied.
 
-## Challenge 1 - Explore Linux output
+## Optional 1 - Count observations
+
+Run:
+
+```bash
+grep -c AAPL data/sample/prices.csv
+grep -c SP500 data/sample/prices.csv
+```
+
+Expected result:
+
+```text
+21
+21
+```
+
+Question:
+
+> Why is having two aligned series useful for future comparison work?
+
+## Optional 2 - Explore Linux output
 
 Try:
 
@@ -585,33 +541,22 @@ head -n 5 data/sample/prices.csv
 tail -n 5 data/sample/prices.csv
 ```
 
-Explain what each command changes compared with the previous commands.
+Explain what changes between these commands.
 
-## Challenge 2 - Count files
+## Optional 3 - Count and search repository files
 
 Try:
 
 ```bash
 find . -type f
-```
-
-Question:
-
-> Which directories contain most of the project documentation?
-
-## Challenge 3 - Search the repository
-
-Try:
-
-```bash
 grep -R "AAPL" .
 ```
 
-Question:
+Do not spend time interpreting every result.
 
-> In which files does AAPL currently appear?
+The goal is only to discover that Linux commands can inspect an entire project tree.
 
-## Challenge 4 - Inspect Git without changing anything
+## Optional 4 - Inspect Git without changing anything
 
 Try:
 
@@ -620,35 +565,45 @@ git status
 git log --oneline
 ```
 
-Do not create branches or commits yet unless the instructor asks you to.
+Do not create branches or commits.
 
-Formal Git workflow begins in later TDs.
+Formal Git work starts in TD03.
 
-# Part 12 - Troubleshooting
+# TROUBLESHOOTING
 
 ## Python command not found
 
 Ask the instructor which Python command is expected in the common environment.
 
-Do not spend the whole session installing a different Python distribution.
+Do not spend the session installing a different Python distribution.
 
 ## Repository not accessible
 
 Check:
 
-- that you are signed into the correct GitHub account;
-- that the fork owner added you as a collaborator;
-- that you accepted any collaboration invitation.
+- that you are signed into the expected GitHub account;
+- that the fork owner added you as collaborator;
+- that you accepted the collaboration invitation.
 
 ## Codespace or environment issue
 
-If the problem cannot be solved quickly, pair temporarily with another team member so that you can continue the TD.
+Apply the timebox rule:
 
-The objective is to keep learning while the environment problem is diagnosed.
+```text
+approximately 10 minutes blocked
+        |
+        v
+pair with a teammate
+        |
+        v
+continue learning
+```
+
+The individual environment can be diagnosed with instructor support while the student remains active in the lab.
 
 ## MarketPulse does not run
 
-Check:
+From the repository root, check:
 
 ```bash
 pwd
@@ -657,13 +612,19 @@ ls src
 ls data/sample
 ```
 
-Make sure you are running the command from the repository root.
+Then retry:
 
-# Part 13 - What comes next?
+```bash
+python src/main.py
+```
 
-In TD02, MarketPulse becomes a real Python exercise.
+# What comes next?
 
-You will work more directly with:
+Pedagogical Wave 1 is not finished yet.
+
+TD02 completes Wave 1 with Python and local data manipulation.
+
+In TD02, MarketPulse becomes a real Python exercise using:
 
 ```text
 CSV
@@ -675,8 +636,6 @@ Instrument
 Benchmark
 ```
 
-and begin to understand how the application reads and manipulates its market data.
-
 No checkpoint evidence is required at the end of TD01.
 
-Checkpoint A will be performed after TD04.
+Checkpoint A is performed after TD04.
