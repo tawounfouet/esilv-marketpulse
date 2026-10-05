@@ -198,24 +198,26 @@ These are the 12 P1 backlog items that R7.4 must resolve.
 
 | ID | Legacy source | Topic | Original decision | Final destination | Target support | Current backlog status | R7.4 status | Validation |
 |---|---|---|---|---|---|---|---|---|
-| ADV-LNX-01 | TD1.1 | File operations | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_LNX_01_FILE_OPERATIONS.md | READY_TO_DESIGN | DONE | REFERENCE_VALIDATED |
-| ADV-LNX-02 | TD1.1 | Permissions and chmod | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_LNX_02_PERMISSIONS_CHMOD.md | READY_TO_DESIGN | DONE | REFERENCE_VALIDATED |
-| ADV-LNX-03 | TD1.3 | Pipes and text processing | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_LNX_03_PIPES_TEXT_PROCESSING.md | READY_TO_DESIGN | DONE | REFERENCE_VALIDATED |
-| ADV-LNX-04 | CM1 / TD1.2 | Environment variables | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_LNX_04_ENVIRONMENT_VARIABLES.md | READY_TO_DESIGN | DONE | REFERENCE_VALIDATED |
-| ADV-GIT-01 | TD3 | Conflict resolution | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_GIT_01_CONFLICT_RESOLUTION.md | READY_TO_DESIGN | DONE | REFERENCE_VALIDATED |
-| ADV-GIT-02 | TD2 | Restore / revert / reset | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_GIT_02_RESTORE_REVERT_RESET.md | READY_TO_DESIGN | DONE | REFERENCE_VALIDATED |
-| ADV-GIT-04 | CM3 | Tags and releases | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_GIT_04_TAGS_RELEASES.md | READY_TO_DESIGN | DONE | REFERENCE_VALIDATED |
-| ADV-RMT-01 | TD1.4 | SSH fundamentals | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_RMT_01_SSH_FUNDAMENTALS.md | READY_TO_DESIGN | PENDING_EXTERNAL | TO_VALIDATE |
-| ADV-RMT-03 | Historical deployment | systemd service | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_RMT_03_SYSTEMD_SERVICE.md | READY_TO_DESIGN | PENDING_EXTERNAL | TO_VALIDATE |
-| ADV-BBG-01 | CM4 / TD4 | Bloomberg reference data | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_BBG_01_REFERENCE_DATA.md | READY_TO_DESIGN | PENDING_EXTERNAL | TO_VALIDATE |
-| ADV-DASH-01 | Historical project | Dash callback | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_DASH_01_CALLBACK.md | READY_TO_DESIGN | PENDING_EXTERNAL | TO_VALIDATE |
-| ADV-DASH-02 | Historical project | Instrument selector | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_DASH_02_INSTRUMENT_SELECTOR.md | READY_TO_DESIGN | PENDING_EXTERNAL | TO_VALIDATE |
+| ADV-LNX-01 | TD1.1 | File operations | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_LNX_01_FILE_OPERATIONS.md | READY_TO_TEACH | DONE | REFERENCE_VALIDATED |
+| ADV-LNX-02 | TD1.1 | Permissions and chmod | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_LNX_02_PERMISSIONS_CHMOD.md | READY_TO_TEACH | DONE | REFERENCE_VALIDATED |
+| ADV-LNX-03 | TD1.3 | Pipes and text processing | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_LNX_03_PIPES_TEXT_PROCESSING.md | READY_TO_TEACH | DONE | REFERENCE_VALIDATED |
+| ADV-LNX-04 | CM1 / TD1.2 | Environment variables | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_LNX_04_ENVIRONMENT_VARIABLES.md | READY_TO_TEACH | DONE | REFERENCE_VALIDATED |
+| ADV-GIT-01 | TD3 | Conflict resolution | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_GIT_01_CONFLICT_RESOLUTION.md | READY_TO_TEACH | DONE | REFERENCE_VALIDATED |
+| ADV-GIT-02 | TD2 | Restore / revert / reset | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_GIT_02_RESTORE_REVERT_RESET.md | READY_TO_TEACH | DONE | REFERENCE_VALIDATED |
+| ADV-GIT-04 | CM3 | Tags and releases | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_GIT_04_TAGS_RELEASES.md | READY_TO_TEACH | DONE | REFERENCE_VALIDATED |
+| ADV-RMT-01 | TD1.4 | SSH fundamentals | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_RMT_01_SSH_FUNDAMENTALS.md | PENDING_EXTERNAL | PENDING_EXTERNAL | TO_VALIDATE |
+| ADV-RMT-03 | Historical deployment | systemd service | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_RMT_03_SYSTEMD_SERVICE.md | PENDING_EXTERNAL | PENDING_EXTERNAL | TO_VALIDATE |
+| ADV-BBG-01 | CM4 / TD4 | Bloomberg reference data | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_BBG_01_REFERENCE_DATA.md | PENDING_EXTERNAL | PENDING_EXTERNAL | TO_VALIDATE |
+| ADV-DASH-01 | Historical project | Dash callback | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_DASH_01_CALLBACK.md | PENDING_EXTERNAL | PENDING_EXTERNAL | TO_VALIDATE |
+| ADV-DASH-02 | Historical project | Instrument selector | OPTIONAL | ADVANCED_READY | docs/advanced/ADV_DASH_02_INSTRUMENT_SELECTOR.md | PENDING_EXTERNAL | PENDING_EXTERNAL | TO_VALIDATE |
 
 R7.4 rule:
 
 ```text
-Each P1 item must become:
+Each P1 item must resolve to:
 READY_TO_TEACH
+or
+PENDING_EXTERNAL with an explicit delivery gate
 or
 explicitly DEFERRED
 ```
@@ -539,3 +541,34 @@ ADV-DASH-02
 ```
 
 They must not be exposed as READY_TO_TEACH in student labs until their delivery gates pass.
+
+
+## 19. R7.4 final entry-point map
+
+Active READY_TO_TEACH student links:
+
+| TD | Support |
+|---|---|
+| TD01 | ADV-LNX-01 |
+| TD01 | ADV-LNX-02 |
+| TD01 | ADV-LNX-03 |
+| TD02 | ADV-LNX-04 |
+| TD03 | ADV-GIT-02 |
+| TD04 | ADV-GIT-01 |
+| TD12 | ADV-GIT-04 |
+
+Explicit inactive destinations:
+
+| TD | Support | Status |
+|---|---|---|
+| TD10 | ADV-BBG-01 | PENDING_EXTERNAL |
+| TD11 | ADV-DASH-01 | PENDING_EXTERNAL |
+| TD11 | ADV-DASH-02 | PENDING_EXTERNAL |
+| TD12 | ADV-RMT-01 | PENDING_EXTERNAL |
+| TD12 | ADV-RMT-03 | PENDING_EXTERNAL |
+
+Closure reference:
+
+```text
+docs/legacy/07_R7_4_ADVANCED_QUALIFICATION_AND_CLOSURE.md
+```
