@@ -2334,20 +2334,638 @@ R6.6 does not block the checkpoint/evidence dry run.
 
 ## 11. R6.7 - Checkpoint and evidence dry run
 
-Validate the canonical evidence contract for:
+Status:
+
+```text
+REVIEW
+```
+
+Validated:
 
 ```text
 Checkpoint A
-TD01-TD04
-
 Checkpoint B
-TD05-TD08
-
 Checkpoint C
-TD09-TD12
+individual README contract
+directory naming
+screenshot naming
+external-evidence recovery semantics
 ```
 
-The dry run must prove that required evidence can actually be produced without exposing credentials or requiring artificial screenshots.
+No synthetic screenshot was created or treated as proof.
+
+### 11.1 Canonical package shape
+
+A disposable evidence tree was created with one representative GitHub username:
+
+```text
+evidence/
+|-- checkpoint-a/
+|   +-- alice-martin/
+|       |-- README.md
+|       |-- 01_terminal_python.png
+|       |-- 02_git_status_log.png
+|       +-- 03_branch_merge.png
+|
+|-- checkpoint-b/
+|   +-- alice-martin/
+|       |-- README.md
+|       |-- 01_pull_request.png
+|       |-- 02_code_review.png
+|       |-- 03_yahoo_market_data.png
+|       +-- 04_instrument_benchmark.png
+|
++-- checkpoint-c/
+    +-- alice-martin/
+        |-- README.md
+        |-- 01_final_market_data.png
+        |-- 02_dash_dashboard.png
+        |-- 03_final_pull_request.png
+        +-- 04_reproducible_run.png
+```
+
+The PNG files in this structural test were empty placeholders used only to validate package naming.
+
+They were not treated as evidence.
+
+Validated counts:
+
+```text
+Checkpoint A = 3 required screenshots
+Checkpoint B = 4 required screenshots
+Checkpoint C = 4 required screenshots
+
+Total required screenshots = 11
+
+Individual README files = 3
+```
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 11.2 Filename contract
+
+Every required screenshot name matches:
+
+```text
+two-digit number
++
+underscore
++
+lowercase snake case
++
+.png
+```
+
+Validated names:
+
+```text
+Checkpoint A
+01_terminal_python.png
+02_git_status_log.png
+03_branch_merge.png
+
+Checkpoint B
+01_pull_request.png
+02_code_review.png
+03_yahoo_market_data.png
+04_instrument_benchmark.png
+
+Checkpoint C
+01_final_market_data.png
+02_dash_dashboard.png
+03_final_pull_request.png
+04_reproducible_run.png
+```
+
+No conflicting filename was found in the canonical checkpoint document or closing TD files.
+
+Classification:
+
+```text
+EXECUTED / INSPECTED
+```
+
+### 11.3 Individual README contract
+
+Each disposable checkpoint README listed exactly the screenshot filenames required for its package.
+
+The canonical README contract can express:
+
+```text
+student name
+GitHub username
+branch
+main commits
+Pull Request
+reviewed Pull Request
+work completed
+main difficulty
+evidence filenames
+```
+
+The GitHub username remains the individual evidence-directory key.
+
+Sensitive identifiers such as:
+
+```text
+personal email
+student identifier
+phone
+home address
+password
+token
+private key
+cloud billing data
+```
+
+are not required.
+
+Classification:
+
+```text
+EXECUTED / INSPECTED
+```
+
+### 11.4 Checkpoint A - fast-forward evidence defect
+
+The initial checkpoint contract had a real sequencing defect.
+
+TD04 allowed:
+
+```text
+valid fast-forward merge
++
+feature-branch deletion
+```
+
+before Checkpoint A capture.
+
+After branch deletion, a fast-forward history can appear fully linear and no longer provide enough visible branch evidence for:
+
+```text
+03_branch_merge.png
+```
+
+This would encourage students to force unnecessary merge commits or capture ambiguous evidence.
+
+Classification:
+
+```text
+DEFECT FOUND
+```
+
+### 11.5 Checkpoint A remediation
+
+The canonical evidence contract and TD04 now require capture:
+
+```text
+after successful merge
++
+before deleting the merged feature branch
+```
+
+Recommended evidence commands:
+
+```bash
+git branch
+git branch --merged
+git log --oneline --graph --decorate --all
+```
+
+A real fast-forward merge was executed in the dry run.
+
+Before deletion:
+
+```text
+feature/display-observation-dates
++
+main
+```
+
+both pointed to the integrated feature commit.
+
+`git branch --merged` listed the feature branch as merged.
+
+After deletion, the feature commit remained in history.
+
+This proves the revised evidence sequence works without forcing a merge commit.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+Remediation commits:
+
+```text
+a336fd66801019e3881fb46a57f5b3b59e94470a
+docs: harden checkpoint evidence capture rules
+
+125431d770c5f2e29f9c3ec6c9346c16f318cbe8
+docs: make TD04 branch evidence fast-forward safe
+```
+
+### 11.6 Checkpoint A evidence feasibility
+
+Required proof:
+
+```text
+01_terminal_python.png
+=
+local terminal + MarketPulse execution
+
+02_git_status_log.png
+=
+local Git state + attributable history
+
+03_branch_merge.png
+=
+local branch and merge evidence
+```
+
+All three evidence meanings are producible from the normal TD01-TD04 workflow.
+
+No external market-data service is required.
+
+No artificial merge is required.
+
+Classification:
+
+```text
+PASS
+```
+
+### 11.7 Checkpoint B - GitHub contribution evidence
+
+Required:
+
+```text
+01_pull_request.png
+02_code_review.png
+```
+
+The evidence semantics are coherent with TD05-TD06:
+
+```text
+PR authored by the student
++
+review performed by the student on another team member's PR
+```
+
+The same screenshot must not be copied across students as proof of personal Git contribution.
+
+The dry-run environment cannot impersonate a second student account and no synthetic instructor-repository PR was created.
+
+Classification:
+
+```text
+CONTRACT PASS
+ACTUAL MULTI-USER GITHUB UI = EXTERNAL VERIFY
+```
+
+### 11.8 Checkpoint B - Yahoo external dependency defect
+
+The original contract required:
+
+```text
+03_yahoo_market_data.png
+```
+
+immediately after TD08 but did not define a canonical response to a genuine Yahoo outage.
+
+That could make an otherwise valid student checkpoint impossible to complete at the scheduled time for reasons outside the student's control.
+
+Classification:
+
+```text
+DEFECT FOUND
+```
+
+### 11.9 Checkpoint B remediation
+
+The canonical evidence contract now defines:
+
+```text
+READY
+PENDING_EXTERNAL
+COMPLETE
+```
+
+For a documented Yahoo outage:
+
+```text
+03_yahoo_market_data.png
+=
+PENDING_EXTERNAL
+```
+
+while the other Checkpoint B evidence can still be submitted and explained.
+
+The student later captures the real Yahoo evidence during an instructor-approved recovery window.
+
+Explicitly forbidden substitutions:
+
+```text
+local CSV presented as Yahoo
+controlled provider double presented as Yahoo LIVE
+old unrelated screenshot
+fabricated remote values
+```
+
+TD08 now points directly to this canonical recovery rule.
+
+Classification:
+
+```text
+REMEDIATED
+```
+
+Remediation commit:
+
+```text
+b03c8760ecc29cfb1843753f61ce0402881ced40
+docs: define TD08 Yahoo evidence recovery
+```
+
+### 11.10 Checkpoint B evidence feasibility
+
+Required proof categories:
+
+```text
+01_pull_request.png
+=
+GitHub UI / individual contribution
+
+02_code_review.png
+=
+GitHub UI / different-student review
+
+03_yahoo_market_data.png
+=
+real remote Yahoo retrieval
+
+04_instrument_benchmark.png
+=
+application behaviour for AAPL + SP500
+1 month + Daily
+```
+
+The contract no longer requires fabrication when Yahoo is unavailable.
+
+Remaining real-world verification:
+
+```text
+team-fork PR
+different-account review
+successful Yahoo remote retrieval
+```
+
+Classification:
+
+```text
+CONTRACT PASS
+EXTERNAL CAPTURE REMAINS
+```
+
+### 11.11 Checkpoint C - final provider evidence
+
+The canonical contract now explicitly accepts the actual authorized final provider mode.
+
+Examples:
+
+```text
+Yahoo Finance via yfinance
+Bloomberg - LIVE
+Bloomberg stage - APPROVED_SAMPLE
+```
+
+If APPROVED_SAMPLE is used:
+
+```text
+APPROVED_SAMPLE
+!=
+LIVE Bloomberg evidence
+```
+
+The exact mode must remain visible.
+
+This is consistent with the TD09-TD10 fallback contract and R6.6.
+
+Classification:
+
+```text
+PASS
+```
+
+### 11.12 Checkpoint C - dashboard evidence
+
+`02_dash_dashboard.png` requires a functional comparative dashboard, not merely a running server.
+
+Visible evidence must include:
+
+```text
+Instrument
+Benchmark
+Lookback
+Interval
+Instrument return
+Benchmark return
+Relative performance
+Base-100 comparison
+```
+
+R6.6 proved that the snapshot and real Plotly figure can supply all of these values.
+
+A real Dash browser capture still requires Dash to be installed in a network-enabled teaching environment.
+
+Classification:
+
+```text
+CONTRACT PASS
+REAL DASH CAPTURE = EXTERNAL VERIFY
+```
+
+### 11.13 Checkpoint C - attributable late-stage PR
+
+The final PR screenshot does not require every student to author a duplicate release PR.
+
+Allowed evidence:
+
+```text
+one meaningful attributable PR
+from TD09, TD10, TD11 or TD12
+```
+
+This prevents artificial duplicate release work while preserving individual traceability.
+
+Classification:
+
+```text
+PASS
+```
+
+### 11.14 Checkpoint C - reproducibility recovery
+
+The canonical contract now requires a successful clean or freshly prepared run that makes the documented sequence understandable:
+
+```bash
+git clone ...
+cd esilv-marketpulse-gXX-tYY
+python -m pip install -r requirements.txt
+python src/main.py
+python src/dashboard.py
+```
+
+A package-index or platform outage may temporarily produce:
+
+```text
+PENDING_EXTERNAL
+```
+
+but a failed installation cannot be submitted as successful reproducibility evidence.
+
+A proprietary LIVE provider does not have to work outside its authorized environment.
+
+The documented authorized fallback may be used for the clean-run provider path when appropriate.
+
+TD12 now points to this rule.
+
+Classification:
+
+```text
+REMEDIATED
+```
+
+Remediation commit:
+
+```text
+c33855343905e750b491edc096c4fb221420a2a9
+docs: align TD12 reproducibility evidence recovery
+```
+
+### 11.15 Shared vs individual screenshot rule
+
+The dry run confirms an important distinction:
+
+```text
+application screenshots
+may naturally look similar across team members
+
+but
+
+Git contribution screenshots
+must remain individually attributable
+```
+
+Examples of inherently individual evidence:
+
+```text
+Pull Request author
+review author
+commit author
+late-stage PR
+```
+
+Examples of potentially similar team-state evidence:
+
+```text
+terminal application output
+instrument vs benchmark result
+final dashboard
+reproducible runtime
+```
+
+Copying another student's personal contribution screenshot is not valid evidence.
+
+Classification:
+
+```text
+PASS
+```
+
+### 11.16 Security dry run
+
+The evidence contract was checked against the onboarding and TEAM template privacy rules.
+
+No required checkpoint field needs:
+
+```text
+password
+API key
+GitHub token
+SSH private key
+Bloomberg credential
+cloud credential
+payment information
+student identifier
+personal email address
+phone
+home address
+```
+
+Students are explicitly instructed to inspect screenshots before committing them.
+
+Classification:
+
+```text
+PASS
+```
+
+### 11.17 R6.7 acceptance criteria
+
+```text
+[x] Checkpoint A has exactly 3 required screenshots
+[x] Checkpoint B has exactly 4 required screenshots
+[x] Checkpoint C has exactly 4 required screenshots
+[x] optional advanced screenshot remains optional
+[x] all 11 required filenames satisfy the canonical naming rule
+[x] each checkpoint directory also requires README.md
+[x] README evidence lists can match directory contents exactly
+[x] evidence directories are keyed by GitHub username
+[x] no sensitive personal field is required
+[x] Checkpoint A terminal evidence is producible
+[x] Checkpoint A Git history evidence is producible
+[x] Checkpoint A fast-forward branch evidence defect was identified
+[x] Checkpoint A capture now occurs before branch deletion
+[x] fast-forward evidence works with git branch --merged
+[x] no artificial merge commit is required
+[x] Checkpoint B PR evidence is individually attributable
+[x] Checkpoint B review evidence requires another student
+[x] Yahoo evidence requires a real remote retrieval
+[x] Yahoo outage recovery no longer requires fabricated proof
+[x] PENDING_EXTERNAL is limited to genuine external blockers
+[x] Checkpoint C final provider may honestly use APPROVED_SAMPLE
+[x] APPROVED_SAMPLE cannot be labelled Bloomberg LIVE
+[x] Checkpoint C dashboard evidence requires the comparative view
+[x] Checkpoint C late-stage PR does not require duplicate release PRs
+[x] Checkpoint C reproducibility requires a successful clean run
+[x] failed dependency installation cannot count as successful evidence
+[x] application-state screenshots may be similar across teammates
+[x] personal Git-contribution screenshots must remain individual
+[x] screenshot security rules cover credentials and secrets
+[ ] actual team-fork Pull Request screenshots captured
+[ ] actual different-student review screenshots captured
+[ ] actual Yahoo remote screenshot captured
+[ ] actual real-Dash browser screenshot captured
+[ ] actual clean network-enabled reproducibility screenshot captured
+```
+
+R6.7 conclusion:
+
+```text
+EVIDENCE CONTRACT PASS
+FAST-FORWARD CAPTURE DEFECT REMEDIATED
+EXTERNAL OUTAGE RECOVERY REMEDIATED
+NO ARTIFICIAL SCREENSHOT REQUIRED
+REAL PLATFORM CAPTURES REMAIN
+```
+
+R6.7 does not block instructor contingency validation.
 
 ## 12. R6.8 - Instructor contingency and provider fallback validation
 
@@ -2409,6 +3027,6 @@ TEACHING BASELINE READY
 | R6.4 | Wave 2 dry run | REVIEW |
 | R6.5 | Wave 3 dry run | REVIEW |
 | R6.6 | Wave 4 dry run | REVIEW |
-| R6.7 | Checkpoint and evidence dry run | NEXT |
-| R6.8 | Instructor contingency and provider fallback validation | NOT STARTED |
+| R6.7 | Checkpoint and evidence dry run | REVIEW |
+| R6.8 | Instructor contingency and provider fallback validation | NEXT |
 | R6.9 | Teaching baseline freeze | NOT STARTED |
