@@ -166,6 +166,45 @@ Branches
 Merge
 ```
 
+### TD04 -> TD05 Team Baseline Gate
+
+TD03 and TD04 may leave different local `main` histories on different student environments.
+
+Before TD05 collaborative work begins, the team establishes one shared baseline:
+
+```text
+local TD04 histories
+        |
+        v
+preserve local archive branches
+        |
+        v
+select one validated main
+        |
+        v
+publish to origin/main
+        |
+        v
+align every student to origin/main
+        |
+        v
+start TD05 feature branches
+```
+
+Rules:
+
+- capture Checkpoint A evidence before destructive alignment if needed;
+- verify every working tree is clean;
+- preserve previous local history with `archive/td04-local`;
+- only the instructor or designated integrator publishes the baseline;
+- verify `origin` points to the team repository;
+- other students align only after the baseline is published;
+- a controlled `git reset --hard origin/main` may be used only after the safety branch and clean-tree checks;
+- a fresh Codespace or fresh clone is an acceptable alternative;
+- do not teach merge or rebase of divergent student mains as part of this handoff.
+
+The objective is operational consistency, not advanced Git-history manipulation.
+
 ### TD05-TD06
 
 Add:

@@ -545,40 +545,52 @@ Acceptance criteria:
 Status:
 
 ```text
-NEW P0 CONTROL
+DONE
 ```
 
-Problem:
-
-Students may have different local histories after TD03-TD04.
-
-Required handoff:
+Implemented control:
 
 ```text
 local learning histories
         |
         v
+Checkpoint A capture
+        |
+        v
+archive/td04-local safety branch
+        |
+        v
 validated team baseline
         |
         v
-all students synchronize
+origin/main
+        |
+        v
+all students align
         |
         v
 TD05 collaborative branches
 ```
 
-Required actions:
+Completed actions:
 
-- define an instructor-controlled synchronization procedure;
-- add it at the end of TD04 or start of TD05;
-- make clear that the exercise is not an advanced Git-history lesson.
+- added the handoff warning at the end of TD04;
+- added a complete Team Baseline Gate at the start of TD05;
+- documented the same control in `docs/03_GITHUB_TEAM_WORKFLOW.md`;
+- made the instructor or designated integrator responsible for selecting and publishing the baseline;
+- require `origin` verification before publication;
+- require clean working trees before synchronization;
+- preserve each student's previous local history with `archive/td04-local`;
+- allow controlled alignment to `origin/main` only after the safety checks;
+- document a fresh Codespace / fresh clone alternative;
+- explicitly state that divergent-main merge/rebase training is outside this handoff.
 
 Acceptance criteria:
 
 ```text
-[ ] all students start TD05 from the same team main
-[ ] no hidden divergent-main assumption remains
-[ ] origin points to team repository
+[x] all students start TD05 from the same team main
+[x] no hidden divergent-main assumption remains
+[x] origin points to team repository
 ```
 
 ### R2.6 TD05 - Remote Branch + Pull Request

@@ -763,6 +763,31 @@ push
 GitHub Pull Request
 ```
 
-Before TD05 feature work begins, the team will first establish one validated shared baseline.
+Before TD05 feature work begins, the team must establish one validated shared baseline.
 
-That synchronization step is defined in the next remediation lot.
+Do not let several different local `main` histories become competing remote baselines.
+
+The controlled handoff is:
+
+```text
+capture Checkpoint A
+        |
+        v
+preserve each local TD04 history
+        |
+        v
+select one validated team main
+        |
+        v
+publish it to origin/main
+        |
+        v
+all students align to origin/main
+        |
+        v
+TD05 feature branches
+```
+
+The detailed procedure is at the start of TD05 and in `docs/03_GITHUB_TEAM_WORKFLOW.md`.
+
+This synchronization is an operational handoff, not an advanced Git-history exercise.

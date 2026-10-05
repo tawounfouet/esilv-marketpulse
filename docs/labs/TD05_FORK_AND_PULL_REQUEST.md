@@ -165,16 +165,182 @@ Before starting:
 [ ] MarketPulse runs
 ```
 
+Before creating any TD05 feature branch, complete the Team Baseline Gate below.
+
+## Team Baseline Gate
+
+TD03 and TD04 intentionally allowed local learning histories.
+
+Different students may therefore have different local `main` commits.
+
+TD05 must not begin until the team has one shared remote baseline.
+
+### Gate rule
+
+```text
+one team
+=
+one validated origin/main
+=
+one starting point for all TD05 branches
+```
+
+The instructor or designated team integrator controls this handoff.
+
+Do not improvise merges or rebases between divergent student histories.
+
+### Step 1 - Capture Checkpoint A first
+
+If Checkpoint A evidence is still needed, capture it before realigning local `main`.
+
+Your local TD03-TD04 history may be useful for:
+
+```text
+02_git_status_log.png
+03_branch_merge.png
+```
+
+### Step 2 - Make every local working tree safe
+
+Each student runs:
+
+```bash
+git switch main
+git status
+```
+
+Do not continue with uncommitted work.
+
+If meaningful local work still exists, commit it or ask the instructor what to preserve.
+
+### Step 3 - Preserve the local TD04 history
+
+Before alignment, each student creates a local safety branch:
+
+```bash
+git branch archive/td04-local
+```
+
+This branch is local safety material.
+
+Do not push it unless the instructor explicitly asks you to.
+
+### Step 4 - Select the team baseline
+
+The instructor or designated integrator selects one validated local `main`.
+
+The selected baseline must satisfy:
+
+```text
+[ ] TEAM.md is correct
+[ ] MarketPulse runs
+[ ] required starter files are present
+[ ] no temporary conflict-demo file remains
+[ ] working tree is clean
+```
+
 Verify:
 
 ```bash
+python src/main.py
 git status
-git branch
-git log --oneline -5
+```
+
+### Step 5 - Verify origin before publishing
+
+On the selected baseline environment:
+
+```bash
+git remote get-url origin
+```
+
+It must point to:
+
+```text
+<team-owner>/esilv-marketpulse-gXX-tYY
+```
+
+If it points elsewhere, stop and ask the instructor.
+
+### Step 6 - Publish the validated baseline
+
+Only the selected integrator publishes the baseline:
+
+```bash
+git switch main
+git push origin main
+```
+
+At this point:
+
+```text
+origin/main
+=
+official TD05 team baseline
+```
+
+### Step 7 - Align every other student
+
+Each other student runs, under instructor guidance:
+
+```bash
+git switch main
+git status
+git fetch origin
+git reset --hard origin/main
+```
+
+The `reset --hard` step is permitted here only because:
+
+```text
+working tree was checked clean
++
+archive/td04-local preserves the previous local history
++
+the instructor controls the synchronization
+```
+
+Do not use `git reset --hard` casually outside this controlled handoff.
+
+If the instructor prefers not to use reset, opening a fresh Codespace or fresh clone from the team repository after the baseline is published is an acceptable alternative.
+
+### Step 8 - Verify common HEAD
+
+Each student runs:
+
+```bash
+git status
+git rev-parse HEAD
+git rev-parse origin/main
 python src/main.py
 ```
 
-Start from a clean working tree.
+For each student:
+
+```text
+HEAD
+=
+origin/main
+```
+
+and MarketPulse must run.
+
+### Baseline Gate definition of done
+
+TD05 feature work may start only when:
+
+```text
+[ ] origin points to the team repository
+[ ] one validated origin/main exists
+[ ] every student starts from that same origin/main
+[ ] every working tree is clean
+[ ] MarketPulse runs for every student
+[ ] previous local TD04 history was preserved before destructive alignment
+```
+
+This gate is not an advanced Git-history lesson.
+
+Its purpose is to remove hidden divergence before collaborative branch and Pull Request work begins.
 
 ## Session plan
 
