@@ -1,117 +1,160 @@
 # ESILV MarketPulse
 
-MarketPulse is the progressive financial market-data use case for the **ESILV A4 - Python, Git, Linux** labs.
+[![Course: MESIFI472326](https://img.shields.io/badge/course-MESIFI472326-1f6feb.svg)](docs/06_TD_SEQUENCE_AND_LEARNING_PATH.md)
+[![ESILV A4](https://img.shields.io/badge/ESILV-A4-111827.svg)](docs/00_MARKETPULSE_FUNCTIONAL_CONTRACT.md)
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB.svg)](https://www.python.org/)
+[![Labs](https://img.shields.io/badge/labs-12-2ea44f.svg)](docs/labs/README.md)
+[![TD](https://img.shields.io/badge/TD-18h-orange.svg)](docs/06_TD_SEQUENCE_AND_LEARNING_PATH.md)
+[![Status](https://img.shields.io/badge/status-teaching%20repository-blueviolet.svg)](docs/08_TD_REMEDIATION_PLAN.md)
 
-## Business context
+**MarketPulse** is the progressive teaching project for the **ESILV A4 - Python, Git, Linux** module.
 
-You are part of the software/data team of a **trading desk**.
+> Acquire market data from several provider stages, normalize it to one canonical contract, compare one instrument with its benchmark, then expose the same application result through the terminal and a Dash dashboard.
 
-The desk wants a simple tool to follow a financial instrument and compare its performance with a relevant market benchmark.
+## What students build
 
-The common starter uses:
+MarketPulse starts deliberately small and evolves across 12 practical labs.
+
+The common business model is:
+
+```text
+1 Instrument
++
+1 Benchmark
++
+1 Provider
++
+1 Historical Window
++
+1 Interval
++
+Performance Comparison
+```
+
+CORE defaults:
 
 ```text
 Instrument : AAPL - Apple Inc.
 Benchmark  : S&P 500
-Provider   : CSV
 Lookback   : 1 month
 Interval   : Daily
 ```
 
-During the labs, MarketPulse will progressively evolve to use:
-
-1. CSV / JSON
-2. Yahoo Finance
-3. Bloomberg
-4. Dash
-
-The goal is not to build the final architecture on day one. The repository evolves as new business and technical requirements are introduced.
-
-## Core idea
+The provider progression is:
 
 ```text
-Instrument
-+
-Benchmark
-+
-Provider
-+
-Lookback
-+
-Interval
-        |
-        v
-Performance comparison
+CSV / JSON
+    |
+    v
+Yahoo Finance
+    |
+    v
+Bloomberg stage
+    |
+    v
+Canonical Market Data
+    |
+    v
+Shared Analytics
+    |
+    v
+Application Snapshot
+    |
+    +----------------+
+    |                |
+    v                v
+Terminal            Dash
 ```
 
-The primary instrument and benchmark are always compared over the same period and frequency.
+## Core analytical contract
 
-See `docs/00_MARKETPULSE_FUNCTIONAL_CONTRACT.md` for the complete common functional contract.
+The required financial concepts stay intentionally small:
 
-## Student workflow
-
-Before collaborative work begins:
-
-1. form a team of 3 to 4 students;
-2. create one fork per team;
-3. rename it using `esilv-marketpulse-gXX-tYY`;
-4. add all team members as collaborators;
-5. copy `TEAM_TEMPLATE.md` to `TEAM.md`;
-6. follow `CONTRIBUTING.md`.
-
-See `docs/01_STUDENT_ONBOARDING.md` for the complete onboarding procedure.
-
-The complete 18-hour lab progression is documented in `docs/06_TD_SEQUENCE_AND_LEARNING_PATH.md`.
-
-Canonical instructor repository: `tawounfouet/esilv-marketpulse`.
-
-## Getting started
-
-Open a terminal and check your environment:
-
-```bash
-pwd
-ls
-python --version
-git --version
+```text
+period return
++
+base-100 normalization
++
+relative performance
 ```
 
-Run the initial version of MarketPulse:
+Daily returns, volume analysis and richer quantitative indicators are optional extensions.
+
+The central business question is:
+
+> Is the selected instrument outperforming or underperforming its benchmark over the same period and frequency?
+
+See [the functional contract](docs/00_MARKETPULSE_FUNCTIONAL_CONTRACT.md).
+
+## Application architecture
+
+The frozen 18-hour CORE Python structure is:
+
+```text
+src/
+├── main.py
+├── analytics.py
+├── dashboard.py
+└── providers/
+    ├── __init__.py
+    ├── yahoo_provider.py
+    └── bloomberg_provider.py
+```
+
+Responsibilities:
+
+```text
+providers/
+=
+provider-specific acquisition
++
+normalization to canonical rows
+
+analytics.py
+=
+alignment
++
+period return
++
+base 100
++
+relative performance
+
+main.py
+=
+application orchestration
++
+build_market_snapshot(...)
++
+terminal presentation
+
+dashboard.py
+=
+Dash presentation
++
+snapshot consumption
+```
+
+The application result shared by terminal and Dash is defined in [the snapshot contract](docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md).
+
+The design principle is:
+
+```text
+Acquire once
+normalize once
+calculate once
+present many times
+```
+
+## Canonical runtime
+
+Terminal:
 
 ```bash
 python src/main.py
 ```
 
-Expected output:
-
-```text
-=== MarketPulse ===
-
-Instrument
-AAPL - Apple Inc.
-Last price: 266.20 USD
-
-Benchmark
-SP500 - S&P 500
-Last level: 6742.00
-
-Period: 1 month
-Interval: Daily
-
-Observations
-AAPL: 21
-SP500: 21
-```
-
-## CORE runtime contract
-
-The terminal entry point remains stable throughout the practical sequence:
-
-```bash
-python src/main.py
-```
-
-From TD11 onward, the dashboard entry point is:
+Dashboard, introduced in TD11:
 
 ```bash
 python src/dashboard.py
@@ -119,135 +162,269 @@ python src/dashboard.py
 
 These are the two canonical CORE runtime commands.
 
-Do not introduce another mandatory entry point unless the teaching team explicitly revises the common architecture.
+The instructor starter repository does not necessarily contain every later-stage student file on day one. Files appear progressively during the lab sequence.
 
-## Starter structure
+## Installation
+
+The starter TD01-TD02 path uses only the Python standard library.
+
+Later labs add direct dependencies as required.
+
+When `requirements.txt` contains the dependencies for the current stage:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+Typical later-stage dependencies include:
 
 ```text
-esilv-marketpulse/
-├── README.md
-├── TEAM_TEMPLATE.md
-├── CONTRIBUTING.md
-├── .gitignore
-├── requirements.txt
-├── config/
-│   └── settings.yml
-├── data/
-│   └── sample/
-│       ├── prices.csv
-│       └── instruments.json
-├── docs/
-│   ├── 00_MARKETPULSE_FUNCTIONAL_CONTRACT.md
-│   ├── 01_STUDENT_ONBOARDING.md
-│   ├── 02_MARKETPULSE_USE_CASE.md
-│   ├── 03_GITHUB_TEAM_WORKFLOW.md
-│   ├── 04_CHECKPOINTS_AND_EVIDENCE.md
-│   ├── 05_TARGET_REPOSITORY_STRUCTURE.md
-│   ├── 06_TD_SEQUENCE_AND_LEARNING_PATH.md
-│   └── labs/
-│       ├── README.md
-│       └── TD01_BOOTSTRAP_LINUX.md
-├── src/
-│   └── main.py
-└── evidence/
-    └── README.md
+yfinance
+dash
+plotly
 ```
+
+Do not add packages that are not actually required by the implementation.
+
+## Bloomberg teaching modes
+
+The Bloomberg stage supports two authorized classroom modes:
+
+```text
+LIVE
+or
+APPROVED_SAMPLE
+```
+
+`LIVE` means the instructor-approved Bloomberg environment successfully returned data.
+
+`APPROVED_SAMPLE` means the instructor fallback assets were used for mapping and normalization work.
+
+Important:
+
+```text
+APPROVED_SAMPLE
+!=
+LIVE Bloomberg evidence
+```
+
+Instructor reference:
+
+```text
+docs/10_BLOOMBERG_INSTRUCTOR_REFERENCE.md
+```
+
+## Student Git workflow
+
+The collaboration model is:
+
+```text
+one team
+=
+one shared fork
+```
+
+Team repository naming:
+
+```text
+<owner>/esilv-marketpulse-gXX-tYY
+```
+
+Typical contribution flow:
+
+```text
+feature branch
+      |
+      v
+commit
+      |
+      v
+push
+      |
+      v
+Pull Request
+      |
+      v
+review
+      |
+      v
+merge
+```
+
+Start with:
+
+- [Student onboarding](docs/01_STUDENT_ONBOARDING.md)
+- [Git team workflow](docs/03_GITHUB_TEAM_WORKFLOW.md)
+- [Contributing guide](CONTRIBUTING.md)
+
+Canonical instructor repository:
+
+```text
+tawounfouet/esilv-marketpulse
+```
+
+## 18-hour learning path
+
+The 12 TDs are organized into four pedagogical waves:
+
+```text
+WAVE 1 - Foundations - 3h
+TD01 Bootstrap + Linux
+TD02 Python + CSV / JSON
+
+WAVE 2 - Git and Collaboration - 6h
+TD03 Git Local Workflow
+TD04 Branches + Merge
+TD05 Remote Branch + Pull Request
+TD06 Code Review
+
+WAVE 3 - Comparison + Yahoo Finance - 3h
+TD07 Data Normalization + Comparison
+TD08 Yahoo Finance
+
+WAVE 4 - Professional Integration - 6h
+TD09 Bloomberg Introduction
+TD10 Bloomberg Provider
+TD11 Dash Dashboard
+TD12 Integration + Release
+```
+
+Full sequence:
+
+[TD sequence and learning path](docs/06_TD_SEQUENCE_AND_LEARNING_PATH.md)
+
+Lab index:
+
+[docs/labs/README.md](docs/labs/README.md)
+
+## Assessment checkpoints
+
+The checkpoint phases are different from the four pedagogical waves:
+
+```text
+Checkpoint A
+TD01-TD04
+Foundations
+25% of the TD grade
+
+Checkpoint B
+TD05-TD08
+Collaboration and Data
+30% of the TD grade
+
+Checkpoint C
+TD09-TD12
+Integration and Release
+45% of the TD grade
+```
+
+The canonical evidence specification is:
+
+[Checkpoint and evidence contract](docs/04_CHECKPOINTS_AND_EVIDENCE.md)
+
+Screenshots complement Git history, execution and explanation. They do not replace them.
 
 ## Starter data
 
-The sample CSV contains approximately one month of daily observations for:
+The repository includes illustrative educational sample data for:
 
-- AAPL as the primary instrument;
-- SP500 as the benchmark.
+```text
+AAPL
+SP500
+```
 
-The values are **illustrative educational sample data**. They are not certified historical market observations.
+The values are teaching data.
 
-The starter dataset is intentionally small enough to inspect directly from the terminal while still supporting two aligned time series.
+They are not certified historical market observations.
 
-## Starter note
-
-At this initial stage:
-
-- `src/main.py` reads the sample CSV and JSON files directly;
-- `config/settings.yml` is a human-readable configuration contract;
-- parsing YAML is not required by the 18-hour CORE;
-- students should not add PyYAML only because `settings.yml` exists;
-- returns, base-100 normalization and relative performance are not implemented yet.
-
-The analytical and provider capabilities appear progressively during the labs.
-
-YAML parsing may be explored later as an explicit optional extension.
-
-## Initial learning objectives
-
-You should first be able to:
-
-- navigate the repository from a Linux terminal;
-- inspect CSV and JSON sample files;
-- execute a Python program;
-- filter observations by ticker;
-- understand the distinction between an instrument and its benchmark;
-- progressively version your changes with Git.
+This keeps the first labs deterministic and inspectable before remote providers are introduced.
 
 ## Repository evolution
 
-```text
-Local CSV / JSON
-      |
-      v
-Git workflow
-      |
-      v
-Collaborative Git workflow
-      |
-      v
-Yahoo Finance
-      |
-      v
-Bloomberg
-      |
-      v
-Performance comparison
-      |
-      v
-Dash
-```
-
-Later CORE analytical concepts include:
+The repository intentionally does not expose the complete final architecture on day one.
 
 ```text
-price
-  |
-  v
-period return
-  |
-  v
-base-100 normalization
-  |
-  v
-relative performance
+TD01-TD06
+src/main.py
+
+TD07
++ src/analytics.py
+
+TD08
++ src/providers/yahoo_provider.py
+
+TD09
++ docs/BLOOMBERG_FIELD_MAPPING.md
+
+TD10
++ src/providers/bloomberg_provider.py
+
+TD11
++ src/dashboard.py
+
+TD12
+release validation only
 ```
 
-Daily returns are optional and are not required by the minimum CORE dashboard.
+Target structure:
 
-More advanced topics such as remote Linux, SSH, deployment, Docker or GitHub Actions are optional extensions and are not part of the initial starter.
+[Target repository structure](docs/05_TARGET_REPOSITORY_STRUCTURE.md)
 
 ## Security
 
 Never commit:
 
-- passwords;
-- API keys;
-- access tokens;
-- SSH private keys;
-- Bloomberg credentials;
-- cloud credentials or billing information.
+```text
+passwords
+API keys
+access tokens
+SSH private keys
+Bloomberg credentials
+cloud credentials
+billing information
+session secrets
+```
 
-## Evidence
+Do not copy another student's credentials.
 
-Evidence is requested only at the defined checkpoints. See `evidence/README.md`.
+Do not fabricate provider evidence when an external service is unavailable.
+
+## CORE vs optional extensions
+
+The common CORE does not require:
+
+```text
+tests/
+Dockerfile
+GitHub Actions
+Kubernetes
+complex packaging
+advanced CI/CD
+advanced quantitative finance
+```
+
+Optional professional extensions can include remote Linux, SSH, Docker or GitHub Actions after the required learning path is complete.
+
+This README intentionally does not display CI, security, release or license badges because those contracts are not present in the CORE repository.
+
+## Key documentation
+
+- [Functional contract](docs/00_MARKETPULSE_FUNCTIONAL_CONTRACT.md)
+- [Student onboarding](docs/01_STUDENT_ONBOARDING.md)
+- [MarketPulse use case](docs/02_MARKETPULSE_USE_CASE.md)
+- [Git team workflow](docs/03_GITHUB_TEAM_WORKFLOW.md)
+- [Checkpoints and evidence](docs/04_CHECKPOINTS_AND_EVIDENCE.md)
+- [Target repository structure](docs/05_TARGET_REPOSITORY_STRUCTURE.md)
+- [TD sequence](docs/06_TD_SEQUENCE_AND_LEARNING_PATH.md)
+- [Transverse review](docs/07_TD_TRANSVERSE_REVIEW_AND_REBALANCING.md)
+- [Remediation plan](docs/08_TD_REMEDIATION_PLAN.md)
+- [Yahoo instructor reference](docs/09_YAHOO_FINANCE_INSTRUCTOR_REFERENCE.md)
+- [Bloomberg instructor reference](docs/10_BLOOMBERG_INSTRUCTOR_REFERENCE.md)
+- [Bloomberg provider scaffold](docs/11_BLOOMBERG_PROVIDER_SCAFFOLD.md)
+- [Application snapshot contract](docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md)
 
 ---
 
 **Course:** MESIFI472326 - Python, Git, Linux  
+**School:** ESILV - A4  
 **Use case:** MarketPulse - Multi-Source Financial Market Data Dashboard

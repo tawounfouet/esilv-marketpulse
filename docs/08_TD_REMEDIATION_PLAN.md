@@ -1003,40 +1003,34 @@ Acceptance criteria:
 Status:
 
 ```text
-CRITICAL REMEDIATION
+DONE
 ```
 
-CORE only:
+Implemented remediation:
 
-- confirm final provider;
-- remove temporary artefacts;
-- verify requirements;
-- verify README;
-- fresh clone or clean setup;
-- run terminal path;
-- run dashboard path;
-- final integration PR;
-- review;
-- merge;
-- final Checkpoint C capture.
-
-Move to REFERENCE / OPTIONAL:
-
-- long architecture recap;
-- repeated Git theory;
-- full evidence philosophy;
-- advanced deployment.
-
-Use `docs/04_CHECKPOINTS_AND_EVIDENCE.md` for full evidence rules.
+- added an explicit CORE definition of done;
+- planned approximately 80 minutes of required release work plus 10 minutes of Checkpoint C and troubleshooting buffer;
+- removed the long architecture recap from CORE;
+- made final provider or access-mode honesty the first release check;
+- kept repository cleanup, direct dependency verification and README validation in CORE;
+- froze `python src/main.py` and `python src/dashboard.py` as release commands;
+- required a fresh or clean reproducibility test;
+- kept one final integration PR, review and merge workflow;
+- required the merged `main` version to be run again;
+- reduced Checkpoint C content to exact filenames, a short capture checklist and a link to `docs/04_CHECKPOINTS_AND_EVIDENCE.md`;
+- preserved the attributable late-stage PR rule from LOT-R1.6;
+- moved advanced deployment, Docker and GitHub Actions to OPTIONAL / REFERENCE;
+- added explicit guidance not to add CI, security, release or license badges unless those contracts actually exist;
+- updated the root README as the instructor repository landing page with course badges, architecture, runtime, learning path, checkpoints and security guidance.
 
 Acceptance criteria:
 
 ```text
-[ ] fresh run succeeds using documented commands
-[ ] final provider is documented honestly
-[ ] final dashboard runs
-[ ] final or late-stage PR evidence is attributable
-[ ] Checkpoint C can be completed without invented work
+[x] fresh or clean run uses documented commands
+[x] final provider or access mode is documented honestly
+[x] final dashboard command is frozen
+[x] final or late-stage PR evidence remains attributable
+[x] Checkpoint C can be completed without invented work
 ```
 
 ## 9. R5 - Final consistency and teaching readiness
@@ -1369,7 +1363,7 @@ Initial status:
 | R1 | Cross-cutting contracts | P0 | DONE |
 | R2 | TD01-TD06 | P0/P1 | DONE |
 | R3 | TD07-TD08 | P0 | DONE |
-| R4 | TD09-TD12 | P0 | IN PROGRESS |
+| R4 | TD09-TD12 | P0 | DONE |
 | R5 | Final validation | P0 closure | NOT STARTED |
 
 Each lot should move through:

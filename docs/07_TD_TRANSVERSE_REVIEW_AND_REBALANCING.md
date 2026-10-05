@@ -1246,83 +1246,51 @@ One snapshot, one dashboard file and one required chart keep the lab within scop
 
 ### TD12 - Integration + Release
 
-Current status:
+Remediation status:
 
 ```text
-CRITICAL OVERLOAD
+REMEDIATED BY LOT-R4.6
 ```
 
-The objective is correct:
+TD12 is now release-only.
 
-```text
-no new major feature
-+
-integration
-+
-documentation
-+
-reproducibility
-```
+CORE is limited to:
 
-The current document is too large because it also repeats much of the checkpoint and architecture material.
-
-CORE:
-
-- final provider confirmation;
+- confirm the final authorized provider or access mode;
 - remove temporary artefacts;
 - verify direct dependencies;
-- update README;
-- fresh clone or clean-environment run;
-- final integration PR;
-- review;
-- merge;
-- final run.
+- verify README run instructions;
+- run `python src/main.py`;
+- run `python src/dashboard.py`;
+- perform a fresh or clean reproducibility test;
+- open one final integration PR;
+- review and merge;
+- rerun merged `main`;
+- capture Checkpoint C using the canonical evidence contract.
 
-Checkpoint C evidence:
+The lab no longer repeats:
 
-Keep only a short checklist in TD12 and make `docs/04_CHECKPOINTS_AND_EVIDENCE.md` the canonical contract.
+- the full architecture history;
+- full Git theory;
+- full evidence philosophy;
+- advanced deployment content.
 
-Individual-evidence correction:
-
-This issue has now been remediated by LOT-R1.6.
-
-For:
-
-```text
-03_final_pull_request.png
-```
-
-the canonical rule is now explicit:
+The attributable late-stage PR rule remains:
 
 ```text
-meaningful late-stage PR from TD09-TD12
+meaningful TD09-TD12 PR
 +
 attributable to the student
 ```
 
-The evidence does not have to be the single team-level final integration PR.
+No artificial duplicate release PR is required.
 
-One integration lead may author the team release PR while other students use their own attributable late-stage Pull Requests.
+Advanced deployment, Docker and GitHub Actions remain optional.
 
-Artificial duplicate release PRs are not required.
-
-Release dependency recommendation:
-
-By the start of TD12:
+Current verdict:
 
 ```text
-dashboard command already frozen
-provider command already frozen
-dependencies already known
-```
-
-TD12 should validate these contracts, not invent them.
-
-Verdict:
-
-```text
-Current version is too large for 90 minutes.
-A release-only version can fit.
+TD12 is designed for about 80 minutes of release work plus a 10-minute evidence and troubleshooting buffer.
 ```
 
 ## 11. Git-content duplication review

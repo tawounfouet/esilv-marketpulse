@@ -14,124 +14,84 @@
 
 ## Context
 
-MarketPulse has progressively evolved through the complete practical sequence.
+TD12 closes the 18-hour guided MarketPulse sequence.
 
-You now have experience with:
+No major feature is introduced here.
 
-```text
-Linux
-Python
-CSV / JSON
-Git
-branches
-Pull Requests
-code review
-data normalization
-instrument / benchmark comparison
-Yahoo Finance
-Bloomberg
-Dash
-```
-
-TD12 closes the practical sequence.
-
-The objective is not to add another major feature.
-
-The objective is to make the existing application:
+The application contracts are already frozen:
 
 ```text
-integrated
-+
-documented
-+
-reviewed
-+
-reproducible
-+
-demonstrable
+Terminal
+python src/main.py
+
+Dashboard
+python src/dashboard.py
+
+Application result
+build_market_snapshot(...)
+
+Evidence contract
+docs/04_CHECKPOINTS_AND_EVIDENCE.md
 ```
 
-A project is not complete only because it works on one student's environment.
+The release task is therefore:
 
-Another person should be able to understand the repository, install its dependencies, run MarketPulse and verify the main result.
+```text
+clean
++
+document
++
+install
++
+run
++
+review
++
+merge
++
+reproduce
++
+capture evidence
+```
 
 ## Learning objectives
 
 At the end of TD12, you should be able to:
 
-- verify the complete MarketPulse architecture;
-- confirm the final provider path;
-- identify and remove temporary development artefacts;
-- review direct dependencies;
-- improve execution documentation;
-- perform a fresh reproducibility test;
-- create a final integration Pull Request;
-- review and merge final changes;
-- prepare Checkpoint C evidence;
-- explain the full MarketPulse workflow from provider to dashboard;
-- distinguish the guided MarketPulse project from the separate final project.
+- confirm the final authorized provider honestly;
+- remove temporary development artefacts;
+- verify direct dependencies;
+- make README execution instructions accurate;
+- validate both frozen runtime commands;
+- reproduce MarketPulse from a fresh or clean setup;
+- review and merge final integration work;
+- prepare Checkpoint C without manufacturing evidence;
+- explain your own late-stage contribution.
 
-## Expected result
+## CORE definition of done
 
-At the end of TD12, the team repository should provide a coherent path from:
+TD12 is complete when the team can confirm:
 
 ```text
-clone repository
-      |
-      v
-install dependencies
-      |
-      v
-select / confirm provider
-      |
-      v
-run MarketPulse
-      |
-      v
-open dashboard
-      |
-      v
-verify instrument vs benchmark comparison
+[ ] final provider or access mode is documented honestly
+[ ] no temporary debug artefact remains
+[ ] requirements.txt contains required direct dependencies
+[ ] README commands match the repository
+[ ] python src/main.py works
+[ ] python src/dashboard.py works
+[ ] dashboard consumes the shared snapshot
+[ ] no secret is committed
+[ ] fresh or clean setup succeeds using documented steps
+[ ] final integration work received review
+[ ] merged team main was run again
+[ ] Checkpoint C can be captured from real project state
 ```
 
-The final CORE application should demonstrate:
+Do not add a large new feature.
 
-```text
-1 Instrument
-+
-1 Benchmark
-+
-1 Provider
-+
-1 month lookback
-+
-Daily interval
-+
-Period returns
-+
-Relative performance
-+
-Base-100 comparison
-+
-Dash dashboard
-```
+Do not redesign the package structure.
 
-## Core completion rule
-
-TD12 is primarily an integration and release session.
-
-Do not start a large new feature.
-
-Priority order:
-
-```text
-1. working application
-2. reproducible setup
-3. clear documentation
-4. clean Git history
-5. complete evidence
-6. optional polish
-```
+Do not add CI/CD, Docker or deployment requirements to the common CORE.
 
 ## Prerequisites
 
@@ -139,219 +99,125 @@ Before starting:
 
 ```text
 [ ] TD01-TD11 completed
-[ ] team main is up to date
-[ ] MarketPulse terminal path works
-[ ] Dash dashboard works
-[ ] selected provider path works
-[ ] instrument and benchmark comparison works
-[ ] Pull Request workflow is understood
-[ ] code review workflow is understood
+[ ] team main is synchronized
+[ ] selected authorized provider path works
+[ ] build_market_snapshot(...) works
+[ ] python src/main.py works
+[ ] python src/dashboard.py works
+[ ] branch / PR / review workflow is understood
+[ ] Checkpoint C canonical contract is known
 ```
 
-Update local main:
+Start with:
 
 ```bash
 git switch main
 git pull
 git status
+python src/main.py
 ```
-
-Start from a clean working tree.
 
 ## Session plan
 
+The CORE is designed for approximately 80 minutes.
+
+The final 10 minutes are reserved for Checkpoint C capture and troubleshooting.
+
 | Time | Activity |
 |---|---|
-| 00-10 min | Final architecture review |
-| 10-25 min | Repository cleanup and dependency check |
-| 25-42 min | README and execution documentation |
-| 42-60 min | Fresh reproducibility test |
-| 60-72 min | Final integration Pull Request |
-| 72-82 min | Review, merge and final run |
-| 82-90 min | Checkpoint C preparation |
+| 00-08 min | Confirm final provider + release scope |
+| 08-20 min | Repository cleanup + dependency check |
+| 20-32 min | README and run instructions |
+| 32-52 min | Fresh or clean reproducibility test |
+| 52-65 min | Final integration PR |
+| 65-75 min | Review + merge |
+| 75-80 min | Final run from merged main |
+| 80-90 min | Checkpoint C capture / buffer |
 
-# Part 1 - Review the final architecture
+# CORE
 
-Before changing anything, explain the current architecture as a team.
+# Part 1 - Confirm the final provider
 
-Target:
+Record the provider or access mode actually used.
 
-```text
-CSV -----------+
-               |
-Yahoo ---------+--> canonical market data
-               |
-Bloomberg -----+
-                       |
-                       v
-                 date alignment
-                       |
-                       v
-                 period return
-                 daily return
-                 base 100
-                 relative performance
-                       |
-                       v
-                 dashboard data
-                       |
-                       v
-                     Dash
-                       |
-                       v
-                     User
-```
-
-Each student should be able to explain where:
+Examples:
 
 ```text
-provider-specific code
-canonical data
-analytics
-presentation
+Yahoo Finance via yfinance
+Bloomberg - LIVE
+Bloomberg stage - APPROVED_SAMPLE
 ```
 
-belong.
-
-# Part 2 - Confirm the final provider
-
-The final provider used for the release must be explicit.
-
-Preferred path when available:
+Do not write:
 
 ```text
-Bloomberg
+Bloomberg - LIVE
 ```
 
-If Bloomberg is not available for technical or organizational reasons, use only the provider authorized by the instructor.
-
-Do not silently change provider and claim Bloomberg execution.
-
-Record the final provider in the README.
-
-Example:
+if the final run actually used:
 
 ```text
-Final provider: Bloomberg
+APPROVED_SAMPLE
 ```
 
-or, if authorized:
+Accuracy is part of the release contract.
 
-```text
-Final provider: Yahoo Finance
-Reason: Bloomberg classroom access unavailable during final validation
-```
+# Part 2 - Create the final integration branch
 
-Accuracy is more important than pretending that every environment behaved identically.
-
-# Part 3 - Create the final integration branch
-
-Create:
+Use:
 
 ```bash
 git switch main
 git pull
+git status
 git switch -c feature/final-integration
 ```
 
-Verify:
+The branch is for:
 
-```bash
-git branch
-git status
+```text
+cleanup
+documentation
+dependency correction
+release-readiness fixes
 ```
 
-The branch should contain only final integration, documentation and release-readiness changes.
+not a new feature line.
 
-# Part 4 - Inspect the repository
+# Part 3 - Clean the repository
 
-Review the project tree.
-
-Useful commands:
-
-```bash
-find . -maxdepth 3 -type f | sort
-```
-
-or:
-
-```bash
-find . -type f | sort
-```
-
-Inspect for:
-
-- temporary files;
-- debug output;
-- obsolete practice files;
-- duplicated scripts;
-- accidental screenshots outside evidence folders;
-- credentials;
-- files that should be ignored.
-
-## 4.1 Git status
-
-Run:
+Inspect:
 
 ```bash
 git status
+git diff
 ```
 
-The integration branch should begin clean.
+Review the project for:
 
-## 4.2 Search for temporary debug code
-
-Review the Python files.
-
-Look for examples such as:
-
-```python
-print(type(...))
-print(history.head())
-print("DEBUG")
+```text
+temporary debug output
+obsolete exercise files
+accidental local paths
+unrelated screenshots
+credentials
+unused dependencies
+duplicate temporary code
 ```
 
 Keep useful application output.
 
-Remove temporary inspection output that no longer belongs in the final flow.
+Remove only artefacts that are genuinely temporary.
 
-# Part 5 - Review the target repository structure
+Do not reorganize the frozen CORE architecture during release cleanup.
 
-The frozen CORE application structure is:
+Reference:
 
 ```text
-esilv-marketpulse/
-├── README.md
-├── TEAM.md
-├── CONTRIBUTING.md
-├── requirements.txt
-├── .gitignore
-├── config/
-│   └── settings.yml
-├── data/
-│   └── sample/
-├── src/
-│   ├── main.py
-│   ├── analytics.py
-│   ├── dashboard.py
-│   └── providers/
-│       ├── __init__.py
-│       ├── yahoo_provider.py
-│       └── bloomberg_provider.py
-├── evidence/
-│   ├── checkpoint-a/
-│   ├── checkpoint-b/
-│   └── checkpoint-c/
-└── docs/
+docs/05_TARGET_REPOSITORY_STRUCTURE.md
 ```
 
-This is the common CORE reference defined in `docs/05_TARGET_REPOSITORY_STRUCTURE.md`.
-
-Do not reorganize the project into a more complex package during TD12.
-
-A more formal `src/marketpulse/` package is an optional professional evolution, not a release requirement.
-
-# Part 6 - Review requirements.txt
+# Part 4 - Verify direct dependencies
 
 Open:
 
@@ -359,9 +225,9 @@ Open:
 requirements.txt
 ```
 
-Verify that the direct dependencies actually used by the project are present.
+The final team repository should list direct dependencies actually required by its code.
 
-Depending on the implemented path, examples may include:
+Typical later-stage dependencies include:
 
 ```text
 yfinance
@@ -369,142 +235,49 @@ dash
 plotly
 ```
 
-Bloomberg-specific dependencies must match the instructor-approved environment.
+A Bloomberg-specific dependency belongs there only if the instructor-approved LIVE implementation really imports it.
 
-Do not add packages that are not imported or required.
+Do not add packages merely because they were discussed.
 
-## 6.1 Test installation command
-
-The documented installation command should be:
+Verify installation:
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-Do not rely on packages that happen to be installed globally on one student's machine.
+# Part 5 - Finalize the README
 
-# Part 7 - Review .gitignore
-
-Confirm that the project does not track local or sensitive artefacts.
-
-Typical ignored elements include:
+The team README must let another student or evaluator answer:
 
 ```text
-__pycache__/
-*.pyc
-.venv/
-venv/
-.env
-data/raw/
-data/processed/
+What is MarketPulse?
+What is the instrument?
+What is the benchmark?
+What provider or mode is used?
+How do I install dependencies?
+How do I run the terminal path?
+How do I run the dashboard?
+What environment constraint exists?
+Where is the evidence?
 ```
 
-Do not blindly ignore files that are required by the starter or evidence contract.
+Use the root instructor README as a presentation reference.
 
-Check before changing `.gitignore`.
-
-# Part 8 - Improve the README
-
-The root `README.md` should allow another student or evaluator to understand and run the project.
-
-At minimum, include sections equivalent to:
-
-```text
-Project purpose
-Architecture
-Market pair
-Provider
-Requirements
-Installation
-Run terminal version
-Run dashboard
-Expected result
-Team
-Evidence
-Known environment constraints
-```
-
-## 8.1 Suggested README structure
-
-```markdown
-# MarketPulse
-
-## Purpose
-
-MarketPulse compares one financial instrument with one benchmark over a common historical window.
-
-## Market pair
-
-- Instrument: AAPL - Apple Inc.
-- Benchmark: S&P 500
-
-## Core contract
-
-- Lookback: 1 month
-- Interval: Daily
-- Provider: <final provider>
-
-## Architecture
-
-<short diagram>
-
-## Installation
+At minimum, retain accurate commands:
 
 ```bash
 python -m pip install -r requirements.txt
-```
-
-## Run
-
-Terminal:
-
-```bash
 python src/main.py
-```
-
-Dashboard:
-
-```bash
 python src/dashboard.py
 ```
 
-## Expected result
+Do not add badges for CI, security, releases or licenses unless the team repository actually contains and supports those contracts.
 
-- instrument return;
-- benchmark return;
-- relative performance;
-- base-100 comparison chart.
+Static course or technology badges are acceptable.
 
-## Team
+# Part 6 - Validate the terminal path
 
-See `TEAM.md`.
-
-## Evidence
-
-See `evidence/`.
-```
-
-Adapt this to your actual implementation.
-
-Do not document commands that do not work.
-
-# Part 9 - Document environment constraints
-
-If Bloomberg requires a specific environment, document it clearly.
-
-Example concept:
-
-```text
-Bloomberg execution requires the ESILV Bloomberg-enabled environment.
-
-Without that environment, the application can still demonstrate the shared architecture using the instructor-authorized fallback provider.
-```
-
-Do not publish credentials or internal access secrets.
-
-# Part 10 - Run the terminal path
-
-Before the reproducibility test, run:
+Run:
 
 ```bash
 python src/main.py
@@ -513,18 +286,18 @@ python src/main.py
 Verify:
 
 ```text
-[ ] provider is correct
+[ ] provider or mode is honest
 [ ] instrument is correct
 [ ] benchmark is correct
 [ ] lookback is 1 month
 [ ] interval is Daily
-[ ] instrument return is displayed
-[ ] benchmark return is displayed
-[ ] relative performance is displayed
-[ ] no debug output remains
+[ ] instrument return is visible
+[ ] benchmark return is visible
+[ ] relative performance is visible
+[ ] no temporary debug output remains
 ```
 
-# Part 11 - Run the dashboard path
+# Part 7 - Validate the dashboard path
 
 Run:
 
@@ -544,237 +317,150 @@ Verify:
 [ ] instrument return is visible
 [ ] benchmark return is visible
 [ ] relative performance is visible
-[ ] base-100 chart contains both series
+[ ] one base-100 chart contains both series
 ```
 
-# Part 12 - Perform a fresh reproducibility test
+The dashboard should consume the shared snapshot contract.
 
-A reproducibility test should simulate a person who does not have your working directory history.
+Do not repair a presentation issue by duplicating provider or analytical logic inside `dashboard.py`.
 
-Use a new directory or fresh environment.
+# Part 8 - Perform a fresh or clean reproducibility test
 
-Do not destroy your current repository.
+Use a fresh directory, fresh Codespace or other instructor-approved clean environment.
+
+Do not destroy your current working copy.
 
 A typical sequence is:
 
 ```bash
-cd ..
 git clone <team-repository-url> marketpulse-repro
 cd marketpulse-repro
 python -m pip install -r requirements.txt
 python src/main.py
-```
-
-Then, if supported in the environment:
-
-```bash
 python src/dashboard.py
 ```
 
-## Important
+If a provider requires a documented classroom environment, use that prerequisite honestly.
 
-If your final unmerged integration work is not yet on `main`, test the relevant remote branch or perform the final clean test after merge.
-
-The final Checkpoint C reproducibility evidence should reflect the final integrated version.
-
-# Part 13 - What reproducibility means
-
-Reproducibility does not mean:
-
-```text
-"It works on my machine."
-```
-
-It means another person can follow documented steps and obtain a functioning project under the documented environment assumptions.
-
-The reproducibility contract includes:
+Reproducibility means:
 
 ```text
 repository
 +
 dependencies
 +
-configuration
+documented environment
 +
-commands
-+
-provider prerequisites
-+
-expected result
+documented commands
+=
+working application
 ```
 
-# Part 14 - Fix reproducibility problems
+It does not mean that an external proprietary provider must work outside its authorized environment.
 
-Typical problems include:
+# Part 9 - Fix only release blockers
+
+If the clean run fails, fix the actual cause.
+
+Common release blockers:
 
 ```text
 missing dependency
-wrong import path
-undocumented configuration
+wrong import
 hard-coded local path
-missing file
-provider-specific assumption
+missing required file
 README command mismatch
+undocumented provider prerequisite
+temporary debug code
 ```
 
-Fix the cause.
+Do not use TD12 to redesign the provider architecture.
 
-Do not solve the test by manually editing the fresh clone without documenting the required change.
+# Part 10 - Open the final integration PR
 
-# Part 15 - Final integration diff
-
-Return to your integration branch.
-
-Run:
+Inspect:
 
 ```bash
 git status
 git diff
 ```
 
-Review every changed file.
+Stage only required release changes.
 
-Ask:
-
-1. Is this change required for final integration?
-2. Is it understandable?
-3. Is it safe?
-4. Is it documented?
-5. Does it preserve the MarketPulse business contract?
-
-# Part 16 - Final commit
-
-Stage only intended files.
-
-Example:
-
-```bash
-git add README.md
-git add requirements.txt
-git add src/
-```
-
-Use more precise paths when possible.
-
-Inspect:
-
-```bash
-git diff --staged
-```
-
-Create a meaningful commit.
-
-Example:
-
-```bash
-git commit -m "chore: prepare MarketPulse final release"
-```
-
-Push:
-
-```bash
-git push -u origin feature/final-integration
-```
-
-# Part 17 - Open the final Pull Request
-
-Suggested title:
+Suggested commit:
 
 ```text
 chore: prepare MarketPulse final release
 ```
 
-Suggested description:
+Suggested PR title:
 
-```markdown
-## What changed
-
-- finalize MarketPulse integration;
-- clean temporary development artefacts;
-- verify direct dependencies;
-- update execution documentation;
-- prepare reproducible run instructions.
-
-## Validation
-
-- ran terminal application;
-- ran Dash dashboard;
-- verified instrument and benchmark comparison;
-- performed fresh setup test;
-- verified evidence structure.
-
-## Final provider
-
-<provider used>
-
-## Known environment constraints
-
-<document only real constraints>
+```text
+chore: prepare MarketPulse final release
 ```
 
-# Part 18 - Final code review
+The PR description should summarize:
 
-Another student reviews the final Pull Request.
+```text
+cleanup
+dependency verification
+README changes
+runtime validation
+fresh-run result
+final provider or access mode
+known environment constraints
+```
 
-The reviewer should verify:
+# Part 11 - Review and merge
+
+Another student reviews the integration PR.
+
+Reviewer checklist:
 
 ```text
 [ ] README commands match the repository
-[ ] requirements.txt is sufficient
-[ ] no secrets are committed
-[ ] no temporary debug files remain
-[ ] provider is documented accurately
+[ ] requirements.txt matches direct imports
+[ ] no secret is committed
+[ ] no temporary debug artefact remains
+[ ] final provider is documented honestly
 [ ] terminal path works
 [ ] dashboard path works
-[ ] instrument and benchmark are both present
-[ ] base-100 comparison remains available
-[ ] evidence structure is preserved
+[ ] snapshot architecture is preserved
+[ ] no unrelated feature was introduced
 ```
 
-Do not merge merely because this is the last TD.
+Merge only after a real review.
 
-The final Pull Request should receive a real review.
+# Part 12 - Validate merged main
 
-# Part 19 - Merge and synchronize
-
-After approval, merge the Pull Request.
-
-Then locally:
+After merge:
 
 ```bash
 git switch main
 git pull
 git status
-git log --oneline -5
-```
-
-Run again:
-
-```bash
 python src/main.py
 ```
 
-and:
+Then:
 
 ```bash
 python src/dashboard.py
 ```
 
-The final validation must be performed from the merged version.
+The final validation must use the merged version.
 
-# Part 20 - Checkpoint C
+# Part 13 - Checkpoint C capture
 
-Checkpoint C closes the practical sequence and Checkpoint Phase C.
+Checkpoint C is now captured.
 
-The canonical evidence contract is:
+Canonical contract:
 
 ```text
 docs/04_CHECKPOINTS_AND_EVIDENCE.md
 ```
 
-That document defines the official screenshot meaning, individual README fields, live validation rules, optional advanced evidence and assessment guidance.
-
-For convenience, the required Checkpoint C files are:
+Required filenames:
 
 ```text
 README.md
@@ -790,315 +476,141 @@ Optional:
 05_advanced_deployment.png
 ```
 
-Store them under:
+Store under:
 
 ```text
 evidence/checkpoint-c/<github-username>/
 ```
 
-Do not rename the files.
-
-For `03_final_pull_request.png`, you do not need to be the author of the single team integration PR.
-
-Use a meaningful late-stage PR from TD09-TD12 that is attributable to your own contribution.
-
-The team release PR may be authored by one integration lead. Do not create duplicate PRs only to manufacture individual evidence.
-
-# Part 21 - Checkpoint C capture checklist
-
-Before leaving TD12, verify:
+For `03_final_pull_request.png`:
 
 ```text
-[ ] final provider is documented honestly
-[ ] final market-data path is visible
-[ ] dashboard shows instrument and benchmark
-[ ] dashboard shows lookback and interval
-[ ] dashboard shows instrument return
-[ ] dashboard shows benchmark return
-[ ] dashboard shows relative performance
-[ ] dashboard shows the base-100 comparison
-[ ] my late-stage Pull Request evidence is attributable to my own contribution
-[ ] fresh or clean reproducible run is demonstrated
-[ ] no secret appears in a screenshot
+meaningful TD09-TD12 PR
++
+attributable to the student
 ```
 
-Do not fabricate Bloomberg evidence.
+It does not have to be the single team final integration PR.
 
-If an instructor-authorized fallback provider is used, document the actual provider honestly.
+Do not create duplicate release PRs just to manufacture evidence.
 
-# Part 22 - Reproducibility evidence reminder
+# Part 14 - Capture checklist
 
-The reproducibility screenshot must demonstrate the final integrated version from a fresh or clean setup.
-
-The canonical runtime commands remain:
-
-```bash
-python src/main.py
-python src/dashboard.py
-```
-
-The exact setup commands may vary by environment, but the documented repository procedure must be sufficient for another person to reproduce the run under the stated prerequisites.
-
-# Part 23 - Checkpoint C live validation reminder
-
-Screenshots do not replace execution and explanation.
-
-Be ready to:
+Before leaving:
 
 ```text
-run MarketPulse
-run the dashboard
-identify the provider path
-explain instrument / benchmark mapping
-explain base 100
-show an attributable late-stage Pull Request
-show a review
-explain the fresh-run process
-explain your own contribution
+[ ] final market-data provider or mode is visible honestly
+[ ] dashboard shows instrument + benchmark
+[ ] lookback and interval are visible
+[ ] three performance values are visible
+[ ] base-100 comparison is visible
+[ ] my PR evidence is attributable to me
+[ ] reproducible run uses final integrated code
+[ ] no secret appears in evidence
 ```
 
-For the official validation rules, use `docs/04_CHECKPOINTS_AND_EVIDENCE.md`.
+Screenshots do not replace live execution and explanation.
 
-# Part 24 - AI-assisted work
+# OPTIONAL / REFERENCE
 
-AI tools may have been used during development.
+The following are outside TD12 CORE.
 
-The assessment does not require guessing whether code was produced with AI.
+## Optional 1 - Advanced deployment
 
-Students remain responsible for the submitted work.
+Use only if the team already has a legitimate optional deployment path.
 
-You should be able to:
+Possible examples from the broader optional track include remote Linux or a simple service setup.
+
+Do not add deployment infrastructure solely for the screenshot.
+
+## Optional 2 - Docker
+
+Docker is optional.
+
+Do not introduce it as a release blocker.
+
+## Optional 3 - GitHub Actions
+
+GitHub Actions is showcase material only.
+
+Do not add CI badges to a team README unless the corresponding workflow really exists and passes.
+
+## Reference - Full evidence rules
+
+Use:
 
 ```text
-explain it
-run it
-modify it
-debug it
-justify it
+docs/04_CHECKPOINTS_AND_EVIDENCE.md
 ```
 
-A repository that works but cannot be explained does not demonstrate the same level of mastery as understood and reproducible work.
+for:
 
-# Part 25 - Final CORE checklist
+```text
+evidence meaning
+individual README fields
+live validation
+assessment guidance
+advanced optional evidence
+```
 
-Before finishing TD12, verify:
+Do not duplicate those rules in TD12.
 
-## Environment
+# Final readiness check
+
+The team should confirm:
 
 ```text
 [ ] repository can be cloned
-[ ] dependencies can be installed
-[ ] no secret is required from Git history
+[ ] dependencies install from requirements.txt
+[ ] documented provider prerequisite is accurate
+[ ] python src/main.py works
+[ ] python src/dashboard.py works
+[ ] final main was reviewed
+[ ] fresh or clean run was demonstrated
+[ ] Checkpoint C filenames are exact
+[ ] no invented evidence exists
 ```
 
-## Data
+Each student should be able to explain:
 
 ```text
-[ ] one instrument is configured
-[ ] one benchmark is configured
-[ ] provider is explicit
-[ ] lookback is 1 month
-[ ] interval is Daily
-[ ] common dates are handled
-```
-
-## Analytics
-
-```text
-[ ] instrument period return works
-[ ] benchmark period return works
-[ ] relative performance works
-[ ] base-100 series works
-```
-
-## Dashboard
-
-```text
-[ ] instrument visible
-[ ] benchmark visible
-[ ] lookback visible
-[ ] interval visible
-[ ] returns visible
-[ ] relative performance visible
-[ ] base-100 chart visible
-```
-
-## Git
-
-```text
-[ ] feature branches used
-[ ] commits are attributable
-[ ] Pull Requests used
-[ ] reviews performed
-[ ] final integration reviewed
-```
-
-## Evidence
-
-```text
-[ ] checkpoint-c README exists
-[ ] 01_final_market_data.png exists
-[ ] 02_dash_dashboard.png exists
-[ ] 03_final_pull_request.png exists
-[ ] 04_reproducible_run.png exists
-[ ] filenames are exact
-```
-
-# Part 26 - Full learning path recap
-
-You have now completed four pedagogical waves:
-
-```text
-WAVE 1 - FOUNDATIONS - 3 HOURS
-TD01 - Bootstrap + Linux
-TD02 - Python + CSV / JSON
-
-WAVE 2 - GIT AND COLLABORATION - 6 HOURS
-TD03 - Git Local Workflow
-TD04 - Branches + Merge
-TD05 - Remote Branch + Pull Request
-TD06 - Code Review
-
-WAVE 3 - COMPARISON + YAHOO FINANCE - 3 HOURS
-TD07 - Data Normalization + Comparison
-TD08 - Yahoo Finance
-
-WAVE 4 - PROFESSIONAL INTEGRATION - 6 HOURS
-TD09 - Bloomberg Introduction
-TD10 - Bloomberg Provider
-TD11 - Dash Dashboard
-TD12 - Integration + Release
-```
-
-The assessment checkpoints follow a different grouping:
-
-```text
-CHECKPOINT PHASE A - TD01-TD04
-        |
-        v
-Checkpoint A
-
-CHECKPOINT PHASE B - TD05-TD08
-        |
-        v
-Checkpoint B
-
-CHECKPOINT PHASE C - TD09-TD12
-        |
-        v
-Checkpoint C
-```
-
-Wave 4 and Checkpoint Phase C both end at TD12, but they are not the same grouping model.
-
-Total practical time:
-
-```text
-12 TD x 1h30
-=
-18 hours
-```
-
-# Part 27 - MarketPulse final mental model
-
-The final project should be understandable through this model:
-
-```text
-Provider
-   |
-   v
-Market data acquisition
-   |
-   v
-Canonical rows
-   |
-   v
-Instrument / benchmark alignment
-   |
-   v
-Analytics
-   |
-   +-- Period return
-   +-- Daily return
-   +-- Base 100
-   +-- Relative performance
-   |
-   v
-Dashboard data
-   |
-   v
-Dash
-   |
-   v
-User
-```
-
-Git surrounds the complete lifecycle:
-
-```text
-branch
-  |
-  v
-commit
-  |
-  v
-push
-  |
-  v
+provider
+canonical rows
+analytics
+snapshot
+terminal
+dashboard
 Pull Request
-  |
-  v
 review
-  |
-  v
-merge
-  |
-  v
-release-ready main
+reproducibility
+personal contribution
 ```
 
-# Part 28 - MarketPulse vs Final Project
+# What comes next?
 
-MarketPulse is the guided practical thread used throughout the 18 hours of TD.
+The guided 18-hour MarketPulse practical path is complete.
 
-It supports the lab-work component of the module.
+```text
+Wave 1 - Foundations
+Wave 2 - Git and Collaboration
+Wave 3 - Comparison and Yahoo Finance
+Wave 4 - Professional Integration
+```
 
 The separate final project remains an autonomous assessment.
 
-The final project should reuse and extend the principles learned through MarketPulse, but it should not be reduced to simply submitting the guided classroom repository unchanged.
-
-Students should be able to transfer:
+MarketPulse provides the reusable principles:
 
 ```text
 Python
 Git
 Linux
-market-data access
-provider separation
-data normalization
-comparison logic
+provider boundaries
+normalization
+analytics
 Dash
-reproducibility
 collaboration
+reproducibility
 ```
 
-to the final project context.
-
-# Part 29 - Final readiness questions
-
-Before leaving the practical sequence, each student should be able to answer:
-
-1. What problem does MarketPulse solve?
-2. Why does the application compare an instrument with a benchmark?
-3. Why is base 100 useful?
-4. What is relative performance?
-5. What is the difference between a canonical ticker and a provider identifier?
-6. Why should provider-specific code remain outside analytics?
-7. What is the difference between a local branch and a remote branch?
-8. Why do we use Pull Requests?
-9. What makes a code review meaningful?
-10. What makes a project reproducible?
-11. How do you run MarketPulse from a fresh repository?
-12. Which part of the project did you personally contribute to?
-
-If you can answer and demonstrate these points, you have completed the CORE MarketPulse practical path.
+The next remediation stage is repository-wide consistency and teaching readiness validation.

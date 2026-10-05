@@ -503,13 +503,16 @@ Contributes to Checkpoint C.
 
 Students should be able to:
 
-- run the complete MarketPulse flow;
-- verify the final provider;
-- verify instrument and benchmark comparison;
-- complete the collaborative Git workflow;
-- update project documentation;
-- demonstrate a reproducible run;
-- explain their individual contribution.
+- confirm the final authorized provider or access mode honestly;
+- verify direct dependencies and README commands;
+- run `python src/main.py`;
+- run `python src/dashboard.py`;
+- demonstrate a fresh or clean reproducible setup;
+- review and merge final integration work;
+- prepare Checkpoint C from real project state;
+- explain their own late-stage contribution.
+
+TD12 introduces no major new feature.
 
 ### Expected result
 
