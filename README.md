@@ -37,8 +37,17 @@
   <a href="https://www.gnu.org/software/bash/" target="_blank" rel="noreferrer" title="Bash">
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bash/bash-original.svg" alt="bash" width="40" height="40"/>
   </a>
-  <a href="https://dash.plotly.com/" target="_blank" rel="noreferrer" title="Dash / Plotly">
-    <img src="https://cdn.simpleicons.org/plotly/3F4F75" alt="dash-plotly" width="40" height="40"/>
+  <a href="https://pypi.org/project/yfinance/" target="_blank" rel="noreferrer" title="Yahoo Finance / yfinance">
+    <img src="https://cdn.simpleicons.org/yahoo/6001D2" alt="yahoo-finance-yfinance" width="40" height="40"/>
+  </a>
+  <a href="https://dash.plotly.com/" target="_blank" rel="noreferrer" title="Dash">
+    <img src="https://img.shields.io/badge/Dash-008DE5?logo=plotly&amp;logoColor=white" alt="dash" height="40"/>
+  </a>
+  <a href="https://plotly.com/python/" target="_blank" rel="noreferrer" title="Plotly">
+    <img src="https://cdn.simpleicons.org/plotly/3F4F75" alt="plotly" width="40" height="40"/>
+  </a>
+  <a href="https://www.bloomberg.com/professional/" target="_blank" rel="noreferrer" title="Bloomberg">
+    <img src="https://img.shields.io/badge/Bloomberg-000000?logo=bloomberg&amp;logoColor=white" alt="bloomberg" height="40"/>
   </a>
 </p>
 
@@ -214,6 +223,10 @@ yfinance
 dash
 plotly
 ```
+
+The complete dependency model, including standard-library modules, transitive dependencies, Bloomberg environment rules and explicit CORE exclusions, is documented in:
+
+[MarketPulse libraries and dependencies](docs/13_MARKETPULSE_LIBRARIES_AND_DEPENDENCIES.md)
 
 Do not add packages that are not actually required by the implementation.
 
@@ -453,6 +466,7 @@ This README intentionally does not display CI, security, release or license badg
 - [Bloomberg instructor reference](docs/10_BLOOMBERG_INSTRUCTOR_REFERENCE.md)
 - [Bloomberg provider scaffold](docs/11_BLOOMBERG_PROVIDER_SCAFFOLD.md)
 - [Application snapshot contract](docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md)
+- [Libraries and dependencies](docs/13_MARKETPULSE_LIBRARIES_AND_DEPENDENCIES.md)
 
 ---
 
