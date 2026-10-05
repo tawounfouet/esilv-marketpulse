@@ -72,6 +72,46 @@ evidence/
 
 The exact screenshot filenames defined in this document are part of the submission contract.
 
+### Evidence completion status
+
+A checkpoint evidence package may temporarily be in one of these states:
+
+```text
+READY
+=
+all locally controllable evidence is present
+
+PENDING_EXTERNAL
+=
+one required proof depends on a documented external service or platform condition that is currently unavailable
+
+COMPLETE
+=
+all required evidence has been captured from real project state
+```
+
+`PENDING_EXTERNAL` is not a substitute for missing student work.
+
+It may be used only when the blocked proof depends on an external condition such as:
+
+```text
+Yahoo service availability
+GitHub platform availability
+clean-environment package installation
+authorized provider environment
+```
+
+A pending external proof must be completed during an instructor-approved recovery window before final grading.
+
+Do not replace a pending proof with:
+
+```text
+fabricated output
+old unrelated screenshot
+local CSV presented as remote data
+controlled test double presented as live provider evidence
+```
+
 ## 3. Checkpoint A - Foundations
 
 Recommended timing:
@@ -134,14 +174,23 @@ The objective is to verify repository state and visible Git history.
 
 The screenshot should show branch usage and visible merge evidence.
 
-Typical commands may include:
+Capture this evidence after the TD04 merge succeeds and before deleting the merged feature branch.
+
+Recommended commands:
 
 ```bash
 git branch
-git log --oneline --graph
+git branch --merged
+git log --oneline --graph --decorate --all
 ```
 
-The exact command sequence may vary, but the evidence must make the branch and merge understandable.
+A fast-forward merge is valid.
+
+In that case, the graph may remain linear. The evidence is still valid when the merged feature branch is visible and `git branch --merged` confirms that it is integrated into the current `main`.
+
+Do not force a merge commit only to make the screenshot look more complex.
+
+After the evidence is captured, the local merged feature branch may be deleted.
 
 ### Live micro-validation
 
@@ -217,6 +266,33 @@ A reaction alone is not sufficient.
 The screenshot should show MarketPulse retrieving or displaying remote market data through the Yahoo Finance stage of the project.
 
 The evidence should make the selected instrument or market pair understandable.
+
+This file requires a real successful remote Yahoo retrieval.
+
+If Yahoo is unavailable during the scheduled checkpoint:
+
+```text
+checkpoint B
+=
+PENDING_EXTERNAL
+```
+
+for this evidence item only.
+
+The student should still submit and explain the other Checkpoint B evidence that is already available.
+
+The missing Yahoo screenshot is then captured during an instructor-approved recovery window after a successful remote retrieval.
+
+Do not substitute:
+
+```text
+local CSV output
+controlled provider-double output
+an old unrelated screenshot
+fabricated remote values
+```
+
+for `03_yahoo_market_data.png`.
 
 #### 04_instrument_benchmark.png
 
@@ -306,11 +382,21 @@ One optional advanced screenshot may also be submitted:
 
 #### 01_final_market_data.png
 
-The screenshot should show the final authorised market-data provider in operation.
+The screenshot should show the final authorised market-data provider or provider mode in operation.
 
-When Bloomberg access is available, Bloomberg should be shown.
+When Bloomberg LIVE access is available and selected, Bloomberg LIVE may be shown.
 
-The generic filename is intentional so that the teaching team can accept another authorised final provider if Bloomberg access is unavailable for technical or organisational reasons.
+When the authorized final path is:
+
+```text
+Bloomberg stage - APPROVED_SAMPLE
+```
+
+that exact mode must remain visible.
+
+APPROVED_SAMPLE is valid final provider-stage evidence when it is the authorized teaching fallback, but it is not evidence of LIVE Bloomberg connectivity.
+
+The generic filename is intentional so that the teaching team can accept the actual authorized final provider or mode without manufacturing provider claims.
 
 #### 02_dash_dashboard.png
 
@@ -360,16 +446,29 @@ Do not create artificial duplicate final Pull Requests only to satisfy the scree
 
 The screenshot should demonstrate that MarketPulse can be started from a clean or freshly prepared environment by following the repository documentation.
 
-Typical evidence may include:
+For the frozen CORE, the evidence should make the clean-run sequence understandable, including the relevant commands:
 
 ```bash
 git clone ...
 cd esilv-marketpulse-gXX-tYY
-...
-python ...
+python -m pip install -r requirements.txt
+python src/main.py
+python src/dashboard.py
 ```
 
-The exact final command may evolve with the project architecture.
+The screenshot does not need to fit every command on one terminal screen, but the submitted evidence and checkpoint README together must identify the clean environment and the successful final runtime path.
+
+If the package index, GitHub, or another required external dependency is unavailable during the scheduled capture, this evidence item may be marked:
+
+```text
+PENDING_EXTERNAL
+```
+
+and completed during an instructor-approved recovery window.
+
+A failed dependency installation must not be presented as a successful reproducible run.
+
+A proprietary LIVE provider does not have to work outside its authorized environment. The reproducibility evidence may use the documented authorized fallback mode when that is the supported clean-run path.
 
 #### 05_advanced_deployment.png
 
