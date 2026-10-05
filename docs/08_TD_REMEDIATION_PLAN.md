@@ -1363,6 +1363,12 @@ PASS
 
 ### R5.4 Terminology scan
 
+Status:
+
+```text
+DONE
+```
+
 Verify consistency for:
 
 ```text
@@ -1378,11 +1384,167 @@ relative performance
 percentage points
 ```
 
+Repository-wide scan result:
+
+```text
+instrument
+=
+primary financial series
+
+benchmark
+=
+comparison market series
+
+provider
+=
+data-source boundary
+
+lookback
+=
+historical comparison window
+
+interval
+=
+observation frequency
+
+canonical ticker
+=
+provider-neutral MarketPulse identifier
+
+provider identifier
+=
+provider-specific identifier or symbol
+
+relative performance
+=
+instrument return - benchmark return
+
+presentation unit
+=
+percentage points
+```
+
+The terminology scan confirmed these canonical mappings:
+
+```text
+AAPL
+=
+canonical instrument ticker
+
+SP500
+=
+canonical benchmark ticker
+
+Yahoo
+AAPL -> AAPL
+SP500 -> ^GSPC
+
+Bloomberg teaching path
+AAPL -> AAPL US Equity
+SP500 -> SPX Index
+```
+
+The repository intentionally uses a few explanatory equivalents:
+
+```text
+historical window / period scope
+=
+lookback
+
+frequency
+=
+interval
+
+1 month
+=
+presentation form of 1mo
+
+Daily
+=
+presentation form of 1d
+
+Yahoo symbol
+=
+Yahoo-specific provider identifier
+
+Bloomberg identifier
+=
+Bloomberg-specific provider identifier
+```
+
+These equivalences are now explicitly documented in:
+
+```text
+docs/00_MARKETPULSE_FUNCTIONAL_CONTRACT.md
+```
+
+Orthographic convention:
+
+```text
+base 100
+=
+concept / noun form
+
+base-100
+=
+adjectival form such as base-100 chart or base-100 normalization
+```
+
+Formula scan result:
+
+```text
+relative performance
+=
+instrument_return - benchmark_return
+
+no benchmark-minus-instrument formula found
+
+unit
+=
+percentage points
+
+no basis-points alternative found
+```
+
+The use-case document was aligned from:
+
+```text
+Final provider Bloomberg
+```
+
+to:
+
+```text
+Professional provider Bloomberg
+```
+
+because Bloomberg is the professional provider stage, while TD12 and Checkpoint C must still describe the actual authorized final provider or access mode honestly.
+
+Same-period / same-frequency invariant:
+
+```text
+same period
++
+same frequency
+=
+same lookback
++
+same interval
++
+compatible common observation dates
+```
+
 Acceptance criteria:
 
 ```text
-[ ] no contradictory vocabulary
-[ ] same-period and same-frequency rule is preserved
+[x] no contradictory vocabulary
+[x] same-period and same-frequency rule is preserved
+```
+
+R5.4 conclusion:
+
+```text
+PASS
 ```
 
 ### R5.5 Timing scan

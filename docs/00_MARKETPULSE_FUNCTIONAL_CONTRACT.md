@@ -55,6 +55,98 @@ Interval
 Performance comparison
 ```
 
+## Terminology conventions
+
+The repository uses the following canonical vocabulary.
+
+```text
+instrument
+=
+the primary financial series being analysed
+
+benchmark
+=
+the comparison market series
+
+provider
+=
+the external or local data-source boundary
+
+lookback
+=
+the historical window used for the comparison
+
+interval
+=
+the observation frequency / sampling interval
+
+canonical ticker
+=
+the provider-neutral application identifier
+
+provider identifier
+=
+the provider-specific symbol or identifier used only at the provider boundary
+
+base 100
+=
+the normalized comparison concept
+
+base-100
+=
+the adjectival form used in expressions such as "base-100 chart"
+
+relative performance
+=
+instrument period return minus benchmark period return
+
+percentage points
+=
+the presentation unit for relative performance
+```
+
+The following wording pairs are intentional equivalents, not different contracts:
+
+```text
+historical window / period scope
+=
+lookback
+
+frequency
+=
+interval
+
+1 month
+=
+presentation form of 1mo
+
+Daily
+=
+presentation form of 1d
+
+Yahoo symbol
+=
+Yahoo-specific form of provider identifier
+
+Bloomberg identifier
+=
+Bloomberg-specific form of provider identifier
+```
+
+The comparison invariant is:
+
+```text
+same period
++
+same frequency
+=
+same lookback
++
+same interval
+```
+
+The two series must then be aligned on compatible common observation dates before analytics.
+
 ## Starter configuration
 
 The starter uses:

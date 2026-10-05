@@ -56,7 +56,7 @@ Lookback          1 month
 Interval          Daily
 Starter provider  CSV / JSON
 Next provider     Yahoo Finance
-Final provider    Bloomberg
+Professional provider  Bloomberg
 ```
 
 ## 4. Why a benchmark?
