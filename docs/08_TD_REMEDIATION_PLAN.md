@@ -1147,6 +1147,12 @@ PASS
 
 ### R5.2 Runtime-command scan
 
+Status:
+
+```text
+DONE
+```
+
 Verify every occurrence of:
 
 ```text
@@ -1154,11 +1160,100 @@ python src/main.py
 python src/dashboard.py
 ```
 
+Repository-wide scan result:
+
+```text
+canonical terminal command
+=
+python src/main.py
+
+canonical dashboard command
+=
+python src/dashboard.py
+
+dashboard availability
+=
+introduced in TD11
+validated again in TD12
+```
+
+The scan found the canonical terminal command consistently across:
+
+```text
+README.md
+student onboarding
+TD01-TD12 where execution is relevant
+target repository structure
+learning path
+checkpoint evidence
+dependency documentation
+legacy / advanced references where the CORE command is restated
+```
+
+The dashboard command is consistently documented in:
+
+```text
+README.md
+TD11
+TD12
+target repository structure
+learning path
+transverse review
+dependency documentation
+advanced backlog
+```
+
+Contradictory MarketPulse runtime commands were explicitly searched for and were not found:
+
+```text
+python3 src/main.py
+python3 src/dashboard.py
+python main.py
+python dashboard.py
+python app.py
+python src/dashboard/app.py
+streamlit run
+flask run
+dash run
+uvicorn
+```
+
+The diagnostic questionnaire contains examples such as:
+
+```text
+python3 app.py
+```
+
+inside standalone Bash questions.
+
+These are diagnostic examples and are not MarketPulse runtime instructions.
+
+Occurrences of:
+
+```text
+python -m pip ...
+```
+
+are dependency installation or package-inspection commands, not application entry points.
+
+TD12 uses the final release commands:
+
+```bash
+python src/main.py
+python src/dashboard.py
+```
+
 Acceptance criteria:
 
 ```text
-[ ] no contradictory dashboard command
-[ ] TD12 uses final commands
+[x] no contradictory dashboard command
+[x] TD12 uses final commands
+```
+
+R5.2 conclusion:
+
+```text
+PASS
 ```
 
 ### R5.3 Checkpoint scan
