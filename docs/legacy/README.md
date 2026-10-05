@@ -147,6 +147,22 @@ Deployment Advanced
 
 This backlog does not change checkpoint requirements.
 
+### 04 - Legacy content operationalization roadmap
+
+```text
+04_LEGACY_CONTENT_OPERATIONALIZATION_ROADMAP.md
+```
+
+Purpose:
+
+```text
+Prevent post-freeze divergence.
+Define the R7 execution order.
+Turn analysis and backlog decisions into operational teaching assets.
+```
+
+This is now the canonical execution roadmap for the remaining Legacy stream.
+
 ### Instructor deep-dive reference
 
 ```text
@@ -200,6 +216,13 @@ CORE / DROP                   OPTIONAL / TEACHER_REFERENCE
                      v                           v
 03 - OPTIONAL BACKLOG       INSTRUCTOR DEEP DIVE
 advanced student work       deeper teacher knowledge
+          \                       /
+           \                     /
+            +---------+----------+
+                      |
+                      v
+              04 - R7 ROADMAP
+              operationalization
 ```
 
 ## Decision taxonomy
@@ -368,26 +391,37 @@ independently licensed assets
 ```text
 01 Previous course analysis          DONE
 02 Legacy to MarketPulse mapping     DONE
-03 Optional advanced backlog         DONE
-Instructor deep-dive reference       DONE
+03 Optional advanced backlog         DONE as backlog design
+Instructor deep-dive reference       DONE as consolidated reference
+04 Legacy operationalization roadmap ACTIVE
 ```
 
-The legacy analysis stream is therefore structurally complete.
+The analysis and classification stream is complete.
 
-Future additions should be driven by an actual teaching need rather than by a desire to preserve every historical artifact.
+The teaching operationalization stream is not yet complete.
 
-## Next repository phase
-
-The next main repository phase is:
+The distinction is:
 
 ```text
-R5 - Final consistency and teaching readiness
+analysis complete
+!=
+all useful Legacy content ready to teach
 ```
 
-starting with:
+## Next Legacy phase
+
+R1-R6 have frozen the common MarketPulse CORE.
+
+The remaining Legacy work is now governed exclusively by:
 
 ```text
-R5.1 - Repository-wide Path Scan
+docs/legacy/04_LEGACY_CONTENT_OPERATIONALIZATION_ROADMAP.md
 ```
 
-The purpose is to validate that the current teaching repository remains internally consistent after all design, remediation, diagnostic and legacy-analysis work.
+The next lot is:
+
+```text
+R7.1 - Legacy freeze reconciliation
+```
+
+Do not create new Legacy-derived teaching material outside that roadmap.
