@@ -459,40 +459,28 @@ Acceptance criteria:
 Status:
 
 ```text
-SLIGHTLY SIMPLIFY
+DONE
 ```
 
-CORE:
+Implemented remediation:
 
-- inspect starter;
-- JSON dictionaries;
-- CSV DictReader;
-- numeric conversion;
-- filter by ticker;
-- first close;
-- last close;
-- reusable summary;
-- final run.
-
-Move to OPTIONAL:
-
-- positive-volume count;
-- min/max close;
-- slicing exercises;
-- additional formatting exercises.
-
-Important handoff:
-
-TD02 should finish with meaningful Python changes that may still be uncommitted.
-
-TD03 should use those changes as real Git material.
+- added an explicit CORE definition of done;
+- planned approximately 80 minutes of required work plus 10 minutes of buffer;
+- retained JSON dictionaries, CSV DictReader, filtering and numeric conversion in CORE;
+- retained first close, last close and one reusable market-summary function in CORE;
+- kept loops and conditions only where they explain the existing filtering logic;
+- moved first/last date, positive-volume counting, min/max close, slicing and formatting exercises to OPTIONAL;
+- preserved the explicit rule that no return calculation belongs in TD02;
+- added a concrete TD02 -> TD03 handoff using the real working Python changes;
+- instructed students not to create unnecessary branches, Pull Requests or commits during TD02;
+- made the first TD03 commit eligible to represent the useful TD02 work.
 
 Acceptance criteria:
 
 ```text
-[ ] no return calculation in TD02
-[ ] meaningful code change exists for TD03
-[ ] optional exercises do not block completion
+[x] no return calculation in TD02
+[x] meaningful code change exists for TD03
+[x] optional exercises do not block completion
 ```
 
 ### R2.3 TD03 - Git Local Workflow

@@ -14,16 +14,16 @@
 
 ## Context
 
-In TD01, your team learned how to access, inspect and run MarketPulse from a Linux environment.
+TD01 made the MarketPulse starter operational.
 
-In TD02, you begin to work directly with the Python code.
+TD02 now turns the starter into a small Python data-processing exercise.
 
 The trading desk currently provides:
 
 - instrument metadata in JSON;
 - daily market prices in CSV.
 
-MarketPulse must load these files, distinguish the primary instrument from its benchmark, filter the correct observations and display a clear summary.
+MarketPulse must load both files, distinguish the primary instrument from its benchmark, filter the correct observations and display a reusable summary.
 
 The common starter still uses:
 
@@ -35,48 +35,44 @@ Interval   : Daily
 Provider   : CSV
 ```
 
+Do not calculate returns yet.
+
+Period return, base 100 and relative performance are introduced later.
+
 ## Learning objectives
 
 At the end of TD02, you should be able to:
 
 - recognize Python lists and dictionaries;
-- read JSON data;
-- read CSV data;
-- understand the structure returned by `csv.DictReader`;
-- filter observations by ticker;
-- use loops and conditions;
-- create simple reusable functions;
+- read JSON with `json.load()`;
+- read CSV with `csv.DictReader`;
+- explain why CSV numeric fields initially arrive as text;
 - convert numeric text to Python numbers;
-- display a simple market summary;
-- explain how MarketPulse separates instrument and benchmark data.
+- filter observations by ticker;
+- use simple loops and conditions;
+- create small reusable functions;
+- display the same summary logic for instrument and benchmark.
 
-## Expected result
+## CORE definition of done
 
-At the end of the session, MarketPulse should be able to display a summary similar to:
+TD02 is complete when MarketPulse:
 
 ```text
-=== MarketPulse ===
-
-Market configuration
-Period   : 1 month
-Interval : Daily
-
-Instrument
-AAPL - Apple Inc.
-Observations : 21
-First close  : 250.00 USD
-Last close   : 266.20 USD
-
-Benchmark
-SP500 - S&P 500
-Observations : 21
-First close  : 6600.00
-Last close   : 6742.00
+[ ] still runs with python src/main.py
+[ ] loads instruments.json
+[ ] loads prices.csv
+[ ] separates AAPL and SP500 rows
+[ ] has 21 observations for each series
+[ ] displays the first close for each series
+[ ] displays the last close for each series
+[ ] converts close values to numeric form before numerical use
+[ ] uses reusable summary logic
+[ ] has meaningful Python changes ready for TD03 Git work
 ```
 
-Do not calculate returns yet.
+No return calculation is required.
 
-Return calculations and relative performance will be introduced later.
+Optional exercises are not required to complete TD02.
 
 ## Prerequisites
 
@@ -92,17 +88,24 @@ Before starting:
 
 ## Session plan
 
+The CORE is designed for approximately 80 minutes.
+
+The final 10 minutes are reserved for questions, debugging and validation.
+
 | Time | Activity |
 |---|---|
-| 00-10 min | Review the existing Python program |
-| 10-25 min | Understand JSON and Python dictionaries |
-| 25-40 min | Understand CSV and lists of dictionaries |
-| 40-55 min | Filter observations by ticker |
-| 55-70 min | Create reusable summary functions |
-| 70-82 min | Improve MarketPulse output |
-| 82-90 min | Readiness check and recap |
+| 00-08 min | Review the starter |
+| 08-20 min | JSON and dictionaries |
+| 20-35 min | CSV and list-of-dictionaries |
+| 35-48 min | Numeric conversion and filtering |
+| 48-63 min | First and last close helpers |
+| 63-75 min | Reusable market summary |
+| 75-80 min | Final run and CORE validation |
+| 80-90 min | Buffer and optional exercises |
 
-# Part 1 - Review the existing program
+# CORE
+
+# Part 1 - Review the starter
 
 Open:
 
@@ -110,7 +113,13 @@ Open:
 src/main.py
 ```
 
-You should recognize the following elements:
+Run:
+
+```bash
+python src/main.py
+```
+
+Identify:
 
 ```text
 import csv
@@ -123,93 +132,80 @@ filter_prices()
 main()
 ```
 
-Run the current version:
+Be able to answer:
 
-```bash
-python src/main.py
-```
-
-Before modifying anything, answer:
-
-1. Which function reads the JSON file?
-2. Which function reads the CSV file?
-3. Which function selects rows for one ticker?
-4. Which function coordinates the program execution?
+1. Which function reads JSON?
+2. Which function reads CSV?
+3. Which function selects one ticker?
+4. Which function coordinates execution?
 5. Where are the input files stored?
+
+Do not refactor the project architecture in TD02.
 
 # Part 2 - Understand JSON and dictionaries
 
-## 2.1 Inspect the JSON file
-
-Run:
+Inspect:
 
 ```bash
 cat data/sample/instruments.json
 ```
 
-The file contains two business objects:
+The top-level objects are:
 
 ```text
 instrument
 benchmark
 ```
 
-In Python, `json.load()` converts this JSON structure into dictionaries.
-
-## 2.2 Explore the loaded structure
-
-Temporarily add simple inspection statements after loading the instruments:
+The current loader is conceptually:
 
 ```python
-instruments = load_instruments()
+with open(DATA_DIR / "instruments.json", encoding="utf-8") as file:
+    instruments = json.load(file)
+```
 
+Temporarily inspect the result:
+
+```python
 print(type(instruments))
 print(instruments.keys())
 ```
 
-Run:
-
-```bash
-python src/main.py
-```
-
-Question:
-
-> What Python type is returned by `load_instruments()`?
-
-Remove temporary debugging statements when you no longer need them.
-
-## 2.3 Access nested values
-
-Given:
+Then inspect nested dictionaries:
 
 ```python
 instrument = instruments["instrument"]
 benchmark = instruments["benchmark"]
+
+print(instrument["ticker"])
+print(instrument["name"])
+print(instrument["currency"])
+
+print(benchmark["ticker"])
+print(benchmark["name"])
 ```
 
-Try accessing:
+You should understand:
 
-```python
-instrument["ticker"]
-instrument["name"]
-instrument["currency"]
+```text
+instruments
+=
+dictionary containing two business objects
 
-benchmark["ticker"]
-benchmark["name"]
+instrument
+=
+dictionary describing the primary instrument
+
+benchmark
+=
+dictionary describing the comparison benchmark
 ```
 
-Questions:
-
-1. What is the type of `instrument`?
-2. What is the difference between `instruments` and `instrument`?
-3. Why is a dictionary appropriate for instrument metadata?
+Remove temporary inspection prints when they are no longer useful.
 
 # Part 3 - Understand CSV and lists of dictionaries
 
-## 3.1 Inspect the CSV
-
-Run:
+Inspect:
 
 ```bash
 head data/sample/prices.csv
@@ -227,9 +223,7 @@ close
 volume
 ```
 
-## 3.2 Inspect the Python structure
-
-The current function is:
+The current loader uses:
 
 ```python
 def load_prices():
@@ -237,7 +231,7 @@ def load_prices():
         return list(csv.DictReader(file))
 ```
 
-Temporarily inspect the result:
+Temporarily inspect:
 
 ```python
 prices = load_prices()
@@ -247,51 +241,59 @@ print(type(prices[0]))
 print(prices[0])
 ```
 
-Questions:
+You should observe:
 
-1. What is the type of `prices`?
-2. What is the type of one row?
-3. Which dictionary key contains the instrument identifier?
+```text
+prices
+=
+list
 
-## 3.3 Important observation about CSV types
+prices[0]
+=
+dictionary
+```
 
-Try:
+## CSV values are text
+
+Inspect:
 
 ```python
 print(prices[0]["close"])
 print(type(prices[0]["close"]))
 ```
 
-You should notice that CSV values are initially read as text.
-
-For numerical operations, conversion is required.
-
-Example:
+Convert when a numerical value is needed:
 
 ```python
 close = float(prices[0]["close"])
-print(close)
-print(type(close))
 ```
 
-Question:
+Key rule:
 
-> Why would comparing or calculating prices as strings be dangerous?
+```text
+CSV text
+    |
+    v
+explicit numeric conversion
+    |
+    v
+safe numerical use
+```
 
-# Part 4 - Filter observations by ticker
+Do not perform arithmetic on price strings.
 
-MarketPulse stores both AAPL and SP500 in the same CSV file.
+# Part 4 - Filter instrument and benchmark rows
 
-The current helper is:
+MarketPulse stores both series in the same CSV.
+
+The starter helper is:
 
 ```python
 def filter_prices(prices, ticker):
     return [row for row in prices if row["ticker"] == ticker]
 ```
 
-## 4.1 Use the function
-
-In `main()`:
+Use it for both business objects:
 
 ```python
 instrument_prices = filter_prices(
@@ -305,7 +307,7 @@ benchmark_prices = filter_prices(
 )
 ```
 
-Inspect the number of rows:
+Check:
 
 ```python
 print(len(instrument_prices))
@@ -319,42 +321,33 @@ Expected result:
 21
 ```
 
-## 4.2 Rewrite the logic with a loop
+## Understand the list comprehension
 
-Before moving on, make sure you understand what the list comprehension does.
-
-Equivalent logic:
+Equivalent logic is:
 
 ```python
-def filter_prices_with_loop(prices, ticker):
-    result = []
+result = []
 
-    for row in prices:
-        if row["ticker"] == ticker:
-            result.append(row)
-
-    return result
+for row in prices:
+    if row["ticker"] == ticker:
+        result.append(row)
 ```
 
-Compare:
+You do not need to keep both implementations.
+
+The important concept is:
 
 ```text
-loop + condition
-vs
-list comprehension
+loop
++
+condition
++
+append
+=
+filtering
 ```
 
-You do not need to keep both functions.
-
-The objective is to understand that both implementations perform the same filtering operation.
-
-# Part 5 - Create reusable helper functions
-
-The application needs to display information for both the primary instrument and the benchmark.
-
-Avoid duplicating the same logic twice.
-
-## 5.1 Get the first close
+# Part 5 - Create first and last close helpers
 
 Create:
 
@@ -366,51 +359,40 @@ def get_first_close(prices):
 The function should:
 
 1. access the first observation;
-2. read its `close` value;
+2. read `close`;
 3. convert it to `float`;
-4. return the result.
+4. return the number.
 
-Expected examples:
+Expected values:
 
 ```text
 AAPL  -> 250.00
 SP500 -> 6600.00
 ```
 
-## 5.2 Get the last close
-
-Create:
+Then create:
 
 ```python
 def get_last_close(prices):
     ...
 ```
 
-Expected examples:
+Expected values:
 
 ```text
 AAPL  -> 266.20
 SP500 -> 6742.00
 ```
 
-## 5.3 Optional safety check
+Keep the functions small and readable.
 
-What should happen if a ticker has no observations?
+A complex error model is not required in TD02.
 
-A simple first approach could be:
+# Part 6 - Build one reusable market summary
 
-```python
-if not prices:
-    ...
-```
+Do not duplicate one display implementation for AAPL and another for SP500.
 
-Discuss with your team what the program should do.
-
-You do not need to build a complex error-management system in TD02.
-
-# Part 6 - Build a reusable market summary
-
-Instead of writing separate display logic for AAPL and SP500, create a reusable function.
+Create one reusable function.
 
 Suggested signature:
 
@@ -419,7 +401,7 @@ def display_market_summary(asset, prices, show_currency=True):
     ...
 ```
 
-The function should display:
+It should display:
 
 ```text
 ticker
@@ -429,7 +411,7 @@ first close
 last close
 ```
 
-Example for the instrument:
+Example instrument output:
 
 ```text
 AAPL - Apple Inc.
@@ -438,7 +420,7 @@ First close  : 250.00 USD
 Last close   : 266.20 USD
 ```
 
-Example for the benchmark:
+Example benchmark output:
 
 ```text
 SP500 - S&P 500
@@ -447,9 +429,7 @@ First close  : 6600.00
 Last close   : 6742.00
 ```
 
-The exact internal implementation is your responsibility.
-
-The important idea is:
+The main idea is:
 
 ```text
 same operation
@@ -459,11 +439,9 @@ different data
 reusable function
 ```
 
-# Part 7 - Improve main()
+# Part 7 - Keep main() readable
 
-Your final `main()` should remain easy to read.
-
-A possible logical sequence is:
+A clear flow is:
 
 ```text
 load metadata
@@ -472,34 +450,31 @@ load metadata
 load prices
       |
       v
-select instrument
+select instrument + benchmark
       |
       v
-select benchmark
-      |
-      v
-filter instrument prices
-      |
-      v
-filter benchmark prices
+filter both series
       |
       v
 display configuration
       |
       v
-display instrument summary
-      |
-      v
-display benchmark summary
+display both summaries
 ```
 
-Do not move everything into `main()`.
+Do not move all implementation logic directly into `main()`.
 
-Use functions to keep responsibilities understandable.
+Use small functions when they make responsibilities clearer.
 
-# Part 8 - Expected final output
+# Part 8 - Validate the final output
 
-Your TD02 version should produce output close to:
+Run:
+
+```bash
+python src/main.py
+```
+
+Target output:
 
 ```text
 === MarketPulse ===
@@ -523,125 +498,126 @@ Last close   : 6742.00
 
 Small formatting differences are acceptable.
 
-The important requirements are:
+Required behaviour:
 
 ```text
 [ ] instrument identified
 [ ] benchmark identified
-[ ] both series filtered correctly
-[ ] 21 observations for each
+[ ] both series filtered
+[ ] 21 observations for AAPL
+[ ] 21 observations for SP500
 [ ] first close displayed
 [ ] last close displayed
-[ ] numeric values converted correctly
-[ ] reusable functions used
+[ ] numerical conversion performed
+[ ] reusable summary logic used
 ```
 
 # Part 9 - Python concepts recap
 
-By the end of this TD, you should recognize:
+You should now recognize:
 
-## Variables
-
-```python
-prices = load_prices()
+```text
+list
+dictionary
+function
+condition
+loop
+type conversion
 ```
 
-## Dictionaries
-
-```python
-instrument["ticker"]
-```
-
-## Lists
+Examples:
 
 ```python
 prices[0]
-```
 
-## Functions
+instrument["ticker"]
 
-```python
 def get_last_close(prices):
     ...
-```
 
-## Conditions
-
-```python
 if row["ticker"] == ticker:
     ...
-```
 
-## Loops
-
-```python
 for row in prices:
     ...
-```
 
-## Type conversion
-
-```python
 float(row["close"])
 ```
 
-# Part 10 - Mini exercises
+# Part 10 - CORE handoff to TD03
 
-## Exercise 1 - Display the first date
+Do not turn TD02 into a Git lesson.
 
-Create a function:
+Formal local Git workflow begins in TD03.
+
+At the end of TD02:
+
+1. make sure the Python changes work;
+2. do not create a Pull Request;
+3. do not create an unnecessary feature branch;
+4. unless the instructor explicitly asks otherwise, leave the useful TD02 changes available in your working tree for TD03.
+
+TD03 will begin from those real changes.
+
+The intended transition is:
+
+```text
+TD02
+working Python change
+      |
+      v
+TD03
+git status
+git diff
+git add
+git commit
+git log
+```
+
+This gives Git a real purpose.
+
+The first meaningful TD03 commit may represent the working Python changes produced during TD02.
+
+# OPTIONAL
+
+Complete optional work only after the CORE definition of done is satisfied.
+
+## Optional 1 - First and last date
+
+Create:
 
 ```python
 def get_first_date(prices):
     ...
 ```
 
-Expected AAPL result:
-
-```text
-2026-09-01
-```
-
-## Exercise 2 - Display the last date
-
-Create:
+and:
 
 ```python
 def get_last_date(prices):
     ...
 ```
 
-Expected result:
+Expected common sample range:
 
 ```text
+2026-09-01
 2026-09-30
 ```
 
-## Exercise 3 - Count positive-volume observations
+## Optional 2 - Positive-volume observations
 
-For the primary instrument, count rows where:
+For the instrument only, count rows where:
 
 ```python
 int(row["volume"]) > 0
 ```
 
-Question:
+Do not make benchmark volume part of the CORE comparison requirement.
 
-> Why is the benchmark volume currently different from the instrument volume in the sample dataset?
+## Optional 3 - Minimum and maximum close
 
-The sample data is educational and simplified.
-
-## Exercise 4 - Change the selected ticker manually
-
-Without changing the project architecture, identify which files would need to change if the starter used another instrument and benchmark.
-
-Do not implement provider logic yet.
-
-# Part 11 - If you finish early
-
-## Challenge 1 - Display min and max close
-
-Create simple functions to return:
+Create small functions that return:
 
 ```text
 minimum close
@@ -650,41 +626,31 @@ maximum close
 
 Do not use pandas.
 
-## Challenge 2 - Display the first three rows
+## Optional 4 - List slicing
 
-Use slicing:
+Inspect:
 
 ```python
 prices[:3]
 ```
 
-Then iterate through them with a loop.
+Iterate through the first three rows.
 
-## Challenge 3 - Count rows without grep
+## Optional 5 - Output formatting
 
-Use Python to count how many observations exist for one ticker.
-
-Compare your result with:
-
-```bash
-grep -c AAPL data/sample/prices.csv
-```
-
-## Challenge 4 - Improve formatting
-
-Use Python formatting to display two decimal places.
-
-Example:
+Experiment with:
 
 ```python
 f"{value:.2f}"
 ```
 
-# Part 12 - Troubleshooting
+Formatting polish must not replace the CORE requirements.
+
+# TROUBLESHOOTING
 
 ## IndexError
 
-If you access:
+If:
 
 ```python
 prices[0]
@@ -696,21 +662,14 @@ or:
 prices[-1]
 ```
 
-on an empty list, Python cannot return an observation.
-
-Check that filtering returned rows.
+fails, verify that filtering returned observations.
 
 ## KeyError
 
-If Python reports a missing dictionary key, inspect:
+Inspect available keys:
 
 ```python
 print(row.keys())
-```
-
-or:
-
-```python
 print(instrument.keys())
 ```
 
@@ -724,11 +683,11 @@ Inspect the value before converting:
 print(row["close"])
 ```
 
-Make sure the field contains numeric text.
+Confirm that the field contains numeric text.
 
 ## FileNotFoundError
 
-Check:
+From the repository root:
 
 ```bash
 pwd
@@ -736,19 +695,23 @@ ls
 ls data/sample
 ```
 
-Run MarketPulse from the repository root.
+Then retry:
 
-# Part 13 - Readiness check
+```bash
+python src/main.py
+```
 
-Before finishing TD02, each student should be able to explain:
+# Final readiness check
+
+Each student should be able to explain:
 
 ```text
 [ ] what a Python list is
 [ ] what a Python dictionary is
 [ ] what csv.DictReader returns
-[ ] why CSV prices need numeric conversion
+[ ] why CSV numeric values need conversion
 [ ] how MarketPulse filters by ticker
-[ ] why reusable functions reduce duplication
+[ ] why one reusable summary function is useful
 [ ] where instrument metadata is stored
 [ ] where price observations are stored
 ```
@@ -756,34 +719,27 @@ Before finishing TD02, each student should be able to explain:
 The team should confirm:
 
 ```text
-[ ] MarketPulse still runs
+[ ] MarketPulse runs
 [ ] AAPL has 21 observations
 [ ] SP500 has 21 observations
 [ ] first and last closes are displayed
 [ ] no external Python library was required
+[ ] no return calculation was added
 ```
 
-# Part 14 - Git expectations
-
-Formal Git workflow is introduced in TD03.
-
-Do not create unnecessary branches or Pull Requests in TD02 unless the instructor asks you to.
-
-The objective today is Python and data manipulation.
-
-# Part 15 - Checkpoint relation
+# Checkpoint relation
 
 No screenshot package is submitted after TD02.
 
-The skills from TD01 and TD02 will later contribute to:
+TD01 and TD02 contribute to:
 
 ```text
 Checkpoint A - Foundations
 ```
 
-which is validated after TD04.
+Checkpoint A is validated after TD04.
 
-# Part 16 - What comes next?
+# What comes next?
 
 Pedagogical Wave 1 is now complete:
 
@@ -794,22 +750,25 @@ TD01 - Bootstrap + Linux
 TD02 - Python + CSV / JSON
 ```
 
-Checkpoint A is not performed yet. It closes Checkpoint Phase A after TD04.
+TD03 introduces the local Git workflow.
 
-In TD03, the business requirement changes:
-
-```text
-"We need to keep a reliable history of changes."
-```
-
-You will start using the local Git workflow:
+It starts from the meaningful Python changes produced here:
 
 ```text
+working tree
+    |
+    v
 git status
+    |
+    v
 git diff
+    |
+    v
 git add
+    |
+    v
 git commit
+    |
+    v
 git log
 ```
-
-MarketPulse will then become a versioned software project rather than only a collection of local file changes.
