@@ -211,7 +211,7 @@ PASS
 Status:
 
 ```text
-NEXT
+REVIEW
 ```
 
 Validate from a genuinely fresh checkout:
@@ -235,31 +235,151 @@ starter data inspection
 python src/main.py
 ```
 
-Required checks:
+### 6.1 Repository accessibility inspection
+
+The instructor repository reports:
 
 ```text
-[ ] public instructor repository can be cloned from the intended student environment
-[ ] repository opens at the expected root
-[ ] no untracked generated file is required
-[ ] no local secret or local-only config is required
-[ ] TD01 Linux commands work from a fresh checkout
-[ ] python src/main.py works without manual repair
-[ ] TEAM_TEMPLATE.md can become TEAM.md without exposing sensitive data
+visibility    = public
+private       = false
+allow_forking = true
+default branch = main
+HTTPS clone URL is published
 ```
 
-Current validation note:
+Classification:
 
 ```text
-The automated execution sandbox used for R6.1 cannot resolve github.com through its shell network path.
-
-The GitHub repository itself remains accessible through the authenticated repository connector.
-
-Therefore:
-- repository content validation = EXECUTED / INSPECTED
-- shell git clone validation = EXTERNAL VERIFY
+INSPECTED
 ```
+
+### 6.2 Local-only dependency scan
+
+Repository search found no CORE runtime dependency on:
+
+```text
+os.environ
+getenv
+dotenv
+absolute workstation path
+localhost-only service
+```
+
+The starter application reads only versioned sample data.
+
+The repository ignore rules exclude local `.env` files.
+
+Classification:
+
+```text
+INSPECTED
+```
+
+### 6.3 TD01 shell command dry run
+
+Using the exact versioned starter runtime and sample data, the following commands were executed successfully:
+
+```bash
+pwd
+ls
+ls data/sample
+cat data/sample/instruments.json
+head data/sample/prices.csv
+grep AAPL data/sample/prices.csv
+grep SP500 data/sample/prices.csv
+python --version
+git --version
+python src/main.py
+```
+
+Observed runtime versions:
+
+```text
+Python 3.13.5
+Git 2.47.3
+```
+
+The MarketPulse output remained identical to the documented TD01 output.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 6.4 Team bootstrap safety
+
+`TEAM_TEMPLATE.md` requires only:
+
+```text
+TD group
+team number
+full name
+GitHub username
+repository name
+```
+
+It explicitly forbids:
+
+```text
+personal email address
+student identification number
+phone number
+home address
+password
+access token
+private key
+cloud billing information
+```
+
+Classification:
+
+```text
+INSPECTED
+```
+
+### 6.5 Remaining external verification
+
+The automated execution sandbox cannot currently resolve `github.com` through its shell network path.
+
+A direct shell command such as:
+
+```bash
+git clone https://github.com/tawounfouet/esilv-marketpulse.git
+```
+
+therefore cannot be used here as evidence of student-network clone portability.
+
+The repository itself remains accessible through the authenticated repository connector.
 
 This limitation must not be reported as a repository failure.
+
+Classification:
+
+```text
+EXTERNAL VERIFY
+```
+
+### 6.6 R6.2 acceptance criteria
+
+```text
+[ ] actual git clone from the intended student environment
+[x] repository is public and forkable
+[x] default branch and HTTPS clone endpoint are exposed
+[x] no untracked generated file is required by the starter runtime
+[x] no local secret or local-only config is required
+[x] required TD01 Linux inspection commands execute
+[x] python src/main.py works from reconstructed exact versioned starter files
+[x] TEAM_TEMPLATE.md can become TEAM.md without requiring sensitive data
+```
+
+R6.2 conclusion:
+
+```text
+READY FOR EXTERNAL CLONE VERIFY
+```
+
+R6.2 does not block the remaining local pedagogical dry run.
 
 ## 7. R6.3 - Wave 1 dry run
 
@@ -423,8 +543,8 @@ TEACHING BASELINE READY
 | Lot | Scope | Status |
 |---|---|---|
 | R6.1 | Starter runtime baseline | DONE |
-| R6.2 | Clean-clone and student bootstrap portability | NEXT |
-| R6.3 | Wave 1 dry run | NOT STARTED |
+| R6.2 | Clean-clone and student bootstrap portability | REVIEW |
+| R6.3 | Wave 1 dry run | NEXT |
 | R6.4 | Wave 2 dry run | NOT STARTED |
 | R6.5 | Wave 3 dry run | NOT STARTED |
 | R6.6 | Wave 4 dry run | NOT STARTED |
