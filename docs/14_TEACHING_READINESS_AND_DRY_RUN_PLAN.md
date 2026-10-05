@@ -2969,11 +2969,23 @@ R6.7 does not block instructor contingency validation.
 
 ## 12. R6.8 - Instructor contingency and provider fallback validation
 
-Validate recovery paths for:
+Status:
+
+```text
+DONE
+```
+
+Canonical operational reference:
+
+```text
+docs/15_INSTRUCTOR_CONTINGENCY_AND_RECOVERY_PLAYBOOK.md
+```
+
+Validated scenarios:
 
 ```text
 student environment failure
-GitHub access delay
+GitHub access delay or outage
 Yahoo provider failure
 Bloomberg LIVE unavailable
 Dash dependency issue
@@ -2982,7 +2994,446 @@ merge conflict
 missing checkpoint evidence
 ```
 
-The objective is to preserve learning continuity without fabricating provider results.
+The objective of R6.8 is not to prove that external services are always available.
+
+It is to prove that their unavailability has a safe, honest and teachable recovery path.
+
+### 12.1 Recovery vocabulary
+
+The playbook standardizes these outcomes:
+
+```text
+CONTINUE_LOCAL
+PAIR_TEMPORARILY
+APPROVED_SAMPLE
+PENDING_EXTERNAL
+ARCHIVE_AND_ALIGN
+RESOLVE_AND_VALIDATE
+```
+
+This avoids using one generic fallback for unrelated failures.
+
+Classification:
+
+```text
+INSPECTED
+```
+
+### 12.2 Student environment failure
+
+Existing onboarding already permits temporary pairing when one student's environment is broken.
+
+R6.8 formalizes:
+
+```text
+broken individual environment
+        |
+        +--> pair temporarily
+        |
+        +--> or use fresh environment
+        |
+        v
+continue learning
+        |
+        v
+restore individual traceability later
+```
+
+Temporary pairing does not authorize:
+
+```text
+shared GitHub credentials
+copied personal evidence
+another student's commits presented as personal work
+```
+
+R6.6 already proved that the application can be reproduced from a fresh local clone when the required local dependencies are available.
+
+Classification:
+
+```text
+INSPECTED + PRIOR EXECUTION REUSED
+```
+
+### 12.3 GitHub unavailable - local work then delayed push
+
+A disposable repository executed this sequence with no remote configured:
+
+```bash
+git switch -c feature/offline-work
+# meaningful change
+git add notes.txt
+git commit
+```
+
+A shared bare remote was created only afterward.
+
+The original local branch was then published:
+
+```bash
+git remote add origin <shared-remote>
+git push -u origin feature/offline-work
+```
+
+Validated invariant:
+
+```text
+local feature HEAD
+=
+remote feature HEAD
+```
+
+The work did not need to be recreated or rebased merely because the remote was temporarily unavailable.
+
+Required GitHub PR/review evidence remains external until the actual platform action occurs.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 12.4 Yahoo provider failure
+
+The contingency reuses the already executed R6.5 behaviour:
+
+```text
+empty provider result
+-> explicit ValueError
+
+Yahoo unavailable
+-> local CSV may continue analytics learning
+
+Yahoo screenshot
+-> PENDING_EXTERNAL
+```
+
+The fallback boundary is explicit:
+
+```text
+local CSV
+=
+teaching continuity
+
+local CSV
+!=
+Yahoo remote evidence
+```
+
+No provider failure is allowed to trigger Yahoo-specific logic inside `analytics.py`.
+
+The current validation environment also directly confirms:
+
+```text
+yfinance = unavailable
+```
+
+Classification:
+
+```text
+EXECUTED / OBSERVED
+```
+
+### 12.5 Bloomberg LIVE unavailable
+
+The authorized response is:
+
+```text
+LIVE unavailable
+        |
+        v
+instructor approval
+        |
+        v
+APPROVED_SAMPLE
+```
+
+R6.6 executed the complete fallback with the remediated full teaching window:
+
+```text
+AAPL  = 21 rows
+SP500 = 21 rows
+
+normalized expected result
+=
+42 / 42 exact rows
+```
+
+The mode remains labelled:
+
+```text
+Bloomberg stage - APPROVED_SAMPLE
+```
+
+and never becomes fake LIVE evidence.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 12.6 Dash dependency issue
+
+The validation environment directly reports:
+
+```text
+dash = unavailable
+plotly = available
+```
+
+The recovery contract preserves the architecture:
+
+```text
+Dash unavailable
+        |
+        +--> do not move dashboard logic into main.py
+        +--> do not duplicate analytics
+        |
+        v
+validate terminal + snapshot
+        |
+        v
+install Dash later
+        |
+        v
+capture real dashboard evidence
+```
+
+R6.6 already proved the upstream snapshot and actual Plotly figure remain valid independently of the missing Dash package.
+
+The real Dash screenshot remains:
+
+```text
+PENDING_EXTERNAL
+```
+
+until Dash is genuinely installed and running.
+
+Classification:
+
+```text
+OBSERVED + PRIOR EXECUTION REUSED
+```
+
+### 12.7 Late student synchronization
+
+R6.8 executed a shared-remote scenario where:
+
+```text
+student local main
+!=
+new origin/main
+```
+
+Before alignment:
+
+```bash
+git branch archive/pre-sync
+```
+
+Then:
+
+```bash
+git fetch origin
+git reset --hard origin/main
+```
+
+Validated invariants:
+
+```text
+archive/pre-sync
+=
+old local HEAD
+
+new local HEAD
+=
+origin/main
+
+working tree
+=
+clean
+```
+
+The student history remained recoverable.
+
+The playbook explicitly forbids this reset when:
+
+```text
+working tree is dirty
+local work is not preserved
+authoritative baseline is unclear
+```
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 12.8 Controlled merge conflict
+
+R6.8 created two incompatible edits to the same tracked line.
+
+Observed merge state:
+
+```text
+merge return code != 0
+git status -> UU config.txt
+```
+
+The final content was chosen deliberately, staged and committed.
+
+After resolution:
+
+```text
+working tree = clean
+chosen final content preserved
+```
+
+The recovery required no destructive random command and no artificial history rewrite.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 12.9 Missing checkpoint evidence
+
+The playbook distinguishes two fundamentally different cases.
+
+External blocker:
+
+```text
+Yahoo unavailable
+GitHub unavailable
+package index unavailable
+        |
+        v
+PENDING_EXTERNAL
+```
+
+Locally controllable omission:
+
+```text
+forgotten screenshot
+wrong filename
+capture not performed
+        |
+        v
+recapture real current state
+or instructor live micro-validation
+```
+
+A locally forgotten screenshot is not reclassified as an external outage.
+
+If the historical state no longer exists, the student must not rewrite Git history merely to manufacture a prettier image.
+
+Classification:
+
+```text
+INSPECTED
+```
+
+### 12.10 Evidence security stop condition
+
+The playbook defines hard stop conditions for:
+
+```text
+secret visible in Git or evidence
+wrong origin before destructive synchronization
+dirty working tree before reset --hard
+provider mode mislabelling
+fabricated remote evidence
+analytics rewrite intended only to hide provider failure
+unpreserved local work before destructive action
+```
+
+A screenshot containing a secret must be retaken or sanitized from real state before submission.
+
+If a credential has already entered Git history, normal checkpoint work stops and the institution's credential-rotation or incident procedure takes precedence.
+
+Classification:
+
+```text
+INSPECTED
+```
+
+### 12.11 Centralization
+
+The new operational guide is:
+
+```text
+docs/15_INSTRUCTOR_CONTINGENCY_AND_RECOVERY_PLAYBOOK.md
+```
+
+Cross-references were added to:
+
+```text
+docs/03_GITHUB_TEAM_WORKFLOW.md
+docs/09_YAHOO_FINANCE_INSTRUCTOR_REFERENCE.md
+docs/10_BLOOMBERG_INSTRUCTOR_REFERENCE.md
+```
+
+Relevant canonical sources remain:
+
+```text
+docs/01_STUDENT_ONBOARDING.md
+docs/04_CHECKPOINTS_AND_EVIDENCE.md
+docs/11_BLOOMBERG_PROVIDER_SCAFFOLD.md
+docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md
+```
+
+The playbook coordinates those documents rather than redefining their normal teaching contracts.
+
+### 12.12 R6.8 acceptance criteria
+
+```text
+[x] student environment failure has a non-blocking recovery path
+[x] temporary pairing does not replace individual evidence
+[x] fresh environment is an authorized recovery option
+[x] GitHub outage does not require discarding local work
+[x] local feature commit can be pushed after remote recovery
+[x] delayed remote push preserves the original feature HEAD
+[x] missing GitHub UI evidence remains external rather than fabricated
+[x] Yahoo outage is separated from analytics correctness
+[x] local CSV may preserve analytics learning during Yahoo outage
+[x] local CSV cannot substitute for Yahoo remote evidence
+[x] empty Yahoo provider output fails explicitly
+[x] Bloomberg LIVE outage has an authorized APPROVED_SAMPLE path
+[x] Bloomberg fallback keeps canonical AAPL and SP500
+[x] Bloomberg fallback covers the full one-month teaching window
+[x] APPROVED_SAMPLE remains visibly different from LIVE
+[x] Dash absence does not justify presentation or analytics duplication
+[x] terminal and snapshot remain valid recovery anchors
+[x] real Dash evidence remains pending until real Dash runs
+[x] late synchronization preserves old local history before alignment
+[x] controlled reset ends with HEAD = origin/main
+[x] merge conflict produces a visible conflict state
+[x] merge conflict can be resolved by deliberate human choice
+[x] locally forgotten evidence is not PENDING_EXTERNAL
+[x] external evidence blockers may use PENDING_EXTERNAL
+[x] missing historical screenshot does not justify Git-history fabrication
+[x] secret exposure is a hard stop condition
+[x] recovery outcomes are centralized in one instructor playbook
+[x] Yahoo reference links to the playbook
+[x] Bloomberg reference links to the playbook
+[x] Git workflow links to the playbook
+[x] no recovery path requires fabricated provider output
+[x] no recovery path requires fabricated GitHub review activity
+```
+
+R6.8 conclusion:
+
+```text
+PASS
+
+8 / 8 contingency scenarios have an explicit recovery path.
+Executable Git recovery scenarios were run successfully.
+Provider and dependency outage paths preserve honest evidence semantics.
+No contingency requires fabricated success.
+```
 
 ## 13. R6.9 - Teaching baseline freeze
 
@@ -3028,5 +3479,5 @@ TEACHING BASELINE READY
 | R6.5 | Wave 3 dry run | REVIEW |
 | R6.6 | Wave 4 dry run | REVIEW |
 | R6.7 | Checkpoint and evidence dry run | REVIEW |
-| R6.8 | Instructor contingency and provider fallback validation | NEXT |
-| R6.9 | Teaching baseline freeze | NOT STARTED |
+| R6.8 | Instructor contingency and provider fallback validation | DONE |
+| R6.9 | Teaching baseline freeze | NEXT |
