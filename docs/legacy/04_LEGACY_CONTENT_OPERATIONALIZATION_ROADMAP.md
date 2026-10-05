@@ -366,11 +366,47 @@ CLOSED
 ### Acceptance criteria
 
 ```text
-[ ] every high-priority Legacy topic has a row
-[ ] every P1 optional backlog item has a row
-[ ] every instructor-priority deep dive has a row
-[ ] every DROP cluster has a documented closure
-[ ] no important Legacy concept has an undefined destination
+[x] every high-priority Legacy topic has a row
+[x] every P1 optional backlog item has a row
+[x] every instructor-priority deep dive has a row
+[x] every DROP cluster has a documented closure
+[x] no important Legacy concept has an undefined destination
+```
+
+### Execution result
+
+Created:
+
+```text
+docs/legacy/05_LEGACY_FINAL_MIGRATION_REGISTRY.md
+```
+
+The registry contains:
+
+```text
+23 CORE_MIGRATED rows
+10 INSTRUCTOR_READY targets
+12 P1 ADVANCED_READY targets
+12 other optional rows
+13 REFERENCE_ONLY rows
+26 DROP_CLOSED rows
+
+96 registered rows total
+```
+
+High-priority coverage:
+
+```text
+10 / 10 explicit destinations
+```
+
+R7.2 conclusion:
+
+```text
+PASS
+
+LEGACY FINAL MIGRATION REGISTRY
+ESTABLISHED
 ```
 
 ## 9. R7.3 - Instructor deep-dive operationalization
@@ -710,8 +746,8 @@ Do not mix the two status systems.
 | Lot | Scope | Status |
 |---|---|---|
 | R7.1 | Legacy freeze reconciliation | DONE |
-| R7.2 | Final migration registry | NEXT |
-| R7.3 | Instructor deep-dive operationalization | NOT STARTED |
+| R7.2 | Final migration registry | DONE |
+| R7.3 | Instructor deep-dive operationalization | NEXT |
 | R7.4 | Advanced P1 content operationalization | NOT STARTED |
 | R7.5 | TD enrichment capsules | NOT STARTED |
 | R7.6 | Advanced-track packaging | NOT STARTED |
@@ -793,7 +829,9 @@ WITHOUT CORE DIVERGENCE
 The next action is:
 
 ```text
-R7.1 - Legacy freeze reconciliation
+R7.3 - Instructor deep-dive operationalization
 ```
 
-Do not start producing advanced labs before R7.1 and R7.2 establish the final Legacy execution baseline.
+R7.1 and R7.2 now establish the Legacy execution baseline.
+
+Do not start R7.4 advanced-lab production before the R7.3 instructor-note sequence is explicitly underway.
