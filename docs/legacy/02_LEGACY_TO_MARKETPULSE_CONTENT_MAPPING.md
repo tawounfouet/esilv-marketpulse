@@ -2380,19 +2380,20 @@ Do not reintroduce finance complexity that obscures Python, Git and Linux learni
 
 ## 27. Recommended next documents
 
-This mapping naturally leads to a third document:
+The optional backlog is now documented in:
 
 ```text
 docs/legacy/03_OPTIONAL_ADVANCED_CONTENT_BACKLOG.md
 ```
 
-Its role should be to transform the items classified OPTIONAL into a structured backlog such as:
+It transforms the items classified OPTIONAL into a structured backlog for:
 
 ```text
 Linux Advanced
 Git Advanced
 Bloomberg Advanced
 Remote Linux
+Dash Advanced
 Deployment
 ```
 
