@@ -61,6 +61,10 @@ marketpulse/
     └── README.md
 ```
 
+## Starter note
+
+At this initial stage, `src/main.py` reads the sample CSV/JSON files directly. `config/settings.yml` is already present as a preview of the configuration mechanism that will be wired into MarketPulse later in the labs.
+
 ## Initial learning objectives
 
 The starter is intentionally small.
