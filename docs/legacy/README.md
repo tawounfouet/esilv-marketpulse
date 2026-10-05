@@ -184,6 +184,12 @@ The registry is the traceability bridge between classification and execution.
 ../instructor/01_LEGACY_DEEP_DIVE_REFERENCE.md
 ```
 
+Operational deep-dive index:
+
+```text
+../instructor/deep-dives/README.md
+```
+
 Purpose:
 
 ```text
@@ -460,10 +466,12 @@ docs/legacy/04_LEGACY_CONTENT_OPERATIONALIZATION_ROADMAP.md
 
 R7.1 and R7.2 are now complete.
 
+R7.3 is now complete.
+
 The current execution target is:
 
 ```text
-R7.3 - Instructor deep-dive operationalization
+R7.4 - Advanced P1 content operationalization
 ```
 
 The routing source for R7.3 and R7.4 is:
