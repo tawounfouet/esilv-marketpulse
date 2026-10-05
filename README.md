@@ -501,6 +501,12 @@ advanced quantitative finance
 Current active ADVANCED work is indexed from:
 
 ```text
+docs/advanced/README.md
+```
+
+The lab-to-advanced availability map is maintained in:
+
+```text
 docs/labs/README.md
 ```
 
@@ -540,6 +546,9 @@ This README intentionally does not display CI, security, release or license badg
 - [Instructor contingency and recovery playbook](docs/15_INSTRUCTOR_CONTINGENCY_AND_RECOVERY_PLAYBOOK.md)
 - [Teaching baseline release](docs/16_TEACHING_BASELINE_RELEASE.md)
 - [Pre-lab diagnostic and interpretation](docs/diagnostic/README.md)
+- [Advanced track](docs/advanced/README.md)
+- [Instructor deep dives](docs/instructor/deep-dives/README.md)
+- [TD enrichment capsules](docs/instructor/02_TD_ENRICHMENT_CAPSULES.md)
 - [Legacy course analysis and migration](docs/legacy/README.md)
 
 ---
