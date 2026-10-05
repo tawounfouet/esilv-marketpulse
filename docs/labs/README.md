@@ -16,7 +16,7 @@ The common sequence contains 12 TD units for a total of 18 hours.
 | TD02 | Python + CSV / JSON | Local instrument and benchmark data |
 | TD03 | Git Local Workflow | Versioned MarketPulse changes |
 | TD04 | Branches + Merge | Feature branches and merge |
-| TD05 | Fork + Pull Request | Collaborative contribution |
+| TD05 | Remote Branch + Pull Request | Collaborative contribution |
 | TD06 | Code Review | Reviewed integration |
 | TD07 | Data Normalization + Comparison | Comparison-ready data |
 | TD08 | Yahoo Finance | Remote daily market data |

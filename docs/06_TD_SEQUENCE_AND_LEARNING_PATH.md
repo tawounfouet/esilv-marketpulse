@@ -15,7 +15,7 @@ TD01  Bootstrap + Linux
 TD02  Python + CSV / JSON
 TD03  Git Local Workflow
 TD04  Branches + Merge
-TD05  Fork + Pull Request
+TD05  Remote Branch + Pull Request
 TD06  Code Review
 TD07  Data Normalization + Comparison
 TD08  Yahoo Finance
@@ -252,7 +252,7 @@ Small features begin to be isolated by branch.
 
 Checkpoint A is performed after TD04.
 
-## 8. TD05 - Fork + Pull Request
+## 8. TD05 - Remote Branch + Pull Request
 
 ### Business requirement
 

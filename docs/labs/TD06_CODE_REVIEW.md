@@ -829,7 +829,7 @@ Wave 2 - Git and Collaboration - 6 hours
 
 TD03 - Git Local Workflow
 TD04 - Branches + Merge
-TD05 - Fork + Pull Request
+TD05 - Remote Branch + Pull Request
 TD06 - Code Review
 ```
 

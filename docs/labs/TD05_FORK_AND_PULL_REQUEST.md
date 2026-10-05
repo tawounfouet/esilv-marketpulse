@@ -1,4 +1,4 @@
-# TD05 - Fork + Pull Request
+# TD05 - Remote Branch + Pull Request
 
 ## Duration
 
@@ -14,46 +14,41 @@
 
 ## Context
 
-During TD01, your team created one shared fork of the instructor repository.
+The team fork already exists from TD01.
 
-During TD03 and TD04, you learned how to:
+TD03 introduced local commits.
 
-- inspect changes;
-- create commits;
-- create feature branches;
-- merge locally.
+TD04 introduced local feature branches and merge.
 
-The next step is collaborative GitHub work.
-
-A feature should now move through:
+TD05 now adds the remote collaboration layer:
 
 ```text
+shared team baseline
+        |
+        v
 local feature branch
         |
         v
-push to team repository
+commit
         |
         v
-Pull Request
+push to origin
         |
         v
-review
-        |
-        v
-merge
-```
-
-TD05 focuses on:
-
-```text
-push
-+
 remote branch
-+
+        |
+        v
 Pull Request
+        |
+        v
+ready for TD06 review
 ```
 
-Formal code review is developed further in TD06.
+The objective is no longer to learn how to fork.
+
+The objective is to move a real branch from a student's local environment into the shared team repository and open a clear Pull Request.
+
+Formal code review is the focus of TD06.
 
 ## Important repository model
 
@@ -73,13 +68,13 @@ not:
 1 fork
 ```
 
-The instructor repository is:
+Instructor repository:
 
 ```text
 tawounfouet/esilv-marketpulse
 ```
 
-The team repository is:
+Team repository:
 
 ```text
 <team-owner>/esilv-marketpulse-gXX-tYY
@@ -91,63 +86,52 @@ Example:
 alice-martin/esilv-marketpulse-g03-t02
 ```
 
-All team members collaborate in that same team repository.
+All students contribute to that same team repository.
 
-Do not create additional individual forks for TD05.
+Do not create another fork for TD05.
 
 ## Learning objectives
 
 At the end of TD05, you should be able to:
 
-- explain the difference between a local branch and a remote branch;
-- inspect configured Git remotes;
-- identify `origin`;
-- create a local feature branch;
-- push the branch to the team repository;
-- understand upstream tracking;
-- open a Pull Request;
+- distinguish a local branch from a remote branch;
+- verify that `origin` points to the team repository;
+- start from the shared team baseline;
+- create one feature branch;
+- implement and commit one small coherent change;
+- push the branch to `origin`;
+- understand what `git push -u` establishes;
+- open a Pull Request inside the team repository;
 - identify source and target branches;
-- write a clear Pull Request title and description;
-- connect a Pull Request to an individual student contribution;
-- explain why feature work is not developed directly on `main`.
+- inspect the `Files changed` view;
+- write a clear PR title and description;
+- leave the Pull Request open for TD06 review.
 
-## Expected result
+## CORE definition of done
 
-Each student should be able to demonstrate:
-
-```text
-main
-  |
-  +-- feature/<description>
-          |
-          v
-       local commit
-          |
-          v
-        git push
-          |
-          v
-GitHub remote branch
-          |
-          v
-Pull Request
-          |
-          v
-team main
-```
-
-By the end of TD05:
+TD05 is complete when each student can confirm:
 
 ```text
-[ ] one feature branch created
-[ ] at least one meaningful commit created
-[ ] feature branch pushed to GitHub
-[ ] Pull Request opened
-[ ] PR title is clear
-[ ] PR description explains the change
-[ ] source and target branches are understood
+[ ] Team Baseline Gate passed
+[ ] origin points to the team repository
+[ ] my local main matches origin/main before feature work
+[ ] I created one feature branch
+[ ] I created at least one meaningful commit
+[ ] I pushed my branch to origin
+[ ] the remote branch exists
+[ ] I opened one Pull Request
+[ ] the PR targets team main
+[ ] the PR source is my feature branch
+[ ] the PR title is meaningful
+[ ] the PR description explains change + reason + validation
+[ ] Files changed contains only intended work
 [ ] MarketPulse still runs
+[ ] the PR remains open for TD06
 ```
+
+A second commit on the same PR is not required.
+
+Extra remote-branch commands are not required.
 
 ## Prerequisites
 
@@ -155,52 +139,57 @@ Before starting:
 
 ```text
 [ ] TD01-TD04 completed
-[ ] Checkpoint A completed or ready
+[ ] Checkpoint A captured or ready
 [ ] team repository accessible
 [ ] all team members are collaborators
-[ ] git status understood
-[ ] commits understood
+[ ] local commits understood
 [ ] branches understood
 [ ] local merge understood
-[ ] MarketPulse runs
+[ ] python src/main.py works
 ```
-
-Before creating any TD05 feature branch, complete the Team Baseline Gate below.
 
 ## Team Baseline Gate
 
-TD03 and TD04 intentionally allowed local learning histories.
+TD03 and TD04 may have produced different local `main` histories.
 
-Different students may therefore have different local `main` commits.
+TD05 feature work starts only after the team has one shared baseline.
 
-TD05 must not begin until the team has one shared remote baseline.
-
-### Gate rule
+### Baseline model
 
 ```text
-one team
-=
-one validated origin/main
-=
-one starting point for all TD05 branches
+local learning histories
+        |
+        v
+Checkpoint A capture
+        |
+        v
+preserve local history
+        |
+        v
+select one validated main
+        |
+        v
+publish origin/main
+        |
+        v
+align every student
+        |
+        v
+TD05 feature branches
 ```
 
-The instructor or designated team integrator controls this handoff.
+### 1. Capture Checkpoint A first
 
-Do not improvise merges or rebases between divergent student histories.
+If Checkpoint A evidence is still needed, capture it before destructive alignment.
 
-### Step 1 - Capture Checkpoint A first
-
-If Checkpoint A evidence is still needed, capture it before realigning local `main`.
-
-Your local TD03-TD04 history may be useful for:
+Your TD03-TD04 local history may be needed for:
 
 ```text
 02_git_status_log.png
 03_branch_merge.png
 ```
 
-### Step 2 - Make every local working tree safe
+### 2. Make the local working tree safe
 
 Each student runs:
 
@@ -211,44 +200,33 @@ git status
 
 Do not continue with uncommitted work.
 
-If meaningful local work still exists, commit it or ask the instructor what to preserve.
+### 3. Preserve the local learning history
 
-### Step 3 - Preserve the local TD04 history
-
-Before alignment, each student creates a local safety branch:
+Create:
 
 ```bash
 git branch archive/td04-local
 ```
 
-This branch is local safety material.
+This is a local safety branch.
 
 Do not push it unless the instructor explicitly asks you to.
 
-### Step 4 - Select the team baseline
+### 4. Select and validate the team baseline
 
-The instructor or designated integrator selects one validated local `main`.
-
-The selected baseline must satisfy:
+The instructor or designated integrator selects one `main` that satisfies:
 
 ```text
 [ ] TEAM.md is correct
-[ ] MarketPulse runs
 [ ] required starter files are present
 [ ] no temporary conflict-demo file remains
 [ ] working tree is clean
+[ ] python src/main.py works
 ```
 
-Verify:
+### 5. Verify origin
 
-```bash
-python src/main.py
-git status
-```
-
-### Step 5 - Verify origin before publishing
-
-On the selected baseline environment:
+On the selected baseline:
 
 ```bash
 git remote get-url origin
@@ -260,28 +238,28 @@ It must point to:
 <team-owner>/esilv-marketpulse-gXX-tYY
 ```
 
-If it points elsewhere, stop and ask the instructor.
+Stop if it points elsewhere.
 
-### Step 6 - Publish the validated baseline
+### 6. Publish the baseline
 
-Only the selected integrator publishes the baseline:
+Only the designated integrator publishes it:
 
 ```bash
 git switch main
 git push origin main
 ```
 
-At this point:
+Now:
 
 ```text
 origin/main
 =
-official TD05 team baseline
+official TD05 starting point
 ```
 
-### Step 7 - Align every other student
+### 7. Align every other student
 
-Each other student runs, under instructor guidance:
+Under instructor guidance:
 
 ```bash
 git switch main
@@ -290,21 +268,21 @@ git fetch origin
 git reset --hard origin/main
 ```
 
-The `reset --hard` step is permitted here only because:
+This controlled `reset --hard` is allowed here only because:
 
 ```text
-working tree was checked clean
+working tree checked clean
 +
-archive/td04-local preserves the previous local history
+archive/td04-local created
 +
-the instructor controls the synchronization
+instructor-controlled synchronization
 ```
 
-Do not use `git reset --hard` casually outside this controlled handoff.
+A fresh Codespace or fresh clone after baseline publication is an acceptable alternative.
 
-If the instructor prefers not to use reset, opening a fresh Codespace or fresh clone from the team repository after the baseline is published is an acceptable alternative.
+Do not use `git reset --hard` casually.
 
-### Step 8 - Verify common HEAD
+### 8. Verify common HEAD
 
 Each student runs:
 
@@ -315,7 +293,7 @@ git rev-parse origin/main
 python src/main.py
 ```
 
-For each student:
+Required state:
 
 ```text
 HEAD
@@ -323,187 +301,111 @@ HEAD
 origin/main
 ```
 
-and MarketPulse must run.
+The Team Baseline Gate is now complete.
 
-### Baseline Gate definition of done
-
-TD05 feature work may start only when:
-
-```text
-[ ] origin points to the team repository
-[ ] one validated origin/main exists
-[ ] every student starts from that same origin/main
-[ ] every working tree is clean
-[ ] MarketPulse runs for every student
-[ ] previous local TD04 history was preserved before destructive alignment
-```
-
-This gate is not an advanced Git-history lesson.
-
-Its purpose is to remove hidden divergence before collaborative branch and Pull Request work begins.
+This is an operational synchronization step, not an advanced merge/rebase lesson.
 
 ## Session plan
 
+The CORE is designed for approximately 80 minutes.
+
+The final 10 minutes are reserved for GitHub variation, troubleshooting and validation.
+
 | Time | Activity |
 |---|---|
-| 00-10 min | Local vs remote Git |
-| 10-20 min | Inspect origin and team repository |
-| 20-35 min | Create a feature branch |
-| 35-50 min | Implement and commit a MarketPulse change |
-| 50-65 min | Push the branch |
-| 65-80 min | Open a Pull Request |
-| 80-90 min | PR validation and recap |
+| 00-15 min | Team Baseline Gate |
+| 15-23 min | Local vs remote + verify origin |
+| 23-35 min | Create coordinated feature branch |
+| 35-50 min | Implement, validate and commit |
+| 50-60 min | Push branch |
+| 60-74 min | Open Pull Request |
+| 74-80 min | Inspect Files changed + leave PR open |
+| 80-90 min | Buffer / troubleshooting / optional |
 
-# Part 1 - Local repository vs remote repository
+If the instructor has prepared the shared baseline before the timed activity, the saved time becomes buffer.
 
-Until now, most Git work has been local.
+# CORE
 
-You now need to distinguish:
+# Part 1 - Local branch vs remote branch
+
+A local branch exists in your working Git environment.
+
+A remote branch exists in the GitHub team repository after push.
 
 ```text
 LOCAL
-working directory
-staging area
-commits
-branches
-
+feature branch
+      |
+      | git push
+      v
 REMOTE
-GitHub team repository
-remote branches
-Pull Requests
+origin/feature branch
 ```
-
-A simplified model is:
-
-```text
-Local computer or Codespace
-        |
-        | git push
-        v
-GitHub team repository
-```
-
-## 1.1 Inspect remotes
 
 Run:
 
 ```bash
 git remote -v
+git remote get-url origin
 ```
 
-You should see a remote called:
-
-```text
-origin
-```
-
-Conceptually:
-
-```text
-origin
-=
-your team repository
-```
-
-Example:
-
-```text
-<team-owner>/esilv-marketpulse-g03-t02
-```
-
-Question:
-
-> Why should `origin` point to the team repository rather than directly to the instructor repository?
-
-# Part 2 - Understand origin and upstream
-
-For the course model:
+For the CORE:
 
 ```text
 origin
 =
 team repository
-
-upstream
-=
-instructor repository
 ```
 
-The instructor repository is:
+The instructor repository may conceptually be called `upstream`, but configuring or synchronizing an `upstream` remote is not required in TD05.
+
+# Part 2 - Coordinate one small contribution per student
+
+Before creating branches, agree on distinct small tasks inside the team.
+
+The goal is to avoid several students independently implementing the exact same change.
+
+Possible contribution examples:
 
 ```text
-tawounfouet/esilv-marketpulse
+Student A -> display provider label
+Student B -> display market metadata
+Student C -> improve execution documentation
+Student D -> improve one clear terminal label or metadata field
 ```
 
-You may not yet have an `upstream` remote configured.
+The instructor may assign different tasks.
 
-That is acceptable.
-
-TD05 mainly uses:
+Each task must be:
 
 ```text
-origin
-```
-
-Advanced synchronization with `upstream` is not required today.
-
-## 2.1 Verify origin
-
-Run:
-
-```bash
-git remote get-url origin
-```
-
-Check that the URL corresponds to your team repository.
-
-If it does not, stop and ask the instructor before pushing.
-
-# Part 3 - Create a feature branch
-
-## 3.1 New business request
-
-The trading desk wants a clearer terminal summary.
-
-Implement a small improvement such as:
-
-```text
-Display the market and currency metadata
-for the instrument and benchmark.
-```
-
-Example target:
-
-```text
-Instrument
-AAPL - Apple Inc.
-Market       : NASDAQ
-Currency     : USD
-Observations : 21
-
-Benchmark
-SP500 - S&P 500
-Market       : US
-Currency     : USD
-Observations : 21
+small
++
+coherent
++
+individually explainable
++
+compatible with the current MarketPulse scope
 ```
 
 Do not calculate returns yet.
 
-## 3.2 Start from main
+Do not start a large refactor.
 
-Run:
+# Part 3 - Create the feature branch
+
+Start from synchronized `main`:
 
 ```bash
 git switch main
 git status
+git rev-parse HEAD
+git rev-parse origin/main
 ```
 
-Make sure the working tree is clean.
+Create a descriptive branch.
 
-## 3.3 Create a branch
-
-Use:
+Example:
 
 ```bash
 git switch -c feature/display-market-metadata
@@ -515,28 +417,21 @@ Verify:
 git branch
 ```
 
-Expected shape:
+Good branch names describe the work.
 
-```text
-* feature/display-market-metadata
-  main
-```
+Avoid names based on the student name or vague words such as `test`, `work` or `final`.
 
-# Part 4 - Implement the change
+# Part 4 - Implement and validate the change
 
-Modify:
+Implement only the coordinated task assigned to your branch.
 
-```text
-src/main.py
-```
-
-Use the existing metadata already present in:
+If the task is market metadata, existing values are available in:
 
 ```text
 data/sample/instruments.json
 ```
 
-The values include:
+Useful fields include:
 
 ```text
 ticker
@@ -545,11 +440,12 @@ currency
 market
 ```
 
-Keep the implementation simple.
+Inspect your work:
 
-Do not duplicate large blocks of output code if a reusable function already exists.
-
-## 4.1 Run MarketPulse
+```bash
+git status
+git diff
+```
 
 Run:
 
@@ -557,22 +453,13 @@ Run:
 python src/main.py
 ```
 
-Verify that the new information appears for both the instrument and benchmark.
-
-## 4.2 Inspect the diff
-
-Run:
-
-```bash
-git status
-git diff
-```
-
-Explain your change to another team member before staging it.
+The application must remain functional before the commit.
 
 # Part 5 - Commit the feature
 
-Stage the intended file:
+Stage only the intended files.
+
+Example:
 
 ```bash
 git add src/main.py
@@ -584,13 +471,13 @@ Inspect:
 git diff --staged
 ```
 
-Commit:
+Commit with a message matching the real change.
+
+Example:
 
 ```bash
 git commit -m "feat: display market metadata"
 ```
-
-Use a message that matches your actual implementation.
 
 Verify:
 
@@ -601,81 +488,65 @@ git log --oneline -5
 
 # Part 6 - Push the branch
 
-The local branch does not automatically exist on GitHub.
+Push the current feature branch to the team repository.
 
-Push it:
+Example:
 
 ```bash
 git push -u origin feature/display-market-metadata
 ```
 
-The `-u` option connects the local branch to its remote tracking branch.
+The `-u` option establishes tracking between the local branch and its remote counterpart.
 
-After this first push, later pushes may usually use:
+After the first push, later pushes from the same tracked branch can usually use:
 
 ```bash
 git push
 ```
 
-## 6.1 Verify tracking
+Verify the branch exists on GitHub.
 
-Run:
-
-```bash
-git branch -vv
-```
-
-You should see information indicating that the local feature branch tracks a remote branch.
-
-## 6.2 Verify on GitHub
-
-Open the team repository on GitHub.
-
-Confirm that the branch exists remotely.
-
-You should be able to distinguish:
+You should now be able to distinguish:
 
 ```text
+feature/display-market-metadata
+=
 local branch
-vs
+
+origin/feature/display-market-metadata
+=
 remote branch
 ```
 
-# Part 7 - Open a Pull Request
+# Part 7 - Open the Pull Request
 
-A Pull Request proposes integrating one branch into another.
+Open the team repository on GitHub.
 
-For TD05:
+Create a Pull Request with:
 
 ```text
 source
 =
-feature/display-market-metadata
+your pushed feature branch
 
 target
 =
-main
+team main
 ```
 
-## 7.1 Open the Pull Request
+Do not target:
 
-On GitHub:
+```text
+tawounfouet/esilv-marketpulse
+```
 
-1. open the team repository;
-2. select the pushed feature branch if necessary;
-3. choose to create a Pull Request;
-4. verify the base branch is `main`;
-5. verify the compare branch is your feature branch.
+The TD05 Pull Request belongs inside the team repository.
 
-Do not create the PR against the instructor repository.
-
-The Pull Request belongs inside the team repository.
-
-## 7.2 Pull Request title
+## PR title
 
 Use a clear title.
 
-Recommended:
+Example:
 
 ```text
 feat: display market metadata
@@ -685,29 +556,28 @@ Avoid:
 
 ```text
 PR
-my work
 changes
-final
+work
 test
+final
 ```
 
-## 7.3 Pull Request description
+## PR description
 
-A useful description should answer:
+A useful description answers:
 
 ```text
 What changed?
-Why was it needed?
+Why?
 How was it validated?
 ```
 
-Example:
+Example structure:
 
 ```markdown
 ## What changed
 
-- display market metadata for the instrument;
-- display market metadata for the benchmark.
+- display market metadata for the instrument and benchmark.
 
 ## Why
 
@@ -716,306 +586,153 @@ The terminal summary should provide clearer context about each market series.
 ## Validation
 
 - ran `python src/main.py`;
-- verified AAPL and SP500 output;
-- verified 21 observations for each series.
+- inspected the terminal output;
+- verified no unrelated change is included.
 ```
 
-Do not copy the example blindly if your implementation differs.
+Adapt the description to your actual branch.
 
-# Part 8 - Understand source and target
+# Part 8 - Verify source, target and Files changed
 
-A Pull Request has two important sides.
+Before considering the PR ready for review, inspect:
 
 ```text
+author
 source branch
-      |
-      v
-Pull Request
-      |
-      v
 target branch
-```
-
-For this TD:
-
-```text
-feature/display-market-metadata
-      |
-      v
-Pull Request
-      |
-      v
-main
-```
-
-Questions:
-
-1. Which branch contains your proposed change?
-2. Which branch receives the change after merge?
-3. Why should the source branch not be `main`?
-4. Why should you inspect both branch names before opening the PR?
-
-# Part 9 - Individual traceability
-
-A Pull Request is part of your individual Git trace.
-
-It makes visible:
-
-- author;
-- branch;
-- commits;
-- changed files;
-- discussion;
-- review;
-- merge status.
-
-Each student should eventually have identifiable:
-
-```text
 commits
-+
-branches
-+
-Pull Requests
-+
-reviews
-```
-
-Do not create a Pull Request under another student's account to simulate contribution.
-
-# Part 10 - Add another commit to an open PR
-
-A Pull Request follows the branch.
-
-It is not a frozen copy of the branch.
-
-Make one small justified improvement on the same feature branch.
-
-For example:
-
-- improve a label;
-- correct formatting;
-- remove an unnecessary blank line.
-
-Then:
-
-```bash
-git status
-git diff
-git add src/main.py
-git commit -m "refactor: improve market metadata display"
-git push
-```
-
-Refresh the Pull Request on GitHub.
-
-Question:
-
-> Did you need to create a second Pull Request?
-
-No.
-
-The new commit appears in the existing Pull Request because the PR follows the source branch.
-
-# Part 11 - Do not merge immediately
-
-TD05 focuses on opening and understanding the Pull Request.
-
-Formal review is the main topic of TD06.
-
-Unless the instructor asks otherwise:
-
-```text
-leave the Pull Request open
-```
-
-at the end of TD05.
-
-This gives another student something real to review in TD06.
-
-# Part 12 - Pull Request quality checklist
-
-Before finishing, verify:
-
-```text
-[ ] title is meaningful
-[ ] description explains the change
-[ ] source branch is correct
-[ ] target branch is main
-[ ] commits are understandable
-[ ] changed files are expected
-[ ] no secret is exposed
-[ ] MarketPulse runs
-```
-
-## Inspect the Files changed tab
-
-Open:
-
-```text
 Files changed
 ```
 
-Question:
+Required interpretation:
 
-> Does the Pull Request contain only the intended feature?
+```text
+source branch
+=
+proposed work
 
-If unrelated changes appear, investigate before requesting review.
+target branch
+=
+team main
+```
 
-# Part 13 - Relationship with Checkpoint B
+Open the GitHub `Files changed` tab.
+
+Confirm:
+
+```text
+[ ] only intended files changed
+[ ] no temporary debug output
+[ ] no secret
+[ ] no unrelated exercise file
+[ ] the change matches the PR description
+```
+
+If unrelated changes appear, investigate before TD06 review.
+
+# Part 9 - Individual traceability
+
+The Pull Request is part of your individual Git trace.
+
+It makes visible:
+
+```text
+author
+branch
+commits
+changed files
+discussion
+review status
+merge status
+```
+
+Do not create a PR from another student's account to simulate contribution.
+
+Each student should be able to explain their own branch and PR.
+
+# Part 10 - Leave the Pull Request open
+
+Do not merge the PR during the normal TD05 flow.
+
+TD06 uses these real Pull Requests for review.
+
+Required TD05 end state:
+
+```text
+feature branch pushed
++
+Pull Request open
++
+ready for another student to review
+```
+
+The instructor may intervene only if a PR is unusable or incorrectly targets the wrong repository.
+
+# Part 11 - CORE validation
+
+Before finishing TD05, each student should confirm:
+
+```text
+[ ] origin is the team repository
+[ ] I started from the shared origin/main baseline
+[ ] I created my own feature branch
+[ ] my commit is understandable
+[ ] my feature branch exists on GitHub
+[ ] I opened a Pull Request
+[ ] source branch is correct
+[ ] target branch is team main
+[ ] Files changed contains intended work only
+[ ] MarketPulse runs
+[ ] the Pull Request remains open for TD06
+```
+
+If these checks pass, TD05 CORE is complete.
+
+# Checkpoint relation
 
 Checkpoint B is performed after TD08.
 
-One required screenshot is:
+One required evidence file is:
 
 ```text
 01_pull_request.png
 ```
 
-The screenshot must make visible:
+The canonical evidence contract is:
 
-- Pull Request title;
-- author;
-- source branch;
-- target branch;
-- relevant status.
+```text
+docs/04_CHECKPOINTS_AND_EVIDENCE.md
+```
 
 Do not submit Checkpoint B yet.
 
-TD05 teaches the workflow that this evidence will later demonstrate.
+TD05 establishes the workflow that later evidence must demonstrate.
 
-# Part 14 - Common mistakes
+# OPTIONAL
 
-## Mistake 1 - Developing directly on main
+Complete optional work only after the CORE definition of done is satisfied and the PR is safely open.
 
-Incorrect:
+## Optional 1 - Add a justified second commit to the same PR
 
-```text
-main
-  |
-  v
-edit
-  |
-  v
-commit
-  |
-  v
-push
-```
+A Pull Request follows its source branch.
 
-Expected from TD04 onward:
-
-```text
-main
-  |
-  v
-feature branch
-  |
-  v
-edit
-  |
-  v
-commit
-  |
-  v
-push
-```
-
-## Mistake 2 - Opening the PR against the instructor repository
-
-Your team PR should normally target:
-
-```text
-team repository main
-```
-
-not:
-
-```text
-tawounfouet/esilv-marketpulse main
-```
-
-## Mistake 3 - One Pull Request containing unrelated work
-
-A PR should represent one coherent change.
-
-Avoid mixing:
-
-```text
-feature
-+
-random documentation
-+
-temporary debug code
-+
-unrelated data changes
-```
-
-## Mistake 4 - Vague title
-
-Avoid:
-
-```text
-changes
-work
-update
-```
-
-Prefer:
-
-```text
-feat: display market metadata
-```
-
-# Part 15 - Git commands recap
-
-You should now understand:
+If a real improvement is needed:
 
 ```bash
-git remote -v
-git remote get-url origin
-git switch main
-git switch -c feature/<description>
 git status
 git diff
-git add
-git commit
-git push -u origin <branch>
+git add <file>
+git commit -m "<meaningful message>"
 git push
-git branch -vv
-git log --oneline
 ```
 
-You should also understand the GitHub concepts:
+Refresh the existing PR.
 
-```text
-remote branch
-Pull Request
-source branch
-target branch
-Files changed
-PR description
-```
+Do not open a second PR for the same branch.
 
-# Part 16 - Mini exercises
+Do not manufacture a second commit only to demonstrate this behaviour.
 
-## Exercise 1 - Identify origin
-
-Run:
-
-```bash
-git remote -v
-```
-
-Write down:
-
-```text
-origin repository
-```
-
-Confirm that it is the team repository.
-
-## Exercise 2 - Inspect tracking
+## Optional 2 - Inspect remote tracking
 
 Run:
 
@@ -1023,31 +740,9 @@ Run:
 git branch -vv
 ```
 
-Identify which remote branch your feature branch tracks.
+Identify the remote branch tracked by your local feature branch.
 
-## Exercise 3 - Explain your PR
-
-To another team member, explain:
-
-```text
-business requirement
-branch name
-main commit
-files changed
-validation performed
-```
-
-## Exercise 4 - Find your branch on GitHub
-
-Without using your local terminal, use GitHub to identify:
-
-- your feature branch;
-- its latest commit;
-- its open Pull Request.
-
-# Part 17 - If you finish early
-
-## Challenge 1 - Inspect remote branches
+## Optional 3 - Inspect remote branches
 
 Run:
 
@@ -1055,45 +750,35 @@ Run:
 git branch -r
 ```
 
-Identify remote branches under:
-
-```text
-origin/
-```
-
-## Challenge 2 - Inspect all branches
-
-Run:
+Then optionally:
 
 ```bash
 git branch -a
 ```
 
-Compare local and remote branch names.
+These commands are useful references, not CORE requirements.
 
-## Challenge 3 - Compare main with your feature
+## Optional 4 - Compare local diff with Files changed
 
 Run:
 
 ```bash
-git diff main..feature/display-market-metadata
+git diff main..HEAD
 ```
 
-Then compare with the GitHub `Files changed` view.
+Compare the result with the GitHub `Files changed` view.
 
-## Challenge 4 - Inspect commit range
+## Optional 5 - Inspect feature-only commits
 
-Try:
+Run:
 
 ```bash
-git log --oneline main..feature/display-market-metadata
+git log --oneline main..HEAD
 ```
 
-Question:
+Identify which commits belong to your feature branch but not to `main`.
 
-> Which commits exist on the feature branch but not on main?
-
-# Part 18 - Troubleshooting
+# TROUBLESHOOTING
 
 ## Push rejected
 
@@ -1102,12 +787,12 @@ Check:
 ```bash
 git status
 git branch
-git remote -v
+git remote get-url origin
 ```
 
-Make sure:
+Verify:
 
-- you are on the expected branch;
+- you are on the expected feature branch;
 - `origin` is the team repository;
 - you have collaborator access.
 
@@ -1116,12 +801,12 @@ Make sure:
 Verify that:
 
 - you are authenticated with your own GitHub account;
-- the fork owner added you as a collaborator;
+- the team fork owner added you as collaborator;
 - you accepted the invitation.
 
 Do not share another student's credentials.
 
-## Wrong remote repository
+## Wrong origin
 
 Run:
 
@@ -1129,13 +814,19 @@ Run:
 git remote get-url origin
 ```
 
-If it points somewhere unexpected, stop before pushing.
+Stop before pushing if the repository is not the team repository.
 
 Ask the instructor for help.
 
-## Pull Request contains unexpected files
+## PR targets the instructor repository
 
-Inspect locally:
+Do not merge it.
+
+Correct the target if possible or ask the instructor before recreating the PR.
+
+## PR contains unexpected files
+
+Inspect:
 
 ```bash
 git status
@@ -1143,82 +834,66 @@ git log --oneline
 git diff main..HEAD
 ```
 
-Then inspect the GitHub `Files changed` tab.
+Then compare with GitHub `Files changed`.
 
-## Pull Request targets the wrong repository or branch
+## Local main differs from origin/main before branch creation
 
-Do not merge it.
+Do not start feature work.
 
-Correct the target if GitHub allows it, or ask the instructor before recreating the PR.
+Return to the Team Baseline Gate.
 
-# Part 19 - Readiness check
+The TD05 branch must start from the common baseline.
 
-Before finishing TD05, each student should be able to explain:
+# Final readiness check
+
+Each student should be able to explain:
 
 ```text
-[ ] local branch
-[ ] remote branch
-[ ] origin
-[ ] git push
-[ ] upstream tracking
-[ ] Pull Request
-[ ] source branch
-[ ] target branch
-[ ] PR title
-[ ] PR description
+local branch
+remote branch
+origin
+git push
+tracking branch
+Pull Request
+source branch
+target branch
+Files changed
+PR title
+PR description
 ```
 
 Each student should also confirm:
 
 ```text
-[ ] I created an identifiable feature branch
-[ ] I created at least one commit
-[ ] I pushed my branch to the team repository
-[ ] I opened a Pull Request
-[ ] my Pull Request targets team main
-[ ] my Pull Request contains only intended changes
+[ ] I pushed an identifiable branch
+[ ] I opened an attributable Pull Request
+[ ] the PR targets team main
+[ ] the PR contains coherent work
+[ ] the PR remains open for review
 [ ] MarketPulse still runs
 ```
 
-# Part 20 - What comes next?
+# What comes next?
 
-In TD06, the business requirement becomes:
-
-```text
-"Changes must be reviewed before integration."
-```
-
-You will use the Pull Requests created in TD05 to practice:
+TD06 introduces review before integration:
 
 ```text
-review
-+
-comment
-+
-request changes
-+
+open TD05 Pull Request
+        |
+        v
+another student reviews
+        |
+        v
+correction only if justified
+        |
+        v
 approval
-+
+        |
+        v
 merge
+        |
+        v
+team main synchronized
 ```
 
-From that point, collaborative MarketPulse development will follow the complete workflow:
-
-```text
-feature branch
-      |
-      v
-commit
-      |
-      v
-push
-      |
-      v
-Pull Request
-      |
-      v
-review
-      |
-      v
-merge
-```
+Do not merge the TD05 PR before the TD06 review workflow unless the instructor explicitly asks you to.

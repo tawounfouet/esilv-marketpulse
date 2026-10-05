@@ -598,47 +598,30 @@ Acceptance criteria:
 Status:
 
 ```text
-REFRAME
+DONE
 ```
 
-Recommended displayed title:
+Implemented remediation:
 
-```text
-TD05 - Remote Branch + Pull Request
-```
-
-The filename can remain unchanged if desired.
-
-CORE:
-
-- verify `origin`;
-- synchronize team baseline;
-- create feature branch;
-- implement one small change;
-- commit;
-- push;
-- inspect remote branch;
-- open PR;
-- inspect source / target / Files changed.
-
-Move to OPTIONAL:
-
-- second commit on the same PR;
-- extra remote-branch commands.
-
-End state:
-
-```text
-PR remains open for TD06
-```
+- changed the displayed lab title to `TD05 - Remote Branch + Pull Request`;
+- kept the existing filename to avoid unnecessary path churn;
+- made the Team Baseline Gate the explicit starting condition;
+- planned approximately 80 minutes of required work plus 10 minutes of buffer;
+- kept `origin` verification, feature branch, one coherent change, commit, push, remote branch, Pull Request and Files changed inspection in CORE;
+- added a team contribution-coordination step to reduce duplicate PRs implementing the same feature;
+- moved a second commit on the same PR to OPTIONAL;
+- moved `git branch -vv`, remote-branch enumeration and extra range inspection to OPTIONAL;
+- removed instructor-repository `upstream` configuration from CORE;
+- made the required end state an open, attributable PR targeting team `main`;
+- explicitly preserved the PR for TD06 review.
 
 Acceptance criteria:
 
 ```text
-[ ] each student can push a branch
-[ ] each student can open a PR
-[ ] PR targets team main
-[ ] usable PRs remain open for TD06
+[x] each student can push a branch
+[x] each student can open a PR
+[x] PR targets team main
+[x] usable PRs remain open for TD06
 ```
 
 ### R2.7 TD06 - Code Review

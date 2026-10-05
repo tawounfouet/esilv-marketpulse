@@ -956,7 +956,7 @@ TD02 - Python + CSV / JSON
 WAVE 2 - GIT AND COLLABORATION - 6 HOURS
 TD03 - Git Local Workflow
 TD04 - Branches + Merge
-TD05 - Fork + Pull Request
+TD05 - Remote Branch + Pull Request
 TD06 - Code Review
 
 WAVE 3 - COMPARISON + YAHOO FINANCE - 3 HOURS
