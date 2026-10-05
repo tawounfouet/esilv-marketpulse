@@ -208,6 +208,27 @@ PENDING_EXTERNAL gates,
 and CORE/checkpoint isolation proof.
 ```
 
+### 08 - R7 final Legacy closure audit
+
+```text
+08_R7_LEGACY_CLOSURE_AUDIT.md
+```
+
+Purpose:
+
+```text
+Provide the final end-to-end proof
+that all significant Legacy content
+has an explicit operational destination.
+```
+
+Final verdict:
+
+```text
+LEGACY CONTENT OPERATIONALIZATION
+COMPLETE
+```
+
 ### Advanced-track portal
 
 ```text
@@ -464,10 +485,11 @@ independently licensed assets
 02 Legacy to MarketPulse mapping     DONE
 03 Optional advanced backlog         DONE as backlog design
 Instructor deep-dive reference       DONE as consolidated reference
-04 Legacy operationalization roadmap ACTIVE
-05 Final migration registry          ACTIVE
+04 Legacy operationalization roadmap DONE
+05 Final migration registry          DONE
 06 Taxonomy impact study             DONE
 07 R7.4 qualification closure        DONE
+08 R7 final closure audit            DONE
 ```
 
 The analysis and classification stream is complete.
@@ -550,11 +572,32 @@ Current P1 state:
 0 ambiguous
 ```
 
-The current execution target is:
+The Legacy operationalization roadmap is complete.
+
+Final status:
 
 ```text
-R7.7 - Legacy closure audit
+R7.1 DONE
+R7.2 DONE
+R7.3 DONE
+R7.4 DONE
+R7.5 DONE
+R7.6 DONE
+R7.7 DONE
+
+LEGACY CONTENT OPERATIONALIZATION
+COMPLETE
 ```
+
+Operational external gates may still promote selected supports from:
+
+```text
+PENDING_EXTERNAL
+->
+READY_TO_TEACH
+```
+
+without reopening the frozen CORE.
 
 The routing source for R7.3 and R7.4 is:
 
