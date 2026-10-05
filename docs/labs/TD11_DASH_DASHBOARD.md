@@ -748,29 +748,40 @@ Add a chart for primary instrument volume if the selected provider supplies mean
 
 Benchmark volume is not a CORE requirement.
 
-## Optional 3 - Simple selector
-
-Experiment with one provider or instrument selector only if the underlying application layer already supports it cleanly.
-
-Do not add a selector by embedding provider calls in callbacks.
-
-## Optional 4 - Callback
-
-Use a Dash callback only when implementing a real optional interaction.
-
-A static CORE dashboard is sufficient.
-
-## Optional 5 - Styling polish
+## Optional 3 - Styling polish
 
 Improve spacing, typography or layout after all required information is correct.
 
 Do not spend CORE time building a design system.
 
-## Optional 6 - Layout helper
+## Optional 4 - Layout helper
 
 If `dashboard.py` becomes difficult to read, extract a small local helper function inside the same file.
 
 Do not introduce a nested dashboard package for the CORE.
+
+# ADVANCED
+
+Interactive Dash work has been reclassified from OPTIONAL to ADVANCED.
+
+The two planned activities are:
+
+```text
+ADV-DASH-01 - Callback
+ADV-DASH-02 - Instrument Selector
+```
+
+Current status:
+
+```text
+PENDING_EXTERNAL
+```
+
+They are not active student exercises yet.
+
+Activation requires a real Dash runtime validation and, for the selector, an application layer that genuinely supports parameterized instruments.
+
+The TD11 CORE remains a static dashboard and is sufficient for Checkpoint C preparation.
 
 # TROUBLESHOOTING
 
