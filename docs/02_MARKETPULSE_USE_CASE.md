@@ -104,13 +104,10 @@ The subsequent evolution can then be compared visually.
 
 ## 6. Analytical progression
 
-MarketPulse progressively introduces:
+MarketPulse CORE progressively introduces:
 
 ```text
 price
-  |
-  v
-daily return
   |
   v
 period return
@@ -121,6 +118,8 @@ base-100 normalization
   v
 relative performance
 ```
+
+Daily returns remain available as an optional extension.
 
 The course does not require advanced quantitative finance.
 

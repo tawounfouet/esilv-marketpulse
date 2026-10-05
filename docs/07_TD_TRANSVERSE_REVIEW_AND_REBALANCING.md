@@ -923,36 +923,18 @@ Verdict:
 
 ### TD07 - Data Normalization + Comparison
 
-Current status:
+Remediation status:
 
 ```text
-TOO HEAVY
+REMEDIATED BY LOT-R3.1
 ```
 
-The current CORE includes:
-
-- numeric normalization;
-- date indexing;
-- common-date intersection;
-- period return;
-- relative performance;
-- base 100;
-- daily returns;
-- output integration;
-- branch;
-- commit;
-- push;
-- PR;
-- review.
-
-That is too much for a 90-minute first analytics session.
-
-Recommended CORE:
+The revised CORE is now limited to:
 
 ```text
 numeric normalization
 +
-date alignment
+common-date alignment
 +
 period return
 +
@@ -961,22 +943,13 @@ base 100
 relative performance
 ```
 
-Move to OPTIONAL:
-
-```text
-daily returns
-best daily return
-worst daily return
-extra tables
-```
-
-Create a stable module during TD07:
+The stable analytics module is introduced in TD07:
 
 ```text
 src/analytics.py
 ```
 
-Suggested functions:
+with the provider-neutral functions:
 
 ```python
 index_by_date(...)
@@ -986,13 +959,15 @@ calculate_base_100(...)
 calculate_relative_performance(...)
 ```
 
-This creates the technical foundation required by TD08 and TD11.
+Daily returns, daily extrema and extra comparison tables are now explicitly OPTIONAL.
+
+The TD07 -> TD08 dependency is also explicit: reviewed TD07 analytics must be available from team `main` before Yahoo Finance integration begins.
 
 Verdict:
 
 ```text
-Current version exceeds the safe 90-minute scope.
-Daily returns should leave the CORE.
+Rebalanced CORE fits the intended 80-minute working window plus buffer.
+Daily returns are no longer a CORE dependency.
 ```
 
 ### TD08 - Yahoo Finance

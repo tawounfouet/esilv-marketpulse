@@ -310,19 +310,29 @@ Contributes to Checkpoint B.
 
 Students should be able to:
 
-- distinguish provider-specific input from common application data;
-- align instrument and benchmark observations;
+- distinguish local acquisition from provider-neutral analytics;
+- create and reuse `src/analytics.py`;
+- align instrument and benchmark observations on common dates;
 - maintain the common 1-month daily contract;
-- prepare data for return calculations;
-- understand why differently scaled series need normalization.
+- calculate period return;
+- calculate base-100 series;
+- calculate relative performance;
+- keep provider identifiers outside analytics.
 
 ### Finance concepts introduced
 
+CORE:
+
 ```text
-daily return
 period return
 base-100 normalization
 relative performance
+```
+
+OPTIONAL:
+
+```text
+daily return
 ```
 
 Only simple formulas are required.

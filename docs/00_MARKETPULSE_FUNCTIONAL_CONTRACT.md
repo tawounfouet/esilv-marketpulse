@@ -139,13 +139,10 @@ Optional advanced work may later explore shorter intervals such as hourly data, 
 
 The starter does not implement the final analytics.
 
-The labs progressively introduce:
+The common CORE progressively introduces:
 
 ```text
 price
-  |
-  v
-daily return
   |
   v
 period return
@@ -156,6 +153,10 @@ base-100 normalization
   v
 relative performance
 ```
+
+Daily returns are an optional analytical extension.
+
+They are not required for TD07 completion or for the minimum final CORE dashboard.
 
 The final comparison should make it possible to answer whether the primary instrument outperforms or underperforms its benchmark over the selected period.
 

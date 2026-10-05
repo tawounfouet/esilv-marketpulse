@@ -672,50 +672,29 @@ P0
 Status:
 
 ```text
-MAJOR REBALANCING
+DONE
 ```
 
-Introduce:
+Implemented remediation:
 
-```text
-src/analytics.py
-```
-
-CORE functions:
-
-```python
-index_by_date(...)
-align_series(...)
-calculate_period_return(...)
-calculate_base_100(...)
-calculate_relative_performance(...)
-```
-
-CORE concepts:
-
-- numeric normalization;
-- common dates;
-- period return;
-- base 100;
-- relative performance.
-
-Move to OPTIONAL:
-
-- daily returns;
-- best daily return;
-- worst daily return;
-- extra comparison tables.
-
-Update functional wording if needed so daily return is no longer a mandatory final CORE feature.
+- introduced `src/analytics.py` as the TD07 repository evolution;
+- defined `index_by_date(...)`, `align_series(...)`, `calculate_period_return(...)`, `calculate_base_100(...)` and `calculate_relative_performance(...)` as CORE functions;
+- made common-date alignment explicit before period comparison;
+- kept local CSV numeric normalization outside provider-neutral analytics;
+- required `analytics.py` to contain no provider-specific identifier;
+- moved daily returns, best/worst daily return and extra comparison tables to OPTIONAL;
+- updated the functional contract, use-case document, learning path and root README so daily returns are no longer a mandatory CORE feature;
+- reduced repeated Git theory to a standard workflow handoff;
+- made reviewed TD07 analytics on team `main` an explicit prerequisite for TD08.
 
 Acceptance criteria:
 
 ```text
-[ ] analytics are reusable outside main.py
-[ ] no provider-specific identifier exists inside analytics.py
-[ ] base 100 starts at 100
-[ ] relative performance uses instrument minus benchmark
-[ ] daily returns are optional
+[x] analytics are reusable outside main.py
+[x] no provider-specific identifier exists inside analytics.py
+[x] base 100 starts at 100
+[x] relative performance uses instrument minus benchmark
+[x] daily returns are optional
 ```
 
 ### R3.2 TD08 - Yahoo Finance
@@ -1368,7 +1347,7 @@ Initial status:
 |---|---|---|---|
 | R1 | Cross-cutting contracts | P0 | DONE |
 | R2 | TD01-TD06 | P0/P1 | DONE |
-| R3 | TD07-TD08 | P0 | NOT STARTED |
+| R3 | TD07-TD08 | P0 | IN PROGRESS |
 | R4 | TD09-TD12 | P0 | NOT STARTED |
 | R5 | Final validation | P0 closure | NOT STARTED |
 

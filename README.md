@@ -213,13 +213,10 @@ Performance comparison
 Dash
 ```
 
-Later analytical concepts include:
+Later CORE analytical concepts include:
 
 ```text
 price
-  |
-  v
-daily return
   |
   v
 period return
@@ -230,6 +227,8 @@ base-100 normalization
   v
 relative performance
 ```
+
+Daily returns are optional and are not required by the minimum CORE dashboard.
 
 More advanced topics such as remote Linux, SSH, deployment, Docker or GitHub Actions are optional extensions and are not part of the initial starter.
 
