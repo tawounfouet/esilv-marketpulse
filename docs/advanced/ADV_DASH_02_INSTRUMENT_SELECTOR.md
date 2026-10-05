@@ -3,7 +3,7 @@
 Status:
 
 ```text
-REVIEW - DASH PACKAGE GATE
+PENDING_EXTERNAL
 ```
 
 Mode:
