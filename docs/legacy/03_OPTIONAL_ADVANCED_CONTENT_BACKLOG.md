@@ -1730,10 +1730,17 @@ unless they become part of the official 12-TD sequence.
 
 Items classified `TEACHER_REFERENCE` should not be mixed into this backlog.
 
-Recommended future file:
+Current instructor reference:
 
 ```text
-docs/instructor/LEGACY_DEEP_DIVE_REFERENCE.md
+docs/instructor/01_LEGACY_DEEP_DIVE_REFERENCE.md
+```
+
+Operationalization of the priority instructor topics is governed by:
+
+```text
+R7.3
+docs/legacy/04_LEGACY_CONTENT_OPERATIONALIZATION_ROADMAP.md
 ```
 
 Examples:
@@ -1833,3 +1840,41 @@ manageable complexity
 ```
 
 The remaining items can stay in the backlog until teaching evidence justifies their implementation.
+
+
+## 47. Current operationalization status
+
+The backlog design is complete.
+
+The advanced teaching assets are not yet complete.
+
+Current interpretation:
+
+```text
+backlog specification
+=
+DONE
+
+READY_TO_TEACH support production
+=
+NOT STARTED
+```
+
+The frozen MarketPulse CORE remains unchanged.
+
+Promotion of P1 items is governed by:
+
+```text
+R7.4
+Advanced P1 content operationalization
+```
+
+in:
+
+```text
+docs/legacy/04_LEGACY_CONTENT_OPERATIONALIZATION_ROADMAP.md
+```
+
+Do not create advanced supports outside the R7 roadmap.
+
+A backlog item remains optional until a separate curriculum decision explicitly changes that status.
