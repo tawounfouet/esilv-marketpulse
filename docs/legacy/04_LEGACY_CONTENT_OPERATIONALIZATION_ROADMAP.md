@@ -639,8 +639,8 @@ docs/legacy/06_CORE_OPTIONAL_ADVANCED_TAXONOMY_IMPACT_STUDY.md
 | Sub-lot | Scope | Status |
 |---|---|---|
 | R7.4.1 | Taxonomy and impact baseline | DONE |
-| R7.4.2 | P1 advanced support production | NEXT |
-| R7.4.3 | Lab taxonomy integration | NOT STARTED |
+| R7.4.2 | P1 advanced support production | DONE |
+| R7.4.3 | Lab taxonomy integration | NEXT |
 | R7.4.4 | Qualification and registry closure | NOT STARTED |
 
 R7.4.1 established:
@@ -655,6 +655,115 @@ R7.4.1 established:
 ```
 
 No CORE or checkpoint contract was changed during R7.4.1.
+
+### R7.4.2 execution result
+
+Produced:
+
+```text
+12 / 12 P1 advanced support documents
+```
+
+Local executable validation:
+
+```text
+ADV-LNX-01 PASS
+ADV-LNX-02 PASS
+ADV-LNX-03 PASS
+ADV-LNX-04 PASS
+ADV-GIT-01 PASS
+ADV-GIT-02 PASS
+ADV-GIT-04 PASS
+```
+
+Additional structural validation:
+
+```text
+ADV-RMT-03
+systemd-analyze verify
+=
+PASS
+
+ADV-DASH-01
+Python callback snippet syntax
+=
+PASS
+
+ADV-DASH-02
+Python callback snippet syntax
+=
+PASS
+```
+
+Current qualification result:
+
+```text
+READY_TO_TEACH
+=
+7
+
+PENDING_EXTERNAL
+=
+5
+```
+
+READY_TO_TEACH:
+
+```text
+ADV-LNX-01
+ADV-LNX-02
+ADV-LNX-03
+ADV-LNX-04
+ADV-GIT-01
+ADV-GIT-02
+ADV-GIT-04
+```
+
+PENDING_EXTERNAL:
+
+```text
+ADV-RMT-01
+ADV-RMT-03
+ADV-BBG-01
+ADV-DASH-01
+ADV-DASH-02
+```
+
+Reason for PENDING_EXTERNAL:
+
+```text
+ADV-RMT-01
+requires real SSH client + approved host
+
+ADV-RMT-03
+unit syntax validated
+real systemd lifecycle still requires approved host
+
+ADV-BBG-01
+requires validated Bloomberg LIVE environment
+
+ADV-DASH-01
+requires real Dash package/runtime
+
+ADV-DASH-02
+requires real Dash package/runtime
++
+parameterized application state
+```
+
+R7.4.2 conclusion:
+
+```text
+PASS FOR SUPPORT PRODUCTION
+
+12 / 12 supports produced
+7 / 12 READY_TO_TEACH
+5 / 12 PENDING_EXTERNAL
+```
+
+R7.4.2 does not claim final R7.4 qualification.
+
+R7.4.3 may integrate only READY_TO_TEACH supports as active student links.
 
 ## 11. R7.5 - TD enrichment capsules
 
@@ -827,6 +936,7 @@ For advanced backlog items, keep the existing item-level statuses:
 ```text
 CANDIDATE
 READY_TO_DESIGN
+PENDING_EXTERNAL
 READY_TO_TEACH
 DEFERRED
 REJECTED
@@ -922,9 +1032,11 @@ WITHOUT CORE DIVERGENCE
 The current action is:
 
 ```text
-R7.4.2 - P1 advanced support production
+R7.4.3 - Lab taxonomy integration
 ```
 
-R7.4.1 taxonomy and impact analysis is complete.
+R7.4.2 produced all 12 P1 support documents.
 
-The 12 P1 supports must be qualified before their corresponding TD ADVANCED links are activated.
+Only the 7 READY_TO_TEACH supports may be activated as student-facing ADVANCED links at this stage.
+
+The 5 PENDING_EXTERNAL supports remain inactive until their delivery gates pass.
