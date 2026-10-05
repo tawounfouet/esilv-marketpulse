@@ -61,6 +61,8 @@ Before collaborative work begins:
 
 See `docs/01_STUDENT_ONBOARDING.md` for the complete onboarding procedure.
 
+The complete 18-hour lab progression is documented in `docs/06_TD_SEQUENCE_AND_LEARNING_PATH.md`.
+
 Canonical instructor repository: `tawounfouet/esilv-marketpulse`.
 
 ## Getting started
@@ -122,7 +124,11 @@ esilv-marketpulse/
 │   ├── 02_MARKETPULSE_USE_CASE.md
 │   ├── 03_GITHUB_TEAM_WORKFLOW.md
 │   ├── 04_CHECKPOINTS_AND_EVIDENCE.md
-│   └── 05_TARGET_REPOSITORY_STRUCTURE.md
+│   ├── 05_TARGET_REPOSITORY_STRUCTURE.md
+│   ├── 06_TD_SEQUENCE_AND_LEARNING_PATH.md
+│   └── td/
+│       ├── README.md
+│       └── TD01_BOOTSTRAP_LINUX.md
 ├── src/
 │   └── main.py
 └── evidence/
