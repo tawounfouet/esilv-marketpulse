@@ -4,7 +4,7 @@
   <img
     src="https://www.itii-pdl.com/wp-content/uploads/2024/11/logo_esilv_couleur.jpg?ver=1733410620"
     alt="ESILV - De Vinci Higher Education"
-    width="300"
+    width="180"
   />
 </p>
 
@@ -18,6 +18,29 @@
 **MarketPulse** is the progressive teaching project for the **ESILV A4 - Python, Git, Linux** module.
 
 > Acquire market data from several provider stages, normalize it to one canonical contract, compare one instrument with its benchmark, then expose the same application result through the terminal and a Dash dashboard.
+
+### ⚡ Languages and Tools
+
+<p align="center">
+  <a href="https://www.python.org/" target="_blank" rel="noreferrer" title="Python">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/>
+  </a>
+  <a href="https://git-scm.com/" target="_blank" rel="noreferrer" title="Git">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg" alt="git" width="40" height="40"/>
+  </a>
+  <a href="https://github.com/" target="_blank" rel="noreferrer" title="GitHub">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" alt="github" width="40" height="40"/>
+  </a>
+  <a href="https://www.kernel.org/" target="_blank" rel="noreferrer" title="Linux">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="40" height="40"/>
+  </a>
+  <a href="https://www.gnu.org/software/bash/" target="_blank" rel="noreferrer" title="Bash">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bash/bash-original.svg" alt="bash" width="40" height="40"/>
+  </a>
+  <a href="https://dash.plotly.com/" target="_blank" rel="noreferrer" title="Dash / Plotly">
+    <img src="https://cdn.simpleicons.org/plotly/3F4F75" alt="dash-plotly" width="40" height="40"/>
+  </a>
+</p>
 
 ## What students build
 
