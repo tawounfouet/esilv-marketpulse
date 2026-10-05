@@ -383,22 +383,254 @@ R6.2 does not block the remaining local pedagogical dry run.
 
 ## 7. R6.3 - Wave 1 dry run
 
-Validate:
+Status:
+
+```text
+DONE
+```
+
+Validated:
 
 ```text
 TD01 Bootstrap + Linux
 TD02 Python + CSV / JSON
 ```
 
-Focus:
+### 7.1 TD01 execution result
+
+The starter path was executed with the versioned CORE assets.
+
+Validated commands include:
+
+```bash
+pwd
+ls
+ls data/sample
+cat data/sample/instruments.json
+head data/sample/prices.csv
+grep AAPL data/sample/prices.csv
+grep SP500 data/sample/prices.csv
+python --version
+git --version
+python src/main.py
+```
+
+Results:
 
 ```text
-student starting point
-command accuracy
-expected output
-file mutations
-handoff into TD03
-90-minute realism
+Python runtime available
+Git runtime available
+AAPL rows = 21
+SP500 rows = 21
+starter output matches the documented TD01 output
+```
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 7.2 TD02 end-state implementation
+
+A temporary teaching working tree was created from the exact starter code.
+
+The TD02 instructions were then applied without changing repository architecture.
+
+Implemented helpers:
+
+```python
+get_first_close(...)
+get_last_close(...)
+display_market_summary(...)
+```
+
+The implementation preserves:
+
+```text
+csv.DictReader
+json.load
+filter_prices(...)
+src/main.py entry point
+standard-library-only dependency model
+```
+
+### 7.3 Numeric conversion evidence
+
+The raw CSV close value was confirmed as:
+
+```text
+str
+```
+
+The helper return values were confirmed as:
+
+```text
+float
+```
+
+Observed values:
+
+```text
+AAPL
+first close = 250.0
+last close  = 266.2
+
+SP500
+first close = 6600.0
+last close  = 6742.0
+```
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 7.4 TD02 target output
+
+Executed:
+
+```bash
+python src/main.py
+```
+
+Observed output:
+
+```text
+=== MarketPulse ===
+
+Market configuration
+Period   : 1 month
+Interval : Daily
+
+Instrument
+AAPL - Apple Inc.
+Observations : 21
+First close  : 250.00 USD
+Last close   : 266.20 USD
+
+Benchmark
+SP500 - S&P 500
+Observations : 21
+First close  : 6600.00
+Last close   : 6742.00
+```
+
+This matches the documented TD02 target behaviour.
+
+### 7.5 TD02 syntax validation
+
+Executed:
+
+```bash
+python -m py_compile src/main.py
+```
+
+Result:
+
+```text
+PASS
+```
+
+### 7.6 TD02 -> TD03 working-tree handoff
+
+A local Git baseline was created only for dry-run verification.
+
+After applying the TD02 changes:
+
+```bash
+git status --short
+```
+
+reported:
+
+```text
+ M src/main.py
+```
+
+The repository `.gitignore` correctly suppresses generated Python cache files.
+
+Executed:
+
+```bash
+git diff --check
+```
+
+Result:
+
+```text
+PASS
+```
+
+The meaningful TD02 change therefore remains available for TD03 exactly as intended:
+
+```text
+TD02
+working Python change
+      |
+      v
+TD03
+git status
+git diff
+git add
+git commit
+git log
+```
+
+### 7.7 Scope protection
+
+The dry run confirmed that TD02 does not require:
+
+```text
+pandas
+return calculations
+base-100 calculations
+relative performance
+feature branches
+Pull Requests
+```
+
+The Wave 1 scope remains focused on Linux inspection and basic Python data handling.
+
+### 7.8 Timing interpretation
+
+The technical path contains no newly discovered hidden setup or refactor.
+
+The documented 80-minute CORE plus 10-minute buffer remains structurally plausible.
+
+Actual classroom completion time remains a teaching observation rather than machine-execution evidence.
+
+Classification:
+
+```text
+INSPECTED
+```
+
+### 7.9 R6.3 acceptance criteria
+
+```text
+[x] TD01 starter executes
+[x] TD01 Linux inspection commands are coherent
+[x] TD02 starts from the TD01 state
+[x] JSON metadata loads correctly
+[x] CSV observations load correctly
+[x] AAPL and SP500 each contain 21 rows
+[x] close values are converted from str to float
+[x] reusable first/last close helpers work
+[x] reusable market summary works
+[x] TD02 target output is reproducible
+[x] no return calculation is introduced
+[x] no external Python dependency is introduced
+[x] TD02 leaves a meaningful src/main.py working-tree change for TD03
+[x] generated Python cache files remain ignored
+[x] git diff --check passes
+```
+
+R6.3 conclusion:
+
+```text
+PASS
 ```
 
 ## 8. R6.4 - Wave 2 dry run
@@ -544,8 +776,8 @@ TEACHING BASELINE READY
 |---|---|---|
 | R6.1 | Starter runtime baseline | DONE |
 | R6.2 | Clean-clone and student bootstrap portability | REVIEW |
-| R6.3 | Wave 1 dry run | NEXT |
-| R6.4 | Wave 2 dry run | NOT STARTED |
+| R6.3 | Wave 1 dry run | DONE |
+| R6.4 | Wave 2 dry run | NEXT |
 | R6.5 | Wave 3 dry run | NOT STARTED |
 | R6.6 | Wave 4 dry run | NOT STARTED |
 | R6.7 | Checkpoint and evidence dry run | NOT STARTED |
