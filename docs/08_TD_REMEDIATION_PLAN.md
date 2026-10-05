@@ -1940,8 +1940,8 @@ Use the simple hyphen instead.
 Repository-wide character scan result:
 
 ```text
-em dash character (—) = 0 occurrence
-en dash character (–) = 0 occurrence
+em dash character (U+2014) = 0 occurrence
+en dash character (U+2013) = 0 occurrence
 ```
 
 No remediation was required because the current default branch already respects the documented character convention.
