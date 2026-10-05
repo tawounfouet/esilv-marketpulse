@@ -301,3 +301,12 @@ Yahoo Finance retrieval through yfinance does not require students to commit cre
 Students must still inspect screenshots and Git changes before publishing evidence.
 
 Never include unrelated secrets from the development environment.
+
+
+## Cross-scenario recovery reference
+
+For the canonical instructor response when Yahoo failure overlaps with GitHub, environment, Dash or evidence issues, use:
+
+```text
+docs/15_INSTRUCTOR_CONTINGENCY_AND_RECOVERY_PLAYBOOK.md
+```
