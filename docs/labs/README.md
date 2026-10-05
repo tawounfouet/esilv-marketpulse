@@ -61,6 +61,93 @@ The official evidence contract is documented in:
 docs/04_CHECKPOINTS_AND_EVIDENCE.md
 ```
 
+## Teaching taxonomy
+
+Every lab now uses the same student-facing structure:
+
+```text
+CORE
+OPTIONAL
+ADVANCED
+```
+
+Interpretation:
+
+```text
+CORE
+=
+mandatory common work
++
+checkpoint-aligned
++
+part of the 18-hour path
+
+OPTIONAL
+=
+lightweight extension
++
+normally 5 to 20 minutes
++
+no checkpoint requirement
+
+ADVANCED
+=
+materially deeper practice
++
+separate support under docs/advanced/
++
+never required for a checkpoint
+```
+
+Instructor-only conceptual depth remains under:
+
+```text
+docs/instructor/
+```
+
+and is not student evidence.
+
+A student who completes the CORE without ADVANCED work must remain eligible for full common checkpoint assessment.
+
+## Current ADVANCED availability
+
+Only supports with status:
+
+```text
+READY_TO_TEACH
+```
+
+are activated as student-facing links.
+
+| TD | Active READY_TO_TEACH ADVANCED support | Other status |
+|---|---|---|
+| TD01 | ADV-LNX-01, ADV-LNX-02, ADV-LNX-03 | - |
+| TD02 | ADV-LNX-04 | - |
+| TD03 | ADV-GIT-02 | - |
+| TD04 | ADV-GIT-01 | - |
+| TD05 | None | No active advanced support |
+| TD06 | None | No active advanced support |
+| TD07 | None | No active advanced support |
+| TD08 | None | No active advanced support |
+| TD09 | None | Bloomberg advanced path not yet active |
+| TD10 | None | ADV-BBG-01 is PENDING_EXTERNAL |
+| TD11 | None | ADV-DASH-01 and ADV-DASH-02 are PENDING_EXTERNAL |
+| TD12 | ADV-GIT-04 | ADV-RMT-01 and ADV-RMT-03 are PENDING_EXTERNAL |
+
+Current totals:
+
+```text
+READY_TO_TEACH active links
+=
+7
+
+PENDING_EXTERNAL supports
+=
+5
+```
+
+PENDING_EXTERNAL means the support exists but still requires a real external teaching environment before activation.
+
 ## Files
 
 The TD files follow this naming convention:
