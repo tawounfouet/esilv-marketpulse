@@ -13,7 +13,7 @@
 [![Python](https://img.shields.io/badge/Python-3.x-3776AB.svg)](https://www.python.org/)
 [![Labs](https://img.shields.io/badge/labs-12-2ea44f.svg)](docs/labs/README.md)
 [![TD](https://img.shields.io/badge/TD-18h-orange.svg)](docs/06_TD_SEQUENCE_AND_LEARNING_PATH.md)
-[![Status](https://img.shields.io/badge/status-teaching%20repository-blueviolet.svg)](docs/08_TD_REMEDIATION_PLAN.md)
+[![Status](https://img.shields.io/badge/status-baseline%20ready-success.svg)](docs/16_TEACHING_BASELINE_RELEASE.md)
 
 **MarketPulse** is the progressive teaching project for the **ESILV A4 - Python, Git, Linux** module.
 
@@ -414,6 +414,25 @@ Target structure:
 
 [Target repository structure](docs/05_TARGET_REPOSITORY_STRUCTURE.md)
 
+## Teaching readiness
+
+The current release decision is:
+
+```text
+TEACHING BASELINE READY
+WITH EXTERNAL PRE-CLASS CHECKS
+```
+
+Repository and pedagogical contracts have been dry-run and remediated.
+
+External services and platform behaviours are verified at the relevant pre-class gate rather than being assumed.
+
+Use:
+
+- [Teaching readiness and dry-run evidence](docs/14_TEACHING_READINESS_AND_DRY_RUN_PLAN.md)
+- [Instructor contingency and recovery playbook](docs/15_INSTRUCTOR_CONTINGENCY_AND_RECOVERY_PLAYBOOK.md)
+- [Teaching baseline release and pre-class gates](docs/16_TEACHING_BASELINE_RELEASE.md)
+
 ## Security
 
 Never commit:
@@ -467,6 +486,9 @@ This README intentionally does not display CI, security, release or license badg
 - [Bloomberg provider scaffold](docs/11_BLOOMBERG_PROVIDER_SCAFFOLD.md)
 - [Application snapshot contract](docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md)
 - [Libraries and dependencies](docs/13_MARKETPULSE_LIBRARIES_AND_DEPENDENCIES.md)
+- [Teaching readiness and dry-run plan](docs/14_TEACHING_READINESS_AND_DRY_RUN_PLAN.md)
+- [Instructor contingency and recovery playbook](docs/15_INSTRUCTOR_CONTINGENCY_AND_RECOVERY_PLAYBOOK.md)
+- [Teaching baseline release](docs/16_TEACHING_BASELINE_RELEASE.md)
 - [Pre-lab diagnostic and interpretation](docs/diagnostic/README.md)
 - [Legacy course analysis and migration](docs/legacy/README.md)
 
