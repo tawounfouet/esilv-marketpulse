@@ -552,6 +552,14 @@ Looks good.
 
 into a statement that names what was actually inspected and why the PR is ready or not ready.
 
+# ADVANCED
+
+No `READY_TO_TEACH` advanced activity is attached directly to TD06 at this time.
+
+Complete the CORE and OPTIONAL work only.
+
+Instructor deep dives may enrich explanations, but they are not student deliverables and are not checkpoint evidence.
+
 # TROUBLESHOOTING
 
 ## No open Pull Request to review
