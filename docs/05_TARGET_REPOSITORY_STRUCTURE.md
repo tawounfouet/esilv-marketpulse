@@ -13,7 +13,7 @@ The objective is to understand why project structure changes.
 Initial structure:
 
 ```text
-marketpulse/
+esilv-marketpulse/
 ├── README.md
 ├── TEAM_TEMPLATE.md
 ├── CONTRIBUTING.md
@@ -112,7 +112,7 @@ dashboard/
 A possible final common structure is:
 
 ```text
-marketpulse/
+esilv-marketpulse/
 │
 ├── README.md
 ├── TEAM.md
