@@ -847,3 +847,57 @@ Explicitly outside CORE
 ```
 
 The intended result is a dependency model that remains small enough for students to understand completely.
+
+
+## 18. Advanced dependency isolation
+
+The advanced track must not silently expand the CORE dependency contract.
+
+Rule:
+
+```text
+advanced-only dependency
+=
+document in the advanced support
+
+advanced-only dependency
+!=
+automatic root requirements.txt dependency
+```
+
+A package belongs in the root:
+
+```text
+requirements.txt
+```
+
+only when the actual MarketPulse application imports it as part of the selected CORE implementation.
+
+Current P1 advanced impact:
+
+```text
+Linux advanced labs
+=
+no new Python dependency
+
+Git advanced labs
+=
+no new Python dependency
+
+Dash advanced labs
+=
+Dash / Plotly already exist in the TD11 CORE dependency model
+
+SSH / systemd advanced labs
+=
+system capabilities, not Python CORE dependencies
+
+Bloomberg reference-data advanced lab
+=
+environment-specific
+no connector added without validated LIVE implementation
+```
+
+A `PENDING_EXTERNAL` support must never cause speculative dependency installation.
+
+The frozen CORE dependency model above therefore remains unchanged.
