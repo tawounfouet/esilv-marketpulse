@@ -37,8 +37,8 @@
   <a href="https://www.gnu.org/software/bash/" target="_blank" rel="noreferrer" title="Bash">
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bash/bash-original.svg" alt="bash" width="40" height="40"/>
   </a>
-  <a href="https://pypi.org/project/yfinance/" target="_blank" rel="noreferrer" title="Yahoo Finance / yfinance">
-    <img src="https://cdn.simpleicons.org/yahoo/6001D2" alt="yahoo-finance-yfinance" width="40" height="40"/>
+  <a href="https://finance.yahoo.com/" target="_blank" rel="noreferrer" title="Yahoo Finance / yfinance">
+    <img src="https://logos-world.net/wp-content/uploads/2020/10/Yahoo-Emblem.png" alt="yahoo" width="40" height="40"/>
   </a>
   <a href="https://dash.plotly.com/" target="_blank" rel="noreferrer" title="Dash">
     <img src="https://img.shields.io/badge/Dash-008DE5?logo=plotly&amp;logoColor=white" alt="dash" height="40"/>
