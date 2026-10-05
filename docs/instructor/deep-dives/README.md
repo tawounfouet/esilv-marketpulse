@@ -185,3 +185,56 @@ assessment rules
 The instructor can know more than students are required to reproduce.
 
 That is the purpose of this directory.
+
+
+## 10. TD enrichment capsules
+
+The deep dives are the full instructor knowledge units.
+
+The short in-class delivery map is:
+
+```text
+docs/instructor/02_TD_ENRICHMENT_CAPSULES.md
+```
+
+Relationship:
+
+```text
+deep dive
+=
+full teacher mental model
+
+capsule
+=
+5 to 10 minute classroom extraction
+```
+
+The capsule document currently defines:
+
+```text
+11 capsules
+mapped to 6 primary TDs
+```
+
+Primary TD coverage:
+
+```text
+TD01
+TD03
+TD04
+TD05
+TD09
+TD10
+```
+
+TDs without a default capsule are intentionally protected from extra conceptual load.
+
+Use:
+
+```text
+CORE completion
+>
+capsule delivery
+```
+
+A capsule must never become a student deliverable or checkpoint requirement.
