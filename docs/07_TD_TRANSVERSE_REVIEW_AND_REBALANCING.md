@@ -1191,90 +1191,57 @@ Provider independence is demonstrated through canonical rows and unchanged analy
 
 ### TD11 - Dash Dashboard
 
-Current status:
+Remediation status:
 
 ```text
-CRITICAL OVERLOAD AND RUNTIME RISK
+REMEDIATED BY LOT-R4.5
 ```
 
-The current content correctly prioritizes:
-
-- provider;
-- instrument;
-- benchmark;
-- lookback;
-- interval;
-- period returns;
-- relative performance;
-- base-100 chart.
-
-That scope should remain.
-
-The current nested path:
-
-```text
-src/dashboard/app.py
-```
-
-creates avoidable import complexity for a beginner sequence.
-
-Recommended CORE entry point:
+The revised CORE uses exactly one dashboard entry point:
 
 ```text
 src/dashboard.py
 ```
 
-with:
+with the frozen command:
 
 ```bash
 python src/dashboard.py
 ```
 
-CORE:
+CORE is now limited to:
 
-- install dependencies;
-- minimal Dash app;
-- consume prepared MarketPulse data;
-- summary context;
-- three performance indicators;
-- one base-100 comparison chart;
-- local run;
-- PR and review.
+- install and record `dash` and `plotly`;
+- create one minimal Dash application;
+- consume `build_market_snapshot(...)`;
+- show provider, instrument, benchmark, lookback and interval;
+- show instrument return, benchmark return and relative performance;
+- show one base-100 comparison chart with both series;
+- compare terminal and dashboard results;
+- standard PR and review.
 
-OPTIONAL:
+The dashboard is explicitly forbidden from:
 
-- daily-return chart;
+- calling Yahoo directly;
+- calling Bloomberg directly;
+- calculating period return;
+- calculating base 100;
+- calculating relative performance.
+
+OPTIONAL now contains:
+
+- daily-return chart, only if already implemented;
 - volume chart;
+- selectors;
 - callbacks;
-- provider selector;
-- instrument selector;
-- layout refactor;
-- styling work.
+- styling polish;
+- small layout helpers.
 
-Important dependency:
-
-This dependency is now resolved by LOT-R4.4.
-
-The shared application result is frozen in:
+Current verdict:
 
 ```text
-docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md
-```
-
-with:
-
-```python
-build_market_snapshot(...)
-```
-
-The terminal and Dash paths must consume the same snapshot.
-
-`src/dashboard.py` must not call Yahoo or Bloomberg directly and must not recompute returns.
-
-Verdict:
-
-```text
-90 minutes can work only with one simple dashboard file, the shared snapshot and no required callbacks.
+The TD11 CORE is designed for about 80 minutes plus a 10-minute buffer.
+One snapshot, one dashboard file and one required chart keep the lab within scope.
 ```
 
 ### TD12 - Integration + Release

@@ -968,47 +968,34 @@ Acceptance criteria:
 Status:
 
 ```text
-CRITICAL REMEDIATION
+DONE
 ```
 
-Use:
+Implemented remediation:
 
-```text
-src/dashboard.py
-```
-
-CORE:
-
-- install `dash` and `plotly`;
-- record direct dependencies;
-- create minimal app;
-- consume shared MarketPulse snapshot;
-- show provider;
-- show instrument;
-- show benchmark;
-- show lookback;
-- show interval;
-- show instrument return;
-- show benchmark return;
-- show relative performance;
-- show one base-100 comparison chart.
-
-Move to OPTIONAL:
-
-- daily-return chart;
-- volume chart;
-- callbacks;
-- selectors;
-- advanced layout;
-- styling polish.
+- added an explicit CORE definition of done;
+- planned approximately 80 minutes of required work plus 10 minutes of browser, debugging and review buffer;
+- froze `src/dashboard.py` as the only CORE dashboard entry point;
+- froze `python src/dashboard.py` as the dashboard command;
+- kept `dash` and `plotly` as direct recorded dependencies;
+- required the dashboard to consume `build_market_snapshot(...)`;
+- required provider, instrument, benchmark, lookback and interval to be visible;
+- required instrument return, benchmark return and relative performance;
+- required one base-100 chart with both series;
+- prohibited provider-specific calls from `dashboard.py`;
+- prohibited return, base-100 and relative-performance formulas from `dashboard.py`;
+- required terminal and dashboard consistency checks;
+- moved daily-return chart, volume chart, selectors, callbacks, advanced layout and styling polish to OPTIONAL;
+- removed repeated evidence details and kept the canonical Checkpoint C reference.
 
 Acceptance criteria:
 
 ```text
-[ ] python src/dashboard.py works
-[ ] no provider logic exists in dashboard.py
-[ ] no hard-coded return values
-[ ] both base-100 series are visible
+[x] python src/dashboard.py is the frozen CORE command
+[x] no provider logic belongs in dashboard.py
+[x] no analytical formula belongs in dashboard.py
+[x] no hard-coded return values are required
+[x] both base-100 series are visible
 ```
 
 ### R4.6 TD12 - Integration + Release

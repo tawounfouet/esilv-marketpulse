@@ -464,6 +464,7 @@ The dashboard does not call Yahoo or Bloomberg directly and does not recompute r
 ### Minimum dashboard target
 
 ```text
+Provider
 Instrument
 Benchmark
 Lookback
@@ -474,10 +475,17 @@ Relative performance
 Base-100 comparison chart
 ```
 
+The dashboard consumes `build_market_snapshot(...)`.
+
+It does not call providers directly and does not recompute analytics.
+
 Optional if time allows:
 
-- daily-return chart;
-- volume chart.
+- daily-return chart, only if daily returns already exist;
+- volume chart;
+- selector;
+- callback;
+- styling polish.
 
 ### Checkpoint relation
 
