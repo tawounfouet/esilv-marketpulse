@@ -220,6 +220,12 @@ Operational deep-dive index:
 ../instructor/deep-dives/README.md
 ```
 
+TD enrichment capsules:
+
+```text
+../instructor/02_TD_ENRICHMENT_CAPSULES.md
+```
+
 Purpose:
 
 ```text
@@ -503,6 +509,15 @@ R7.3 is now complete.
 
 R7.4 is now complete.
 
+R7.5 is now complete.
+
+Instructor enrichment state:
+
+```text
+10 deep dives
+11 TD enrichment capsules
+```
+
 Current P1 state:
 
 ```text
@@ -514,7 +529,7 @@ Current P1 state:
 The current execution target is:
 
 ```text
-R7.5 - TD enrichment capsules
+R7.6 - Advanced-track packaging
 ```
 
 The routing source for R7.3 and R7.4 is:
