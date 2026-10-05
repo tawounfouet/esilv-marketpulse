@@ -1063,11 +1063,17 @@ Recommended instructor preparation:
 
 Provide a known-good `yfinance` snippet or provider skeleton so that time is spent understanding normalization rather than debugging library syntax.
 
-Verdict:
+Historical verdict before remediation:
 
 ```text
-Current version does not safely fit 90 minutes.
-A reduced CORE can fit if internet and installation work.
+The previous version did not safely fit 90 minutes.
+```
+
+Current verdict after LOT-R3.2:
+
+```text
+The reduced CORE is designed for about 80 minutes plus a 10-minute buffer.
+Remote availability remains an external teaching risk, covered by the instructor reference and outage procedure.
 ```
 
 ### TD09 - Bloomberg Introduction
