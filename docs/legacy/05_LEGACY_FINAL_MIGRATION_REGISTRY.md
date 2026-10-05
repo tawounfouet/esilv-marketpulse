@@ -145,7 +145,7 @@ CLOSED_BY_POLICY
 CORE migration conclusion:
 
 ```text
-23 significant Legacy concepts
+25 significant Legacy concepts
 already absorbed into the frozen CORE
 ```
 
@@ -372,7 +372,7 @@ R7.2 registry
 Current registry totals:
 
 ```text
-CORE_MIGRATED rows           = 23
+CORE_MIGRATED rows           = 25
 INSTRUCTOR_READY targets     = 10
 P1 ADVANCED_READY targets    = 12
 other optional rows          = 12
@@ -383,7 +383,7 @@ DROP_CLOSED rows             = 26
 Total registered rows:
 
 ```text
-96
+98
 ```
 
 The count is a traceability aid, not a curriculum-size target.
