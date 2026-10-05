@@ -489,6 +489,30 @@ This screenshot may demonstrate an optional advanced extension such as:
 
 It is not required for the common core and must not penalise students who do not complete the advanced track.
 
+### ADVANCED assessment isolation
+
+Repository taxonomy:
+
+```text
+CORE
+OPTIONAL
+ADVANCED
+INSTRUCTOR
+```
+
+Checkpoint rule:
+
+```text
+ADVANCED work is never required
+for Checkpoint A, B or C.
+```
+
+A student who completes the required CORE evidence must not lose common checkpoint credit because they did not complete an ADVANCED activity.
+
+A `PENDING_EXTERNAL` advanced support is not available evidence until its delivery gate has passed.
+
+Instructor-only material is never student evidence.
+
 ### Suggested final validation
 
 A short technical demonstration may include:
