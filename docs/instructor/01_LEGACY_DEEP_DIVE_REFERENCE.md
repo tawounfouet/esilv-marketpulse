@@ -1556,9 +1556,11 @@ Advanced remote labs should use instructor- or school-provisioned infrastructure
 
 # Part IX - Recommended instructor reference backlog
 
-## 46. High-priority deep dives to formalize later
+## 46. High-priority deep dives to operationalize
 
-If this reference evolves into separate instructor notes, prioritize:
+R7.3 now governs the transformation of these topics into separate instructor notes.
+
+Prioritize:
 
 ```text
 1. Git staging mental model
@@ -1631,3 +1633,39 @@ better teaching
 ```
 
 This document preserves the historical depth while protecting the current MarketPulse learning path.
+
+
+## 50. Current operationalization status
+
+This document is complete as a consolidated instructor reference.
+
+It is not yet the final operational form for the 10 priority deep dives.
+
+Current state:
+
+```text
+consolidated reference
+=
+DONE
+
+separate instructor-ready notes
+=
+NOT STARTED
+```
+
+The operationalization target is defined by:
+
+```text
+R7.3
+Instructor deep-dive operationalization
+```
+
+in:
+
+```text
+docs/legacy/04_LEGACY_CONTENT_OPERATIONALIZATION_ROADMAP.md
+```
+
+The frozen 18-hour CORE remains unchanged.
+
+The separate notes must improve instructor usability without creating new mandatory student deliverables.
