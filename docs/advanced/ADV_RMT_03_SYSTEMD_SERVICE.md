@@ -3,7 +3,7 @@
 Status:
 
 ```text
-REVIEW - EXTERNAL HOST GATE
+PENDING_EXTERNAL
 ```
 
 Mode:
