@@ -48,6 +48,19 @@ The primary instrument and benchmark are always compared over the same period an
 
 See `docs/00_MARKETPULSE_FUNCTIONAL_CONTRACT.md` for the complete common functional contract.
 
+## Student workflow
+
+Before collaborative work begins:
+
+1. form a team of 3 to 4 students;
+2. create one fork per team;
+3. rename it using `marketpulse-gXX-tYY`;
+4. add all team members as collaborators;
+5. copy `TEAM_TEMPLATE.md` to `TEAM.md`;
+6. follow `CONTRIBUTING.md`.
+
+See `docs/01_STUDENT_ONBOARDING.md` for the complete onboarding procedure.
+
 ## Getting started
 
 Open a terminal and check your environment:
@@ -91,6 +104,8 @@ SP500: 21
 ```text
 marketpulse/
 ├── README.md
+├── TEAM_TEMPLATE.md
+├── CONTRIBUTING.md
 ├── .gitignore
 ├── requirements.txt
 ├── config/
@@ -100,7 +115,12 @@ marketpulse/
 │       ├── prices.csv
 │       └── instruments.json
 ├── docs/
-│   └── 00_MARKETPULSE_FUNCTIONAL_CONTRACT.md
+│   ├── 00_MARKETPULSE_FUNCTIONAL_CONTRACT.md
+│   ├── 01_STUDENT_ONBOARDING.md
+│   ├── 02_MARKETPULSE_USE_CASE.md
+│   ├── 03_GITHUB_TEAM_WORKFLOW.md
+│   ├── 04_CHECKPOINTS_AND_EVIDENCE.md
+│   └── 05_TARGET_REPOSITORY_STRUCTURE.md
 ├── src/
 │   └── main.py
 └── evidence/
