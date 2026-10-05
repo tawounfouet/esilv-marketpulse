@@ -672,6 +672,20 @@ analytics.py
 
 Explain where provider-specific identifiers disappear.
 
+# ADVANCED
+
+No `READY_TO_TEACH` advanced activity is attached directly to TD09 at this time.
+
+The Bloomberg reference-data path is intentionally not active here because its prerequisites include:
+
+```text
+TD09-TD10 CORE complete
++
+validated Bloomberg LIVE environment
+```
+
+Instructor deep dives may be used during TD09, but they are not student deliverables.
+
 # TROUBLESHOOTING
 
 ## LIVE Bloomberg access unavailable
