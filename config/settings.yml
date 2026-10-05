@@ -1,0 +1,9 @@
+app:
+  name: MarketPulse
+
+market:
+  provider: csv
+  ticker: AAPL
+
+data:
+  file: data/sample/prices.csv
