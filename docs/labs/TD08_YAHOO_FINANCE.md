@@ -743,7 +743,23 @@ Do not rewrite analytics because Yahoo is temporarily unavailable.
 
 Do not fabricate successful Yahoo output.
 
-Checkpoint B file `03_yahoo_market_data.png` requires a successful remote retrieval unless the instructor formally defines another evidence recovery procedure.
+Checkpoint B file `03_yahoo_market_data.png` requires a successful remote retrieval.
+
+If Yahoo remains externally unavailable after local code checks and one retry, follow the canonical recovery rule in:
+
+```text
+docs/04_CHECKPOINTS_AND_EVIDENCE.md
+```
+
+The Yahoo evidence item becomes:
+
+```text
+PENDING_EXTERNAL
+```
+
+until a successful remote retrieval can be captured during an instructor-approved recovery window.
+
+Do not substitute CSV output, provider-double output or fabricated values for the missing Yahoo evidence.
 
 # OPTIONAL
 
