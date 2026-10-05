@@ -1860,7 +1860,7 @@ The remaining items can stay in the backlog until teaching evidence justifies th
 
 The backlog design is complete.
 
-The advanced teaching assets are not yet complete.
+The advanced teaching assets are now partially qualified and fully packaged for the P1 scope.
 
 Current interpretation:
 
@@ -1869,9 +1869,19 @@ backlog specification
 =
 DONE
 
-READY_TO_TEACH support production
+P1 support production
 =
-NOT STARTED
+DONE
+
+P1 qualification
+=
+7 READY_TO_TEACH
++
+5 PENDING_EXTERNAL
+
+advanced-track packaging
+=
+DONE
 ```
 
 The frozen MarketPulse CORE remains unchanged.
@@ -1937,3 +1947,37 @@ ADV-DASH-02
 ```
 
 PENDING_EXTERNAL items must complete their real environment gate before a student TD advertises them as READY_TO_TEACH.
+
+
+## 49. R7.6 packaging status
+
+Canonical advanced-track index:
+
+```text
+docs/advanced/README.md
+```
+
+The index now provides:
+
+```text
+domain navigation
+status navigation
+duration
+prerequisites
+delivery mode
+infrastructure requirements
+diagnostic-driven selection
+time-based selection
+self-study guidance
+external-gate promotion rules
+```
+
+Packaging rule:
+
+```text
+advanced track
+!=
+second mandatory curriculum
+```
+
+The P2/P3 backlog remains here and must not be presented as READY_TO_TEACH unless separately qualified.
