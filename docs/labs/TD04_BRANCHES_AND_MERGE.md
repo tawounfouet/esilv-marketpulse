@@ -600,48 +600,7 @@ For the official evidence rules, use `docs/04_CHECKPOINTS_AND_EVIDENCE.md`.
 
 Complete optional work only after the CORE definition of done and Checkpoint A preparation are under control.
 
-## Optional 1 - Execute a controlled conflict
-
-Only perform this exercise if the instructor has enough time to supervise it.
-
-Use a harmless text file, not MarketPulse business code.
-
-Example outline:
-
-```text
-main
-creates practice file
-        |
-        v
-practice branch
-changes one line
-        |
-        v
-main
-changes same line differently
-        |
-        v
-merge
-        |
-        v
-conflict
-```
-
-Inspect:
-
-```bash
-git status
-```
-
-Read the conflict markers.
-
-Resolve the file only after understanding both versions.
-
-Then stage the resolved file and complete the merge.
-
-Do not leave the practice file in the final project unless the instructor wants to preserve it.
-
-## Optional 2 - Compare another branch
+## Optional 1 - Compare another branch
 
 Create a harmless practice branch and use:
 
@@ -651,7 +610,7 @@ git diff main..<branch>
 
 Explain what exists only on the branch.
 
-## Optional 3 - Inspect graph decorations
+## Optional 2 - Inspect graph decorations
 
 Run:
 
@@ -665,7 +624,7 @@ Identify:
 - `main`;
 - recent commits.
 
-## Optional 4 - File history
+## Optional 3 - File history
 
 Run:
 
@@ -678,6 +637,39 @@ Then:
 ```bash
 git show <commit-id> -- src/main.py
 ```
+
+# ADVANCED
+
+Complete advanced work only after TD04 CORE and Checkpoint A preparation are complete.
+
+Advanced work is not required for Checkpoint A.
+
+## ADV-GIT-01 - Conflict Resolution
+
+Status:
+
+```text
+READY_TO_TEACH
+```
+
+Prerequisites:
+
+```text
+TD04 CORE complete
+branch and merge understood
+```
+
+Estimated duration:
+
+```text
+30-45 minutes
+```
+
+Support:
+
+[ADV-GIT-01 - Conflict Resolution](../advanced/ADV_GIT_01_CONFLICT_RESOLUTION.md)
+
+The controlled conflict exercise previously listed under OPTIONAL now lives exclusively in this advanced support.
 
 # TROUBLESHOOTING
 
