@@ -228,17 +228,81 @@ Historical analysis content should not be rewritten merely because R6 is closed.
 ### Acceptance criteria
 
 ```text
-[ ] legacy README points to this roadmap
-[ ] stale R5/R6 "next phase" wording is removed
-[ ] R6 frozen CORE status is acknowledged
-[ ] R7 scope is explicit
-[ ] legacy analysis remains historically intact
-[ ] no CORE contract is changed
+[x] legacy README points to this roadmap
+[x] stale R5/R6 "next phase" wording is removed
+[x] R6 frozen CORE status is acknowledged
+[x] R7 scope is explicit
+[x] legacy analysis remains historically intact
+[x] no CORE contract is changed
 ```
 
 ### Exit result
 
 ```text
+LEGACY DOCUMENTATION
+ALIGNED WITH FROZEN CORE
+```
+
+### Execution result
+
+R7.1 reconciled the Legacy documentation with the frozen R6 baseline without rewriting the historical analysis.
+
+Updated:
+
+```text
+docs/legacy/README.md
+docs/legacy/01_PREVIOUS_COURSE_REPOSITORY_ANALYSIS.md
+docs/legacy/02_LEGACY_TO_MARKETPULSE_CONTENT_MAPPING.md
+docs/legacy/03_OPTIONAL_ADVANCED_CONTENT_BACKLOG.md
+docs/instructor/01_LEGACY_DEEP_DIVE_REFERENCE.md
+```
+
+The reconciliation establishes:
+
+```text
+analysis
+=
+historical source
+
+mapping
+=
+classification source
+
+advanced backlog
+=
+optional design source
+
+instructor deep dive
+=
+consolidated teacher reference
+
+R7 roadmap
+=
+execution source
+
+R6 release
+=
+frozen CORE boundary
+```
+
+No TD, checkpoint, runtime, provider or analytics contract was changed.
+
+### R7.1 acceptance result
+
+```text
+[x] legacy README points to this roadmap
+[x] stale R5/R6 next-phase wording is removed
+[x] R6 frozen CORE status is acknowledged
+[x] R7 scope is explicit
+[x] legacy analysis remains historically intact
+[x] no CORE contract is changed
+```
+
+R7.1 conclusion:
+
+```text
+PASS
+
 LEGACY DOCUMENTATION
 ALIGNED WITH FROZEN CORE
 ```
@@ -645,8 +709,8 @@ Do not mix the two status systems.
 
 | Lot | Scope | Status |
 |---|---|---|
-| R7.1 | Legacy freeze reconciliation | NEXT |
-| R7.2 | Final migration registry | NOT STARTED |
+| R7.1 | Legacy freeze reconciliation | DONE |
+| R7.2 | Final migration registry | NEXT |
 | R7.3 | Instructor deep-dive operationalization | NOT STARTED |
 | R7.4 | Advanced P1 content operationalization | NOT STARTED |
 | R7.5 | TD enrichment capsules | NOT STARTED |
