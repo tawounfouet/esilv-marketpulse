@@ -635,27 +635,471 @@ PASS
 
 ## 8. R6.4 - Wave 2 dry run
 
-Validate:
+Status:
+
+```text
+REVIEW
+```
+
+Validated scope:
 
 ```text
 TD03 Git Local Workflow
 TD04 Branches + Merge
-TD05 Remote Branch + Pull Request
-TD06 Code Review
+TD04 -> TD05 Team Baseline Gate
+TD05 remote branch mechanics
+TD06 review and integration mechanics
 ```
 
-Focus:
+The GitHub Pull Request and review UI still require one real team-fork verification.
+
+### 8.1 Validation topology
+
+The dry run used:
 
 ```text
-real changes
-commit history
-branch state
-Team Baseline Gate
-remote workflow
-Pull Request lifecycle
-review and merge
-handoff into analytics work
+student-a working repository
+student-b working repository
+team.git bare shared remote
+integrator working repository
 ```
+
+This provided a real Git remote and independent local histories without creating artificial branches or Pull Requests in the instructor repository.
+
+For the Git-only mechanics, the temporary harness used a reduced sample CSV with the same MarketPulse code shape and the same first and last dates.
+
+The authoritative 21-row AAPL/SP500 starter-data validation remains R6.3.
+
+### 8.2 TD03 - local Git workflow
+
+Starting state:
+
+```text
+src/main.py modified
+=
+real TD02-style Python change
+```
+
+Executed:
+
+```bash
+git status
+git diff
+git add src/main.py
+git diff --staged
+git commit
+git log --oneline
+git show HEAD
+python src/main.py
+```
+
+Observed transition:
+
+```text
+working tree
+      |
+      v
+staged src/main.py
+      |
+      v
+feat: improve MarketPulse market summary
+      |
+      v
+clean main
+```
+
+Validation:
+
+```text
+git diff --check = PASS
+git diff --staged --check = PASS
+runtime after commit = PASS
+working tree after commit = clean
+```
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 8.3 TD04 - branch isolation and merge
+
+Created:
+
+```text
+feature/display-observation-dates
+```
+
+The branch added only:
+
+```text
+get_first_date(...)
+get_last_date(...)
+date presentation in the reusable summary
+```
+
+Executed:
+
+```bash
+git switch -c feature/display-observation-dates
+git status
+git diff
+python src/main.py
+git add src/main.py
+git diff --staged
+git commit
+git log --oneline --graph --decorate --all
+git diff main..feature/display-observation-dates
+git switch main
+git merge feature/display-observation-dates
+git branch -d feature/display-observation-dates
+```
+
+The branch diff was limited to:
+
+```text
+src/main.py
+10 insertions
+```
+
+Git selected a valid fast-forward merge.
+
+No artificial merge commit was forced.
+
+After merge:
+
+```text
+feature visible from main
+feature commit still visible in history
+MarketPulse runtime = PASS
+working tree = clean
+```
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 8.4 Team Baseline Gate - divergent local histories
+
+The dry run deliberately created two valid but different TD04 histories.
+
+Before synchronization:
+
+```text
+student-a/main != student-b/main
+```
+
+Student B then executed the documented safety sequence:
+
+```bash
+git switch main
+git status
+git branch archive/td04-local
+git fetch origin
+git reset --hard origin/main
+```
+
+After synchronization:
+
+```text
+student-b HEAD = origin/main
+archive/td04-local = previous student-b TD04 history
+working tree = clean
+MarketPulse runtime = PASS
+```
+
+The test proved both required properties:
+
+```text
+common shared baseline established
++
+local learning history preserved
+```
+
+This confirms the controlled hard reset is technically justified by the safety branch and clean-tree preconditions.
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 8.5 TD05 - remote branch mechanics
+
+From the synchronized shared baseline, two distinct student contributions were created.
+
+Student A:
+
+```text
+branch
+=
+feature/display-provider-label
+
+commit
+=
+feat: display provider label
+
+changed file
+=
+src/main.py
+```
+
+Student B:
+
+```text
+branch
+=
+docs/improve-execution-docs
+
+commit
+=
+docs: clarify MarketPulse execution
+
+changed file
+=
+docs/EXECUTION.md
+```
+
+Executed for both students:
+
+```bash
+git switch main
+git pull --ff-only
+git switch -c <feature-branch>
+git add <intended-file>
+git diff --staged --check
+git commit
+git push -u origin <feature-branch>
+```
+
+The shared remote then contained:
+
+```text
+main
+feature/display-provider-label
+docs/improve-execution-docs
+```
+
+Both local feature branches tracked their corresponding remote branches.
+
+The candidate changes were inspectable as:
+
+```text
+origin/main
+      |
+      +--> origin/feature/display-provider-label
+
+origin/main
+      |
+      +--> origin/docs/improve-execution-docs
+```
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 8.6 Pull Request boundary
+
+The following Pull Request properties were validated structurally from the actual branch state and from the TD05 contract:
+
+```text
+source = pushed student feature branch
+target = team main
+diff = intended branch change only
+PR remains open until TD06
+```
+
+However, the dry-run environment does not contain a disposable student team fork.
+
+No artificial Pull Request was created in:
+
+```text
+tawounfouet/esilv-marketpulse
+```
+
+because that would pollute the instructor repository with synthetic teaching evidence.
+
+Required remaining check:
+
+```text
+open one real PR inside a disposable or actual team fork
+verify source branch
+verify target branch
+verify title and description
+verify Files changed
+leave PR open
+```
+
+Classification:
+
+```text
+EXTERNAL VERIFY
+```
+
+### 8.7 TD06 - review semantics
+
+The two remote candidate diffs were inspected before integration.
+
+Provider-label candidate:
+
+```text
+files changed = src/main.py only
+scope = 2 inserted lines
+runtime = PASS
+blocking issue = none
+review outcome = APPROVE
+```
+
+Execution-documentation candidate:
+
+```text
+files changed = docs/EXECUTION.md only
+scope = documentation only
+blocking issue = none
+review outcome = APPROVE
+```
+
+No correction commit was manufactured because no real defect was found.
+
+This validates the TD06 rule:
+
+```text
+no real defect
+      |
+      v
+meaningful review
+      |
+      v
+approval
+```
+
+rather than:
+
+```text
+review exercise
+      |
+      v
+fake defect
+      |
+      v
+fake fix commit
+```
+
+Classification:
+
+```text
+EXECUTED for diff inspection and integration logic
+INSPECTED for GitHub review-outcome semantics
+```
+
+### 8.8 Reviewed integration and synchronization
+
+After inspection, both branches were integrated into the shared remote main.
+
+The resulting graph contained:
+
+```text
+reviewed provider-label integration
++
+reviewed execution-documentation integration
++
+previous TD04 baseline
++
+previous TD03 commit
+```
+
+Both student environments then executed:
+
+```bash
+git switch main
+git pull --ff-only
+git status
+python src/main.py
+```
+
+Final state:
+
+```text
+student-a HEAD = origin/main
+student-b HEAD = origin/main
+student-a working tree = clean
+student-b working tree = clean
+student-a runtime = PASS
+student-b runtime = PASS
+```
+
+Classification:
+
+```text
+EXECUTED
+```
+
+### 8.9 TD06 -> TD07 handoff
+
+Wave 2 now leaves:
+
+```text
+one synchronized main
++
+established branch workflow
++
+established remote push workflow
++
+review-before-merge rule
++
+clean working trees
+```
+
+TD07 can therefore introduce:
+
+```text
+src/analytics.py
+```
+
+as the next real feature instead of reteaching the collaboration workflow.
+
+### 8.10 R6.4 acceptance criteria
+
+```text
+[x] TD03 starts from a meaningful TD02 working-tree change
+[x] git status and git diff expose that change
+[x] intended work can be staged deliberately
+[x] git diff --staged represents the next commit
+[x] meaningful local commit can be created and inspected
+[x] TD04 starts from clean main
+[x] feature branch isolates observation-date work
+[x] feature branch compares cleanly against main
+[x] fast-forward merge works and is accepted
+[x] branch can be deleted without losing history
+[x] two divergent TD04 local mains can be reproduced
+[x] archive/td04-local preserves pre-alignment history
+[x] controlled reset aligns another student to origin/main
+[x] remote feature branches can be pushed with upstream tracking
+[x] remote candidate diffs contain only intended work
+[ ] actual GitHub Pull Request opened in a team fork
+[ ] actual GitHub Files changed view verified in a team fork
+[ ] actual review submitted by another student account
+[ ] actual PR merged through the GitHub UI after review
+[x] no fake correction commit is required when review finds no defect
+[x] reviewed branch integration mechanics work
+[x] all student mains can synchronize to the integrated remote main
+[x] MarketPulse remains executable after synchronization
+[x] Wave 2 leaves a clean handoff for TD07
+```
+
+R6.4 conclusion:
+
+```text
+LOCAL AND REMOTE GIT MECHANICS PASS
+GITHUB PR/REVIEW UI VERIFY REMAINS
+```
+
+R6.4 does not block the Wave 3 dry run.
 
 ## 9. R6.5 - Wave 3 dry run
 
@@ -777,8 +1221,8 @@ TEACHING BASELINE READY
 | R6.1 | Starter runtime baseline | DONE |
 | R6.2 | Clean-clone and student bootstrap portability | REVIEW |
 | R6.3 | Wave 1 dry run | DONE |
-| R6.4 | Wave 2 dry run | NEXT |
-| R6.5 | Wave 3 dry run | NOT STARTED |
+| R6.4 | Wave 2 dry run | REVIEW |
+| R6.5 | Wave 3 dry run | NEXT |
 | R6.6 | Wave 4 dry run | NOT STARTED |
 | R6.7 | Checkpoint and evidence dry run | NOT STARTED |
 | R6.8 | Instructor contingency and provider fallback validation | NOT STARTED |
