@@ -40,7 +40,7 @@ Only one member creates the initial team fork.
 Source repository:
 
 ```text
-tawounfouet/marketpulse
+tawounfouet/esilv-marketpulse
 ```
 
 The fork belongs to the team for the duration of the module.
@@ -52,13 +52,13 @@ The student who creates the fork is not automatically the team leader.
 Use the following convention:
 
 ```text
-marketpulse-gXX-tYY
+esilv-marketpulse-gXX-tYY
 ```
 
 Example:
 
 ```text
-marketpulse-g03-t02
+esilv-marketpulse-g03-t02
 ```
 
 Do not include student initials in the repository name.
@@ -176,7 +176,7 @@ Before onboarding is considered complete:
 [ ] GitHub login works
 [ ] Team is identified
 [ ] Team repository exists
-[ ] Repository follows marketpulse-gXX-tYY naming
+[ ] Repository follows esilv-marketpulse-gXX-tYY naming
 [ ] All members have access
 [ ] TEAM.md is completed
 [ ] Development environment opens
