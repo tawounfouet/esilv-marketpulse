@@ -452,9 +452,41 @@ Do not copy another student's credentials.
 
 Do not fabricate provider evidence when an external service is unavailable.
 
-## CORE vs optional extensions
+## Teaching layers: CORE / OPTIONAL / ADVANCED / INSTRUCTOR
 
-The common CORE does not require:
+MarketPulse now distinguishes four teaching layers:
+
+```text
+CORE
+=
+mandatory common path
++
+checkpoint-aligned
++
+18-hour curriculum
+
+OPTIONAL
+=
+lightweight extension inside a TD
++
+not required for checkpoint evidence
+
+ADVANCED
+=
+materially deeper student practice
++
+dedicated support under docs/advanced/
++
+never required for a checkpoint
+
+INSTRUCTOR
+=
+teacher-facing conceptual depth
++
+not a student deliverable
+```
+
+The common CORE still does not require:
 
 ```text
 tests/
@@ -466,7 +498,25 @@ advanced CI/CD
 advanced quantitative finance
 ```
 
-Optional professional extensions can include remote Linux, SSH, Docker or GitHub Actions after the required learning path is complete.
+Current active ADVANCED work is indexed from:
+
+```text
+docs/labs/README.md
+```
+
+Instructor deep dives are indexed from:
+
+```text
+docs/instructor/deep-dives/README.md
+```
+
+Some advanced supports may exist with status:
+
+```text
+PENDING_EXTERNAL
+```
+
+Such supports are not activated as student exercises until their real delivery gate passes.
 
 This README intentionally does not display CI, security, release or license badges because those contracts are not present in the CORE repository.
 
