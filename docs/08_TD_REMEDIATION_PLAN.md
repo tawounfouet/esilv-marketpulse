@@ -1085,9 +1085,9 @@ remaining occurrences are intentional:
 - remediation scan / historical exclusion language
 - explicit "Do not create" example in TD11
 
-tawounfouet/marketpulse
+legacy instructor repository name without the `esilv-` prefix
 =
-no occurrence
+no active occurrence outside this scan description
 
 canonical instructor repository
 =
