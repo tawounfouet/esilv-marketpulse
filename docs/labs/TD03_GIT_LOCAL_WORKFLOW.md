@@ -639,6 +639,37 @@ git ls-files
 
 This command is useful reference material, not a CORE requirement.
 
+# ADVANCED
+
+Complete advanced work only after TD03 CORE is complete.
+
+Advanced work is not required for Checkpoint A.
+
+## ADV-GIT-02 - Restore, Revert and Reset
+
+Status:
+
+```text
+READY_TO_TEACH
+```
+
+Prerequisites:
+
+```text
+TD03 CORE complete
+basic commits and status understood
+```
+
+Estimated duration:
+
+```text
+60 minutes
+```
+
+Support:
+
+[ADV-GIT-02 - Restore, Revert and Reset](../advanced/ADV_GIT_02_RESTORE_REVERT_RESET.md)
+
 # TROUBLESHOOTING
 
 ## Nothing to commit
