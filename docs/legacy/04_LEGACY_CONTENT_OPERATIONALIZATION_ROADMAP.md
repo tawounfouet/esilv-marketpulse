@@ -384,14 +384,14 @@ docs/legacy/05_LEGACY_FINAL_MIGRATION_REGISTRY.md
 The registry contains:
 
 ```text
-23 CORE_MIGRATED rows
+25 CORE_MIGRATED rows
 10 INSTRUCTOR_READY targets
 12 P1 ADVANCED_READY targets
 12 other optional rows
 13 REFERENCE_ONLY rows
 26 DROP_CLOSED rows
 
-96 registered rows total
+98 registered rows total
 ```
 
 High-priority coverage:
