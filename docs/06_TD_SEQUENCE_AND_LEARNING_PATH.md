@@ -353,12 +353,14 @@ Contributes to Checkpoint B.
 
 Students should be able to:
 
-- retrieve remote market data;
-- configure an instrument and benchmark;
+- retrieve remote market data for the common CORE pair;
+- handle AAPL as the instrument and S&P 500 as the benchmark;
 - use the common lookback and interval;
 - understand provider-specific symbols;
 - handle simple acquisition errors;
 - connect remote data to the existing MarketPulse flow.
+
+Changing to another market pair is optional and is not required for Checkpoint B.
 
 ### Git level expected
 

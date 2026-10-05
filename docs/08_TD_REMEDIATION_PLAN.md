@@ -733,26 +733,33 @@ Acceptance criteria:
 
 ### R3.3 Resolve Checkpoint B market-pair requirement
 
-Current gap:
-
-Checkpoint B currently mentions ability to change the selected market pair.
-
-Recommended decision:
-
-Remove this from mandatory CORE validation.
-
-Keep alternate market pairs as:
+Status:
 
 ```text
-OPTIONAL
-or
-oral extension
+DONE
 ```
+
+Implemented decision:
+
+```text
+Checkpoint B mandatory pair
+=
+AAPL + S&P 500
+```
+
+Completed actions:
+
+- removed "ability to change the selected market pair" from mandatory Checkpoint B skills;
+- removed mandatory ticker-change validation from Checkpoint B oral questions;
+- kept alternate coherent market pairs as OPTIONAL or oral extension;
+- updated TD08 to state explicitly that alternate pair selection is not required for Checkpoint B;
+- updated the learning path so TD08 mandatory scope is the common CORE pair;
+- reconciled the transverse review with the resolved decision.
 
 Acceptance criteria:
 
 ```text
-[ ] Checkpoint B mandatory scope matches what TD08 actually teaches
+[x] Checkpoint B mandatory scope matches what TD08 actually teaches
 ```
 
 ## 8. R4 - Rebalance TD09 to TD12
@@ -1333,7 +1340,7 @@ Initial status:
 |---|---|---|---|
 | R1 | Cross-cutting contracts | P0 | DONE |
 | R2 | TD01-TD06 | P0/P1 | DONE |
-| R3 | TD07-TD08 | P0 | IN PROGRESS |
+| R3 | TD07-TD08 | P0 | DONE |
 | R4 | TD09-TD12 | P0 | NOT STARTED |
 | R5 | Final validation | P0 closure | NOT STARTED |
 

@@ -775,6 +775,14 @@ AAPL + S&P 500
 
 Do not make alternate pair selection a mandatory TD08 task.
 
+Checkpoint B also does not require changing the CORE market pair.
+
+For mandatory validation, the common pair remains:
+
+```text
+AAPL + S&P 500
+```
+
 ## Optional 3 - Provider selector
 
 Experiment with:

@@ -1522,41 +1522,34 @@ A mandatory merge-conflict exercise is not necessary for Checkpoint A.
 Alignment:
 
 ```text
-GOOD WITH ONE SMALL GAP
+REMEDIATED BY LOT-R3.3
 ```
 
-Evidence:
+Evidence remains:
 
 - Pull Request from TD05;
 - code review from TD06;
 - comparison from TD07;
 - Yahoo data from TD08.
 
-Gap:
-
-The checkpoint skills mention ability to change the selected market pair.
-
-The labs mainly guarantee the AAPL + SP500 common path.
-
-Decision:
-
-Either:
+Resolved decision:
 
 ```text
-A. remove "change the selected market pair" from required Checkpoint B skills
+Checkpoint B validates the common CORE pair:
+AAPL + S&P 500
 ```
 
-or:
+Changing the selected ticker or market pair is no longer a mandatory Checkpoint B skill.
+
+Alternate coherent market pairs remain:
 
 ```text
-B. add one small controlled provider-symbol change exercise to TD08 CORE
+OPTIONAL
+or
+oral extension
 ```
 
-Recommendation:
-
-Choose A for the common CORE.
-
-Alternate pairs can remain an oral or advanced extension.
+This aligns the canonical checkpoint contract with what TD08 actually guarantees.
 
 ### Checkpoint C
 

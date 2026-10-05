@@ -180,7 +180,7 @@ Suggested weight inside the TD grade:
 - instrument and benchmark handling;
 - common data model;
 - Yahoo Finance integration;
-- ability to change the selected market pair;
+- correct handling of the common CORE pair AAPL + S&P 500;
 - same lookback and interval for instrument and benchmark.
 
 ### Required screenshots
@@ -254,7 +254,10 @@ The instructor may ask:
 - Where is the benchmark handled?
 - Why must instrument and benchmark use the same period and interval?
 - Why should processing not depend directly on one provider?
-- Can you change the selected ticker and run the application again?
+
+Changing the selected ticker or market pair is not a mandatory Checkpoint B skill.
+
+If the instructor wants an extension question, they may optionally ask whether the student can explain what would need to change for another coherent instrument and benchmark pair.
 
 ## 5. Checkpoint C - Integration and Release
 
