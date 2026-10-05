@@ -517,51 +517,11 @@ before TD12.
 
 These commands must not still be changing during the release session.
 
-## 7. Repository architecture inconsistency
+## 7. Repository architecture and runtime contract
 
-This is one of the most important technical findings.
+This finding has now been remediated by LOT-R1.1 and LOT-R1.2.
 
-### Current target document
-
-`docs/05_TARGET_REPOSITORY_STRUCTURE.md` proposes a final package:
-
-```text
-src/
-└── marketpulse/
-    ├── main.py
-    ├── providers/
-    ├── processing/
-    └── dashboard/
-```
-
-### Current later labs
-
-The TD08-TD12 documents instead use structures such as:
-
-```text
-src/
-├── main.py
-├── providers/
-└── dashboard/
-```
-
-and TD11 proposes running:
-
-```bash
-python src/dashboard/app.py
-```
-
-### Why this matters
-
-A nested dashboard script may need to import code from sibling directories.
-
-Running a nested script directly can create Python import-path problems that do not occur when running `src/main.py`.
-
-This is exactly the type of accidental packaging problem that should not consume a beginner lab.
-
-### Recommended CORE architecture
-
-For the 18-hour CORE, prefer a deliberately simple executable layout:
+The 18-hour CORE uses one deliberately simple executable layout:
 
 ```text
 src/
@@ -574,14 +534,18 @@ src/
     └── bloomberg_provider.py
 ```
 
-This keeps both entry points at the same level:
+The two canonical runtime commands are:
 
 ```bash
 python src/main.py
 python src/dashboard.py
 ```
 
-and makes simple imports easier to explain.
+The terminal entry point is used from the starter onward.
+
+The dashboard entry point is introduced in TD11 and is reused unchanged in TD12.
+
+This decision avoids accidental Python packaging and import-path complexity during a beginner practical sequence.
 
 Suggested responsibility:
 
@@ -599,15 +563,9 @@ dashboard.py
 Dash presentation using shared application results
 ```
 
-The more formal:
+A more formal Python package remains an optional professional evolution outside the mandatory CORE.
 
-```text
-src/marketpulse/
-```
-
-package architecture can remain a future professional refactor or optional extension.
-
-The CORE should prioritize reliable execution and conceptual clarity over packaging sophistication.
+The CORE therefore prioritizes reliable execution and conceptual clarity over packaging sophistication.
 
 ## 8. Configuration inconsistency
 

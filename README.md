@@ -103,6 +103,24 @@ AAPL: 21
 SP500: 21
 ```
 
+## CORE runtime contract
+
+The terminal entry point remains stable throughout the practical sequence:
+
+```bash
+python src/main.py
+```
+
+From TD11 onward, the dashboard entry point is:
+
+```bash
+python src/dashboard.py
+```
+
+These are the two canonical CORE runtime commands.
+
+Do not introduce another mandatory entry point unless the teaching team explicitly revises the common architecture.
+
 ## Starter structure
 
 ```text

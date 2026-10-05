@@ -236,6 +236,12 @@ Acceptance criteria:
 
 ### R1.2 Freeze runtime commands
 
+Status:
+
+```text
+DONE
+```
+
 CORE commands:
 
 ```bash
@@ -243,19 +249,24 @@ python src/main.py
 python src/dashboard.py
 ```
 
-Required actions:
+The terminal command is valid from the starter onward.
 
-- use these commands consistently;
-- update README examples;
-- update TD11;
-- update TD12 reproducibility procedure.
+The dashboard command is introduced in TD11 and reused unchanged in TD12.
+
+Completed actions:
+
+- canonical commands documented in the root README;
+- canonical commands documented in the learning path;
+- TD11 uses the single-file dashboard entry point;
+- TD12 fresh-run and final validation use the same commands;
+- the transverse review now reflects the resolved runtime contract.
 
 Acceptance criteria:
 
 ```text
-[ ] terminal command is unique and stable
-[ ] dashboard command is unique and stable
-[ ] TD12 fresh-run instructions use the same commands
+[x] terminal command is unique and stable
+[x] dashboard command is unique and stable
+[x] TD12 fresh-run instructions use the same commands
 ```
 
 ### R1.3 Freeze configuration status

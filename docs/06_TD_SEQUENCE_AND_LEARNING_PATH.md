@@ -80,6 +80,26 @@ daily interval
 performance comparison
 ```
 
+### CORE runtime contract
+
+The execution contract is intentionally stable:
+
+```bash
+python src/main.py
+```
+
+is the terminal entry point from the starter onward.
+
+From TD11 onward:
+
+```bash
+python src/dashboard.py
+```
+
+is the dashboard entry point.
+
+TD12 must validate these same commands from a fresh or clean setup.
+
 ## 4. TD01 - Bootstrap + Linux
 
 ### Business requirement
