@@ -1549,6 +1549,12 @@ PASS
 
 ### R5.5 Timing scan
 
+Status:
+
+```text
+DONE
+```
+
 Every TD must have:
 
 ```text
@@ -1564,11 +1570,122 @@ The buffer is necessary for:
 - Git mistakes;
 - instructor explanations.
 
+Repository-wide timing matrix:
+
+| TD | CORE end | 80-90 minute block | Checkpoint capture |
+|---|---:|---|---|
+| TD01 | 80 min | Buffer, support, optional exploration | N/A |
+| TD02 | 80 min | Buffer, optional exercises | N/A |
+| TD03 | 80 min | Buffer, optional exercises | N/A |
+| TD04 | 80 min | Checkpoint A capture, buffer, optional conflict practice | Included |
+| TD05 | 80 min | Buffer, troubleshooting, optional | N/A |
+| TD06 | 80 min | Buffer, optional review practice | N/A |
+| TD07 | 80 min | Buffer, review, optional analytics | N/A |
+| TD08 | 80 min | Review, Checkpoint B capture, troubleshooting | Included |
+| TD09 | 80 min | Review, troubleshooting, optional | N/A |
+| TD10 | 80 min | Review, troubleshooting, optional | N/A |
+| TD11 | 80 min | Review, troubleshooting, optional polish | N/A |
+| TD12 | 80 min | Checkpoint C capture, buffer | Included |
+
+Detailed scan result:
+
+```text
+TD01
+78-80 = CORE definition of done
+80-90 = buffer / support / optional exploration
+
+TD02
+75-80 = final run + CORE validation
+80-90 = buffer / optional exercises
+
+TD03
+72-80 = run MarketPulse + CORE validation
+80-90 = buffer / optional exercises
+
+TD04
+75-80 = CORE validation
+80-90 = Checkpoint A capture / buffer / optional practice
+
+TD05
+74-80 = inspect Files changed + leave PR open
+80-90 = buffer / troubleshooting / optional
+
+TD06
+75-80 = CORE validation
+80-90 = buffer / optional practice
+
+TD07
+72-80 = validation + standard Git handoff
+80-90 = buffer / review / optional
+
+TD08
+78-80 = CORE definition of done
+80-90 = review / Checkpoint B / troubleshooting
+
+TD09
+72-80 = validation + standard Git handoff
+80-90 = review / troubleshooting / optional
+
+TD10
+74-80 = CORE validation + standard Git handoff
+80-90 = review / troubleshooting / optional
+
+TD11
+78-80 = CORE validation
+80-90 = review / troubleshooting / optional
+
+TD12
+75-80 = final run from merged main
+80-90 = Checkpoint C capture / buffer
+```
+
+Optional-section ordering scan:
+
+```text
+all 12 labs place their dedicated OPTIONAL sections
+after the mandatory CORE material
+
+no optional exercise is required
+to satisfy the CORE definition of done
+```
+
+Checkpoint timing:
+
+```text
+Checkpoint A
+=
+TD04 final 10-minute block
+
+Checkpoint B
+=
+TD08 final 10-minute block
+
+Checkpoint C
+=
+TD12 final 10-minute block
+```
+
+The scan also confirms that the 90-minute structure is not being used as:
+
+```text
+90 minutes mandatory work
++
+extra checkpoint capture
+```
+
+Instead, checkpoint-ending labs reserve their final block for capture, support and validation.
+
 Acceptance criteria:
 
 ```text
-[ ] no CORE requires optional challenges to finish
-[ ] checkpoint capture time is included where relevant
+[x] no CORE requires optional challenges to finish
+[x] checkpoint capture time is included where relevant
+```
+
+R5.5 conclusion:
+
+```text
+PASS
 ```
 
 ### R5.6 Dependency continuity scan
