@@ -934,10 +934,89 @@ docs/instructor/02_TD_ENRICHMENT_CAPSULES.md
 ### Acceptance criteria
 
 ```text
-[ ] each capsule maps to one TD
-[ ] each capsule has a stop point
-[ ] no capsule changes CORE DoD
-[ ] no capsule creates hidden prerequisite
+[x] each capsule maps to one TD
+[x] each capsule has a stop point
+[x] no capsule changes CORE DoD
+[x] no capsule creates hidden prerequisite
+```
+
+### Execution result
+
+Created:
+
+```text
+docs/instructor/02_TD_ENRICHMENT_CAPSULES.md
+```
+
+Result:
+
+```text
+11 capsules
+mapped to 6 primary TDs
+```
+
+Primary TDs:
+
+```text
+TD01
+TD03
+TD04
+TD05
+TD09
+TD10
+```
+
+Intentionally no default capsule:
+
+```text
+TD02
+TD06
+TD07
+TD08
+TD11
+TD12
+```
+
+The document provides for every capsule:
+
+```text
+source deep dive
+duration
+delivery trigger
+teaching objective
+micro-sequence
+understanding check
+stop point
+non-impact statement
+```
+
+Global rules:
+
+```text
+CORE completion
+>
+capsule
+
+capsule
+!=
+student exercise
+
+capsule
+!=
+checkpoint evidence
+
+capsule
+!=
+ADVANCED lab
+```
+
+R7.5 conclusion:
+
+```text
+PASS
+
+TD ENRICHMENT CAPSULES
+OPERATIONAL
 ```
 
 ## 12. R7.6 - Advanced-track packaging
@@ -996,10 +1075,12 @@ final migration registry
 ```text
 Has every high-priority Legacy topic received a final destination?
 
-Has every P1 advanced item been either:
+Has every P1 advanced item been explicitly resolved as:
 READY_TO_TEACH
 or
-explicitly DEFERRED?
+PENDING_EXTERNAL with an explicit delivery gate
+or
+DEFERRED?
 
 Have instructor-priority concepts been operationalized?
 
@@ -1068,8 +1149,8 @@ Do not mix the two status systems.
 | R7.2 | Final migration registry | DONE |
 | R7.3 | Instructor deep-dive operationalization | DONE |
 | R7.4 | Advanced P1 content operationalization | DONE |
-| R7.5 | TD enrichment capsules | NEXT |
-| R7.6 | Advanced-track packaging | NOT STARTED |
+| R7.5 | TD enrichment capsules | DONE |
+| R7.6 | Advanced-track packaging | NEXT |
 | R7.7 | Legacy closure audit | NOT STARTED |
 
 ## 16. Current baseline facts
@@ -1125,7 +1206,7 @@ R7 is complete only when:
 [x] R7.2 DONE
 [x] R7.3 DONE
 [x] R7.4 DONE with every P1 item explicitly resolved
-[ ] R7.5 DONE
+[x] R7.5 DONE
 [ ] R7.6 DONE when advanced supports exist
 [ ] R7.7 DONE
 ```
@@ -1154,9 +1235,12 @@ WITHOUT CORE DIVERGENCE
 The current action is:
 
 ```text
-R7.5 - TD enrichment capsules
+R7.6 - Advanced-track packaging
 ```
 
-R7.4 is closed.
+R7.5 is closed.
 
-Seven advanced supports are active and five remain explicitly PENDING_EXTERNAL with inactive student links.
+The instructor layer now contains both:
+10 operational deep dives
++
+11 TD enrichment capsules.
