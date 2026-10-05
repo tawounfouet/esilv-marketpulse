@@ -1,0 +1,88 @@
+{
+  "sample_kind": "instructor_approved_fallback_fixture",
+  "provider_stage": "bloomberg",
+  "access_mode": "approved_sample",
+  "is_live_bloomberg_output": false,
+  "provenance": "Illustrative teaching values reused from data/sample/prices.csv. Not certified Bloomberg historical observations.",
+  "schema_note": "observation_date/open_value/high_value/low_value/close_value/volume_value are teaching wrapper keys, not Bloomberg field mnemonics.",
+  "series": [
+    {
+      "role": "instrument",
+      "canonical_ticker": "AAPL",
+      "provider_identifier": "AAPL US Equity",
+      "observations": [
+        {
+          "observation_date": "2026-09-01",
+          "open_value": 249.2,
+          "high_value": 251.5,
+          "low_value": 248,
+          "close_value": 250,
+          "volume_value": 38000000
+        },
+        {
+          "observation_date": "2026-09-02",
+          "open_value": 250.8,
+          "high_value": 252.8,
+          "low_value": 249.6,
+          "close_value": 251.3,
+          "volume_value": 39500000
+        },
+        {
+          "observation_date": "2026-09-03",
+          "open_value": 249.6,
+          "high_value": 251.3,
+          "low_value": 248.4,
+          "close_value": 249.8,
+          "volume_value": 41000000
+        },
+        {
+          "observation_date": "2026-09-04",
+          "open_value": 251.3,
+          "high_value": 253.6,
+          "low_value": 250.1,
+          "close_value": 252.1,
+          "volume_value": 42500000
+        }
+      ]
+    },
+    {
+      "role": "benchmark",
+      "canonical_ticker": "SP500",
+      "provider_identifier": "SPX Index",
+      "observations": [
+        {
+          "observation_date": "2026-09-01",
+          "open_value": 6592,
+          "high_value": 6615,
+          "low_value": 6580,
+          "close_value": 6600,
+          "volume_value": 0
+        },
+        {
+          "observation_date": "2026-09-02",
+          "open_value": 6607,
+          "high_value": 6627,
+          "low_value": 6595,
+          "close_value": 6612,
+          "volume_value": 0
+        },
+        {
+          "observation_date": "2026-09-03",
+          "open_value": 6596,
+          "high_value": 6613,
+          "low_value": 6584,
+          "close_value": 6598,
+          "volume_value": 0
+        },
+        {
+          "observation_date": "2026-09-04",
+          "open_value": 6612,
+          "high_value": 6635,
+          "low_value": 6600,
+          "close_value": 6620,
+          "volume_value": 0
+        }
+      ]
+    }
+  ]
+}

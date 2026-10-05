@@ -1119,16 +1119,25 @@ OPTIONAL:
 - additional identifiers;
 - extra response-analysis exercises.
 
-Required instructor asset:
+Required instructor assets are now prepared by LOT-R4.1:
 
 ```text
-a reference Bloomberg sample that is known to work for the lab
+docs/10_BLOOMBERG_INSTRUCTOR_REFERENCE.md
+data/sample/bloomberg_reference_sample.json
+data/sample/bloomberg_reference_expected.json
 ```
+
+The fallback fixture is deliberately not presented as raw live Bloomberg output.
+
+It uses documented teaching wrapper keys so the course does not invent unverified Bloomberg field mnemonics.
+
+The reference also defines the required `LIVE` vs `APPROVED_SAMPLE` distinction.
 
 Verdict:
 
 ```text
-90 minutes feasible if a fallback sample exists before class.
+The external-access risk now has an instructor-controlled fallback path.
+TD09 can be rebalanced without making live Bloomberg connectivity a completion condition.
 ```
 
 ### TD10 - Bloomberg Provider

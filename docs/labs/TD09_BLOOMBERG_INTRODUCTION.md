@@ -611,12 +611,32 @@ If live access is unavailable:
 
 1. do not fabricate a successful request;
 2. do not use another student's credentials;
-3. use an instructor-provided Bloomberg sample or export if available;
+3. use the instructor-approved fallback assets;
 4. complete the field-mapping exercise from that approved sample;
-5. document that the session used a sample rather than live retrieval;
+5. document that the session used `APPROVED_SAMPLE` rather than `LIVE`;
 6. continue the architectural work.
 
-A local sample can support mapping and normalization practice.
+Instructor reference:
+
+```text
+docs/10_BLOOMBERG_INSTRUCTOR_REFERENCE.md
+```
+
+Fallback input:
+
+```text
+data/sample/bloomberg_reference_sample.json
+```
+
+Expected canonical result:
+
+```text
+data/sample/bloomberg_reference_expected.json
+```
+
+The fallback fixture uses teaching wrapper keys, not claimed Bloomberg field mnemonics.
+
+A local approved sample supports mapping and normalization practice.
 
 It does not prove live Bloomberg connectivity.
 

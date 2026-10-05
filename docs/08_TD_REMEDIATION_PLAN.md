@@ -779,26 +779,38 @@ P0
 Status:
 
 ```text
-P0 PRE-CLASS REQUIREMENT
+DONE
 ```
 
-Prepare:
+Prepared assets:
 
 ```text
-1. known-good Bloomberg sample
-2. reference field mapping
-3. expected canonical normalized result
-4. documented live vs sample distinction
+docs/10_BLOOMBERG_INSTRUCTOR_REFERENCE.md
+data/sample/bloomberg_reference_sample.json
+data/sample/bloomberg_reference_expected.json
 ```
 
-The sample must be usable without exposing credentials.
+Implemented controls:
+
+- added an instructor-approved fallback fixture for the Bloomberg stage;
+- reused illustrative MarketPulse starter values rather than claiming certified Bloomberg observations;
+- labelled the fixture explicitly as `APPROVED_SAMPLE`;
+- made `is_live_bloomberg_output = false` explicit in the sample metadata;
+- used teaching wrapper keys rather than inventing Bloomberg field mnemonics;
+- documented the wrapper-to-canonical reference mapping;
+- added a known expected canonical normalized result;
+- froze `AAPL US Equity -> AAPL` and `SPX Index -> SP500` for the teaching path;
+- documented `LIVE` vs `APPROVED_SAMPLE` semantics;
+- stated explicitly that approved-sample execution does not prove live connectivity;
+- linked TD09 and TD10 to the fallback assets;
+- kept all fallback assets credential-free.
 
 Acceptance criteria:
 
 ```text
-[ ] TD09 can succeed without live Bloomberg
-[ ] TD10 can succeed without fabricating provider evidence
-[ ] students can distinguish live from approved sample mode
+[x] TD09 can succeed without live Bloomberg
+[x] TD10 can continue provider-boundary work without fabricating live evidence
+[x] students can distinguish LIVE from APPROVED_SAMPLE mode
 ```
 
 ### R4.2 TD09 - Bloomberg Introduction
@@ -1341,7 +1353,7 @@ Initial status:
 | R1 | Cross-cutting contracts | P0 | DONE |
 | R2 | TD01-TD06 | P0/P1 | DONE |
 | R3 | TD07-TD08 | P0 | DONE |
-| R4 | TD09-TD12 | P0 | NOT STARTED |
+| R4 | TD09-TD12 | P0 | IN PROGRESS |
 | R5 | Final validation | P0 closure | NOT STARTED |
 
 Each lot should move through:

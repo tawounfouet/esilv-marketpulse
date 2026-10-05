@@ -695,15 +695,21 @@ That makes failures harder to understand.
 
 # Part 17 - Fallback mode
 
-If live Bloomberg access is unavailable during TD10, use only an instructor-approved sample or export.
+If live Bloomberg access is unavailable during TD10, use only the instructor-approved fallback assets:
+
+```text
+docs/10_BLOOMBERG_INSTRUCTOR_REFERENCE.md
+data/sample/bloomberg_reference_sample.json
+data/sample/bloomberg_reference_expected.json
+```
 
 The architecture should remain:
 
 ```text
-approved Bloomberg sample
+approved Bloomberg-stage sample
           |
           v
-Bloomberg normalization
+Bloomberg provider boundary
           |
           v
 canonical rows
@@ -712,15 +718,21 @@ canonical rows
 shared analytics
 ```
 
-Document clearly:
+The fallback input uses teaching wrapper keys.
+
+Those keys are not claimed Bloomberg field mnemonics.
+
+Document the provider mode clearly:
 
 ```text
-live provider access
+LIVE
 or
-approved sample fallback
+APPROVED_SAMPLE
 ```
 
 Do not label sample-based execution as live Bloomberg retrieval.
+
+When `APPROVED_SAMPLE` is used, normalized rows should match the expected canonical reference.
 
 # Part 18 - Validation matrix
 

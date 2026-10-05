@@ -1,0 +1,79 @@
+{
+  "sample_kind": "expected_canonical_result",
+  "source_fixture": "data/sample/bloomberg_reference_sample.json",
+  "access_mode": "approved_sample",
+  "rows": [
+    {
+      "date": "2026-09-01",
+      "ticker": "AAPL",
+      "open": 249.2,
+      "high": 251.5,
+      "low": 248,
+      "close": 250,
+      "volume": 38000000
+    },
+    {
+      "date": "2026-09-02",
+      "ticker": "AAPL",
+      "open": 250.8,
+      "high": 252.8,
+      "low": 249.6,
+      "close": 251.3,
+      "volume": 39500000
+    },
+    {
+      "date": "2026-09-03",
+      "ticker": "AAPL",
+      "open": 249.6,
+      "high": 251.3,
+      "low": 248.4,
+      "close": 249.8,
+      "volume": 41000000
+    },
+    {
+      "date": "2026-09-04",
+      "ticker": "AAPL",
+      "open": 251.3,
+      "high": 253.6,
+      "low": 250.1,
+      "close": 252.1,
+      "volume": 42500000
+    },
+    {
+      "date": "2026-09-01",
+      "ticker": "SP500",
+      "open": 6592,
+      "high": 6615,
+      "low": 6580,
+      "close": 6600,
+      "volume": 0
+    },
+    {
+      "date": "2026-09-02",
+      "ticker": "SP500",
+      "open": 6607,
+      "high": 6627,
+      "low": 6595,
+      "close": 6612,
+      "volume": 0
+    },
+    {
+      "date": "2026-09-03",
+      "ticker": "SP500",
+      "open": 6596,
+      "high": 6613,
+      "low": 6584,
+      "close": 6598,
+      "volume": 0
+    },
+    {
+      "date": "2026-09-04",
+      "ticker": "SP500",
+      "open": 6612,
+      "high": 6635,
+      "low": 6600,
+      "close": 6620,
+      "volume": 0
+    }
+  ]
+}
