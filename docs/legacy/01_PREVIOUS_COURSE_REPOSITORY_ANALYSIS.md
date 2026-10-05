@@ -1798,3 +1798,9 @@ contenu historique
 ```
 
 afin de tirer parti de l'ancien matériel sans réintroduire sa surcharge.
+
+Cette cartographie est maintenant documentée dans :
+
+```text
+docs/legacy/02_LEGACY_TO_MARKETPULSE_CONTENT_MAPPING.md
+```
