@@ -408,6 +408,25 @@ analysis complete
 all useful Legacy content ready to teach
 ```
 
+## Frozen CORE reference
+
+The common MarketPulse CORE is frozen through R6.
+
+Release decision:
+
+```text
+TEACHING BASELINE READY
+WITH EXTERNAL PRE-CLASS CHECKS
+```
+
+Canonical release reference:
+
+```text
+docs/16_TEACHING_BASELINE_RELEASE.md
+```
+
+Legacy operationalization must preserve that baseline.
+
 ## Next Legacy phase
 
 R1-R6 have frozen the common MarketPulse CORE.
@@ -418,10 +437,16 @@ The remaining Legacy work is now governed exclusively by:
 docs/legacy/04_LEGACY_CONTENT_OPERATIONALIZATION_ROADMAP.md
 ```
 
-The next lot is:
+The current roadmap state is maintained in:
 
 ```text
-R7.1 - Legacy freeze reconciliation
+docs/legacy/04_LEGACY_CONTENT_OPERATIONALIZATION_ROADMAP.md
+```
+
+After R7.1 reconciliation, execution proceeds to:
+
+```text
+R7.2 - Final migration registry
 ```
 
 Do not create new Legacy-derived teaching material outside that roadmap.
