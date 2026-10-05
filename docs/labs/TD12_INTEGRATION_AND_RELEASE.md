@@ -1053,41 +1053,50 @@ Before finishing TD12, verify:
 
 # Part 30 - Full learning path recap
 
-You have now completed:
+You have now completed four pedagogical waves:
 
 ```text
-WAVE 1 - Foundations
-
+WAVE 1 - FOUNDATIONS - 3 HOURS
 TD01 - Bootstrap + Linux
 TD02 - Python + CSV / JSON
+
+WAVE 2 - GIT AND COLLABORATION - 6 HOURS
 TD03 - Git Local Workflow
 TD04 - Branches + Merge
-        |
-        v
-Checkpoint A
-
-
-WAVE 2 - Collaboration + Data
-
 TD05 - Fork + Pull Request
 TD06 - Code Review
+
+WAVE 3 - COMPARISON + YAHOO FINANCE - 3 HOURS
 TD07 - Data Normalization + Comparison
 TD08 - Yahoo Finance
-        |
-        v
-Checkpoint B
 
-
-WAVE 3 - Professional Integration
-
+WAVE 4 - PROFESSIONAL INTEGRATION - 6 HOURS
 TD09 - Bloomberg Introduction
 TD10 - Bloomberg Provider
 TD11 - Dash Dashboard
 TD12 - Integration + Release
+```
+
+The assessment checkpoints follow a different grouping:
+
+```text
+CHECKPOINT PHASE A - TD01-TD04
+        |
+        v
+Checkpoint A
+
+CHECKPOINT PHASE B - TD05-TD08
+        |
+        v
+Checkpoint B
+
+CHECKPOINT PHASE C - TD09-TD12
         |
         v
 Checkpoint C
 ```
+
+Wave 4 and Checkpoint Phase C both end at TD12, but they are not the same grouping model.
 
 Total practical time:
 

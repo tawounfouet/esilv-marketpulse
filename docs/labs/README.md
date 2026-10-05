@@ -1,4 +1,4 @@
-# MarketPulse TD Index
+# MarketPulse Lab Index
 
 ## Purpose
 
@@ -25,24 +25,35 @@ The common sequence contains 12 TD units for a total of 18 hours.
 | TD11 | Dash Dashboard | Comparative market dashboard |
 | TD12 | Integration + Release | Reproducible final release |
 
-## Checkpoints
+## Pedagogical waves
 
 ```text
-TD01-TD04
+Wave 1 - TD01-TD02 - 3 hours
+Wave 2 - TD03-TD06 - 6 hours
+Wave 3 - TD07-TD08 - 3 hours
+Wave 4 - TD09-TD12 - 6 hours
+```
+
+## Checkpoint phases
+
+```text
+Checkpoint Phase A - TD01-TD04
     |
     v
 Checkpoint A
 
-TD05-TD08
+Checkpoint Phase B - TD05-TD08
     |
     v
 Checkpoint B
 
-TD09-TD12
+Checkpoint Phase C - TD09-TD12
     |
     v
 Checkpoint C
 ```
+
+Pedagogical waves and checkpoint phases are intentionally different groupings.
 
 The official evidence contract is documented in:
 

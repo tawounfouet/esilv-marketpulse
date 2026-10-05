@@ -484,20 +484,22 @@ Trader
 
 Checkpoint C is performed after TD12.
 
-## 16. Checkpoint timeline
+## 16. Checkpoint phases
+
+The checkpoint phases are assessment groupings and are different from the four pedagogical waves.
 
 ```text
-TD01-TD04
+CHECKPOINT PHASE A - TD01-TD04
     |
     v
 CHECKPOINT A - Foundations - 25%
 
-TD05-TD08
+CHECKPOINT PHASE B - TD05-TD08
     |
     v
 CHECKPOINT B - Collaboration and Data - 30%
 
-TD09-TD12
+CHECKPOINT PHASE C - TD09-TD12
     |
     v
 CHECKPOINT C - Integration and Release - 45%

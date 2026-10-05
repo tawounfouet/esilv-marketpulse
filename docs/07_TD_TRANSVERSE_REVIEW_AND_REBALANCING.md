@@ -589,7 +589,9 @@ If YAML parsing is introduced later, it must be presented as an explicit optiona
 
 ## 9. Official waves vs checkpoint phases
 
-`docs/06_TD_SEQUENCE_AND_LEARNING_PATH.md` correctly defines four pedagogical waves:
+This finding has now been remediated by LOT-R1.4.
+
+The four pedagogical waves are:
 
 ```text
 Wave 1 - TD01-TD02 - 3h
@@ -598,28 +600,19 @@ Wave 3 - TD07-TD08 - 3h
 Wave 4 - TD09-TD12 - 6h
 ```
 
-TD12 currently recaps the course using three groups labelled as waves:
+The assessment checkpoint phases are:
 
 ```text
-TD01-TD04
-TD05-TD08
-TD09-TD12
+Checkpoint Phase A - TD01-TD04
+Checkpoint Phase B - TD05-TD08
+Checkpoint Phase C - TD09-TD12
 ```
 
-Those groups are checkpoint phases, not the official pedagogical waves.
+The two grouping systems now use distinct terminology throughout the active teaching documents.
 
-Required correction:
+A wave describes pedagogical sequencing.
 
-```text
-Keep four official waves everywhere.
-
-Use "Checkpoint Phase A/B/C" when grouping:
-TD01-TD04
-TD05-TD08
-TD09-TD12
-```
-
-This removes an avoidable terminology contradiction.
+A checkpoint phase describes the group of TDs whose evidence contributes to one assessment checkpoint.
 
 ## 10. Detailed workload review
 

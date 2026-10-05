@@ -995,9 +995,11 @@ Inspect the merged code before creating more changes.
 
 # Part 19 - What comes next?
 
-The first pedagogical wave is now complete:
+Checkpoint Phase A is now complete:
 
 ```text
+Checkpoint Phase A - TD01-TD04
+
 TD01 - Bootstrap + Linux
 TD02 - Python + CSV / JSON
 TD03 - Git Local Workflow
@@ -1006,6 +1008,10 @@ TD04 - Branches + Merge
         v
 Checkpoint A
 ```
+
+This is a checkpoint boundary, not a pedagogical wave boundary.
+
+Pedagogical Wave 1 ended after TD02. Wave 2 continues through TD06.
 
 In TD05, the workflow becomes collaborative at GitHub level.
 

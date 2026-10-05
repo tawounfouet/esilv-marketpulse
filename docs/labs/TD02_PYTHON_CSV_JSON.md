@@ -785,6 +785,17 @@ which is validated after TD04.
 
 # Part 16 - What comes next?
 
+Pedagogical Wave 1 is now complete:
+
+```text
+Wave 1 - Foundations - 3 hours
+
+TD01 - Bootstrap + Linux
+TD02 - Python + CSV / JSON
+```
+
+Checkpoint A is not performed yet. It closes Checkpoint Phase A after TD04.
+
 In TD03, the business requirement changes:
 
 ```text

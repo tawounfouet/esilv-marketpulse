@@ -822,6 +822,19 @@ Each student should also confirm:
 
 # Part 21 - What comes next?
 
+Pedagogical Wave 2 is now complete:
+
+```text
+Wave 2 - Git and Collaboration - 6 hours
+
+TD03 - Git Local Workflow
+TD04 - Branches + Merge
+TD05 - Fork + Pull Request
+TD06 - Code Review
+```
+
+Checkpoint B is not performed yet. It closes Checkpoint Phase B after TD08.
+
 The collaboration workflow is now established.
 
 The next business requirement is:

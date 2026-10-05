@@ -827,9 +827,11 @@ The reviewer should verify:
 
 Checkpoint B is performed after TD08.
 
-It validates the second wave:
+It closes Checkpoint Phase B:
 
 ```text
+Checkpoint Phase B - TD05-TD08
+
 TD05 - Fork + Pull Request
 TD06 - Code Review
 TD07 - Data Normalization + Comparison
@@ -838,6 +840,8 @@ TD08 - Yahoo Finance
         v
 Checkpoint B
 ```
+
+TD08 also closes pedagogical Wave 3, which covers TD07-TD08.
 
 ## 20.1 Evidence directory
 
@@ -1176,13 +1180,15 @@ Each student should also confirm:
 
 # Part 28 - What comes next?
 
-The second pedagogical wave is now complete:
+Pedagogical Wave 3 and Checkpoint Phase B are now complete:
 
 ```text
-TD05 - Fork + Pull Request
-TD06 - Code Review
+Wave 3 - Comparison + Yahoo Finance - 3 hours
+
 TD07 - Data Normalization + Comparison
 TD08 - Yahoo Finance
+
+Checkpoint Phase B - TD05-TD08
         |
         v
 Checkpoint B

@@ -306,6 +306,12 @@ Acceptance criteria:
 
 ### R1.4 Freeze pedagogical wave terminology
 
+Status:
+
+```text
+DONE
+```
+
 Official waves:
 
 ```text
@@ -323,16 +329,21 @@ Checkpoint Phase B - TD05-TD08
 Checkpoint Phase C - TD09-TD12
 ```
 
-Required actions:
+Completed actions:
 
-- correct TD12;
-- scan all documentation for inconsistent wave terminology.
+- TD02 now closes Wave 1 explicitly;
+- TD04 now closes Checkpoint Phase A rather than incorrectly closing a wave;
+- TD06 now closes Wave 2 explicitly;
+- TD08 now distinguishes Wave 3 from Checkpoint Phase B;
+- TD12 now recaps four pedagogical waves and three checkpoint phases separately;
+- the lab index and learning-path documents use the same terminology;
+- the transverse review reflects the resolved terminology contract.
 
 Acceptance criteria:
 
 ```text
-[ ] four waves everywhere
-[ ] checkpoint groupings are called phases, not waves
+[x] four waves everywhere
+[x] checkpoint groupings are called phases, not waves
 ```
 
 ### R1.5 Freeze checkpoint source of truth
