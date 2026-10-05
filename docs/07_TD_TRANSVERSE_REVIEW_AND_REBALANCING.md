@@ -1,0 +1,1886 @@
+# TD Transverse Review and Rebalancing
+
+## 1. Purpose
+
+This document reviews the complete 18-hour MarketPulse practical sequence after the creation of TD01 through TD12.
+
+The review focuses on seven questions:
+
+1. Is the sequence globally coherent?
+2. Can each TD realistically fit into 1 hour 30 minutes?
+3. Are dependencies between TDs explicit and technically viable?
+4. Are concepts repeated more than necessary?
+5. Does the pedagogical difficulty increase progressively?
+6. Do the three checkpoints assess skills that were actually prepared in the labs?
+7. Does the repository produced by one TD remain a viable starting point for the next TD?
+
+This document is a teaching-design review.
+
+It does not replace:
+
+- the functional contract;
+- the checkpoint contract;
+- the learning-path document;
+- the student-facing lab instructions.
+
+## 2. Overall conclusion
+
+The global learning path is strong and coherent.
+
+The business progression is easy to understand:
+
+```text
+local files
+    |
+    v
+Python manipulation
+    |
+    v
+Git history
+    |
+    v
+branches
+    |
+    v
+GitHub collaboration
+    |
+    v
+comparison model
+    |
+    v
+Yahoo Finance
+    |
+    v
+Bloomberg
+    |
+    v
+Dash
+    |
+    v
+reproducible release
+```
+
+The three checkpoint positions are also logically placed:
+
+```text
+TD04 -> Checkpoint A
+TD08 -> Checkpoint B
+TD12 -> Checkpoint C
+```
+
+However, the review identifies five major issues that should be corrected before the labs are considered frozen:
+
+```text
+1. several TDs contain more work than a realistic 90-minute session;
+2. the local Git work from TD02-TD04 does not yet have a fully explicit transition to the shared remote workflow in TD05;
+3. the repository architecture described in docs/05 and the paths used by TD08-TD12 are not fully aligned;
+4. TD12 uses a three-wave recap while docs/06 correctly defines four official pedagogical waves;
+5. Checkpoint C individual Pull Request evidence must not depend on every student being the author of one team-level final integration PR.
+```
+
+The recommended strategy is therefore:
+
+```text
+keep the 12-TD sequence
++
+keep the three checkpoints
++
+reduce CORE scope inside overloaded TDs
++
+move secondary work to OPTIONAL
++
+freeze one executable repository architecture
++
+make cross-TD handoffs explicit
+```
+
+No additional TD is required.
+
+## 3. Audit basis
+
+The review covers:
+
+- `docs/00_MARKETPULSE_FUNCTIONAL_CONTRACT.md`;
+- `docs/04_CHECKPOINTS_AND_EVIDENCE.md`;
+- `docs/05_TARGET_REPOSITORY_STRUCTURE.md`;
+- `docs/06_TD_SEQUENCE_AND_LEARNING_PATH.md`;
+- `docs/labs/README.md`;
+- all files from `TD01` to `TD12`;
+- the current starter `src/main.py`;
+- `requirements.txt`;
+- `config/settings.yml`;
+- `CONTRIBUTING.md`.
+
+The review assumes the fixed common contract:
+
+```text
+1 instrument
++
+1 benchmark
++
+1 provider
++
+1 month lookback
++
+daily interval
++
+performance comparison
+```
+
+## 4. Documentation-density indicator
+
+Document length is not the same thing as teaching time.
+
+However, it is a useful warning signal when a 90-minute lab contains many concepts, code blocks, exercises, Git operations and checkpoint activities.
+
+Current student-facing lab size:
+
+| TD | Approx. lines | Approx. words | Main parts | 90-minute risk |
+|---|---:|---:|---:|---|
+| TD01 | 683 | 1,698 | 13 | Medium |
+| TD02 | 805 | 1,936 | 16 | Medium |
+| TD03 | 916 | 2,201 | 18 | Medium |
+| TD04 | 1,029 | 2,481 | 19 | High |
+| TD05 | 1,059 | 2,444 | 20 | High |
+| TD06 | 850 | 2,435 | 21 | Medium |
+| TD07 | 1,040 | 2,424 | 20 | High |
+| TD08 | 1,203 | 3,022 | 28 | Critical |
+| TD09 | 841 | 2,628 | 22 | High |
+| TD10 | 1,062 | 2,772 | 28 | Critical |
+| TD11 | 1,095 | 2,613 | 29 | Critical |
+| TD12 | 1,206 | 3,144 | 33 | Critical |
+
+The main conclusion is not that the files are too long by themselves.
+
+The problem is that several later TDs combine:
+
+```text
+new concept
++
+new code
++
+new architecture
++
+dependency installation
++
+Git workflow
++
+review
++
+evidence preparation
+```
+
+inside one 90-minute block.
+
+That is where rebalancing is required.
+
+## 5. Global strengths to preserve
+
+### 5.1 One stable business question
+
+The same business question remains visible throughout the sequence:
+
+> How is a financial instrument performing compared with its market benchmark?
+
+This is a major strength.
+
+The technical concepts are therefore introduced because MarketPulse needs them, not as disconnected exercises.
+
+### 5.2 Progressive Git learning
+
+The Git progression is pedagogically sound:
+
+```text
+inspect
+    |
+    v
+commit
+    |
+    v
+branch
+    |
+    v
+push
+    |
+    v
+Pull Request
+    |
+    v
+review
+    |
+    v
+merge
+```
+
+The sequence should be preserved.
+
+### 5.3 Provider progression
+
+The provider progression is also coherent:
+
+```text
+CSV / JSON
+    |
+    v
+Yahoo Finance
+    |
+    v
+Bloomberg
+```
+
+Each provider adds a reason to separate acquisition from analytics.
+
+### 5.4 Checkpoint progression
+
+The checkpoints assess increasingly complete evidence:
+
+```text
+Checkpoint A
+environment + Python + local Git
+
+Checkpoint B
+collaboration + remote data + comparison
+
+Checkpoint C
+professional provider + dashboard + reproducibility
+```
+
+The weighting progression:
+
+```text
+25%
+30%
+45%
+```
+
+is coherent with the increasing integration difficulty.
+
+### 5.5 Scope protection
+
+The current documentation correctly keeps the following outside the mandatory CORE:
+
+- automated test frameworks;
+- Docker;
+- GitHub Actions;
+- Kubernetes;
+- intraday market data;
+- advanced quantitative finance.
+
+This protection should remain.
+
+## 6. Cross-TD dependency review
+
+### TD01 -> TD02
+
+Status:
+
+```text
+GOOD
+```
+
+TD01 prepares:
+
+- repository access;
+- Linux terminal;
+- CSV and JSON inspection;
+- Python execution.
+
+TD02 immediately reuses these elements.
+
+No major dependency gap exists.
+
+### TD02 -> TD03
+
+Status:
+
+```text
+PARTIAL
+```
+
+TD02 asks students to modify MarketPulse.
+
+TD03 introduces the first real commit workflow.
+
+This is logically useful because TD03 can version code created during TD02.
+
+However, the handoff is not explicit enough.
+
+Recommended clarification:
+
+```text
+TD02 ends with working but potentially uncommitted Python changes.
+
+TD03 begins by inspecting those changes with:
+git status
+git diff
+
+The first meaningful TD03 commit may capture the student's TD02 work.
+```
+
+This creates a stronger project narrative than inventing an unrelated modification only to demonstrate Git.
+
+### TD03 -> TD04
+
+Status:
+
+```text
+GOOD LOCALLY
+```
+
+Local commits naturally lead to feature branches and merge.
+
+The main risk is time, not conceptual continuity.
+
+### TD04 -> TD05
+
+Status:
+
+```text
+CRITICAL HANDOFF GAP
+```
+
+TD03 and TD04 are intentionally local.
+
+TD05 suddenly assumes a shared team repository becomes the collaborative source of truth.
+
+If several students have independent local histories after TD03 and TD04, there is no explicit reconciliation step before remote collaboration begins.
+
+This can produce:
+
+- divergent local `main` branches;
+- different TD02 implementations;
+- uncertainty about which branch represents the team baseline;
+- push rejections;
+- unnecessary merge problems before Pull Requests are even introduced.
+
+A canonical handoff must be added.
+
+Recommended rule:
+
+```text
+At the end of TD04, each student has local evidence.
+
+Before TD05 feature work begins, the team selects one validated team baseline.
+
+TD05 starts by synchronizing every student to that baseline before new branches are created.
+```
+
+The exact synchronization procedure must remain simple and instructor-controlled.
+
+Do not make history reconciliation itself a hidden advanced Git exercise.
+
+### TD05 -> TD06
+
+Status:
+
+```text
+GOOD
+```
+
+TD05 deliberately leaves Pull Requests open.
+
+TD06 then uses those real Pull Requests for review.
+
+This is one of the strongest handoffs in the sequence.
+
+### TD06 -> TD07
+
+Status:
+
+```text
+GOOD
+```
+
+By TD07, the collaboration workflow is established and can become routine rather than a new lesson.
+
+Later TDs should therefore shorten repeated Git explanations and refer back to `CONTRIBUTING.md`.
+
+### TD07 -> TD08
+
+Status:
+
+```text
+CONCEPTUALLY GOOD
+TECHNICALLY UNDER-SPECIFIED
+```
+
+TD07 creates the analytical contract that TD08 should reuse.
+
+However, the exact location of reusable analytical functions is not frozen.
+
+TD08 introduces `src/providers/yahoo_provider.py`, while TD07 may still leave all analytical functions inside `src/main.py`.
+
+This works for small scripts but becomes fragile before Dash.
+
+Decision required before the labs are frozen:
+
+```text
+TD07 must establish the canonical location of reusable analytics.
+```
+
+Recommended CORE structure is defined later in this document.
+
+### TD08 -> TD09
+
+Status:
+
+```text
+GOOD
+```
+
+Yahoo introduces provider-specific identifiers and normalization.
+
+Bloomberg then extends exactly the same idea.
+
+### TD09 -> TD10
+
+Status:
+
+```text
+HIGH EXTERNAL DEPENDENCY
+```
+
+TD10 depends on information discovered during TD09:
+
+- available Bloomberg access method;
+- actual returned fields;
+- date representation;
+- identifier behaviour.
+
+This dependency is legitimate, but the course must not depend entirely on live Bloomberg availability.
+
+Required instructor preparation:
+
+```text
+a known-good approved Bloomberg sample
++
+a completed reference field mapping
++
+a validated fallback path
+```
+
+Students may create their own mapping during TD09, but the instructor must have a recovery artefact ready.
+
+### TD10 -> TD11
+
+Status:
+
+```text
+ARCHITECTURE GAP
+```
+
+TD11 requires Dash to reuse application results.
+
+The current labs correctly say that provider logic should not be duplicated in the dashboard.
+
+However, no single reusable application-level function is currently frozen as the source of dashboard data.
+
+Before TD11, MarketPulse should expose something conceptually similar to:
+
+```python
+build_market_snapshot(...)
+```
+
+returning:
+
+```text
+provider metadata
+instrument metadata
+benchmark metadata
+aligned series
+period returns
+relative performance
+base-100 series
+```
+
+Then both terminal output and Dash can consume the same computed result.
+
+### TD11 -> TD12
+
+Status:
+
+```text
+GOOD CONCEPTUALLY
+RUNTIME COMMAND MUST BE FROZEN
+```
+
+The final reproducibility test depends on one stable execution contract.
+
+The repository must define exactly:
+
+```text
+how to run terminal mode
+how to run dashboard mode
+```
+
+before TD12.
+
+These commands must not still be changing during the release session.
+
+## 7. Repository architecture inconsistency
+
+This is one of the most important technical findings.
+
+### Current target document
+
+`docs/05_TARGET_REPOSITORY_STRUCTURE.md` proposes a final package:
+
+```text
+src/
+└── marketpulse/
+    ├── main.py
+    ├── providers/
+    ├── processing/
+    └── dashboard/
+```
+
+### Current later labs
+
+The TD08-TD12 documents instead use structures such as:
+
+```text
+src/
+├── main.py
+├── providers/
+└── dashboard/
+```
+
+and TD11 proposes running:
+
+```bash
+python src/dashboard/app.py
+```
+
+### Why this matters
+
+A nested dashboard script may need to import code from sibling directories.
+
+Running a nested script directly can create Python import-path problems that do not occur when running `src/main.py`.
+
+This is exactly the type of accidental packaging problem that should not consume a beginner lab.
+
+### Recommended CORE architecture
+
+For the 18-hour CORE, prefer a deliberately simple executable layout:
+
+```text
+src/
+├── main.py
+├── analytics.py
+├── dashboard.py
+└── providers/
+    ├── __init__.py
+    ├── yahoo_provider.py
+    └── bloomberg_provider.py
+```
+
+This keeps both entry points at the same level:
+
+```bash
+python src/main.py
+python src/dashboard.py
+```
+
+and makes simple imports easier to explain.
+
+Suggested responsibility:
+
+```text
+main.py
+application orchestration + terminal output
+
+analytics.py
+alignment + period return + base 100 + relative performance
+
+providers/
+provider-specific acquisition + normalization
+
+dashboard.py
+Dash presentation using shared application results
+```
+
+The more formal:
+
+```text
+src/marketpulse/
+```
+
+package architecture can remain a future professional refactor or optional extension.
+
+The CORE should prioritize reliable execution and conceptual clarity over packaging sophistication.
+
+## 8. Configuration inconsistency
+
+The starter contains:
+
+```text
+config/settings.yml
+```
+
+and `src/main.py` currently says that YAML configuration will be wired later.
+
+However, no mandatory lab actually introduces YAML parsing.
+
+TD10 only presents configuration as a possible extension.
+
+This creates an unfulfilled promise in the learning path.
+
+Recommended decision:
+
+```text
+Keep settings.yml as a readable configuration contract.
+Do not require YAML parsing in the 18-hour CORE.
+```
+
+The starter comments and README should eventually be adjusted to say this explicitly.
+
+Do not add PyYAML merely to satisfy an earlier comment.
+
+## 9. Official waves vs checkpoint phases
+
+`docs/06_TD_SEQUENCE_AND_LEARNING_PATH.md` correctly defines four pedagogical waves:
+
+```text
+Wave 1 - TD01-TD02 - 3h
+Wave 2 - TD03-TD06 - 6h
+Wave 3 - TD07-TD08 - 3h
+Wave 4 - TD09-TD12 - 6h
+```
+
+TD12 currently recaps the course using three groups labelled as waves:
+
+```text
+TD01-TD04
+TD05-TD08
+TD09-TD12
+```
+
+Those groups are checkpoint phases, not the official pedagogical waves.
+
+Required correction:
+
+```text
+Keep four official waves everywhere.
+
+Use "Checkpoint Phase A/B/C" when grouping:
+TD01-TD04
+TD05-TD08
+TD09-TD12
+```
+
+This removes an avoidable terminology contradiction.
+
+## 10. Detailed workload review
+
+### TD01 - Bootstrap + Linux
+
+Current status:
+
+```text
+KEEP WITH TIMEBOX PROTECTION
+```
+
+Strengths:
+
+- excellent introduction to MarketPulse;
+- Linux commands are concrete;
+- no premature Python modification;
+- onboarding and project context are integrated.
+
+Risk:
+
+Team creation, fork setup, collaborator invitations and environment problems can consume much more than the planned time.
+
+Rebalancing:
+
+CORE:
+
+- MarketPulse context;
+- one team fork;
+- TEAM.md;
+- working terminal;
+- `pwd`, `ls`, `cd`, `cat`, `head`, `grep`;
+- Python and Git version;
+- run MarketPulse.
+
+OPTIONAL:
+
+- recursive grep;
+- file counting;
+- extra Git exploration.
+
+Operational rule:
+
+```text
+After approximately 10 minutes on an individual environment blocker,
+the student temporarily pairs with a teammate and continues the lab.
+```
+
+Verdict:
+
+```text
+90 minutes feasible if environment escalation is controlled.
+```
+
+### TD02 - Python + CSV / JSON
+
+Current status:
+
+```text
+KEEP, SLIGHTLY SIMPLIFY
+```
+
+Strengths:
+
+- directly reuses starter files;
+- good progression from data structures to functions;
+- does not introduce pandas too early;
+- correctly postpones returns.
+
+Risk:
+
+Too many recap and exercise sections for a first Python manipulation lab.
+
+CORE:
+
+- inspect existing program;
+- JSON dictionary access;
+- CSV `DictReader`;
+- numeric conversion;
+- filter by ticker;
+- first and last close;
+- reusable summary function;
+- run final output.
+
+OPTIONAL:
+
+- positive-volume exercise;
+- min/max close;
+- slicing challenges;
+- extended formatting work.
+
+Recommended handoff to TD03:
+
+```text
+Do not require a final Git workflow in TD02.
+
+Leave a meaningful working change that TD03 can inspect and commit.
+```
+
+Verdict:
+
+```text
+90 minutes feasible after reducing exercise pressure.
+```
+
+### TD03 - Git Local Workflow
+
+Current status:
+
+```text
+KEEP, REDUCE SECONDARY EXERCISES
+```
+
+Strengths:
+
+- good mental model;
+- strong use of `git status`, `git diff`, staging and history;
+- no premature remote complexity.
+
+Main improvement:
+
+Use the TD02 modification as the primary real change whenever possible.
+
+This makes the sequence:
+
+```text
+TD02 creates useful Python work
+TD03 learns how to version that real work
+```
+
+rather than inventing a new cosmetic change only for Git.
+
+CORE:
+
+- status;
+- diff;
+- add;
+- staged diff;
+- commit;
+- log;
+- show;
+- clean working tree.
+
+OPTIONAL / REFERENCE:
+
+- tracked/untracked temporary-file exercise;
+- two-file staging exercise;
+- author filtering;
+- `git ls-files`.
+
+Verdict:
+
+```text
+90 minutes feasible with a narrower CORE.
+```
+
+### TD04 - Branches + Merge
+
+Current status:
+
+```text
+TOO HEAVY
+```
+
+Current lab combines:
+
+- branch mental model;
+- feature implementation;
+- commit;
+- branch comparison;
+- merge;
+- branch deletion;
+- merge conflict;
+- conflict resolution;
+- Checkpoint A;
+- live validation;
+- evidence security.
+
+The merge-conflict exercise is educational but is not required by Checkpoint A.
+
+Rebalancing:
+
+CORE:
+
+- create branch;
+- implement one small feature;
+- commit;
+- compare branch;
+- merge;
+- inspect graph;
+- prepare Checkpoint A.
+
+INSTRUCTOR DEMO or OPTIONAL:
+
+- manufactured conflict;
+- manual conflict resolution;
+- cleanup of conflict practice file.
+
+Conflict concepts can still be explained in 5 minutes without requiring every team to manufacture one.
+
+Verdict:
+
+```text
+Current version is unlikely to fit safely in 90 minutes.
+Rebalanced version can fit.
+```
+
+### TD05 - Fork + Pull Request
+
+Current status:
+
+```text
+KEEP CONCEPT, REFRAME TITLE AND START
+```
+
+The fork itself was already created in TD01.
+
+The new concept in TD05 is actually:
+
+```text
+remote branch
++
+push
++
+Pull Request
+```
+
+Recommended pedagogical title:
+
+```text
+TD05 - Remote Branch + Pull Request
+```
+
+The existing filename may be retained if compatibility is preferred, but the student-facing title should reflect the actual new skill.
+
+Critical addition:
+
+```text
+Start TD05 with team baseline synchronization.
+```
+
+CORE:
+
+- verify `origin`;
+- synchronize to validated team baseline;
+- create feature branch;
+- implement small change;
+- commit;
+- push;
+- open PR;
+- inspect source, target and Files changed.
+
+OPTIONAL:
+
+- second commit on the same open PR;
+- advanced remote-branch commands.
+
+Verdict:
+
+```text
+90 minutes feasible only if repository state is clean at the start.
+```
+
+### TD06 - Code Review
+
+Current status:
+
+```text
+GOOD WITH ONE IMPORTANT RULE CHANGE
+```
+
+The lab currently encourages a full cycle with feedback, correction, review again and approval.
+
+This is useful, but a correction should not be artificially required.
+
+A correct PR may genuinely need no code change.
+
+Recommended rule:
+
+```text
+Every student must perform a meaningful review.
+
+A correction is required only when the review identifies a real issue.
+```
+
+Meaningful review evidence can be:
+
+- technical question;
+- validation request;
+- actionable suggestion;
+- request changes;
+- approval with specific rationale.
+
+CORE:
+
+- inspect another PR;
+- review Files changed;
+- leave meaningful feedback;
+- respond appropriately;
+- approve or request changes;
+- merge when ready;
+- pull updated main.
+
+Verdict:
+
+```text
+90 minutes realistic if TD05 leaves usable open PRs.
+```
+
+### TD07 - Data Normalization + Comparison
+
+Current status:
+
+```text
+TOO HEAVY
+```
+
+The current CORE includes:
+
+- numeric normalization;
+- date indexing;
+- common-date intersection;
+- period return;
+- relative performance;
+- base 100;
+- daily returns;
+- output integration;
+- branch;
+- commit;
+- push;
+- PR;
+- review.
+
+That is too much for a 90-minute first analytics session.
+
+Recommended CORE:
+
+```text
+numeric normalization
++
+date alignment
++
+period return
++
+base 100
++
+relative performance
+```
+
+Move to OPTIONAL:
+
+```text
+daily returns
+best daily return
+worst daily return
+extra tables
+```
+
+Create a stable module during TD07:
+
+```text
+src/analytics.py
+```
+
+Suggested functions:
+
+```python
+index_by_date(...)
+align_series(...)
+calculate_period_return(...)
+calculate_base_100(...)
+calculate_relative_performance(...)
+```
+
+This creates the technical foundation required by TD08 and TD11.
+
+Verdict:
+
+```text
+Current version exceeds the safe 90-minute scope.
+Daily returns should leave the CORE.
+```
+
+### TD08 - Yahoo Finance
+
+Current status:
+
+```text
+CRITICAL OVERLOAD
+```
+
+The current lab contains 28 main parts.
+
+It combines:
+
+- dependency installation;
+- first yfinance experiment;
+- pandas-like response inspection;
+- schema normalization;
+- provider module creation;
+- provider-symbol mapping;
+- two-series retrieval;
+- canonical validation;
+- alignment;
+- analytics reuse;
+- failure handling;
+- invalid-symbol exercise;
+- Git workflow;
+- PR;
+- review;
+- full Checkpoint B;
+- live validation.
+
+Rebalancing:
+
+CORE:
+
+- install `yfinance`;
+- record dependency;
+- retrieve AAPL;
+- normalize to canonical rows;
+- map SP500 to `^GSPC`;
+- retrieve both series;
+- align common dates;
+- reuse TD07 analytics;
+- run MarketPulse;
+- push and open PR.
+
+REFERENCE / OPTIONAL:
+
+- invalid-symbol exercise;
+- extended provider-failure experiment;
+- alternate instrument exercise;
+- provider selector;
+- advanced mapping refactor.
+
+Checkpoint B:
+
+The exact evidence filenames remain mandatory, but the detailed evidence contract should remain centralized in `docs/04_CHECKPOINTS_AND_EVIDENCE.md`.
+
+The lab should contain a short capture checklist and a link to the canonical document rather than repeating the entire contract.
+
+Recommended instructor preparation:
+
+Provide a known-good `yfinance` snippet or provider skeleton so that time is spent understanding normalization rather than debugging library syntax.
+
+Verdict:
+
+```text
+Current version does not safely fit 90 minutes.
+A reduced CORE can fit if internet and installation work.
+```
+
+### TD09 - Bloomberg Introduction
+
+Current status:
+
+```text
+GOOD CONCEPT, EXTERNAL-RISK HEAVY
+```
+
+The strongest aspect of TD09 is that it does not invent unverified Bloomberg fields.
+
+That must remain.
+
+However, live Bloomberg access should not be the condition for successful completion of the lab.
+
+Recommended CORE result:
+
+```text
+docs/BLOOMBERG_FIELD_MAPPING.md
+```
+
+produced from either:
+
+```text
+live instructor-approved access
+or
+instructor-approved reference sample
+```
+
+CORE:
+
+- Bloomberg role;
+- identifier mapping;
+- inspect one approved response;
+- map actual fields;
+- preserve canonical tickers;
+- document access mode accurately.
+
+OPTIONAL:
+
+- extra live exploration;
+- additional identifiers;
+- extra response-analysis exercises.
+
+Required instructor asset:
+
+```text
+a reference Bloomberg sample that is known to work for the lab
+```
+
+Verdict:
+
+```text
+90 minutes feasible if a fallback sample exists before class.
+```
+
+### TD10 - Bloomberg Provider
+
+Current status:
+
+```text
+CRITICAL OVERLOAD
+```
+
+TD10 currently includes:
+
+- provider boundary;
+- identifier mapping;
+- raw acquisition;
+- normalization;
+- wrapper function;
+- date-window translation;
+- instrument;
+- benchmark;
+- alignment;
+- shared analytics;
+- provider selection;
+- configuration;
+- output;
+- failure handling;
+- fallback;
+- validation matrix;
+- Git workflow;
+- PR;
+- review.
+
+This is too broad.
+
+Recommended CORE:
+
+- use TD09 mapping;
+- implement or complete Bloomberg normalization;
+- obtain canonical rows from live or approved sample path;
+- preserve `AAPL` and `SP500`;
+- feed the shared alignment and analytics functions;
+- validate instrument and benchmark;
+- PR and review.
+
+Move to OPTIONAL:
+
+- generalized provider selector;
+- YAML provider configuration;
+- richer provider metadata;
+- extended error model.
+
+Recommended teaching scaffold:
+
+Provide a provider file with the connection boundary clearly marked:
+
+```python
+def fetch_raw_bloomberg_history(...):
+    # Environment-specific code supplied or demonstrated by instructor
+    ...
+```
+
+Students focus on the boundary and normalization contract.
+
+Verdict:
+
+```text
+Current version exceeds 90 minutes.
+A scaffolded integration version can fit.
+```
+
+### TD11 - Dash Dashboard
+
+Current status:
+
+```text
+CRITICAL OVERLOAD AND RUNTIME RISK
+```
+
+The current content correctly prioritizes:
+
+- provider;
+- instrument;
+- benchmark;
+- lookback;
+- interval;
+- period returns;
+- relative performance;
+- base-100 chart.
+
+That scope should remain.
+
+The current nested path:
+
+```text
+src/dashboard/app.py
+```
+
+creates avoidable import complexity for a beginner sequence.
+
+Recommended CORE entry point:
+
+```text
+src/dashboard.py
+```
+
+with:
+
+```bash
+python src/dashboard.py
+```
+
+CORE:
+
+- install dependencies;
+- minimal Dash app;
+- consume prepared MarketPulse data;
+- summary context;
+- three performance indicators;
+- one base-100 comparison chart;
+- local run;
+- PR and review.
+
+OPTIONAL:
+
+- daily-return chart;
+- volume chart;
+- callbacks;
+- provider selector;
+- instrument selector;
+- layout refactor;
+- styling work.
+
+Important dependency:
+
+TD10 or the application layer must already expose reusable computed data.
+
+Verdict:
+
+```text
+90 minutes can work only with one simple dashboard file and no required callbacks.
+```
+
+### TD12 - Integration + Release
+
+Current status:
+
+```text
+CRITICAL OVERLOAD
+```
+
+The objective is correct:
+
+```text
+no new major feature
++
+integration
++
+documentation
++
+reproducibility
+```
+
+The current document is too large because it also repeats much of the checkpoint and architecture material.
+
+CORE:
+
+- final provider confirmation;
+- remove temporary artefacts;
+- verify direct dependencies;
+- update README;
+- fresh clone or clean-environment run;
+- final integration PR;
+- review;
+- merge;
+- final run.
+
+Checkpoint C evidence:
+
+Keep only a short checklist in TD12 and make `docs/04_CHECKPOINTS_AND_EVIDENCE.md` the canonical contract.
+
+Important individual-evidence correction:
+
+Every student does not need to be the author of the same team-level final integration PR.
+
+For:
+
+```text
+03_final_pull_request.png
+```
+
+a student should be allowed to show a final or late-stage PR from TD09-TD12 that is attributable to that student.
+
+The team-level release PR may be authored by one integration lead.
+
+This matches the existing checkpoint document better than forcing artificial final PRs for every student.
+
+Release dependency recommendation:
+
+By the start of TD12:
+
+```text
+dashboard command already frozen
+provider command already frozen
+dependencies already known
+```
+
+TD12 should validate these contracts, not invent them.
+
+Verdict:
+
+```text
+Current version is too large for 90 minutes.
+A release-only version can fit.
+```
+
+## 11. Git-content duplication review
+
+From TD07 onward, the Git workflow is already learned.
+
+The later labs repeatedly restate:
+
+```text
+git switch main
+git pull
+git switch -c ...
+git status
+git diff
+git add
+git commit
+git push
+open Pull Request
+review
+merge
+```
+
+This is useful as a reminder but currently consumes substantial document space.
+
+Recommended pattern from TD07 onward:
+
+```text
+## Standard Git workflow
+
+Use the workflow defined in CONTRIBUTING.md.
+
+Suggested branch:
+feature/...
+
+Suggested commit:
+feat: ...
+
+Before opening the PR:
+- run the required application command;
+- inspect git diff;
+- verify no unrelated files are included.
+```
+
+Keep full Git teaching only in TD03-TD06.
+
+This reduces duplication without removing the workflow.
+
+## 12. Checkpoint-content duplication review
+
+The authoritative evidence contract is already:
+
+```text
+docs/04_CHECKPOINTS_AND_EVIDENCE.md
+```
+
+TD04, TD08 and TD12 currently repeat large portions of that contract.
+
+Risk:
+
+If evidence filenames or rules change later, several files must be updated consistently.
+
+Recommended single-source rule:
+
+```text
+docs/04_CHECKPOINTS_AND_EVIDENCE.md
+=
+canonical evidence specification
+```
+
+Checkpoint-ending labs should contain only:
+
+- checkpoint name;
+- required filenames;
+- short "capture now" checklist;
+- link to the canonical evidence document.
+
+Do not duplicate the full rubric and evidence philosophy in every lab.
+
+## 13. Pedagogical difficulty curve
+
+Current conceptual curve:
+
+```text
+LOW
+TD01 environment
+TD02 Python data structures
+TD03 Git local
+TD04 branches
+
+MEDIUM
+TD05 remote Git
+TD06 review
+TD07 financial comparison
+
+HIGH
+TD08 remote provider
+TD09 professional provider concepts
+TD10 provider integration
+TD11 web dashboard
+TD12 release
+```
+
+The direction is correct.
+
+The issue is that TD08-TD12 currently increase both:
+
+```text
+conceptual difficulty
+and
+task count
+```
+
+at the same time.
+
+Rebalancing should keep conceptual difficulty rising while reducing the number of required side tasks.
+
+## 14. Finance-scope review
+
+The CORE financial concepts should be frozen as:
+
+```text
+price
+period return
+base 100
+relative performance
+```
+
+Daily return should move to:
+
+```text
+OPTIONAL / TIME PERMITTING
+```
+
+This matches the actual dashboard target, which does not require a daily-return chart.
+
+Do not add:
+
+- Sharpe ratio;
+- beta;
+- CAPM;
+- alpha;
+- VaR;
+- RSI;
+- MACD;
+- Bollinger Bands;
+- portfolio optimization.
+
+## 15. Checkpoint alignment review
+
+### Checkpoint A
+
+Alignment:
+
+```text
+GOOD
+```
+
+Evidence:
+
+- terminal and Python from TD01-TD02;
+- Git status and log from TD03;
+- branch and merge from TD04.
+
+Important consequence:
+
+A mandatory merge-conflict exercise is not necessary for Checkpoint A.
+
+### Checkpoint B
+
+Alignment:
+
+```text
+GOOD WITH ONE SMALL GAP
+```
+
+Evidence:
+
+- Pull Request from TD05;
+- code review from TD06;
+- comparison from TD07;
+- Yahoo data from TD08.
+
+Gap:
+
+The checkpoint skills mention ability to change the selected market pair.
+
+The labs mainly guarantee the AAPL + SP500 common path.
+
+Decision:
+
+Either:
+
+```text
+A. remove "change the selected market pair" from required Checkpoint B skills
+```
+
+or:
+
+```text
+B. add one small controlled provider-symbol change exercise to TD08 CORE
+```
+
+Recommendation:
+
+Choose A for the common CORE.
+
+Alternate pairs can remain an oral or advanced extension.
+
+### Checkpoint C
+
+Alignment:
+
+```text
+GOOD WITH INDIVIDUAL TRACEABILITY CLARIFICATION
+```
+
+Evidence:
+
+- final market provider from TD09-TD10;
+- dashboard from TD11;
+- final or late-stage PR from TD09-TD12;
+- reproducible run from TD12.
+
+Required clarification:
+
+```text
+03_final_pull_request.png
+does not have to be the single team release PR.
+```
+
+It must be a late-stage PR attributable to the student.
+
+## 16. Proposed canonical CORE repository evolution
+
+### TD01-TD06
+
+Keep:
+
+```text
+src/
+└── main.py
+```
+
+This avoids architecture work before students need it.
+
+### TD07
+
+Introduce:
+
+```text
+src/
+├── main.py
+└── analytics.py
+```
+
+Purpose:
+
+Move reusable comparison calculations out of terminal presentation.
+
+### TD08
+
+Introduce:
+
+```text
+src/
+├── main.py
+├── analytics.py
+└── providers/
+    ├── __init__.py
+    └── yahoo_provider.py
+```
+
+### TD10
+
+Extend:
+
+```text
+src/
+├── main.py
+├── analytics.py
+└── providers/
+    ├── __init__.py
+    ├── yahoo_provider.py
+    └── bloomberg_provider.py
+```
+
+### TD11
+
+Add one simple dashboard entry point:
+
+```text
+src/
+├── main.py
+├── analytics.py
+├── dashboard.py
+└── providers/
+    ├── __init__.py
+    ├── yahoo_provider.py
+    └── bloomberg_provider.py
+```
+
+Execution contract:
+
+```bash
+python src/main.py
+python src/dashboard.py
+```
+
+This is the recommended 18-hour CORE architecture.
+
+A more formal package structure can be shown after the CORE sequence as an architectural extension.
+
+## 17. Proposed CORE vs OPTIONAL decisions
+
+| TD | Keep in CORE | Move to optional / demo |
+|---|---|---|
+| TD01 | setup, Linux, run starter | extended shell exploration |
+| TD02 | JSON, CSV, types, filtering, reusable summary | min/max, volume and extra formatting exercises |
+| TD03 | status, diff, add, commit, log, show | multi-file staging drills, author filtering |
+| TD04 | branch, feature, merge, graph, CP-A | manufactured conflict exercise |
+| TD05 | remote, push, PR | second PR-update commit exercise |
+| TD06 | meaningful review, approve/request changes, merge | forced correction when no real issue exists |
+| TD07 | normalization, alignment, period return, base 100, relative performance | daily returns and daily extrema |
+| TD08 | yfinance, symbol mapping, normalization, two-series reuse | invalid-symbol experiment, extra provider selector |
+| TD09 | Bloomberg concepts, approved sample/live inspection, mapping | extended live exploration |
+| TD10 | normalize Bloomberg, canonical rows, reuse analytics | YAML wiring, generic provider framework |
+| TD11 | static Dash summary + base-100 chart | callbacks, extra charts, styling, selectors |
+| TD12 | clean, document, fresh run, final PR, release | advanced deployment |
+
+## 18. Rebalanced 18-hour target
+
+The official schedule remains unchanged:
+
+```text
+Wave 1
+TD01 + TD02
+3 hours
+
+Wave 2
+TD03 + TD04 + TD05 + TD06
+6 hours
+
+Wave 3
+TD07 + TD08
+3 hours
+
+Wave 4
+TD09 + TD10 + TD11 + TD12
+6 hours
+```
+
+Checkpoint phases remain:
+
+```text
+Checkpoint Phase A
+TD01-TD04
+
+Checkpoint Phase B
+TD05-TD08
+
+Checkpoint Phase C
+TD09-TD12
+```
+
+Do not call the three checkpoint phases "waves".
+
+## 19. Priority corrections
+
+### P0 - Must be corrected before teaching
+
+1. Freeze one CORE repository architecture.
+2. Fix the TD04 -> TD05 local-to-remote handoff.
+3. Reduce TD08, TD10, TD11 and TD12 CORE scope.
+4. Make Bloomberg fallback material available before TD09.
+5. Correct the TD12 three-wave terminology.
+6. Clarify Checkpoint C individual PR evidence.
+
+### P1 - Strongly recommended
+
+1. Move daily returns out of TD07 CORE.
+2. Move merge-conflict execution out of TD04 CORE.
+3. Reframe TD05 around remote branch + PR rather than fork creation.
+4. Stop requiring an artificial correction in TD06.
+5. Centralize checkpoint details in docs/04.
+6. Shorten repeated Git instructions after TD06.
+7. Clarify that settings.yml is a reference contract, not mandatory parsed YAML.
+
+### P2 - Quality improvements
+
+1. Rename the labs index heading from "TD Index" to "Lab Index" while retaining TD filenames.
+2. Add a visible CORE / OPTIONAL / INSTRUCTOR DEMO label convention to every lab.
+3. Add a short "Definition of Done" near the top of each lab.
+4. Keep optional challenges but move them after the CORE stop point.
+5. Freeze tested direct dependency versions at release time rather than relying indefinitely on unbounded package versions.
+
+## 20. Proposed lab template after rebalancing
+
+Each student-facing lab should converge toward:
+
+```text
+# TDxx - Title
+
+## Duration
+## Business requirement
+## Learning objectives
+## CORE definition of done
+## Prerequisites
+## Session plan
+
+# CORE
+Part 1
+Part 2
+Part 3
+...
+
+# Validation
+Run command
+Expected behaviour
+
+# Standard Git workflow
+Short reminder only
+
+# Checkpoint relation
+Short canonical reference
+
+# OPTIONAL
+Exercises / challenges
+
+# Troubleshooting
+Only topic-specific issues
+
+# What comes next?
+```
+
+This keeps each lab operational while reducing repeated material.
+
+## 21. Recommended implementation sequence
+
+The review should now be followed by a controlled rebalancing pass.
+
+Recommended order:
+
+```text
+R1 - Freeze cross-cutting contracts
+     repository structure
+     runtime commands
+     wave terminology
+     configuration status
+     checkpoint source of truth
+
+R2 - Rebalance Wave 1 and Wave 2
+     TD01-TD06
+     especially TD04-TD05 handoff
+
+R3 - Rebalance Wave 3
+     TD07-TD08
+     create analytics contract
+
+R4 - Rebalance Wave 4
+     TD09-TD12
+     Bloomberg fallback
+     dashboard entry point
+     reproducibility
+
+R5 - Final consistency scan
+     paths
+     filenames
+     commands
+     evidence
+     no duplicated contradictions
+```
+
+## 22. Final assessment
+
+The current 12-TD design should not be replaced.
+
+Its architecture and business narrative are strong.
+
+The main problem is not the sequence.
+
+The main problem is density.
+
+The correct next move is:
+
+```text
+preserve the sequence
++
+simplify the CORE
++
+make optional material explicit
++
+freeze technical handoffs
++
+centralize repeated contracts
+```
+
+After these corrections, the MarketPulse sequence can realistically function as a coherent 18-hour practical path rather than only as twelve individually complete documents.
