@@ -193,6 +193,21 @@ before introducing student-facing ADVANCED sections.
 
 It freezes the impact scope before R7.4 implementation.
 
+### 07 - R7.4 advanced qualification and closure
+
+```text
+07_R7_4_ADVANCED_QUALIFICATION_AND_CLOSURE.md
+```
+
+Purpose:
+
+```text
+Record the final R7.4 qualification,
+active READY_TO_TEACH links,
+PENDING_EXTERNAL gates,
+and CORE/checkpoint isolation proof.
+```
+
 ### Instructor deep-dive reference
 
 ```text
@@ -430,6 +445,9 @@ independently licensed assets
 03 Optional advanced backlog         DONE as backlog design
 Instructor deep-dive reference       DONE as consolidated reference
 04 Legacy operationalization roadmap ACTIVE
+05 Final migration registry          ACTIVE
+06 Taxonomy impact study             DONE
+07 R7.4 qualification closure        DONE
 ```
 
 The analysis and classification stream is complete.
@@ -483,13 +501,21 @@ R7.1 and R7.2 are now complete.
 
 R7.3 is now complete.
 
+R7.4 is now complete.
+
+Current P1 state:
+
+```text
+7 READY_TO_TEACH
+5 PENDING_EXTERNAL
+0 ambiguous
+```
+
 The current execution target is:
 
 ```text
-R7.4.2 - P1 advanced support production
+R7.5 - TD enrichment capsules
 ```
-
-R7.4.1 taxonomy and impact analysis is complete.
 
 The routing source for R7.3 and R7.4 is:
 
