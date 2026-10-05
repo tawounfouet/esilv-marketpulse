@@ -641,7 +641,7 @@ docs/legacy/06_CORE_OPTIONAL_ADVANCED_TAXONOMY_IMPACT_STUDY.md
 | R7.4.1 | Taxonomy and impact baseline | DONE |
 | R7.4.2 | P1 advanced support production | DONE |
 | R7.4.3 | Lab taxonomy integration | DONE |
-| R7.4.4 | Qualification and registry closure | NEXT |
+| R7.4.4 | Qualification and registry closure | DONE |
 
 R7.4.1 established:
 
@@ -819,6 +819,67 @@ PASS
 LAB TAXONOMY INTEGRATED
 WITH READY-ONLY ACTIVATION
 ```
+
+### R7.4.4 execution result
+
+Global qualification:
+
+```text
+12 / 12 support paths resolve
+12 / 12 labs contain ADVANCED
+53 Optional activities remain
+3 former Optional activities reclassified
+7 active links target READY_TO_TEACH supports
+5 PENDING_EXTERNAL supports remain inactive
+0 active PENDING_EXTERNAL links
+requirements.txt unchanged
+checkpoint requirements unchanged
+canonical runtime unchanged
+```
+
+Transverse documentation aligned:
+
+```text
+README.md
+docs/04_CHECKPOINTS_AND_EVIDENCE.md
+docs/06_TD_SEQUENCE_AND_LEARNING_PATH.md
+docs/07_TD_TRANSVERSE_REVIEW_AND_REBALANCING.md
+docs/13_MARKETPULSE_LIBRARIES_AND_DEPENDENCIES.md
+docs/labs/README.md
+```
+
+P1 resolution rule:
+
+```text
+READY_TO_TEACH
+or
+PENDING_EXTERNAL with explicit gate
+or
+DEFERRED
+```
+
+Current result:
+
+```text
+READY_TO_TEACH = 7
+PENDING_EXTERNAL = 5
+DEFERRED = 0
+AMBIGUOUS = 0
+```
+
+Closure evidence:
+
+```text
+docs/legacy/07_R7_4_ADVANCED_QUALIFICATION_AND_CLOSURE.md
+```
+
+R7.4 conclusion:
+
+```text
+DONE
+```
+
+The five external-gated items remain unavailable as student links until real validation promotes them.
 
 ## 11. R7.5 - TD enrichment capsules
 
@@ -1006,8 +1067,8 @@ Do not mix the two status systems.
 | R7.1 | Legacy freeze reconciliation | DONE |
 | R7.2 | Final migration registry | DONE |
 | R7.3 | Instructor deep-dive operationalization | DONE |
-| R7.4 | Advanced P1 content operationalization | NEXT |
-| R7.5 | TD enrichment capsules | NOT STARTED |
+| R7.4 | Advanced P1 content operationalization | DONE |
+| R7.5 | TD enrichment capsules | NEXT |
 | R7.6 | Advanced-track packaging | NOT STARTED |
 | R7.7 | Legacy closure audit | NOT STARTED |
 
@@ -1040,9 +1101,15 @@ Instructor deep-dive operationalization
 =
 DONE
 
-Advanced READY_TO_TEACH support production
+Advanced P1 support production
 =
-NOT STARTED
+DONE
+
+Current P1 qualification
+=
+7 READY_TO_TEACH
++
+5 PENDING_EXTERNAL
 ```
 
 This distinction is important.
@@ -1054,10 +1121,10 @@ A complete analysis is not the same as complete teaching operationalization.
 R7 is complete only when:
 
 ```text
-[ ] R7.1 DONE
-[ ] R7.2 DONE
-[ ] R7.3 DONE
-[ ] R7.4 DONE or remaining P1 items explicitly DEFERRED
+[x] R7.1 DONE
+[x] R7.2 DONE
+[x] R7.3 DONE
+[x] R7.4 DONE with every P1 item explicitly resolved
 [ ] R7.5 DONE
 [ ] R7.6 DONE when advanced supports exist
 [ ] R7.7 DONE
@@ -1087,9 +1154,9 @@ WITHOUT CORE DIVERGENCE
 The current action is:
 
 ```text
-R7.4.4 - Qualification and registry closure
+R7.5 - TD enrichment capsules
 ```
 
-R7.4.3 integrated the explicit ADVANCED taxonomy into all 12 labs.
+R7.4 is closed.
 
-R7.4.4 must now verify global counts, links, checkpoint isolation, dependency isolation and transverse documentation alignment.
+Seven advanced supports are active and five remain explicitly PENDING_EXTERNAL with inactive student links.
