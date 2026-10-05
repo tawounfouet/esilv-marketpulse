@@ -4,7 +4,7 @@
   <img
     src="https://www.itii-pdl.com/wp-content/uploads/2024/11/logo_esilv_couleur.jpg?ver=1733410620"
     alt="ESILV - De Vinci Higher Education"
-    width="180"
+    width="100"
   />
 </p>
 
