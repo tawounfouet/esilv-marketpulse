@@ -623,4 +623,11 @@ collaboration
 reproducibility
 ```
 
-The next remediation stage is repository-wide consistency and teaching readiness validation.
+The guided sequence is complete.
+
+For future course delivery, instructor readiness and recovery are governed by:
+
+```text
+docs/15_INSTRUCTOR_CONTINGENCY_AND_RECOVERY_PLAYBOOK.md
+docs/16_TEACHING_BASELINE_RELEASE.md
+```
