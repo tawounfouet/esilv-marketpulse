@@ -1804,3 +1804,44 @@ Cette cartographie est maintenant documentée dans :
 ```text
 docs/legacy/02_LEGACY_TO_MARKETPULSE_CONTENT_MAPPING.md
 ```
+
+
+## 32. Current lifecycle note
+
+This document remains the historical analysis baseline.
+
+Its analytical conclusions are intentionally preserved.
+
+The current MarketPulse CORE has since been frozen through:
+
+```text
+R1-R6
+```
+
+with the release decision documented in:
+
+```text
+docs/16_TEACHING_BASELINE_RELEASE.md
+```
+
+The remaining Legacy work is no longer an open-ended migration exercise.
+
+It is governed by:
+
+```text
+docs/legacy/04_LEGACY_CONTENT_OPERATIONALIZATION_ROADMAP.md
+```
+
+Therefore:
+
+```text
+this document
+=
+historical analysis source
+
+R7 roadmap
+=
+current execution source
+```
+
+Future operationalization must not rewrite the historical findings merely to reflect later repository phases.
