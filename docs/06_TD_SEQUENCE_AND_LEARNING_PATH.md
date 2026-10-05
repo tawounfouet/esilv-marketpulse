@@ -580,19 +580,66 @@ CHECKPOINT PHASE C - TD09-TD12
 CHECKPOINT C - Integration and Release - 45%
 ```
 
-## 17. Common path vs advanced path
+## 17. CORE, OPTIONAL and ADVANCED student paths
 
-The following topics are outside the required 18-hour core:
+The student-facing taxonomy is:
 
-- remote VPS setup;
-- SSH deployment;
-- systemd;
-- Docker;
-- GitHub Actions;
-- intraday market data;
-- advanced quantitative finance.
+```text
+CORE
+=
+required 18-hour path
 
-These may be offered as optional extensions.
+OPTIONAL
+=
+lightweight in-TD extension
+
+ADVANCED
+=
+deeper separate practice
+under docs/advanced/
+```
+
+ADVANCED work is never required for Checkpoint A, B or C.
+
+Current examples include:
+
+```text
+Linux file operations
+permissions
+pipes and text processing
+environment variables
+Git conflict resolution
+Git recovery
+tags and releases
+```
+
+Other supports may remain:
+
+```text
+PENDING_EXTERNAL
+```
+
+until a real teaching environment validates their delivery gate.
+
+Topics such as:
+
+```text
+remote VPS setup
+SSH deployment
+systemd
+Docker
+GitHub Actions
+intraday market data
+advanced quantitative finance
+```
+
+remain outside the required 18-hour CORE unless separately qualified as ADVANCED material.
+
+Instructor conceptual depth is maintained separately under:
+
+```text
+docs/instructor/
+```
 
 ## 18. Pedagogical rule
 
