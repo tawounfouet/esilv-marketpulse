@@ -14,27 +14,33 @@
 
 ## Context
 
-Until now, MarketPulse has worked with local CSV and JSON files.
-
-TD07 introduced a comparison model based on:
+TD07 introduced provider-neutral analytics in:
 
 ```text
-instrument
-+
-benchmark
-+
-same lookback
-+
-same interval
-+
-aligned observations
-+
-performance comparison
+src/analytics.py
 ```
 
-The next objective is to change the data source without rewriting the analytical logic.
+TD08 changes the data source while preserving those analytics.
 
-MarketPulse will now retrieve daily market data through the Python package:
+The target architecture is:
+
+```text
+Yahoo Finance
+      |
+      v
+Yahoo provider
+      |
+      v
+canonical MarketPulse rows
+      |
+      v
+TD07 analytics.py
+      |
+      v
+terminal comparison
+```
+
+The remote data is accessed through:
 
 ```text
 yfinance
@@ -47,61 +53,59 @@ yfinance is a community Python library.
 It is not the official Yahoo Finance API.
 ```
 
-The package is used here as an accessible pedagogical bridge before Bloomberg.
+TD08 is not a pandas course and not a provider-framework design exercise.
+
+The goal is to build one simple adapter that produces the same canonical rows already consumed by MarketPulse analytics.
 
 ## Learning objectives
 
 At the end of TD08, you should be able to:
 
-- install and record a Python dependency;
-- retrieve remote market data with `yfinance`;
-- distinguish a business ticker from a provider-specific symbol;
-- use a 1-month lookback and daily interval;
-- convert provider output to the MarketPulse canonical row structure;
-- feed the existing comparison logic with Yahoo Finance data;
-- handle a basic remote-data failure;
-- explain why provider acquisition should remain separate from analytics;
-- complete the established branch, PR and review workflow.
+- install and record one direct dependency;
+- retrieve one remote Yahoo Finance series;
+- distinguish canonical ticker from provider-specific symbol;
+- create `src/providers/yahoo_provider.py`;
+- normalize Yahoo output into the MarketPulse canonical row contract;
+- preserve `SP500` as the benchmark ticker while mapping Yahoo to `^GSPC`;
+- retrieve instrument and benchmark for a 1-month daily window;
+- align the two remote series using TD07 logic;
+- reuse TD07 analytics unchanged;
+- run MarketPulse with remote data;
+- prepare Checkpoint B evidence honestly.
 
-## Expected result
+## CORE definition of done
 
-MarketPulse should be able to use:
-
-```text
-Provider   : Yahoo Finance
-Instrument : AAPL
-Benchmark  : S&P 500
-Yahoo      : AAPL + ^GSPC
-Lookback   : 1 month
-Interval   : Daily
-```
-
-and produce a comparison summary using remote data.
-
-Example shape:
+TD08 is complete when the team can confirm:
 
 ```text
-=== MarketPulse ===
-
-Provider
-Yahoo Finance
-
-Market configuration
-Instrument : AAPL - Apple Inc.
-Benchmark  : S&P 500
-Period     : 1 month
-Interval   : Daily
-
-Instrument return : ...
-Benchmark return  : ...
-
-Relative performance
-AAPL vs SP500 : ... percentage points
+[ ] yfinance is installed in the working environment
+[ ] yfinance is recorded in requirements.txt
+[ ] src/providers/__init__.py exists
+[ ] src/providers/yahoo_provider.py exists
+[ ] Yahoo AAPL data can be retrieved
+[ ] provider output is normalized to canonical rows
+[ ] canonical ticker AAPL remains AAPL
+[ ] canonical ticker SP500 remains SP500
+[ ] Yahoo-specific benchmark symbol is ^GSPC
+[ ] instrument and benchmark use period=1mo
+[ ] instrument and benchmark use interval=1d
+[ ] TD07 align_series() is reused
+[ ] TD07 analytics functions are reused without provider-specific changes
+[ ] python src/main.py works
+[ ] the TD08 change follows the standard branch / PR / review workflow
+[ ] Checkpoint B can be captured after successful remote retrieval
 ```
 
-The exact observations and values depend on the retrieval date.
+The following are not required for CORE completion:
 
-Do not hard-code expected market prices.
+```text
+invalid-symbol experiment
+alternate market pair
+generic provider selector
+YAML provider parsing
+advanced retry logic
+extra provider-error drills
+```
 
 ## Prerequisites
 
@@ -109,10 +113,9 @@ Before starting:
 
 ```text
 [ ] TD01-TD07 completed
-[ ] team main is up to date
-[ ] MarketPulse comparison works with CSV
-[ ] period return works
-[ ] base-100 calculation works
+[ ] reviewed TD07 analytics are merged to team main
+[ ] src/analytics.py exists
+[ ] python src/main.py works with local CSV
 [ ] branch / PR / review workflow is understood
 [ ] internet access is available
 ```
@@ -123,220 +126,52 @@ Update local main:
 git switch main
 git pull
 git status
-```
-
-Run the current application:
-
-```bash
 python src/main.py
 ```
 
 Start from a clean working tree.
 
+## Instructor preparation
+
+Before the session, the instructor should have:
+
+```text
+[ ] known-good yfinance retrieval snippet
+[ ] expected canonical row example
+[ ] AAPL -> AAPL mapping confirmed
+[ ] SP500 -> ^GSPC mapping confirmed
+[ ] temporary-outage fallback explanation ready
+```
+
+Reference:
+
+```text
+docs/09_YAHOO_FINANCE_INSTRUCTOR_REFERENCE.md
+```
+
+The reference is a teaching fallback, not a substitute for successful remote evidence.
+
 ## Session plan
+
+The CORE is designed for approximately 80 minutes.
+
+The final 10 minutes are reserved for review, remote-provider variation and Checkpoint B capture.
 
 | Time | Activity |
 |---|---|
-| 00-10 min | Provider concept and Yahoo symbols |
-| 10-22 min | Install and record yfinance |
-| 22-38 min | Retrieve first remote series |
-| 38-55 min | Normalize Yahoo data |
-| 55-68 min | Retrieve instrument and benchmark |
-| 68-78 min | Reuse comparison logic |
-| 78-90 min | Validate, PR, review and Checkpoint B |
+| 00-08 min | Provider boundary + symbol mapping |
+| 08-18 min | Install and record yfinance |
+| 18-30 min | Retrieve AAPL and inspect returned structure |
+| 30-48 min | Create Yahoo provider + normalize rows |
+| 48-60 min | Retrieve AAPL + SP500 benchmark |
+| 60-70 min | Reuse TD07 alignment + analytics |
+| 70-78 min | Validate MarketPulse + standard Git handoff |
+| 78-80 min | CORE definition of done |
+| 80-90 min | Review / Checkpoint B / troubleshooting |
 
-# Part 1 - Understand the provider problem
+## Repository evolution
 
-The business concept should remain stable even when the provider changes.
-
-For MarketPulse:
-
-```text
-Business instrument
-AAPL
-    |
-    +-- CSV symbol    : AAPL
-    +-- Yahoo symbol  : AAPL
-    +-- Bloomberg     : later
-```
-
-For the benchmark:
-
-```text
-Business benchmark
-S&P 500
-    |
-    +-- CSV symbol    : SP500
-    +-- Yahoo symbol  : ^GSPC
-    +-- Bloomberg     : later
-```
-
-Provider-specific identifiers are not always identical.
-
-## Question
-
-> Why should MarketPulse avoid treating `^GSPC` as the universal business identifier for the S&P 500?
-
-Because `^GSPC` belongs to one provider convention.
-
-The application should preserve the business concept:
-
-```text
-S&P 500
-```
-
-while adapters translate it to provider-specific identifiers.
-
-# Part 2 - Create the feature branch
-
-Create a branch:
-
-```bash
-git switch main
-git pull
-git switch -c feature/yahoo-provider
-```
-
-Verify:
-
-```bash
-git branch
-git status
-```
-
-All TD08 work should remain on this feature branch until review and merge.
-
-# Part 3 - Install yfinance
-
-Check whether the package is already installed:
-
-```bash
-python -m pip show yfinance
-```
-
-If it is not installed:
-
-```bash
-python -m pip install yfinance
-```
-
-Verify:
-
-```bash
-python -m pip show yfinance
-```
-
-## 3.1 Record the dependency
-
-Update:
-
-```text
-requirements.txt
-```
-
-Add:
-
-```text
-yfinance
-```
-
-Do not add every transitive package manually.
-
-The direct dependency for this TD is `yfinance`.
-
-## 3.2 Why record dependencies?
-
-A local installation is not enough.
-
-Another student should be able to prepare the project with:
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-This becomes increasingly important before the final reproducibility check.
-
-# Part 4 - Retrieve one remote series
-
-Start with the primary instrument only.
-
-Create a small experiment in Python.
-
-Example:
-
-```python
-import yfinance as yf
-
-ticker = yf.Ticker("AAPL")
-
-history = ticker.history(
-    period="1mo",
-    interval="1d",
-    auto_adjust=False,
-)
-
-print(history.head())
-print(history.tail())
-```
-
-Run the experiment.
-
-## Questions
-
-1. Is the result empty?
-2. Which columns are available?
-3. What type of object is returned?
-4. Are the column names the same as the MarketPulse CSV schema?
-5. Where are the dates stored?
-
-## Important
-
-`yfinance` returns a table-like structure backed by pandas.
-
-TD08 is not a full pandas course.
-
-You only need enough interaction with the returned table to convert it into the existing MarketPulse data contract.
-
-# Part 5 - Understand the schema mismatch
-
-MarketPulse expects rows such as:
-
-```python
-{
-    "date": "2026-09-01",
-    "ticker": "AAPL",
-    "open": 249.20,
-    "high": 251.50,
-    "low": 248.00,
-    "close": 250.00,
-    "volume": 38000000,
-}
-```
-
-Yahoo data uses provider-oriented column names such as:
-
-```text
-Open
-High
-Low
-Close
-Volume
-```
-
-The provider adapter must translate from:
-
-```text
-Yahoo schema
-      |
-      v
-MarketPulse canonical schema
-```
-
-This is normalization at the provider boundary.
-
-# Part 6 - Create the Yahoo provider module
-
-TD08 extends the frozen CORE structure:
+TD08 extends the CORE structure to:
 
 ```text
 src/
@@ -347,6 +182,152 @@ src/
     └── yahoo_provider.py
 ```
 
+Responsibility split:
+
+```text
+src/providers/yahoo_provider.py
+=
+Yahoo acquisition
++
+Yahoo symbol handling
++
+Yahoo -> canonical row normalization
+
+src/analytics.py
+=
+provider-neutral alignment
++
+period return
++
+base 100
++
+relative performance
+
+src/main.py
+=
+orchestration
++
+terminal output
+```
+
+# CORE
+
+# Part 1 - Understand canonical ticker vs provider symbol
+
+The business identifiers stay stable:
+
+```text
+Instrument canonical ticker : AAPL
+Benchmark canonical ticker  : SP500
+```
+
+Yahoo-specific symbols are:
+
+```text
+AAPL  -> AAPL
+SP500 -> ^GSPC
+```
+
+The critical distinction is:
+
+```text
+SP500
+=
+MarketPulse canonical ticker
+
+^GSPC
+=
+Yahoo provider symbol
+```
+
+Do not propagate `^GSPC` into `analytics.py`.
+
+Provider identifiers belong at the provider boundary.
+
+# Part 2 - Create the TD08 feature branch
+
+Use the standard workflow already learned.
+
+```bash
+git switch main
+git pull
+git status
+git switch -c feature/yahoo-provider
+```
+
+TD08 does not reteach Git theory.
+
+Use `CONTRIBUTING.md` when you need the workflow reminder.
+
+# Part 3 - Install and record yfinance
+
+Check:
+
+```bash
+python -m pip show yfinance
+```
+
+If needed:
+
+```bash
+python -m pip install yfinance
+```
+
+Then add the direct dependency to:
+
+```text
+requirements.txt
+```
+
+Required entry:
+
+```text
+yfinance
+```
+
+Do not manually list every transitive dependency.
+
+A teammate should later be able to install project dependencies with:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+# Part 4 - Retrieve AAPL first
+
+Before writing the provider module, make one minimal retrieval.
+
+```python
+import yfinance as yf
+
+history = yf.Ticker("AAPL").history(
+    period="1mo",
+    interval="1d",
+    auto_adjust=False,
+)
+
+print(history.head())
+```
+
+You only need to identify:
+
+```text
+date index
+Open
+High
+Low
+Close
+Volume
+```
+
+The returned structure is table-like and backed by pandas.
+
+Do not turn TD08 into a pandas tutorial.
+
+The goal is only to convert the rows into the existing MarketPulse contract.
+
+# Part 5 - Create the Yahoo provider
+
 Create:
 
 ```text
@@ -354,9 +335,20 @@ src/providers/__init__.py
 src/providers/yahoo_provider.py
 ```
 
-Keep shared comparison logic in `src/analytics.py`.
+Use one provider function.
 
-A possible starter implementation is:
+Suggested contract:
+
+```python
+fetch_yahoo_prices(
+    symbol,
+    canonical_ticker,
+    period="1mo",
+    interval="1d",
+)
+```
+
+A teaching implementation is:
 
 ```python
 import yfinance as yf
@@ -395,45 +387,60 @@ def fetch_yahoo_prices(
     return rows
 ```
 
-This is a pedagogical implementation.
+The exact internal syntax may evolve with the library.
 
-The important contract is the returned structure, not the exact internal syntax.
+The required contract is the returned canonical row structure.
 
-## 6.1 Why two identifiers?
+# Part 6 - Validate one canonical Yahoo row
 
-The function accepts:
-
-```text
-symbol
-canonical_ticker
-```
-
-Example:
+Retrieve:
 
 ```python
-fetch_yahoo_prices(
-    symbol="^GSPC",
-    canonical_ticker="SP500",
+instrument_prices = fetch_yahoo_prices(
+    symbol="AAPL",
+    canonical_ticker="AAPL",
 )
 ```
 
-Yahoo receives:
+Inspect:
 
-```text
-^GSPC
+```python
+print(instrument_prices[0])
 ```
 
-while the rest of MarketPulse continues to know the benchmark as:
+Expected shape:
 
-```text
-SP500
+```python
+{
+    "date": "YYYY-MM-DD",
+    "ticker": "AAPL",
+    "open": 0.0,
+    "high": 0.0,
+    "low": 0.0,
+    "close": 0.0,
+    "volume": 0,
+}
 ```
 
-# Part 7 - Configure provider symbols
+The numeric values above describe types and shape only.
 
-For TD08, a simple mapping is sufficient.
+Do not hard-code them.
 
-Example:
+Required types:
+
+```text
+date    -> str
+ticker  -> str
+open    -> float
+high    -> float
+low     -> float
+close   -> float
+volume  -> int
+```
+
+# Part 7 - Add the Yahoo symbol mapping
+
+A minimal mapping is enough:
 
 ```python
 YAHOO_SYMBOLS = {
@@ -442,228 +449,162 @@ YAHOO_SYMBOLS = {
 }
 ```
 
-The mapping may temporarily live near the acquisition configuration.
+Keep the mapping near Yahoo acquisition logic or orchestration.
 
-Do not scatter provider symbols throughout analytical functions.
+Do not place it in `analytics.py`.
 
-The analytical layer should not contain:
+The common business ticker remains:
+
+```text
+SP500
+```
+
+even though Yahoo receives:
 
 ```text
 ^GSPC
 ```
 
-unless it is explicitly dealing with the Yahoo provider.
+# Part 8 - Retrieve instrument and benchmark
 
-# Part 8 - Retrieve both market series
-
-Import the provider function into the application.
-
-Example:
-
-```python
-from providers.yahoo_provider import fetch_yahoo_prices
-```
-
-Then retrieve:
+Retrieve both series through the same provider function:
 
 ```python
 instrument_prices = fetch_yahoo_prices(
-    symbol="AAPL",
+    symbol=YAHOO_SYMBOLS["AAPL"],
     canonical_ticker="AAPL",
     period="1mo",
     interval="1d",
 )
 
 benchmark_prices = fetch_yahoo_prices(
-    symbol="^GSPC",
+    symbol=YAHOO_SYMBOLS["SP500"],
     canonical_ticker="SP500",
     period="1mo",
     interval="1d",
 )
 ```
 
-Do not duplicate the Yahoo retrieval implementation for instrument and benchmark.
+Do not duplicate provider implementation for instrument and benchmark.
 
-# Part 9 - Validate the canonical structure
+Do not assume that both raw series always contain exactly the same dates.
 
-Inspect one row:
+# Part 9 - Reuse TD07 alignment
 
-```python
-print(instrument_prices[0])
-print(benchmark_prices[0])
-```
-
-Verify that both contain:
-
-```text
-date
-ticker
-open
-high
-low
-close
-volume
-```
-
-Verify types:
+Import the existing TD07 function:
 
 ```python
-print(type(instrument_prices[0]["close"]))
-print(type(instrument_prices[0]["volume"]))
+from analytics import align_series
 ```
 
-Expected:
+Then:
+
+```python
+aligned_instrument, aligned_benchmark = align_series(
+    instrument_prices,
+    benchmark_prices,
+)
+```
+
+The alignment logic must not be rewritten for Yahoo.
+
+Validate:
 
 ```text
-float
-int
+[ ] aligned instrument is not empty
+[ ] aligned benchmark is not empty
+[ ] both aligned lists have the same length
+[ ] corresponding rows use common dates
 ```
 
-The exact number of rows may differ from the static CSV sample because the remote one-month window depends on trading days and retrieval date.
+# Part 10 - Reuse TD07 analytics unchanged
 
-# Part 10 - Reuse TD07 analytics
+Reuse:
 
-This is the architectural test.
+```python
+calculate_period_return(...)
+calculate_base_100(...)
+calculate_relative_performance(...)
+```
 
-Your TD07 analytical functions should work with the Yahoo rows without being rewritten specifically for Yahoo.
+The architectural proof is:
+
+```text
+CSV
+  |
+  v
+canonical rows
+  |
+  +------------------+
+                     |
+Yahoo                |
+  |                  |
+  v                  |
+canonical rows       |
+  |                  |
+  +------------------+
+          |
+          v
+same analytics.py
+```
+
+If `analytics.py` needs to check whether the provider is CSV or Yahoo, stop and inspect the design.
+
+Provider-specific behaviour should remain outside the analytical layer.
+
+# Part 11 - Integrate Yahoo into main.py
+
+Keep the orchestration understandable.
 
 Conceptually:
 
 ```text
-CSV provider
-     |
-     +------+
-            |
-Yahoo provider
-     |      |
-     +------+
+select Yahoo provider path
         |
         v
-canonical rows
+fetch AAPL
         |
         v
-alignment
+fetch ^GSPC as canonical SP500
+        |
+        v
+align_series()
         |
         v
 period return
-        |
-        v
 base 100
+relative performance
         |
         v
-relative performance
+terminal summary
 ```
 
-If your analysis functions need to know whether the source is CSV or Yahoo, inspect your design.
-
-Provider details should remain near acquisition.
-
-# Part 11 - Align remote observations
-
-Yahoo may return dates that differ from the static teaching CSV.
-
-Build or reuse the TD07 alignment logic.
-
-Example:
-
-```python
-instrument_by_date = index_by_date(
-    instrument_prices
-)
-
-benchmark_by_date = index_by_date(
-    benchmark_prices
-)
-
-common_dates = sorted(
-    set(instrument_by_date)
-    & set(benchmark_by_date)
-)
-```
-
-Verify:
-
-```python
-print(len(common_dates))
-print(common_dates[0])
-print(common_dates[-1])
-```
-
-Do not assume that the two raw series always have exactly the same number of rows.
-
-Use common dates for direct comparison.
-
-# Part 12 - Build aligned lists
-
-Create aligned instrument and benchmark lists from the common dates.
-
-Example:
-
-```python
-aligned_instrument = [
-    instrument_by_date[date]
-    for date in common_dates
-]
-
-aligned_benchmark = [
-    benchmark_by_date[date]
-    for date in common_dates
-]
-```
-
-Then reuse the TD07 functions.
-
-For example:
-
-```python
-instrument_return = calculate_period_return(
-    aligned_instrument
-)
-
-benchmark_return = calculate_period_return(
-    aligned_benchmark
-)
-```
-
-# Part 13 - Display provider information
-
-The user should be able to understand the data source.
-
-Add a clear provider label.
+The terminal output should identify the provider honestly.
 
 Example:
 
 ```text
 Provider
-Yahoo Finance
+Yahoo Finance via yfinance
+
+Market configuration
+Instrument : AAPL - Apple Inc.
+Benchmark  : S&P 500
+Period     : 1 month
+Interval   : Daily
+
+Instrument return : ...
+Benchmark return  : ...
+
+Relative performance
+AAPL vs SP500 : ... percentage points
 ```
 
-Do not present `yfinance` as an official Yahoo API.
+The values depend on retrieval time.
 
-A precise description is:
+Do not hard-code market values or expected percentages.
 
-```text
-Yahoo Finance data accessed through the yfinance Python package.
-```
-
-# Part 14 - Validate the business contract
-
-Before committing, verify:
-
-```text
-[ ] provider is Yahoo Finance
-[ ] instrument business ticker remains AAPL
-[ ] benchmark business ticker remains SP500
-[ ] Yahoo benchmark symbol is ^GSPC
-[ ] lookback is 1 month
-[ ] interval is daily
-[ ] instrument data is not empty
-[ ] benchmark data is not empty
-[ ] common dates exist
-[ ] period returns are calculated
-[ ] relative performance is calculated
-[ ] base-100 comparison can be produced
-```
+# Part 12 - CORE validation
 
 Run:
 
@@ -671,71 +612,44 @@ Run:
 python src/main.py
 ```
 
-# Part 15 - Handle a simple provider failure
-
-Remote services can fail.
-
-Possible causes include:
-
-- no internet connection;
-- provider temporarily unavailable;
-- invalid symbol;
-- empty response.
-
-The application should not fail with a mysterious error if the provider returns no data.
-
-The provider function already includes:
-
-```python
-if history.empty:
-    raise ValueError(
-        f"No Yahoo Finance data returned for {symbol}"
-    )
-```
-
-At application level, a simple TD08 approach is enough.
-
-Example:
-
-```python
-try:
-    ...
-except ValueError as error:
-    print(f"Market data error: {error}")
-```
-
-Do not build a complex retry framework in TD08.
-
-# Part 16 - Invalid symbol exercise
-
-Try a clearly invalid symbol in a temporary experiment.
-
-Example:
+Then verify:
 
 ```text
-THIS_SYMBOL_SHOULD_NOT_EXIST_123
+[ ] provider is identified as Yahoo Finance via yfinance
+[ ] AAPL remote data is not empty
+[ ] SP500 benchmark remote data is not empty
+[ ] Yahoo symbol ^GSPC is used only at provider boundary
+[ ] canonical ticker remains SP500
+[ ] rows use date/ticker/open/high/low/close/volume
+[ ] period is 1 month
+[ ] interval is daily
+[ ] common dates exist
+[ ] TD07 analytics are reused unchanged
+[ ] first base-100 value is 100 for both aligned series
+[ ] relative performance uses instrument minus benchmark
 ```
 
-Observe the result.
+# Part 13 - Standard Git handoff
 
-Then restore the correct configuration.
+Use the established workflow:
 
-Question:
-
-> Why is an empty provider response different from an empty local CSV file?
-
-Discuss where each failure originates.
-
-# Part 17 - Git workflow
-
-Inspect:
-
-```bash
-git status
-git diff
+```text
+feature branch
++
+inspect diff
++
+commit
++
+push
++
+Pull Request
++
+review
++
+merge
 ```
 
-Expected changed files may include:
+Typical changed files:
 
 ```text
 requirements.txt
@@ -744,98 +658,37 @@ src/providers/__init__.py
 src/providers/yahoo_provider.py
 ```
 
-Do not include unrelated files.
-
-Stage the intended files.
-
-Example:
-
-```bash
-git add requirements.txt
-git add src/main.py
-git add src/providers/__init__.py
-git add src/providers/yahoo_provider.py
-```
-
-Inspect:
-
-```bash
-git diff --staged
-```
-
-Commit:
-
-```bash
-git commit -m "feat: add Yahoo Finance provider"
-```
-
-Push:
-
-```bash
-git push -u origin feature/yahoo-provider
-```
-
-# Part 18 - Open the Pull Request
-
-Suggested title:
+Suggested commit and PR title:
 
 ```text
 feat: add Yahoo Finance provider
 ```
 
-Suggested description:
-
-```markdown
-## What changed
-
-- add yfinance dependency;
-- add Yahoo Finance acquisition module;
-- map Yahoo symbols to MarketPulse tickers;
-- normalize Yahoo data to the canonical row structure;
-- reuse existing instrument vs benchmark comparison.
-
-## Validation
-
-- retrieved AAPL data for 1 month at daily interval;
-- retrieved ^GSPC data for 1 month at daily interval;
-- aligned common dates;
-- ran MarketPulse successfully;
-- verified period and relative performance output.
-```
-
-Another team member reviews the Pull Request before merge.
-
-# Part 19 - Review points
-
-The reviewer should verify:
+Before merge, the reviewer should verify:
 
 ```text
 [ ] yfinance is recorded in requirements.txt
-[ ] provider code is separate from analytical calculations
-[ ] AAPL uses Yahoo symbol AAPL
-[ ] S&P 500 uses Yahoo symbol ^GSPC
+[ ] provider code is separate from analytics
+[ ] AAPL maps to AAPL
+[ ] SP500 maps to ^GSPC
 [ ] canonical ticker remains SP500
-[ ] period is 1 month
-[ ] interval is daily
-[ ] returned rows use canonical field names
-[ ] comparison functions are reused
-[ ] no market values are hard-coded
-[ ] no unrelated files are included
+[ ] returned rows are canonical
+[ ] analytics.py has no Yahoo-specific change
+[ ] no market value is hard-coded
+[ ] no unrelated file is included
 ```
 
-# Part 20 - Checkpoint B
+# Part 14 - Checkpoint B
 
-Checkpoint B is performed after TD08 and closes Checkpoint Phase B.
+Checkpoint B closes Checkpoint Phase B after TD08.
 
-The canonical evidence contract is:
+Canonical evidence contract:
 
 ```text
 docs/04_CHECKPOINTS_AND_EVIDENCE.md
 ```
 
-That document defines the exact screenshot meaning, individual README fields, live validation rules and assessment guidance.
-
-For convenience, the required Checkpoint B files are:
+For convenience, required files are:
 
 ```text
 README.md
@@ -853,118 +706,78 @@ evidence/checkpoint-b/<github-username>/
 
 Do not rename the files.
 
-TD08 also closes pedagogical Wave 3, which covers TD07-TD08.
+## Capture checklist
 
-# Part 21 - Checkpoint B capture checklist
-
-Before leaving TD08, verify:
+Before leaving TD08:
 
 ```text
-[ ] your Pull Request is attributable to you
-[ ] your review contains meaningful technical content
-[ ] Yahoo Finance remote data was actually retrieved
-[ ] instrument and benchmark are both visible
+[ ] my Pull Request is attributable to me
+[ ] my review contains meaningful technical content
+[ ] successful Yahoo remote retrieval is visible
+[ ] AAPL and SP500 are both visible
 [ ] lookback is 1 month
 [ ] interval is Daily
-[ ] no secret appears in a screenshot
+[ ] no secret appears in the screenshots
 ```
 
 Do not use static CSV output as Yahoo evidence.
 
 Do not fabricate remote-provider evidence.
 
-# Part 22 - Checkpoint B live validation reminder
-
 Screenshots do not replace execution and explanation.
 
-Be ready to:
-
-```text
-run MarketPulse
-identify the Yahoo provider boundary
-show the canonical row structure
-explain SP500 vs ^GSPC
-explain common-date alignment
-show your Pull Request
-show a review you performed
-```
-
-For the official validation rules, use `docs/04_CHECKPOINTS_AND_EVIDENCE.md`.
-
-# Part 23 - If Yahoo Finance is temporarily unavailable
+# Part 15 - Temporary Yahoo outage procedure
 
 Remote services are outside the repository's control.
 
-If Yahoo Finance is unavailable during the lab:
+If Yahoo retrieval fails during the session:
 
-1. verify your internet connection;
+1. verify internet access;
 2. verify the symbol;
-3. retry once after checking the code;
-4. keep the provider implementation;
-5. use the local CSV path to continue architectural work;
-6. report the outage to the instructor.
+3. compare your provider code with the instructor reference;
+4. retry once after correcting any local issue;
+5. use the local CSV path to continue validating `analytics.py`;
+6. report the external failure to the instructor.
 
-Do not fabricate Yahoo Finance evidence.
+Do not rewrite analytics because Yahoo is temporarily unavailable.
 
-Checkpoint B Yahoo evidence should be captured after a successful remote retrieval.
+Do not fabricate successful Yahoo output.
 
-If an external outage prevents this during the scheduled session, the instructor decides the recovery procedure.
+Checkpoint B file `03_yahoo_market_data.png` requires a successful remote retrieval unless the instructor formally defines another evidence recovery procedure.
 
-# Part 24 - Mini exercises
+# OPTIONAL
 
-## Exercise 1 - Change instrument
+Complete optional work only after the CORE definition of done is satisfied.
 
-Temporarily retrieve another widely traded instrument.
+## Optional 1 - Invalid-symbol experiment
 
-Example:
+Try a clearly invalid symbol in a temporary experiment.
+
+Observe the provider response.
+
+Restore the valid mapping afterward.
+
+Do not make this experiment part of required Checkpoint B evidence.
+
+## Optional 2 - Alternate instrument
+
+Temporarily retrieve another widely traded instrument such as:
 
 ```text
 MSFT
 ```
 
-Do not change the permanent team market pair unless instructed.
-
-Verify that the provider function remains reusable.
-
-## Exercise 2 - Inspect provider symbols
-
-Explain why:
+The common CORE pair remains:
 
 ```text
-SP500
+AAPL + S&P 500
 ```
 
-and:
+Do not make alternate pair selection a mandatory TD08 task.
 
-```text
-^GSPC
-```
+## Optional 3 - Provider selector
 
-represent related concepts but serve different roles.
-
-## Exercise 3 - Compare row contracts
-
-Print one CSV-normalized row and one Yahoo-normalized row.
-
-Verify that both have the same keys.
-
-## Exercise 4 - Compare observation counts
-
-Display:
-
-```text
-raw instrument observations
-raw benchmark observations
-common aligned observations
-```
-
-Explain why these numbers may differ.
-
-# Part 25 - If you finish early
-
-## Challenge 1 - Provider selection
-
-Introduce a simple provider setting:
+Experiment with:
 
 ```text
 csv
@@ -972,39 +785,33 @@ or
 yahoo
 ```
 
-Then choose the acquisition path without changing analytical functions.
+without changing analytical functions.
 
-Keep the implementation small.
+A generic provider framework is not required.
 
-## Challenge 2 - Extract symbol mapping
+## Optional 4 - Configuration refactor
 
-Move the Yahoo symbol mapping into a clearer configuration structure.
+You may document provider mapping more formally.
 
-Do not introduce secrets or unnecessary frameworks.
+Do not require YAML parsing.
 
-## Challenge 3 - Print retrieval window
+Do not introduce PyYAML only for this exercise.
 
-Display the first and last common dates returned by Yahoo.
+## Optional 5 - Additional provider-error handling
 
-## Challenge 4 - Compare CSV and Yahoo architecture
+You may improve user-facing error messages.
 
-Draw:
+Do not build:
 
 ```text
-CSV
- |
- v
-canonical rows
-
-Yahoo
- |
- v
-canonical rows
+retry framework
+backoff engine
+provider abstraction framework
 ```
 
-Then explain why both can feed the same calculations.
+inside TD08.
 
-# Part 26 - Troubleshooting
+# TROUBLESHOOTING
 
 ## ModuleNotFoundError: yfinance
 
@@ -1024,32 +831,16 @@ python -m pip show yfinance
 
 Check:
 
-- internet access;
-- symbol spelling;
-- period;
-- interval.
-
-Test the instrument and benchmark independently.
-
-## Import error for providers
-
-Check the structure:
-
 ```text
-src/
-├── main.py
-└── providers/
-    ├── __init__.py
-    └── yahoo_provider.py
+internet access
+symbol spelling
+period=1mo
+interval=1d
 ```
 
-Run the application from the repository root:
+Test AAPL and `^GSPC` separately.
 
-```bash
-python src/main.py
-```
-
-## KeyError on Yahoo columns
+## Returned columns differ from expectation
 
 Inspect:
 
@@ -1057,81 +848,97 @@ Inspect:
 print(history.columns)
 ```
 
-Verify the actual provider output before assuming a column name.
+Use the structure actually returned by the library.
 
-## Dates do not align
+Do not invent provider fields.
 
-Inspect the date sets and use common dates.
+## Import error for providers
 
-Do not compare rows only by list position if dates differ.
-
-## Benchmark volume looks unusual
-
-Index volume may differ from equity volume and may be zero or provider-dependent.
-
-Volume is not required for the benchmark-performance calculation.
-
-# Part 27 - Readiness check
-
-Before finishing TD08, each student should be able to explain:
+Verify:
 
 ```text
-[ ] what yfinance is
-[ ] why it is not described as the official Yahoo API
-[ ] provider-specific symbol vs canonical ticker
-[ ] why SP500 maps to ^GSPC for Yahoo
-[ ] why Yahoo data must be normalized
-[ ] why common dates matter
-[ ] why analytics should not depend on the provider
-[ ] how requirements.txt improves reproducibility
-[ ] what to do when a remote provider returns no data
+src/
+├── main.py
+├── analytics.py
+└── providers/
+    ├── __init__.py
+    └── yahoo_provider.py
 ```
 
-Each student should also confirm:
+Run from repository root:
+
+```bash
+python src/main.py
+```
+
+## No common dates
+
+Use the existing `align_series()`.
+
+Inspect the dates returned by both provider calls.
+
+Do not compare rows only by list position.
+
+## PR changes analytics.py for Yahoo-specific logic
+
+Stop before merge.
+
+Yahoo-specific symbols and acquisition behaviour belong in the provider boundary, not in `analytics.py`.
+
+# Final readiness check
+
+Each student should be able to explain:
 
 ```text
-[ ] I used a feature branch
-[ ] I created identifiable commits
-[ ] I pushed the branch
-[ ] I used a Pull Request
-[ ] another student reviewed work
-[ ] Yahoo data was retrieved successfully
-[ ] instrument and benchmark comparison works
-[ ] Checkpoint B evidence uses the official filenames
+[ ] yfinance vs official Yahoo API
+[ ] canonical ticker vs provider symbol
+[ ] SP500 vs ^GSPC
+[ ] provider normalization
+[ ] canonical row structure
+[ ] common-date alignment
+[ ] why analytics.py stays provider-neutral
+[ ] why requirements.txt matters
+[ ] what to do during temporary provider failure
 ```
 
-# Part 28 - What comes next?
+The team should confirm:
+
+```text
+[ ] Yahoo provider returns canonical rows
+[ ] SP500 remains the canonical benchmark ticker
+[ ] ^GSPC remains Yahoo-specific
+[ ] TD07 analytics run unchanged
+[ ] python src/main.py works with successful Yahoo retrieval
+[ ] Checkpoint B can be completed honestly
+```
+
+# What comes next?
 
 Pedagogical Wave 3 and Checkpoint Phase B are now complete:
 
 ```text
-Wave 3 - Comparison + Yahoo Finance - 3 hours
+Wave 3 - TD07-TD08
 
-TD07 - Data Normalization + Comparison
-TD08 - Yahoo Finance
+TD07
+provider-neutral analytics
 
-Checkpoint Phase B - TD05-TD08
+TD08
+Yahoo provider
         |
         v
-Checkpoint B
+same analytics contract
 ```
 
-The next business requirement is:
+TD09 introduces the professional data environment.
+
+The central design rule remains:
 
 ```text
-"The trading desk now has access to a professional market-data environment."
-```
-
-In TD09, MarketPulse will begin the Bloomberg stage.
-
-The key idea remains unchanged:
-
-```text
-new provider
-      |
-      v
-canonical market data
-      |
-      v
-existing comparison logic
+provider-specific acquisition
+        |
+        v
+canonical rows
+        |
+        v
+provider-neutral analytics
 ```

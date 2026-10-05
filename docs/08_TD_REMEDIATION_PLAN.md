@@ -702,47 +702,33 @@ Acceptance criteria:
 Status:
 
 ```text
-CRITICAL REMEDIATION
+DONE
 ```
 
-CORE:
+Implemented remediation:
 
-- install `yfinance`;
-- record dependency;
-- retrieve AAPL;
-- understand returned structure;
-- create `src/providers/yahoo_provider.py`;
-- normalize to canonical rows;
-- map `SP500 -> ^GSPC`;
-- retrieve instrument and benchmark;
-- align common dates;
-- reuse TD07 analytics;
-- run MarketPulse;
-- standard Git workflow;
-- prepare Checkpoint B evidence.
-
-Move to OPTIONAL:
-
-- invalid-symbol experiment;
-- extra provider-error drills;
-- alternate instrument;
-- provider selector;
-- configuration refactor.
-
-Instructor preparation:
-
-- known-good yfinance example;
-- known-good expected canonical row;
-- fallback explanation for temporary remote outage.
+- added an explicit CORE definition of done;
+- planned approximately 80 minutes of required work plus 10 minutes of review, remote variation and Checkpoint B buffer;
+- retained `yfinance` installation and `requirements.txt` recording in CORE;
+- reduced provider exploration to one AAPL retrieval and only the returned structure needed for normalization;
+- introduced `src/providers/yahoo_provider.py` as the Yahoo acquisition boundary;
+- kept canonical row normalization in the provider;
+- froze `AAPL -> AAPL` and `SP500 -> ^GSPC` for TD08 CORE;
+- required `SP500` to remain the canonical benchmark ticker;
+- required TD07 `align_series()` and analytics functions to run unchanged;
+- reduced repeated Git instruction to the established workflow handoff;
+- moved invalid-symbol experiment, alternate instrument, provider selector, configuration refactor and advanced error handling to OPTIONAL;
+- added `docs/09_YAHOO_FINANCE_INSTRUCTOR_REFERENCE.md` with a known-good teaching shape, canonical row example and outage fallback;
+- preserved honest Checkpoint B evidence rules and prohibited fabricated Yahoo output.
 
 Acceptance criteria:
 
 ```text
-[ ] Yahoo provider returns canonical rows
-[ ] SP500 remains canonical ticker
-[ ] ^GSPC remains provider-specific
-[ ] TD07 analytics run unchanged
-[ ] Checkpoint B can be completed
+[x] Yahoo provider returns canonical rows
+[x] SP500 remains canonical ticker
+[x] ^GSPC remains provider-specific
+[x] TD07 analytics run unchanged
+[x] Checkpoint B can be completed
 ```
 
 ### R3.3 Resolve Checkpoint B market-pair requirement

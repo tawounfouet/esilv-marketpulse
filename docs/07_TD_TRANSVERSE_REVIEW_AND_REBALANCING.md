@@ -972,15 +972,45 @@ Daily returns are no longer a CORE dependency.
 
 ### TD08 - Yahoo Finance
 
-Current status:
+Remediation status:
 
 ```text
-CRITICAL OVERLOAD
+REMEDIATED BY LOT-R3.2
 ```
 
-The current lab contains 28 main parts.
+The revised CORE now focuses on:
 
-It combines:
+- install and record `yfinance`;
+- retrieve AAPL;
+- inspect only the provider structure needed for normalization;
+- create `src/providers/yahoo_provider.py`;
+- normalize to canonical rows;
+- preserve `AAPL` and `SP500` as canonical tickers;
+- map Yahoo benchmark symbol `^GSPC` at the provider boundary;
+- retrieve both instrument and benchmark;
+- reuse TD07 `align_series()`;
+- reuse TD07 analytics unchanged;
+- run MarketPulse;
+- use the established Git workflow;
+- prepare Checkpoint B evidence.
+
+The following are now explicitly OPTIONAL:
+
+- invalid-symbol experiment;
+- alternate instrument;
+- provider selector;
+- configuration refactor;
+- advanced provider-error handling.
+
+An instructor reference asset now provides a known-good retrieval shape, canonical row example and temporary-outage procedure:
+
+```text
+docs/09_YAHOO_FINANCE_INSTRUCTOR_REFERENCE.md
+```
+
+The lab no longer depends on extended pandas exploration or extra provider drills.
+
+Historical finding before remediation:
 
 - dependency installation;
 - first yfinance experiment;
