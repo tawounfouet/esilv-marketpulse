@@ -1258,6 +1258,12 @@ PASS
 
 ### R5.3 Checkpoint scan
 
+Status:
+
+```text
+DONE
+```
+
 Verify:
 
 ```text
@@ -1280,12 +1286,79 @@ Checkpoint C
 05_advanced_deployment.png optional
 ```
 
+Repository-wide scan result:
+
+```text
+Checkpoint A
+=
+exact filename set preserved in docs/04 and TD04
+individual preparation references in TD03 / TD05 are consistent
+
+Checkpoint B
+=
+exact filename set preserved in docs/04 and TD08
+individual preparation references in TD05 / TD06 / TD07 are consistent
+
+Checkpoint C
+=
+exact required filename set preserved in docs/04 and TD12
+TD10 prepares 01_final_market_data.png
+TD11 prepares 02_dash_dashboard.png
+03_final_pull_request.png keeps the late-stage attributable-PR rule
+05_advanced_deployment.png remains optional
+```
+
+Canonical evidence authority:
+
+```text
+docs/04_CHECKPOINTS_AND_EVIDENCE.md
+```
+
+The canonical document explicitly declares itself the single source of truth for:
+
+```text
+checkpoint timing
+required filenames
+optional filenames
+screenshot meaning
+individual evidence
+live validation
+assessment guidance
+security
+```
+
+The supporting evidence index:
+
+```text
+evidence/README.md
+```
+
+does not redefine the filename contract and points back to `docs/04_CHECKPOINTS_AND_EVIDENCE.md`.
+
+Checkpoint directories are consistently documented as:
+
+```text
+evidence/checkpoint-a/<github-username>/
+evidence/checkpoint-b/<github-username>/
+evidence/checkpoint-c/<github-username>/
+```
+
+A repository-wide `.png` reference scan found no alternate checkpoint filename competing with the canonical names.
+
+The Yahoo logo asset referenced by the root README is unrelated to checkpoint evidence and does not affect this contract.
+
 Acceptance criteria:
 
 ```text
-[ ] exact filenames match everywhere
-[ ] optional file remains optional
-[ ] docs/04 is canonical
+[x] exact filenames match everywhere
+[x] optional file remains optional
+[x] docs/04 is canonical
+```
+
+R5.3 conclusion:
+
+```text
+PASS
 ```
 
 ### R5.4 Terminology scan
