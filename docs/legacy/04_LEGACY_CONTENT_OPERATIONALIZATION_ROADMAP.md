@@ -458,12 +458,12 @@ optional extension
 ### Acceptance criteria per note
 
 ```text
-[ ] useful in a real TD
-[ ] can be read quickly before or during class
-[ ] does not create a new mandatory student deliverable
-[ ] aligns with one or more current TDs
-[ ] avoids stale historical claims
-[ ] marks environment-specific claims clearly
+[x] useful in a real TD
+[x] can be read quickly before or during class
+[x] does not create a new mandatory student deliverable
+[x] aligns with one or more current TDs
+[x] avoids stale historical claims
+[x] marks environment-specific claims clearly
 ```
 
 ### R7.3 closure
@@ -471,6 +471,60 @@ optional extension
 R7.3 is complete only when all 10 priority notes are:
 
 ```text
+INSTRUCTOR_READY
+```
+
+### Execution result
+
+Created index:
+
+```text
+docs/instructor/deep-dives/README.md
+```
+
+Created 10 operational notes:
+
+```text
+INS_GIT_01_STAGING_MENTAL_MODEL.md
+INS_GIT_02_HEAD_REFS_REMOTE_TRACKING.md
+INS_GIT_03_OBJECT_MODEL.md
+INS_GIT_04_MERGE_VS_REBASE.md
+
+INS_LNX_01_UNIX_PHILOSOPHY.md
+INS_LNX_02_PERMISSIONS_TROUBLESHOOTING.md
+
+INS_BBG_01_TERMINAL_IDENTIFIERS.md
+INS_BBG_02_BDP_BDS_BDH.md
+INS_BBG_03_REQUEST_RESPONSE_SUBSCRIPTION.md
+INS_BBG_04_XBBG_VS_BLPAPI.md
+```
+
+Structural validation:
+
+```text
+notes present              = 10 / 10
+INSTRUCTOR_READY status    = 10 / 10
+required sections present  = 10 / 10
+CORE boundary present      = 10 / 10
+stop point present         = 10 / 10
+```
+
+No TD, checkpoint, runtime, analytics or provider contract was changed.
+
+Bloomberg notes explicitly preserve the rule:
+
+```text
+current operational fact
+=
+verify in approved environment
+```
+
+R7.3 conclusion:
+
+```text
+PASS
+
+10 / 10 PRIORITY DEEP DIVES
 INSTRUCTOR_READY
 ```
 
@@ -747,8 +801,8 @@ Do not mix the two status systems.
 |---|---|---|
 | R7.1 | Legacy freeze reconciliation | DONE |
 | R7.2 | Final migration registry | DONE |
-| R7.3 | Instructor deep-dive operationalization | NEXT |
-| R7.4 | Advanced P1 content operationalization | NOT STARTED |
+| R7.3 | Instructor deep-dive operationalization | DONE |
+| R7.4 | Advanced P1 content operationalization | NEXT |
 | R7.5 | TD enrichment capsules | NOT STARTED |
 | R7.6 | Advanced-track packaging | NOT STARTED |
 | R7.7 | Legacy closure audit | NOT STARTED |
@@ -780,7 +834,7 @@ DONE as consolidated reference
 
 Instructor deep-dive operationalization
 =
-NOT STARTED
+DONE
 
 Advanced READY_TO_TEACH support production
 =
@@ -829,9 +883,9 @@ WITHOUT CORE DIVERGENCE
 The next action is:
 
 ```text
-R7.3 - Instructor deep-dive operationalization
+R7.4 - Advanced P1 content operationalization
 ```
 
-R7.1 and R7.2 now establish the Legacy execution baseline.
+R7.3 has operationalized all 10 priority instructor deep dives.
 
-Do not start R7.4 advanced-lab production before the R7.3 instructor-note sequence is explicitly underway.
+R7.4 may now start from the 12 P1 ADVANCED_READY targets defined in the final migration registry.
