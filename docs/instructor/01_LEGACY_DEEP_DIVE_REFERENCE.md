@@ -1650,22 +1650,21 @@ DONE
 
 separate instructor-ready notes
 =
-NOT STARTED
+DONE
+
+index
+=
+docs/instructor/deep-dives/README.md
 ```
 
-The operationalization target is defined by:
+R7.3 has now operationalized all 10 priority topics as separate instructor notes.
+
+Canonical index:
 
 ```text
-R7.3
-Instructor deep-dive operationalization
-```
-
-in:
-
-```text
-docs/legacy/04_LEGACY_CONTENT_OPERATIONALIZATION_ROADMAP.md
+docs/instructor/deep-dives/README.md
 ```
 
 The frozen 18-hour CORE remains unchanged.
 
-The separate notes must improve instructor usability without creating new mandatory student deliverables.
+The notes improve instructor usability without creating new mandatory student deliverables.
