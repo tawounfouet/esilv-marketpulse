@@ -3,7 +3,16 @@ app:
 
 market:
   provider: csv
-  ticker: AAPL
+  lookback: 1mo
+  interval: 1d
+
+  instrument:
+    ticker: AAPL
+    name: Apple Inc.
+
+  benchmark:
+    ticker: SP500
+    name: S&P 500
 
 data:
   file: data/sample/prices.csv
