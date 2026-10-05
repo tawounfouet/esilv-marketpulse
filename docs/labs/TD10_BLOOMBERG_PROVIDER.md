@@ -14,97 +14,122 @@
 
 ## Context
 
-TD09 introduced Bloomberg as a professional market-data environment.
-
-You identified:
-
-- the Bloomberg access method available in class;
-- the Bloomberg identifiers for the MarketPulse instrument and benchmark;
-- the fields actually returned by the teaching environment;
-- the mapping between Bloomberg data and the MarketPulse canonical row model.
-
-TD10 now turns that discovery work into an application provider.
-
-The target architecture is:
+TD09 produced the mapping contract:
 
 ```text
-CSV
-Yahoo
-Bloomberg
-   |
-   v
-canonical market data
-   |
-   v
-same alignment logic
-   |
-   v
-same analytics
-   |
-   v
-same MarketPulse output
+docs/BLOOMBERG_FIELD_MAPPING.md
 ```
 
-The key objective is provider independence.
+TD10 turns that mapping into:
+
+```text
+src/providers/bloomberg_provider.py
+```
+
+The objective is not to build a generic provider framework.
+
+The objective is to prove that the Bloomberg stage can feed the same canonical rows and the same analytics already used by CSV and Yahoo.
+
+Target architecture:
+
+```text
+Bloomberg-stage input
+        |
+        v
+bloomberg_provider.py
+        |
+        v
+canonical rows
+        |
+        v
+align_series()
+        |
+        v
+period return
+base 100
+relative performance
+        |
+        v
+MarketPulse terminal output
+```
+
+## Authorized access modes
+
+TD10 preserves the TD09 access mode:
+
+```text
+LIVE
+or
+APPROVED_SAMPLE
+```
+
+### LIVE
+
+Use only the instructor-approved Bloomberg access mechanism documented during TD09.
+
+The exact connection implementation depends on the classroom environment.
+
+### APPROVED_SAMPLE
+
+Use:
+
+```text
+docs/10_BLOOMBERG_INSTRUCTOR_REFERENCE.md
+docs/11_BLOOMBERG_PROVIDER_SCAFFOLD.md
+data/sample/bloomberg_reference_sample.json
+data/sample/bloomberg_reference_expected.json
+```
+
+APPROVED_SAMPLE validates the provider boundary and normalization contract.
+
+It does not prove live Bloomberg connectivity.
 
 ## Learning objectives
 
 At the end of TD10, you should be able to:
 
-- isolate Bloomberg-specific acquisition logic;
-- reuse the mapping documented in TD09;
-- preserve canonical MarketPulse tickers;
-- normalize Bloomberg output to the common row contract;
-- feed existing analytics without Bloomberg-specific changes;
-- select a provider without duplicating analytical code;
-- validate both instrument and benchmark paths;
-- handle a simple provider failure;
-- explain where Bloomberg-specific code starts and stops;
-- complete the established GitHub workflow.
+- create a Bloomberg-specific provider boundary;
+- reuse the TD09 mapping instead of inventing fields;
+- preserve canonical AAPL and SP500 tickers;
+- normalize approved Bloomberg-stage input to canonical rows;
+- obtain instrument and benchmark rows;
+- reuse TD07 alignment unchanged;
+- reuse TD07 analytics unchanged;
+- make LIVE vs APPROVED_SAMPLE visible;
+- validate the terminal path;
+- complete the established Git workflow.
 
-## Expected result
+## CORE definition of done
 
-MarketPulse should be able to use a Bloomberg provider path such as:
-
-```text
-Provider   : Bloomberg
-Instrument : AAPL - Apple Inc.
-Bloomberg  : AAPL US Equity
-
-Benchmark  : S&P 500
-Bloomberg  : SPX Index
-
-Lookback   : 1 month
-Interval   : Daily
-```
-
-and then reuse:
+TD10 is complete when the team can confirm:
 
 ```text
-alignment
-period return
-daily return
-base 100
-relative performance
+[ ] docs/BLOOMBERG_FIELD_MAPPING.md is the mapping source
+[ ] src/providers/bloomberg_provider.py exists
+[ ] AAPL maps to AAPL US Equity
+[ ] SP500 maps to SPX Index
+[ ] one authorized access mode is used: LIVE or APPROVED_SAMPLE
+[ ] Bloomberg-stage input is normalized to canonical rows
+[ ] canonical instrument ticker remains AAPL
+[ ] canonical benchmark ticker remains SP500
+[ ] instrument rows are not empty
+[ ] benchmark rows are not empty
+[ ] align_series() is reused
+[ ] analytics.py has no Bloomberg-specific calculation
+[ ] period return is reused
+[ ] base 100 is reused
+[ ] relative performance is reused
+[ ] terminal output shows the actual access mode honestly
+[ ] python src/main.py works
+[ ] no credential is committed
+[ ] the change follows the standard branch / PR / review workflow
 ```
 
-without implementing separate Bloomberg-specific formulas.
+Daily returns are not required.
 
-## Important environment rule
+A generic provider selector is not required.
 
-The Bloomberg connection code depends on the actual ESILV teaching environment.
-
-Use only the access method confirmed during TD09.
-
-Do not:
-
-- invent a Bloomberg Python package;
-- install random Bloomberg connectors;
-- copy another student's credentials;
-- commit credentials;
-- bypass access controls.
-
-If the class uses an instructor-provided Bloomberg sample instead of a live connection, clearly preserve that distinction.
+YAML parsing is not required.
 
 ## Prerequisites
 
@@ -112,13 +137,13 @@ Before starting:
 
 ```text
 [ ] TD01-TD09 completed
-[ ] docs/BLOOMBERG_FIELD_MAPPING.md exists
-[ ] Bloomberg identifiers are confirmed
-[ ] available Bloomberg fields are documented
-[ ] CSV provider path works
-[ ] Yahoo provider path works
-[ ] common comparison logic works
-[ ] team main is up to date
+[ ] docs/BLOOMBERG_FIELD_MAPPING.md exists and was reviewed
+[ ] TD09 access mode is documented
+[ ] AAPL US Equity mapping is documented
+[ ] SPX Index mapping is documented
+[ ] src/analytics.py exists
+[ ] Yahoo provider path is understood
+[ ] team main is synchronized
 ```
 
 Update local main:
@@ -127,73 +152,44 @@ Update local main:
 git switch main
 git pull
 git status
-```
-
-Run MarketPulse before changing anything:
-
-```bash
 python src/main.py
 ```
 
 Start from a clean working tree.
 
+## Instructor preparation
+
+Reference materials:
+
+```text
+docs/10_BLOOMBERG_INSTRUCTOR_REFERENCE.md
+docs/11_BLOOMBERG_PROVIDER_SCAFFOLD.md
+```
+
+For LIVE mode, the instructor supplies or demonstrates only the environment-specific raw acquisition body.
+
+For APPROVED_SAMPLE mode, the repository fallback assets are sufficient.
+
 ## Session plan
+
+The CORE is designed for approximately 80 minutes.
+
+The final 10 minutes are reserved for review, environment variation and troubleshooting.
 
 | Time | Activity |
 |---|---|
-| 00-10 min | Review TD09 mapping |
-| 10-25 min | Create Bloomberg provider boundary |
-| 25-45 min | Implement or connect acquisition |
-| 45-60 min | Normalize Bloomberg output |
-| 60-72 min | Integrate instrument and benchmark |
-| 72-82 min | Reuse existing analytics |
-| 82-90 min | Validate, PR and review |
+| 00-08 min | Review TD09 mapping + access mode |
+| 08-18 min | Create Bloomberg provider boundary |
+| 18-38 min | Implement raw input path + normalization |
+| 38-52 min | Obtain AAPL + SP500 canonical rows |
+| 52-65 min | Reuse alignment + analytics |
+| 65-74 min | Integrate terminal output + mode label |
+| 74-80 min | CORE validation + standard Git handoff |
+| 80-90 min | Review / troubleshooting / OPTIONAL |
 
-# Part 1 - Review the TD09 mapping
+## Repository evolution
 
-Open:
-
-```text
-docs/BLOOMBERG_FIELD_MAPPING.md
-```
-
-Before writing provider code, verify that the document contains:
-
-```text
-[ ] instrument canonical ticker
-[ ] instrument Bloomberg identifier
-[ ] benchmark canonical ticker
-[ ] benchmark Bloomberg identifier
-[ ] access method used in class
-[ ] observed historical fields
-[ ] date representation
-[ ] notes about missing or provider-specific values
-```
-
-Do not start from assumptions that contradict the actual TD09 observations.
-
-# Part 2 - Create the feature branch
-
-Create:
-
-```bash
-git switch main
-git pull
-git switch -c feature/bloomberg-provider
-```
-
-Verify:
-
-```bash
-git branch
-git status
-```
-
-All TD10 work should stay on this branch until review and merge.
-
-# Part 3 - Create the Bloomberg provider module
-
-TD10 extends the same frozen CORE structure:
+TD10 extends the CORE structure to:
 
 ```text
 src/
@@ -205,55 +201,80 @@ src/
     └── bloomberg_provider.py
 ```
 
+Responsibility split:
+
+```text
+bloomberg_provider.py
+=
+Bloomberg identifier handling
++
+authorized raw input boundary
++
+Bloomberg-stage normalization
+
+analytics.py
+=
+provider-neutral alignment
++
+period return
++
+base 100
++
+relative performance
+
+main.py
+=
+orchestration
++
+terminal output
+```
+
+# CORE
+
+# Part 1 - Review TD09 before coding
+
+Open:
+
+```text
+docs/BLOOMBERG_FIELD_MAPPING.md
+```
+
+Verify:
+
+```text
+[ ] Access mode is LIVE or APPROVED_SAMPLE
+[ ] AAPL -> AAPL US Equity
+[ ] SP500 -> SPX Index
+[ ] input structure is documented
+[ ] mapped fields are traceable
+[ ] missing fields are documented honestly
+[ ] TD10 handoff notes are present
+```
+
+Do not replace the TD09 mapping with assumptions from the internet.
+
+# Part 2 - Create the feature branch
+
+Use the established workflow:
+
+```bash
+git switch main
+git pull
+git status
+git switch -c feature/bloomberg-provider
+```
+
+TD10 does not reteach Git theory.
+
+# Part 3 - Create the provider module
+
 Create:
 
 ```text
 src/providers/bloomberg_provider.py
 ```
 
-The provider should have two conceptual responsibilities:
-
-```text
-1. acquire Bloomberg data
-2. normalize Bloomberg data
-```
-
-It should not calculate:
-
-```text
-period return
-daily return
-base 100
-relative performance
-```
-
-Those belong to the shared analytical layer.
-
-## 3.1 Provider boundary
-
-Conceptually:
-
-```text
-Bloomberg identifier
-        |
-        v
-Bloomberg-specific request
-        |
-        v
-Bloomberg-specific response
-        |
-        v
-normalization
-        |
-        v
-MarketPulse canonical rows
-```
-
-# Part 4 - Define the Bloomberg identifier mapping
-
-Keep provider identifiers near provider configuration.
-
-A simple mapping may look like:
+Keep the identifier mapping close to the provider boundary:
 
 ```python
 BLOOMBERG_IDENTIFIERS = {
@@ -262,33 +283,20 @@ BLOOMBERG_IDENTIFIERS = {
 }
 ```
 
-This mapping means:
-
-```text
-canonical ticker
-        |
-        v
-Bloomberg identifier
-```
-
-The rest of MarketPulse should continue to use:
+The rest of MarketPulse continues to use:
 
 ```text
 AAPL
 SP500
 ```
 
-not Bloomberg identifiers as universal application identifiers.
+# Part 4 - Separate raw input from normalization
 
-# Part 5 - Separate acquisition from normalization
+The provider has two responsibilities.
 
-A useful provider design has two steps.
+## 4.1 Raw input boundary
 
-## 5.1 Acquisition step
-
-The exact implementation depends on the teaching environment.
-
-Conceptually:
+Conceptual LIVE signature:
 
 ```python
 def fetch_raw_bloomberg_history(
@@ -299,17 +307,27 @@ def fetch_raw_bloomberg_history(
     ...
 ```
 
-Replace the implementation body only with the instructor-approved access mechanism.
+Only the instructor-approved classroom mechanism belongs inside this boundary.
 
-The function should return the raw Bloomberg response.
+Do not invent a Bloomberg package or connector.
 
-Do not put MarketPulse analytics inside it.
+In APPROVED_SAMPLE mode, raw input comes from:
 
-## 5.2 Normalization step
+```text
+data/sample/bloomberg_reference_sample.json
+```
 
-Create a function that transforms the observed Bloomberg response into canonical rows.
+Use the scaffold in:
 
-Conceptual signature:
+```text
+docs/11_BLOOMBERG_PROVIDER_SCAFFOLD.md
+```
+
+## 4.2 Normalization boundary
+
+Create a function that transforms the authorized input into canonical rows.
+
+Conceptual contract:
 
 ```python
 def normalize_bloomberg_history(
@@ -319,7 +337,7 @@ def normalize_bloomberg_history(
     ...
 ```
 
-The output must use:
+Output fields:
 
 ```text
 date
@@ -331,761 +349,495 @@ close
 volume
 ```
 
-The exact source-field names must come from:
+Field sources must come from TD09 mapping.
+
+# Part 5 - APPROVED_SAMPLE normalization
+
+When the session mode is APPROVED_SAMPLE, the input uses teaching wrapper keys:
+
+```text
+observation_date
+open_value
+high_value
+low_value
+close_value
+volume_value
+```
+
+Map them to:
+
+```text
+date
+open
+high
+low
+close
+volume
+```
+
+and assign the canonical ticker from the approved series metadata.
+
+Example shape:
+
+```python
+{
+    "date": observation["observation_date"],
+    "ticker": canonical_ticker,
+    "open": float(observation["open_value"]),
+    "high": float(observation["high_value"]),
+    "low": float(observation["low_value"]),
+    "close": float(observation["close_value"]),
+    "volume": int(observation["volume_value"]),
+}
+```
+
+These wrapper keys are not Bloomberg field mnemonics.
+
+Do not reuse them as LIVE field names unless the actual environment independently returns the same names.
+
+# Part 6 - LIVE normalization
+
+When the session mode is LIVE, use only fields actually documented in:
 
 ```text
 docs/BLOOMBERG_FIELD_MAPPING.md
 ```
 
-Do not invent field names that were not observed in TD09.
+The instructor-approved raw acquisition returns the actual classroom response.
 
-# Part 6 - Build the provider function
+Your normalization code translates that observed structure into the same canonical row contract.
 
-Create a high-level function such as:
+If one expected field is unavailable, use only the instructor-approved convention documented in TD09.
 
-```python
-def fetch_bloomberg_prices(
-    identifier,
-    canonical_ticker,
-    start_date,
-    end_date,
-):
-    raw_data = fetch_raw_bloomberg_history(
-        identifier=identifier,
-        start_date=start_date,
-        end_date=end_date,
-    )
+Do not fabricate a value or field name.
 
-    rows = normalize_bloomberg_history(
-        raw_data=raw_data,
-        canonical_ticker=canonical_ticker,
-    )
+# Part 7 - Obtain instrument and benchmark rows
 
-    if not rows:
-        raise ValueError(
-            f"No Bloomberg data returned for {identifier}"
-        )
-
-    return rows
-```
-
-This function defines the MarketPulse provider contract.
-
-The exact connection mechanism stays inside the raw acquisition step.
-
-# Part 7 - Preserve the common row model
-
-Every normalized Bloomberg row should conceptually look like:
-
-```python
-{
-    "date": "YYYY-MM-DD",
-    "ticker": "AAPL",
-    "open": 0.0,
-    "high": 0.0,
-    "low": 0.0,
-    "close": 0.0,
-    "volume": 0,
-}
-```
-
-The example numbers above are structural placeholders only.
-
-Do not hard-code them in the real implementation.
-
-## Important
-
-If the teaching environment does not provide one field for a given instrument type, document the behaviour.
-
-For example, benchmark volume may be unavailable or not meaningful.
-
-Do not fabricate data only to fill the schema.
-
-The instructor may allow:
-
-- a neutral value;
-- a nullable representation;
-- a documented provider-specific rule.
-
-Use the convention approved during class.
-
-# Part 8 - Handle the date window
-
-The common business contract remains:
+The common mappings remain:
 
 ```text
-Lookback : 1 month
-Interval : Daily
-```
-
-Bloomberg may require explicit start and end dates rather than the Yahoo-style value:
-
-```text
-1mo
-```
-
-The provider may therefore translate the business contract into provider-specific request parameters.
-
-Conceptually:
-
-```text
-MarketPulse
-lookback = 1 month
-interval = daily
-        |
-        v
-Bloomberg provider
-        |
-        v
-start date
-end date
-daily historical request
-```
-
-Provider-specific translation belongs inside or near the provider layer.
-
-# Part 9 - Retrieve the instrument
-
-Use the confirmed Bloomberg identifier:
-
-```text
+AAPL
+  |
+  v
 AAPL US Equity
-```
 
-Conceptual call:
-
-```python
-instrument_prices = fetch_bloomberg_prices(
-    identifier="AAPL US Equity",
-    canonical_ticker="AAPL",
-    start_date=start_date,
-    end_date=end_date,
-)
-```
-
-Verify:
-
-```text
-[ ] response is not empty
-[ ] canonical ticker is AAPL
-[ ] dates are available
-[ ] close values are numeric
-[ ] rows follow the canonical structure
-```
-
-# Part 10 - Retrieve the benchmark
-
-Use:
-
-```text
+SP500
+  |
+  v
 SPX Index
 ```
 
-Conceptual call:
+Obtain canonical rows for both.
 
-```python
-benchmark_prices = fetch_bloomberg_prices(
-    identifier="SPX Index",
-    canonical_ticker="SP500",
-    start_date=start_date,
-    end_date=end_date,
-)
-```
-
-Verify:
+Required result:
 
 ```text
-[ ] response is not empty
-[ ] canonical ticker is SP500
-[ ] dates are available
-[ ] close values are numeric
-[ ] rows follow the canonical structure
+instrument rows
+ticker = AAPL
+
+benchmark rows
+ticker = SP500
 ```
 
-# Part 11 - Align the Bloomberg series
+Both lists must be non-empty in the selected authorized mode.
 
-Reuse the existing alignment functions from TD07 and TD08.
+# Part 8 - Validate canonical structure
 
-Conceptually:
+Inspect one row from each series.
 
-```python
-instrument_by_date = index_by_date(
-    instrument_prices
-)
-
-benchmark_by_date = index_by_date(
-    benchmark_prices
-)
-
-common_dates = sorted(
-    set(instrument_by_date)
-    & set(benchmark_by_date)
-)
-```
-
-Then build aligned lists.
-
-Do not create a Bloomberg-specific alignment algorithm unless the provider genuinely requires a documented exception.
-
-# Part 12 - Reuse the analytics unchanged
-
-The most important TD10 validation is architectural.
-
-These functions should not care whether rows came from:
+Both must expose:
 
 ```text
-CSV
-Yahoo
-Bloomberg
+date
+ticker
+open
+high
+low
+close
+volume
 ```
 
-Reuse:
+Check:
+
+```text
+[ ] close is numeric
+[ ] date is available
+[ ] AAPL row uses ticker AAPL
+[ ] benchmark row uses ticker SP500
+```
+
+In APPROVED_SAMPLE mode, compare the normalized rows with:
+
+```text
+data/sample/bloomberg_reference_expected.json
+```
+
+The reference provides an exact expected result for the fallback fixture.
+
+# Part 9 - Reuse alignment unchanged
+
+Use:
+
+```python
+from analytics import align_series
+```
+
+Then:
+
+```python
+aligned_instrument, aligned_benchmark = align_series(
+    instrument_prices,
+    benchmark_prices,
+)
+```
+
+Do not implement:
+
+```text
+align_bloomberg_series()
+```
+
+unless the instructor explicitly identifies a real provider exception.
+
+# Part 10 - Reuse analytics unchanged
+
+Reuse the TD07 CORE functions:
 
 ```text
 calculate_period_return()
-calculate_daily_returns()
 calculate_base_100()
 calculate_relative_performance()
 ```
 
-If you are tempted to create:
+Do not create:
 
 ```text
 calculate_bloomberg_period_return()
+calculate_bloomberg_base_100()
 ```
 
-stop and inspect the design.
-
-That would duplicate business logic unnecessarily.
-
-# Part 13 - Provider selection
-
-MarketPulse now has multiple provider paths.
-
-A simple educational selector is enough.
-
-Conceptually:
-
-```python
-provider = "bloomberg"
-
-if provider == "csv":
-    ...
-elif provider == "yahoo":
-    ...
-elif provider == "bloomberg":
-    ...
-else:
-    raise ValueError(
-        f"Unsupported provider: {provider}"
-    )
-```
-
-The objective is not to build a complex plugin framework.
-
-The objective is to make acquisition selectable while keeping analytics shared.
-
-# Part 14 - Configuration
-
-The CORE repository already contains:
+The architectural proof is:
 
 ```text
-config/settings.yml
+CSV -----------+
+               |
+Yahoo ---------+--> canonical rows --> same analytics.py
+               |
+Bloomberg -----+
 ```
 
-In the 18-hour CORE, this file is a human-readable configuration contract.
+# Part 11 - Integrate the terminal path
 
-You are not required to parse YAML from Python.
+Wire the TD10 provider path into `src/main.py` without creating a generic framework.
 
-Do not add PyYAML only because this file exists.
+The terminal output must show the actual mode.
 
-The provider value may still be updated for documentation purposes:
-
-```yaml
-market:
-  provider: bloomberg
-  lookback: 1mo
-  interval: 1d
-```
-
-Provider-specific identifiers may also be documented conceptually:
-
-```yaml
-providers:
-  yahoo:
-    AAPL: AAPL
-    SP500: ^GSPC
-
-  bloomberg:
-    AAPL: AAPL US Equity
-    SP500: SPX Index
-```
-
-If your team chooses to wire YAML into Python, treat it as an explicit optional extension.
-
-The required TD10 implementation must not depend on YAML parsing.
-
-Configuration should make the application clearer, not more complicated.
-
-# Part 15 - Display provider information
-
-The terminal output should clearly identify the provider.
-
-Example:
+Example LIVE output:
 
 ```text
-=== MarketPulse ===
-
 Provider
 Bloomberg
 
-Market configuration
+Access mode
+LIVE
+```
+
+Example fallback output:
+
+```text
+Provider
+Bloomberg stage
+
+Access mode
+APPROVED_SAMPLE
+```
+
+Do not display APPROVED_SAMPLE as live Bloomberg retrieval.
+
+Keep the common business context visible:
+
+```text
 Instrument : AAPL - Apple Inc.
 Benchmark  : S&P 500
 Period     : 1 month
 Interval   : Daily
-
-Instrument return : ...
-Benchmark return  : ...
-Relative performance : ...
 ```
 
-Do not expose credentials or connection details in normal output.
-
-# Part 16 - Provider failure handling
-
-Professional providers can also return errors.
-
-Possible cases include:
-
-- Bloomberg environment unavailable;
-- access not authorized;
-- invalid identifier;
-- empty historical response;
-- missing expected field.
-
-TD10 requires only simple, understandable failure handling.
-
-Possible approach:
-
-```python
-if not rows:
-    raise ValueError(
-        f"No Bloomberg data returned for {identifier}"
-    )
-```
-
-At application level:
-
-```python
-try:
-    ...
-except ValueError as error:
-    print(f"Market data error: {error}")
-```
-
-Do not hide every exception with:
-
-```python
-except Exception:
-    pass
-```
-
-That makes failures harder to understand.
-
-# Part 17 - Fallback mode
-
-If live Bloomberg access is unavailable during TD10, use only the instructor-approved fallback assets:
+and reuse the calculated:
 
 ```text
-docs/10_BLOOMBERG_INSTRUCTOR_REFERENCE.md
-data/sample/bloomberg_reference_sample.json
-data/sample/bloomberg_reference_expected.json
+instrument return
+benchmark return
+relative performance
+base-100 series
 ```
 
-The architecture should remain:
-
-```text
-approved Bloomberg-stage sample
-          |
-          v
-Bloomberg provider boundary
-          |
-          v
-canonical rows
-          |
-          v
-shared analytics
-```
-
-The fallback input uses teaching wrapper keys.
-
-Those keys are not claimed Bloomberg field mnemonics.
-
-Document the provider mode clearly:
-
-```text
-LIVE
-or
-APPROVED_SAMPLE
-```
-
-Do not label sample-based execution as live Bloomberg retrieval.
-
-When `APPROVED_SAMPLE` is used, normalized rows should match the expected canonical reference.
-
-# Part 18 - Validation matrix
-
-Before committing, validate:
-
-| Requirement | CSV | Yahoo | Bloomberg |
-|---|---:|---:|---:|
-| Canonical instrument ticker | yes | yes | yes |
-| Canonical benchmark ticker | yes | yes | yes |
-| Daily historical data | yes | yes | yes or approved sample |
-| Common row structure | yes | yes | yes |
-| Alignment logic reused | yes | yes | yes |
-| Period return reused | yes | yes | yes |
-| Base-100 logic reused | yes | yes | yes |
-| Relative performance reused | yes | yes | yes |
-
-The exact data values will differ across providers and retrieval dates.
-
-The architecture should remain consistent.
-
-# Part 19 - Inspect the diff
+# Part 12 - CORE validation
 
 Run:
 
 ```bash
-git status
-git diff
+python src/main.py
 ```
 
-Expected files may include:
+Verify:
+
+```text
+[ ] access mode is visible
+[ ] AAPL path works
+[ ] SP500 path works
+[ ] canonical rows have the expected fields
+[ ] common dates exist
+[ ] align_series() is reused
+[ ] analytics.py contains no Bloomberg identifier
+[ ] period return is calculated by shared analytics
+[ ] base 100 is calculated by shared analytics
+[ ] relative performance is calculated by shared analytics
+[ ] no credential appears in terminal output
+```
+
+If using APPROVED_SAMPLE:
+
+```text
+[ ] normalized fallback rows match the expected canonical reference
+[ ] output does not claim LIVE connectivity
+```
+
+# Part 13 - Standard Git handoff
+
+Use the established workflow:
+
+```text
+feature branch
++
+inspect diff
++
+commit
++
+push
++
+Pull Request
++
+review
++
+merge
+```
+
+Typical required files:
 
 ```text
 src/main.py
 src/providers/bloomberg_provider.py
-config/settings.yml
-docs/BLOOMBERG_FIELD_MAPPING.md
 ```
 
-Only include files actually required by your implementation.
+Only update the mapping document if the approved classroom observation changed.
 
-Do not change unrelated files.
-
-# Part 20 - Commit and push
-
-Stage the intended files.
-
-Example:
-
-```bash
-git add src/main.py
-git add src/providers/bloomberg_provider.py
-```
-
-Add configuration or mapping files only if they changed.
-
-Inspect:
-
-```bash
-git diff --staged
-```
-
-Commit:
-
-```bash
-git commit -m "feat: add Bloomberg provider"
-```
-
-Push:
-
-```bash
-git push -u origin feature/bloomberg-provider
-```
-
-# Part 21 - Open the Pull Request
-
-Suggested title:
+Suggested commit and PR title:
 
 ```text
-feat: add Bloomberg provider
+feat: add Bloomberg provider boundary
 ```
 
-Suggested description:
-
-```markdown
-## What changed
-
-- add Bloomberg provider boundary;
-- map Bloomberg identifiers to canonical tickers;
-- normalize Bloomberg data to MarketPulse rows;
-- reuse existing comparison analytics.
-
-## Validation
-
-- verified AAPL Bloomberg path;
-- verified SP500 Bloomberg path;
-- verified canonical row structure;
-- verified common-date alignment;
-- verified period return and base-100 reuse.
-
-## Environment
-
-- Bloomberg access mode: <live or approved sample>
-```
-
-Be accurate about the environment used.
-
-# Part 22 - Review points
-
-The reviewer should verify:
+Reviewer checklist:
 
 ```text
-[ ] Bloomberg identifiers match the TD09 mapping
-[ ] no credentials are committed
-[ ] provider-specific code stays in provider layer
+[ ] TD09 mapping is respected
+[ ] access mode is honest
+[ ] provider identifiers stay in provider boundary
 [ ] canonical tickers remain AAPL and SP500
-[ ] normalized rows follow the common structure
-[ ] analytics are reused
-[ ] no Bloomberg-specific return formula exists
-[ ] provider mode is documented accurately
-[ ] MarketPulse still runs
+[ ] normalized rows use canonical keys
+[ ] analytics.py has no Bloomberg-specific formula
+[ ] no credential is committed
+[ ] APPROVED_SAMPLE is not labelled LIVE
 ```
 
-Merge only after review.
-
-# Part 23 - Relationship with Checkpoint C
+# Checkpoint relation
 
 Checkpoint C is performed after TD12.
 
-One required screenshot will be:
+TD10 prepares:
 
 ```text
 01_final_market_data.png
 ```
 
-When Bloomberg is available, the final provider evidence should show Bloomberg in operation.
+but no Checkpoint C package is submitted yet.
 
-The generic filename is intentional because the teaching team may authorize another final provider if Bloomberg access is unavailable for technical or organizational reasons.
+If TD10 uses APPROVED_SAMPLE, do not present that execution as proof of live Bloomberg connectivity.
 
-Do not create false evidence.
-
-# Part 24 - Mini exercises
-
-## Exercise 1 - Trace provider-specific code
-
-Identify every location in the project that contains:
+The final authorized provider evidence policy remains defined in:
 
 ```text
-AAPL US Equity
-SPX Index
+docs/04_CHECKPOINTS_AND_EVIDENCE.md
 ```
 
-Question:
+# OPTIONAL
 
-> Should those values appear inside analytical functions?
+Complete optional work only after the CORE definition of done is satisfied.
 
-## Exercise 2 - Compare normalized rows
+## Optional 1 - Human-readable settings update
 
-Print one normalized row from:
+You may update:
+
+```text
+config/settings.yml
+```
+
+to document:
+
+```text
+provider = bloomberg
+lookback = 1mo
+interval = 1d
+```
+
+The file remains a human-readable contract.
+
+Do not add PyYAML for TD10 CORE.
+
+## Optional 2 - Generic provider selection
+
+Experiment with a small selector for:
+
+```text
+csv
+yahoo
+bloomberg
+```
+
+Do not build a plugin framework.
+
+## Optional 3 - Additional provider metadata
+
+Experiment with metadata such as:
+
+```text
+provider
+access_mode
+instrument_source
+benchmark_source
+```
+
+Do not expose credentials or workstation details.
+
+## Optional 4 - Extended error handling
+
+Improve messages for:
+
+```text
+empty input
+missing field
+unsupported identifier
+unavailable LIVE environment
+```
+
+Do not build retry or backoff infrastructure.
+
+## Optional 5 - Additional Bloomberg-stage diagnostics
+
+Compare one canonical row from:
 
 ```text
 CSV
 Yahoo
-Bloomberg
+Bloomberg stage
 ```
 
-Compare the keys.
+and explain why the analytics layer can reuse them.
 
-## Exercise 3 - Switch provider
+# TROUBLESHOOTING
 
-Change the provider selection from Yahoo to Bloomberg.
+## LIVE access fails
 
-Verify that analytical function names do not change.
+Do not redesign the application.
 
-## Exercise 4 - Invalid Bloomberg identifier
-
-Using a safe instructor-approved test, observe what happens when the provider cannot retrieve an identifier.
-
-Explain where the failure is handled.
-
-# Part 25 - If you finish early
-
-## Challenge 1 - Extract provider selection
-
-Move provider selection into a small dedicated function.
-
-Conceptual example:
-
-```python
-def load_market_data(provider, ...):
-    ...
-```
-
-Keep it simple.
-
-## Challenge 2 - Reduce duplication
-
-Compare Yahoo and Bloomberg acquisition paths.
-
-Identify code that is truly shared and code that is provider-specific.
-
-Do not force two provider APIs into identical internal code if their access mechanisms differ.
-
-## Challenge 3 - Provider metadata
-
-Return or display a small metadata structure such as:
-
-```python
-{
-    "provider": "bloomberg",
-    "instrument_source": "AAPL US Equity",
-    "benchmark_source": "SPX Index",
-}
-```
-
-Do not expose credentials.
-
-## Challenge 4 - Architecture diagram
-
-Update an ASCII diagram:
+With instructor approval, switch to:
 
 ```text
-CSV -----------+
-               |
-Yahoo ---------+--> canonical rows --> analytics
-               |
-Bloomberg -----+
+APPROVED_SAMPLE
 ```
 
-Explain the provider boundary to another student.
+and document the mode change.
 
-# Part 26 - Troubleshooting
+## APPROVED_SAMPLE normalization differs from expected reference
 
-## Bloomberg access fails
+Compare:
 
-Verify the instructor-approved environment first.
+```text
+data/sample/bloomberg_reference_sample.json
+data/sample/bloomberg_reference_expected.json
+```
 
-Do not change the architecture randomly before confirming whether the issue is:
+Verify wrapper-key mapping and canonical ticker assignment.
 
-- access;
-- identifier;
-- field mapping;
-- code.
-
-## Provider returns data but normalization fails
+## Provider returns rows but analytics fail
 
 Inspect:
 
 ```text
-raw response
-observed field names
-date structure
-numeric types
-```
-
-Compare them with:
-
-```text
-docs/BLOOMBERG_FIELD_MAPPING.md
-```
-
-## Canonical ticker is wrong
-
-Remember:
-
-```text
-AAPL US Equity -> AAPL
-SPX Index      -> SP500
-```
-
-The provider identifier is not the canonical application ticker.
-
-## Analytics differ between providers
-
-Different providers may return slightly different data histories or adjustments.
-
-First verify:
-
-```text
-date range
-interval
+date
+ticker
+close
 common dates
-close field
-adjustment convention
 ```
 
-Do not assume that differing values automatically mean the formula is wrong.
+The issue should be diagnosed at the contract boundary before analytics are modified.
 
-## Credentials appear in output
+## Analytics require Bloomberg identifiers
 
 Stop.
 
-Remove the sensitive output from code and screenshots.
+Provider-specific identifiers must disappear before rows reach `analytics.py`.
 
-Notify the instructor if sensitive data was committed.
+## Credentials appear in code or output
 
-# Part 27 - Readiness check
+Stop.
 
-Before finishing TD10, each student should be able to explain:
+Remove the sensitive material and notify the instructor if it entered Git history.
+
+# Final readiness check
+
+Each student should be able to explain:
 
 ```text
+[ ] TD09 mapping contract
 [ ] Bloomberg provider boundary
-[ ] raw acquisition vs normalization
-[ ] canonical ticker vs Bloomberg identifier
-[ ] why analytics stay provider-independent
-[ ] how the 1-month daily contract is translated
-[ ] how Bloomberg failures are surfaced
-[ ] live access vs approved sample fallback
-[ ] why provider selection should not duplicate analytics
+[ ] LIVE vs APPROVED_SAMPLE
+[ ] raw input vs normalization
+[ ] AAPL vs AAPL US Equity
+[ ] SP500 vs SPX Index
+[ ] canonical row structure
+[ ] why align_series() is reused
+[ ] why analytics.py remains provider-neutral
+[ ] why fallback execution is not live evidence
 ```
 
-Each student should also confirm:
+The team should confirm:
 
 ```text
-[ ] I used a feature branch
-[ ] I created identifiable commits
-[ ] I pushed the branch
-[ ] I used a Pull Request
-[ ] another student reviewed the change
+[ ] bloomberg_provider.py exists
+[ ] AAPL and SP500 canonical rows are produced
+[ ] existing analytics are reused unchanged
+[ ] actual access mode is visible
+[ ] python src/main.py works
+[ ] provider change was reviewed
 [ ] no credentials were committed
-[ ] Bloomberg rows use canonical tickers
-[ ] existing analytics were reused
-[ ] MarketPulse still runs
 ```
 
-# Part 28 - What comes next?
+# What comes next?
 
-MarketPulse now has the intended provider progression:
+TD10 now provides:
 
 ```text
-CSV
-Yahoo
-Bloomberg
-   |
-   v
-canonical market data
-   |
-   v
-shared comparison logic
+provider-specific input
+        |
+        v
+canonical rows
+        |
+        v
+shared analytics
 ```
 
-The next business requirement is:
+Before TD11, MarketPulse needs one reusable application-level result so that terminal and dashboard presentation do not recompute business logic independently.
 
-```text
-"Traders want a visual interface instead of terminal output."
-```
-
-In TD11, the analytical results will be exposed through Dash.
-
-The main visual objective will be:
-
-```text
-Instrument vs Benchmark
-Base 100
-```
-
-with clear summary indicators for period and relative performance.
+That contract is introduced in the next remediation lot.

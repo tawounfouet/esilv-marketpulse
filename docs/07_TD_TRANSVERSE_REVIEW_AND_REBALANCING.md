@@ -1145,70 +1145,48 @@ LIVE and APPROVED_SAMPLE are both valid CORE paths when documented honestly.
 
 ### TD10 - Bloomberg Provider
 
-Current status:
+Remediation status:
 
 ```text
-CRITICAL OVERLOAD
+REMEDIATED BY LOT-R4.3
 ```
 
-TD10 currently includes:
+The revised CORE is limited to:
 
-- provider boundary;
-- identifier mapping;
-- raw acquisition;
-- normalization;
-- wrapper function;
-- date-window translation;
-- instrument;
-- benchmark;
-- alignment;
-- shared analytics;
-- provider selection;
-- configuration;
-- output;
-- failure handling;
-- fallback;
-- validation matrix;
-- Git workflow;
-- PR;
-- review.
-
-This is too broad.
-
-Recommended CORE:
-
-- use TD09 mapping;
-- implement or complete Bloomberg normalization;
-- obtain canonical rows from live or approved sample path;
+- use the reviewed TD09 mapping;
+- create `src/providers/bloomberg_provider.py`;
+- keep one authorized raw input boundary;
+- support the session's `LIVE` or `APPROVED_SAMPLE` mode;
+- normalize provider-stage input to canonical rows;
 - preserve `AAPL` and `SP500`;
-- feed the shared alignment and analytics functions;
-- validate instrument and benchmark;
-- PR and review.
+- obtain instrument and benchmark rows;
+- reuse `align_series()`;
+- reuse period return, base 100 and relative performance;
+- show the actual access mode in terminal output;
+- use the established Git workflow.
 
-Move to OPTIONAL:
+The provider implementation no longer requires:
 
+- daily returns;
 - generalized provider selector;
-- YAML provider configuration;
-- richer provider metadata;
-- extended error model.
+- YAML parsing;
+- rich provider metadata;
+- extended error architecture;
+- dynamic plugin design.
 
-Recommended teaching scaffold:
-
-Provide a provider file with the connection boundary clearly marked:
-
-```python
-def fetch_raw_bloomberg_history(...):
-    # Environment-specific code supplied or demonstrated by instructor
-    ...
-```
-
-Students focus on the boundary and normalization contract.
-
-Verdict:
+A teaching scaffold is now available:
 
 ```text
-Current version exceeds 90 minutes.
-A scaffolded integration version can fit.
+docs/11_BLOOMBERG_PROVIDER_SCAFFOLD.md
+```
+
+It contains an exact APPROVED_SAMPLE normalization path and a clearly marked LIVE acquisition boundary without inventing a connector.
+
+Current verdict:
+
+```text
+The scaffolded TD10 CORE is designed for about 80 minutes plus a 10-minute buffer.
+Provider independence is demonstrated through canonical rows and unchanged analytics.
 ```
 
 ### TD11 - Dash Dashboard

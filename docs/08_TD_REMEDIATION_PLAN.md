@@ -851,37 +851,33 @@ Acceptance criteria:
 Status:
 
 ```text
-CRITICAL REMEDIATION
+DONE
 ```
 
-CORE:
+Implemented remediation:
 
-- use TD09 mapping;
-- create `src/providers/bloomberg_provider.py`;
-- isolate raw acquisition boundary;
-- normalize Bloomberg data;
-- preserve canonical tickers;
-- obtain instrument and benchmark rows;
-- reuse alignment;
-- reuse analytics;
-- validate terminal output;
-- standard Git workflow.
-
-Move to OPTIONAL:
-
-- YAML provider configuration;
-- generic provider framework;
-- advanced provider metadata;
-- extended error architecture;
-- dynamic provider selector.
+- added an explicit CORE definition of done;
+- planned approximately 80 minutes of required work plus 10 minutes of review and environment buffer;
+- made the reviewed TD09 mapping the required source for provider normalization;
+- created `docs/11_BLOOMBERG_PROVIDER_SCAFFOLD.md`;
+- defined a clear LIVE raw acquisition boundary without inventing a Bloomberg connector;
+- provided an exact APPROVED_SAMPLE loader and normalization path;
+- required `AAPL US Equity -> AAPL` and `SPX Index -> SP500`;
+- required canonical rows before analytics;
+- required reuse of `align_series()`, period return, base 100 and relative performance unchanged;
+- removed daily returns from TD10 CORE;
+- removed generic provider selection from CORE;
+- moved YAML settings updates, richer metadata and extended error handling to OPTIONAL;
+- required terminal output to expose `LIVE` or `APPROVED_SAMPLE` honestly;
+- preserved the standard branch / PR / review workflow.
 
 Acceptance criteria:
 
 ```text
-[ ] Bloomberg-specific logic remains inside provider boundary
-[ ] analytics are unchanged
-[ ] canonical output matches Yahoo/CSV structure
-[ ] live vs sample mode is visible and honest
+[x] Bloomberg-specific logic remains inside provider boundary
+[x] analytics are unchanged
+[x] canonical output matches Yahoo/CSV structure
+[x] LIVE vs APPROVED_SAMPLE mode is visible and honest
 ```
 
 ### R4.4 Add reusable application snapshot contract

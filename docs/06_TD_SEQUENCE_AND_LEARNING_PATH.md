@@ -409,10 +409,16 @@ Contributes to Checkpoint C.
 
 Students should be able to:
 
-- isolate Bloomberg-specific acquisition logic;
-- map Bloomberg identifiers to MarketPulse concepts;
-- produce the same comparison-ready structure;
-- preserve instrument and benchmark semantics.
+- use the reviewed TD09 mapping as the provider contract;
+- create `src/providers/bloomberg_provider.py`;
+- isolate the authorized raw input boundary;
+- normalize LIVE or APPROVED_SAMPLE input to canonical rows;
+- preserve AAPL and SP500 semantics;
+- reuse `align_series()` unchanged;
+- reuse period return, base 100 and relative performance unchanged;
+- display the actual access mode honestly.
+
+Daily returns, generic provider selection and YAML parsing are not required.
 
 ### MarketPulse evolution
 
