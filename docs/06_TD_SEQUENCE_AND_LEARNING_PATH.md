@@ -435,9 +435,15 @@ common market-data model
 
 Contributes to Checkpoint C.
 
-## Application snapshot handoff before TD11
+## TD10 -> TD11 application snapshot handoff
 
-Before dashboard presentation is wired, MarketPulse uses the shared application result defined in:
+TD10 must leave the shared application result implemented in:
+
+```text
+src/main.py
+```
+
+using the contract defined in:
 
 ```text
 docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md
@@ -447,6 +453,20 @@ The required boundary is:
 
 ```python
 build_market_snapshot(...)
+```
+
+The handoff is:
+
+```text
+TD10
+provider path + analytics
+        |
+        v
+build_market_snapshot(...)
+        |
+        v
+TD11
+Dash presentation
 ```
 
 Both terminal and Dash consume that same result.

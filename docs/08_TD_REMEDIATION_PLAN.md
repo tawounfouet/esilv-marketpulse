@@ -1690,6 +1690,12 @@ PASS
 
 ### R5.6 Dependency continuity scan
 
+Status:
+
+```text
+DONE
+```
+
 Validate the chain:
 
 ```text
@@ -1722,12 +1728,123 @@ TD11 dashboard.py
 TD12 release
 ```
 
+Repository-wide dependency scan result:
+
+```text
+TD01 -> TD02
+TD01 produces:
+- accessible team repository
+- TEAM.md
+- Linux terminal
+- working python src/main.py
+TD02 explicitly requires those items
+
+TD02 -> TD03
+TD02 produces:
+- meaningful Python changes
+- working local MarketPulse
+TD03 explicitly uses those real changes for status / diff / staging / commit
+
+TD03 -> TD04
+TD03 produces:
+- local Git mental model
+- meaningful commits
+TD04 explicitly requires status / diff / add / commit / log understanding
+
+TD04 -> TD05
+TD04 produces:
+- branch + merge understanding
+- Checkpoint A evidence
+TD05 starts with the explicit Team Baseline Gate before remote feature work
+
+TD05 -> TD06
+TD05 produces:
+- pushed feature branch
+- open Pull Request
+TD06 explicitly requires open PRs and performs review / correction / approval / merge
+
+TD06 -> TD07
+TD06 leaves:
+- reviewed changes merged to team main
+- synchronized local main
+TD07 starts from synchronized main and reuses the established Git workflow
+
+TD07 -> TD08
+TD07 produces:
+- src/analytics.py
+- align_series()
+- calculate_period_return()
+- calculate_base_100()
+- calculate_relative_performance()
+TD08 explicitly requires reviewed TD07 analytics merged to team main
+
+TD08 -> TD09
+TD08 produces:
+- src/providers/yahoo_provider.py
+- provider boundary concept
+- canonical remote rows
+- Checkpoint B evidence
+TD09 explicitly requires the provider boundary and canonical-row model to be understood
+
+TD09 -> TD10
+TD09 produces:
+- docs/BLOOMBERG_FIELD_MAPPING.md
+- documented LIVE or APPROVED_SAMPLE mode
+- AAPL / SP500 Bloomberg identifier mapping
+TD10 explicitly requires the reviewed mapping and documented mode
+
+TD10 -> TD11
+TD10 produces:
+- src/providers/bloomberg_provider.py
+- shared analytics reuse
+- build_market_snapshot(...) in src/main.py
+- import-safe main.py
+TD11 explicitly requires that snapshot boundary before dashboard work
+
+TD11 -> TD12
+TD11 produces:
+- src/dashboard.py
+- Dash + Plotly direct dependencies
+- terminal / dashboard shared-snapshot presentation
+TD12 explicitly requires both runtime commands and build_market_snapshot(...) to work
+```
+
+One real continuity gap was found during the scan:
+
+```text
+previous state
+=
+TD11 required build_market_snapshot(...)
+but TD10 did not explicitly require students to implement it
+
+remediation
+=
+TD10 now creates build_market_snapshot(...) in src/main.py
+and makes main() consume it before TD11 begins
+```
+
+The TD10 timing remains inside its previously validated 80-minute CORE by using the existing 65-74 minute integration slot for the snapshot refactor and terminal integration.
+
+The learning-path document now names this explicitly as:
+
+```text
+TD10 -> TD11 application snapshot handoff
+```
+
+No other unexplained cross-TD refactor was found.
+
 Acceptance criteria:
 
 ```text
-[ ] every file exists before the next TD needs it
-[ ] every function dependency is introduced earlier
-[ ] no unexplained refactor is required between labs
+[x] every file exists before the next TD needs it
+[x] every function dependency is introduced earlier
+[x] no unexplained refactor is required between labs
+```
+
+R5.6 conclusion:
+
+```text
+PASS
 ```
 
 ### R5.7 Security scan

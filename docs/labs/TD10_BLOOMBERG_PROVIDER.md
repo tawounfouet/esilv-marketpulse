@@ -95,6 +95,9 @@ At the end of TD10, you should be able to:
 - obtain instrument and benchmark rows;
 - reuse TD07 alignment unchanged;
 - reuse TD07 analytics unchanged;
+- create the shared `build_market_snapshot(...)` application boundary in `src/main.py`;
+- make the terminal path consume that shared snapshot;
+- keep `src/main.py` import-safe for TD11;
 - make LIVE vs APPROVED_SAMPLE visible;
 - validate the terminal path;
 - complete the established Git workflow.
@@ -119,6 +122,10 @@ TD10 is complete when the team can confirm:
 [ ] period return is reused
 [ ] base 100 is reused
 [ ] relative performance is reused
+[ ] build_market_snapshot(...) exists in src/main.py
+[ ] build_market_snapshot(...) returns the shared application result
+[ ] main() consumes the shared snapshot
+[ ] src/main.py keeps if __name__ == "__main__": main()
 [ ] terminal output shows the actual access mode honestly
 [ ] python src/main.py works
 [ ] no credential is committed
@@ -183,7 +190,7 @@ The final 10 minutes are reserved for review, environment variation and troubles
 | 18-38 min | Implement raw input path + normalization |
 | 38-52 min | Obtain AAPL + SP500 canonical rows |
 | 52-65 min | Reuse alignment + analytics |
-| 65-74 min | Integrate terminal output + mode label |
+| 65-74 min | Build shared snapshot + integrate terminal output + mode label |
 | 74-80 min | CORE validation + standard Git handoff |
 | 80-90 min | Review / troubleshooting / OPTIONAL |
 
@@ -526,9 +533,75 @@ Yahoo ---------+--> canonical rows --> same analytics.py
 Bloomberg -----+
 ```
 
-# Part 11 - Integrate the terminal path
+# Part 11 - Build the shared snapshot and integrate the terminal path
 
-Wire the TD10 provider path into `src/main.py` without creating a generic framework.
+TD10 must leave a concrete application boundary ready for TD11.
+
+Use the frozen contract:
+
+```text
+docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md
+```
+
+In `src/main.py`, create:
+
+```python
+def build_market_snapshot(...):
+    ...
+```
+
+This function must reuse the provider path and shared analytics that already exist.
+
+It must return the application result needed by both terminal and dashboard presentation.
+
+At minimum, the snapshot contains:
+
+```text
+provider
+lookback
+interval
+instrument
+benchmark
+instrument_return
+benchmark_return
+relative_performance
+instrument_base_100
+benchmark_base_100
+```
+
+Do not duplicate formulas inside the snapshot builder.
+
+The intended flow is:
+
+```text
+provider rows
+      |
+      v
+analytics.py
+      |
+      v
+build_market_snapshot(...)
+      |
+      v
+main()
+      |
+      v
+terminal output
+```
+
+Keep `src/main.py` import-safe:
+
+```python
+def main():
+    snapshot = build_market_snapshot(...)
+    ...
+
+
+if __name__ == "__main__":
+    main()
+```
+
+This is required because TD11 imports `build_market_snapshot(...)` from `src/main.py`.
 
 The terminal output must show the actual mode.
 
@@ -572,6 +645,10 @@ relative performance
 base-100 series
 ```
 
+TD10 is therefore the producing side of the TD10 -> TD11 snapshot handoff.
+
+TD11 only adds presentation on top of this result.
+
 # Part 12 - CORE validation
 
 Run:
@@ -593,6 +670,9 @@ Verify:
 [ ] period return is calculated by shared analytics
 [ ] base 100 is calculated by shared analytics
 [ ] relative performance is calculated by shared analytics
+[ ] build_market_snapshot(...) returns the required shared result
+[ ] main() consumes build_market_snapshot(...)
+[ ] importing src/main.py does not execute the terminal program
 [ ] no credential appears in terminal output
 ```
 
@@ -818,6 +898,8 @@ The team should confirm:
 [ ] bloomberg_provider.py exists
 [ ] AAPL and SP500 canonical rows are produced
 [ ] existing analytics are reused unchanged
+[ ] build_market_snapshot(...) exists and is reusable
+[ ] main() consumes the shared snapshot
 [ ] actual access mode is visible
 [ ] python src/main.py works
 [ ] provider change was reviewed
@@ -838,17 +920,19 @@ canonical rows
 shared analytics
 ```
 
-Before TD11, MarketPulse uses the frozen application snapshot contract:
+TD10 now leaves the frozen application snapshot contract implemented in `src/main.py`:
 
 ```text
 docs/12_MARKETPULSE_APPLICATION_SNAPSHOT_CONTRACT.md
 ```
 
-The shared boundary is:
+The shared boundary produced by TD10 is:
 
 ```python
 build_market_snapshot(...)
 ```
+
+TD11 consumes this existing boundary.
 
 The contract keeps one calculation path for both presentations:
 
