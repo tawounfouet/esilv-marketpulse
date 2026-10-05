@@ -24,12 +24,12 @@ The repository is collective, but contributions must remain individually identif
 
 ```text
 INSTRUCTOR REPOSITORY
-tawounfouet/marketpulse
+tawounfouet/esilv-marketpulse
         |
         | fork
         v
 TEAM REPOSITORY
-marketpulse-gXX-tYY
+esilv-marketpulse-gXX-tYY
         |
         +-- Student A
         +-- Student B
@@ -45,13 +45,13 @@ Students do not develop directly in it.
 Use:
 
 ```text
-marketpulse-gXX-tYY
+esilv-marketpulse-gXX-tYY
 ```
 
 Example:
 
 ```text
-marketpulse-g03-t02
+esilv-marketpulse-g03-t02
 ```
 
 Where:
@@ -258,7 +258,7 @@ team repository
 
 upstream
 =
-instructor repository
+tawounfouet/esilv-marketpulse
 ```
 
 The instructor may introduce these Git remote concepts later.
