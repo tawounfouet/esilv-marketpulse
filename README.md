@@ -1,4 +1,4 @@
-# MarketPulse
+# ESILV MarketPulse
 
 MarketPulse is the progressive financial market-data use case for the **ESILV A4 - Python, Git, Linux** labs.
 
@@ -54,12 +54,14 @@ Before collaborative work begins:
 
 1. form a team of 3 to 4 students;
 2. create one fork per team;
-3. rename it using `marketpulse-gXX-tYY`;
+3. rename it using `esilv-marketpulse-gXX-tYY`;
 4. add all team members as collaborators;
 5. copy `TEAM_TEMPLATE.md` to `TEAM.md`;
 6. follow `CONTRIBUTING.md`.
 
 See `docs/01_STUDENT_ONBOARDING.md` for the complete onboarding procedure.
+
+Canonical instructor repository: `tawounfouet/esilv-marketpulse`.
 
 ## Getting started
 
@@ -102,7 +104,7 @@ SP500: 21
 ## Starter structure
 
 ```text
-marketpulse/
+esilv-marketpulse/
 ├── README.md
 ├── TEAM_TEMPLATE.md
 ├── CONTRIBUTING.md
