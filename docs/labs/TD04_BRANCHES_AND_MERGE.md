@@ -707,27 +707,17 @@ git branch -d <branch>
 
 # Part 13 - Checkpoint A
 
-Checkpoint A is performed after TD04.
+Checkpoint A is performed after TD04 and closes Checkpoint Phase A.
 
-It validates the foundations from TD01 to TD04.
-
-## 13.1 Required evidence directory
-
-Each student uses:
+The canonical evidence contract is:
 
 ```text
-evidence/checkpoint-a/<github-username>/
+docs/04_CHECKPOINTS_AND_EVIDENCE.md
 ```
 
-Example:
+That document defines the required screenshot content, individual README fields, live validation rules and assessment guidance.
 
-```text
-evidence/checkpoint-a/alice-martin/
-```
-
-## 13.2 Required files
-
-Exactly these files are required:
+For convenience, the required Checkpoint A files are:
 
 ```text
 README.md
@@ -736,131 +726,45 @@ README.md
 03_branch_merge.png
 ```
 
-Do not rename the screenshots.
-
-## 13.3 01_terminal_python.png
-
-The screenshot should show evidence such as:
-
-```bash
-pwd
-ls
-python src/main.py
-```
-
-The image must make it clear that MarketPulse runs from the project environment.
-
-## 13.4 02_git_status_log.png
-
-The screenshot should show:
-
-```bash
-git status
-git log --oneline
-```
-
-The objective is to demonstrate repository state and visible history.
-
-## 13.5 03_branch_merge.png
-
-The screenshot should show branch and merge evidence.
-
-Recommended commands:
-
-```bash
-git branch
-git log --oneline --graph --decorate --all
-```
-
-The graph should make your branch work understandable.
-
-## 13.6 Individual README
-
-Create:
+Store them under:
 
 ```text
-evidence/checkpoint-a/<github-username>/README.md
+evidence/checkpoint-a/<github-username>/
 ```
 
-Suggested content:
+Do not rename the files.
 
-```markdown
-# Checkpoint A
+# Part 14 - Checkpoint A capture checklist
 
-## Student
+Before leaving TD04, capture or prepare evidence only after verifying:
 
-- Name: Alice Martin
-- GitHub: @alice-martin
-
-## Contribution
-
-- Feature branch: feature/display-observation-dates
-- Main commit(s):
-  - <commit-id>
-
-## Work completed
-
-Briefly explain the change you implemented.
-
-## Main difficulty
-
-Briefly explain one difficulty or concept that required attention.
-
-## Evidence
-
-- 01_terminal_python.png
-- 02_git_status_log.png
-- 03_branch_merge.png
+```text
+[ ] MarketPulse runs
+[ ] git status is understandable
+[ ] git log shows your work
+[ ] branch and merge history are visible
+[ ] evidence belongs to your own GitHub identity
+[ ] no secret appears in a screenshot
 ```
 
-The filenames must exactly match the files stored in the directory.
+Do not invent evidence.
 
-# Part 14 - Checkpoint A live micro-validation
+# Part 15 - Checkpoint A live validation reminder
 
 Screenshots do not replace understanding.
 
-The instructor may ask you to perform a small live task such as:
+Be ready to:
 
 ```text
-create a branch
-make a small modification
-show git diff
-stage the change
-commit it
-show the Git graph
 run MarketPulse
+show git diff
+show your commits
+show a branch
+explain a merge
+explain your own contribution
 ```
 
-You should be able to explain what each command changes in the Git state.
-
-# Part 15 - Checkpoint A readiness
-
-Before submitting Checkpoint A, each student should be able to confirm:
-
-```text
-[ ] I can navigate the repository from Linux
-[ ] I can run MarketPulse
-[ ] I understand CSV and JSON input files
-[ ] I can explain lists and dictionaries used by MarketPulse
-[ ] I can use git status
-[ ] I can use git diff
-[ ] I can use git add
-[ ] I can create a commit
-[ ] I can read git log
-[ ] I can create a branch
-[ ] I can switch branches
-[ ] I can merge a branch
-[ ] I understand a simple merge conflict
-[ ] I can explain my own contribution
-```
-
-The team should confirm:
-
-```text
-[ ] MarketPulse still runs
-[ ] no required evidence filename was changed
-[ ] no secrets appear in screenshots
-```
+For the official validation rules, use `docs/04_CHECKPOINTS_AND_EVIDENCE.md`.
 
 # Part 16 - Security before screenshots
 

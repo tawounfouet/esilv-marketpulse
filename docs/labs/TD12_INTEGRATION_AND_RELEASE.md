@@ -764,21 +764,17 @@ The final validation must be performed from the merged version.
 
 # Part 20 - Checkpoint C
 
-Checkpoint C closes the practical sequence.
+Checkpoint C closes the practical sequence and Checkpoint Phase C.
 
-It validates integration and release readiness.
-
-## 20.1 Evidence directory
-
-Each student uses:
+The canonical evidence contract is:
 
 ```text
-evidence/checkpoint-c/<github-username>/
+docs/04_CHECKPOINTS_AND_EVIDENCE.md
 ```
 
-## 20.2 Required files
+That document defines the official screenshot meaning, individual README fields, live validation rules, optional advanced evidence and assessment guidance.
 
-Exactly these files are required:
+For convenience, the required Checkpoint C files are:
 
 ```text
 README.md
@@ -794,179 +790,70 @@ Optional:
 05_advanced_deployment.png
 ```
 
+Store them under:
+
+```text
+evidence/checkpoint-c/<github-username>/
+```
+
 Do not rename the files.
 
-# Part 21 - 01_final_market_data.png
+# Part 21 - Checkpoint C capture checklist
 
-This screenshot demonstrates the final market-data provider path.
-
-When Bloomberg is available and authorized, it should show Bloomberg-based MarketPulse execution.
-
-The screenshot should make understandable:
+Before leaving TD12, verify:
 
 ```text
-provider
-instrument
-benchmark
-lookback
-interval
+[ ] final provider is documented honestly
+[ ] final market-data path is visible
+[ ] dashboard shows instrument and benchmark
+[ ] dashboard shows lookback and interval
+[ ] dashboard shows instrument return
+[ ] dashboard shows benchmark return
+[ ] dashboard shows relative performance
+[ ] dashboard shows the base-100 comparison
+[ ] late-stage Pull Request evidence is attributable
+[ ] fresh or clean reproducible run is demonstrated
+[ ] no secret appears in a screenshot
 ```
-
-If the instructor authorizes a fallback provider, use the same generic filename:
-
-```text
-01_final_market_data.png
-```
-
-Document the actual provider honestly in the individual README.
 
 Do not fabricate Bloomberg evidence.
 
-# Part 22 - 02_dash_dashboard.png
+If an instructor-authorized fallback provider is used, document the actual provider honestly.
 
-This screenshot must show the functional comparative dashboard.
+# Part 22 - Reproducibility evidence reminder
 
-At minimum:
+The reproducibility screenshot must demonstrate the final integrated version from a fresh or clean setup.
 
-```text
-Instrument
-Benchmark
-Lookback
-Interval
-Instrument return
-Benchmark return
-Relative performance
-Base-100 comparison chart
-```
-
-The screenshot should make the comparison understandable without requiring hidden context.
-
-# Part 23 - 03_final_pull_request.png
-
-Show a final or late-stage Pull Request demonstrating the collaborative workflow.
-
-The screenshot should make visible:
-
-```text
-PR title
-author
-source branch
-target branch
-status
-```
-
-The PR should correspond to identifiable contribution by the student.
-
-# Part 24 - 04_reproducible_run.png
-
-This screenshot demonstrates that the final project can be executed from a fresh or clean setup.
-
-Useful visible commands may include:
+The canonical runtime commands remain:
 
 ```bash
-git clone <team-repository-url>
-cd esilv-marketpulse-gXX-tYY
-python -m pip install -r requirements.txt
 python src/main.py
+python src/dashboard.py
 ```
 
-The exact command set may depend on the environment.
+The exact setup commands may vary by environment, but the documented repository procedure must be sufficient for another person to reproduce the run under the stated prerequisites.
 
-The screenshot should clearly demonstrate a clean execution path, not merely an already-running development session.
-
-# Part 25 - Optional 05_advanced_deployment.png
-
-This file is optional.
-
-It may demonstrate an advanced extension such as:
-
-```text
-SSH
-VPS
-systemd
-Docker
-GitHub Actions
-```
-
-These advanced topics are not required for full CORE completion.
-
-Do not use Kubernetes for the CORE project.
-
-Do not require paid cloud infrastructure for the mandatory grade.
-
-# Part 26 - Checkpoint C README
-
-Create:
-
-```text
-evidence/checkpoint-c/<github-username>/README.md
-```
-
-Suggested structure:
-
-```markdown
-# Checkpoint C
-
-## Student
-
-- Name: Alice Martin
-- GitHub: @alice-martin
-
-## Contribution
-
-- Branch: feature/final-integration
-- Main commits:
-  - <commit-id>
-- Final Pull Request: #...
-- Reviewed Pull Request: #...
-
-## Final provider
-
-<provider actually used>
-
-## Work completed
-
-Briefly explain your contribution to the final integration.
-
-## Main difficulty
-
-Briefly explain one technical or collaborative difficulty.
-
-## Reproducibility
-
-Describe the fresh-run procedure you validated.
-
-## Evidence
-
-- 01_final_market_data.png
-- 02_dash_dashboard.png
-- 03_final_pull_request.png
-- 04_reproducible_run.png
-- 05_advanced_deployment.png if used
-```
-
-# Part 27 - Checkpoint C live validation
+# Part 23 - Checkpoint C live validation reminder
 
 Screenshots do not replace execution and explanation.
 
-The instructor may ask you to:
+Be ready to:
 
 ```text
 run MarketPulse
 run the dashboard
-change or identify the provider
+identify the provider path
 explain instrument / benchmark mapping
 explain base 100
-show your final Pull Request
-show a code review
-explain one commit
+show an attributable late-stage Pull Request
+show a review
 explain the fresh-run process
-modify a small part of the application
+explain your own contribution
 ```
 
-You should be able to explain the code you submit.
+For the official validation rules, use `docs/04_CHECKPOINTS_AND_EVIDENCE.md`.
 
-# Part 28 - AI-assisted work
+# Part 24 - AI-assisted work
 
 AI tools may have been used during development.
 
@@ -986,7 +873,7 @@ justify it
 
 A repository that works but cannot be explained does not demonstrate the same level of mastery as understood and reproducible work.
 
-# Part 29 - Final CORE checklist
+# Part 25 - Final CORE checklist
 
 Before finishing TD12, verify:
 
@@ -1051,7 +938,7 @@ Before finishing TD12, verify:
 [ ] filenames are exact
 ```
 
-# Part 30 - Full learning path recap
+# Part 26 - Full learning path recap
 
 You have now completed four pedagogical waves:
 
@@ -1106,7 +993,7 @@ Total practical time:
 18 hours
 ```
 
-# Part 31 - MarketPulse final mental model
+# Part 27 - MarketPulse final mental model
 
 The final project should be understandable through this model:
 
@@ -1164,7 +1051,7 @@ merge
 release-ready main
 ```
 
-# Part 32 - MarketPulse vs Final Project
+# Part 28 - MarketPulse vs Final Project
 
 MarketPulse is the guided practical thread used throughout the 18 hours of TD.
 
@@ -1191,7 +1078,7 @@ collaboration
 
 to the final project context.
 
-# Part 33 - Final readiness questions
+# Part 29 - Final readiness questions
 
 Before leaving the practical sequence, each student should be able to answer:
 

@@ -348,25 +348,34 @@ Acceptance criteria:
 
 ### R1.5 Freeze checkpoint source of truth
 
+Status:
+
+```text
+DONE
+```
+
 Canonical file:
 
 ```text
 docs/04_CHECKPOINTS_AND_EVIDENCE.md
 ```
 
-Required actions:
+Completed actions:
 
-- keep exact screenshot names there;
-- shorten checkpoint sections inside TD04, TD08 and TD12;
-- retain only capture checklist + link in the labs;
-- remove duplicated rubric details from labs.
+- docs/04 now explicitly declares itself the single source of truth;
+- exact screenshot meaning, README rules, live validation and assessment guidance remain centralized there;
+- TD04, TD08 and TD12 now keep only a short checkpoint summary, capture checklist and canonical reference;
+- evidence/README.md no longer maintains a parallel filename specification;
+- duplicated checkpoint README templates and detailed screenshot definitions were removed from the labs;
+- checkpoint security reminders remain visible at the point of capture.
 
 Acceptance criteria:
 
 ```text
-[ ] evidence filenames are defined once canonically
-[ ] labs reference docs/04
-[ ] no contradictory checkpoint rules exist
+[x] evidence requirements are defined canonically in docs/04
+[x] labs reference docs/04
+[x] no parallel evidence contract remains in evidence/README.md
+[x] no contradictory checkpoint rules are intentionally maintained
 ```
 
 ### R1.6 Clarify Checkpoint C Pull Request evidence

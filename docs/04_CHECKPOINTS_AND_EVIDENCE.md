@@ -1,5 +1,23 @@
 # Checkpoints and Evidence
 
+## Canonical status
+
+This document is the single source of truth for MarketPulse checkpoint evidence.
+
+It defines:
+
+- checkpoint timing;
+- required and optional filenames;
+- screenshot meaning;
+- individual evidence rules;
+- live validation principles;
+- assessment guidance;
+- security rules.
+
+Student-facing labs may repeat a short capture checklist for convenience, but they do not redefine the evidence contract.
+
+If another repository document conflicts with this file, this file controls the checkpoint evidence requirements.
+
 ## 1. Purpose
 
 The goal is not to grade every lab independently.

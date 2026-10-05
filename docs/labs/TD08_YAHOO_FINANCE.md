@@ -825,35 +825,17 @@ The reviewer should verify:
 
 # Part 20 - Checkpoint B
 
-Checkpoint B is performed after TD08.
+Checkpoint B is performed after TD08 and closes Checkpoint Phase B.
 
-It closes Checkpoint Phase B:
-
-```text
-Checkpoint Phase B - TD05-TD08
-
-TD05 - Fork + Pull Request
-TD06 - Code Review
-TD07 - Data Normalization + Comparison
-TD08 - Yahoo Finance
-        |
-        v
-Checkpoint B
-```
-
-TD08 also closes pedagogical Wave 3, which covers TD07-TD08.
-
-## 20.1 Evidence directory
-
-Each student uses:
+The canonical evidence contract is:
 
 ```text
-evidence/checkpoint-b/<github-username>/
+docs/04_CHECKPOINTS_AND_EVIDENCE.md
 ```
 
-## 20.2 Required files
+That document defines the exact screenshot meaning, individual README fields, live validation rules and assessment guidance.
 
-Exactly these files are required:
+For convenience, the required Checkpoint B files are:
 
 ```text
 README.md
@@ -863,111 +845,51 @@ README.md
 04_instrument_benchmark.png
 ```
 
-Do not rename them.
-
-## 20.3 01_pull_request.png
-
-Show:
-
-- PR title;
-- author;
-- source branch;
-- target branch;
-- relevant status.
-
-The Pull Request must correspond to identifiable work by the student.
-
-## 20.4 02_code_review.png
-
-Show a meaningful review performed by the student on another team member's Pull Request.
-
-A reaction alone is not sufficient.
-
-## 20.5 03_yahoo_market_data.png
-
-Show MarketPulse retrieving or displaying remote Yahoo Finance market data.
-
-The screenshot should make the provider and market series understandable.
-
-Do not use a screenshot of static CSV output as Yahoo evidence.
-
-## 20.6 04_instrument_benchmark.png
-
-Show that MarketPulse handles both:
+Store them under:
 
 ```text
-Instrument
-+
-Benchmark
+evidence/checkpoint-b/<github-username>/
 ```
 
-under the common contract:
+Do not rename the files.
+
+TD08 also closes pedagogical Wave 3, which covers TD07-TD08.
+
+# Part 21 - Checkpoint B capture checklist
+
+Before leaving TD08, verify:
 
 ```text
-Lookback : 1 month
-Interval : Daily
+[ ] your Pull Request is attributable to you
+[ ] your review contains meaningful technical content
+[ ] Yahoo Finance remote data was actually retrieved
+[ ] instrument and benchmark are both visible
+[ ] lookback is 1 month
+[ ] interval is Daily
+[ ] no secret appears in a screenshot
 ```
 
-The output should make the selected instrument and benchmark identifiable.
+Do not use static CSV output as Yahoo evidence.
 
-# Part 21 - Checkpoint B README
+Do not fabricate remote-provider evidence.
 
-Create:
+# Part 22 - Checkpoint B live validation reminder
+
+Screenshots do not replace execution and explanation.
+
+Be ready to:
 
 ```text
-evidence/checkpoint-b/<github-username>/README.md
-```
-
-Suggested structure:
-
-```markdown
-# Checkpoint B
-
-## Student
-
-- Name: Alice Martin
-- GitHub: @alice-martin
-
-## Contribution
-
-- Branch: feature/yahoo-provider
-- Main commits:
-  - <commit-id>
-- Pull Request: #...
-- Reviewed Pull Request: #...
-
-## Work completed
-
-Briefly describe your contribution.
-
-## Main difficulty
-
-Briefly explain one technical or collaborative difficulty.
-
-## Evidence
-
-- 01_pull_request.png
-- 02_code_review.png
-- 03_yahoo_market_data.png
-- 04_instrument_benchmark.png
-```
-
-# Part 22 - Checkpoint B live validation
-
-The instructor may ask you to:
-
-```text
-change the selected Yahoo symbol
 run MarketPulse
-explain where Yahoo is called
+identify the Yahoo provider boundary
 show the canonical row structure
-show the benchmark mapping
-explain the common-date alignment
+explain SP500 vs ^GSPC
+explain common-date alignment
 show your Pull Request
 show a review you performed
 ```
 
-You should be able to modify and run the project without relying only on screenshots.
+For the official validation rules, use `docs/04_CHECKPOINTS_AND_EVIDENCE.md`.
 
 # Part 23 - If Yahoo Finance is temporarily unavailable
 
