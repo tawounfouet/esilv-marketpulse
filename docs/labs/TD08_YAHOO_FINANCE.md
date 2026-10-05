@@ -835,6 +835,14 @@ provider abstraction framework
 
 inside TD08.
 
+# ADVANCED
+
+No `READY_TO_TEACH` advanced activity is attached directly to TD08 at this time.
+
+Provider selection and additional provider-error handling remain OPTIONAL experiments with explicit scope limits.
+
+Advanced work is not required for Checkpoint B.
+
 # TROUBLESHOOTING
 
 ## ModuleNotFoundError: yfinance
