@@ -159,22 +159,36 @@ Their final destination is an operational instructor note under R7.3.
 
 | ID | Legacy source | Topic | Original decision | Final destination | R7.3 target | Operational status | Validation | Best current TD |
 |---|---|---|---|---|---|---|---|---|
-| INS-GIT-01 | CM2 | Staging mental model | TEACHER_REFERENCE + CORE support | INSTRUCTOR_READY | deep-dives/INS_GIT_01_STAGING_MENTAL_MODEL.md | TO_BUILD_R7.3 | MAPPED | TD03 |
-| INS-GIT-02 | CM2 / CM3 | HEAD / refs / remote-tracking refs | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_GIT_02_HEAD_REFS_REMOTE_TRACKING.md | TO_BUILD_R7.3 | MAPPED | TD03-TD05 |
-| INS-GIT-03 | CM2 | Git object model: blob/tree/commit | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_GIT_03_OBJECT_MODEL.md | TO_BUILD_R7.3 | MAPPED | TD03 |
-| INS-GIT-04 | CM3 | Merge vs rebase | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_GIT_04_MERGE_VS_REBASE.md | TO_BUILD_R7.3 | MAPPED | TD04-TD06 |
-| INS-LNX-01 | CM0 / CM1 | Unix philosophy | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_LNX_01_UNIX_PHILOSOPHY.md | TO_BUILD_R7.3 | MAPPED | TD01 |
-| INS-LNX-02 | CM1 / TD1.1 / TD1.4 | Permissions troubleshooting | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_LNX_02_PERMISSIONS_TROUBLESHOOTING.md | TO_BUILD_R7.3 | MAPPED | TD01 / advanced remote |
-| INS-BBG-01 | CM4 | Bloomberg Terminal + identifiers | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_BBG_01_TERMINAL_IDENTIFIERS.md | TO_BUILD_R7.3 | MAPPED | TD09 |
-| INS-BBG-02 | CM4 | BDP / BDS / BDH | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_BBG_02_BDP_BDS_BDH.md | TO_BUILD_R7.3 | MAPPED | TD09 |
-| INS-BBG-03 | CM4 | Request/Response vs Subscription | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_BBG_03_REQUEST_RESPONSE_SUBSCRIPTION.md | TO_BUILD_R7.3 | MAPPED | TD09-TD10 |
-| INS-BBG-04 | CM4 | xbbg vs blpapi | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_BBG_04_XBBG_VS_BLPAPI.md | TO_BUILD_R7.3 | MAPPED | TD10 |
+| INS-GIT-01 | CM2 | Staging mental model | TEACHER_REFERENCE + CORE support | INSTRUCTOR_READY | deep-dives/INS_GIT_01_STAGING_MENTAL_MODEL.md | DONE | REFERENCE_VALIDATED | TD03 |
+| INS-GIT-02 | CM2 / CM3 | HEAD / refs / remote-tracking refs | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_GIT_02_HEAD_REFS_REMOTE_TRACKING.md | DONE | REFERENCE_VALIDATED | TD03-TD05 |
+| INS-GIT-03 | CM2 | Git object model: blob/tree/commit | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_GIT_03_OBJECT_MODEL.md | DONE | REFERENCE_VALIDATED | TD03 |
+| INS-GIT-04 | CM3 | Merge vs rebase | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_GIT_04_MERGE_VS_REBASE.md | DONE | REFERENCE_VALIDATED | TD04-TD06 |
+| INS-LNX-01 | CM0 / CM1 | Unix philosophy | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_LNX_01_UNIX_PHILOSOPHY.md | DONE | REFERENCE_VALIDATED | TD01 |
+| INS-LNX-02 | CM1 / TD1.1 / TD1.4 | Permissions troubleshooting | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_LNX_02_PERMISSIONS_TROUBLESHOOTING.md | DONE | REFERENCE_VALIDATED | TD01 / advanced remote |
+| INS-BBG-01 | CM4 | Bloomberg Terminal + identifiers | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_BBG_01_TERMINAL_IDENTIFIERS.md | DONE | REFERENCE_VALIDATED | TD09 |
+| INS-BBG-02 | CM4 | BDP / BDS / BDH | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_BBG_02_BDP_BDS_BDH.md | DONE | REFERENCE_VALIDATED | TD09 |
+| INS-BBG-03 | CM4 | Request/Response vs Subscription | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_BBG_03_REQUEST_RESPONSE_SUBSCRIPTION.md | DONE | REFERENCE_VALIDATED | TD09-TD10 |
+| INS-BBG-04 | CM4 | xbbg vs blpapi | TEACHER_REFERENCE | INSTRUCTOR_READY | deep-dives/INS_BBG_04_XBBG_VS_BLPAPI.md | DONE | REFERENCE_VALIDATED | TD10 |
 
-R7.3 closure requirement:
+R7.3 closure result:
 
 ```text
 10 / 10
-must become INSTRUCTOR_READY
+INSTRUCTOR_READY
+
+operational status
+=
+DONE
+
+validation
+=
+REFERENCE_VALIDATED
+```
+
+Index:
+
+```text
+docs/instructor/deep-dives/README.md
 ```
 
 ## 7. ADVANCED_READY P1 registry
